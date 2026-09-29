@@ -11,6 +11,11 @@ on a single 16 GB GPU:**
 
 What worked, what failed, and why.
 
+📄 **Technical report:** [`paper/main.pdf`](paper/main.pdf) — *Four Ways to Navigate: An Empirical Study of
+Vision-and-Language Navigation Policies on a Single GPU* (19 pages, LaTeX source in [`paper/`](paper/)).
+📚 **References:** [`docs/REFERENCES.md`](docs/REFERENCES.md) (53 works; BibTeX in
+[`paper/references.bib`](paper/references.bib)).
+
 > **Status (Sept 2026): research code, finished and not maintained.** Results are on subsets of R2R-CE `val_unseen`
 > (n = 40–150), with thresholds tuned on that split. Read [Caveats](#caveats) before quoting a number.
 
@@ -360,13 +365,15 @@ tools/           make_figures.py (docs/figures from logs), make_demo_media.py (d
 tests/           one test file per equation group (311 tests)
 results/         probe reports and closed-loop run summaries (JSON)
 logs/            every training and evaluation log (text)
-docs/            EXPERIMENTS.md (narrative), EXPERIMENT_LOG.md (every number + source), EQUATIONS.md, GOTCHAS.md, figures/
+paper/           technical report: main.tex, references.bib (53 entries), figures/, main.pdf (build: make -C paper)
+docs/            EXPERIMENTS.md (narrative), EXPERIMENT_LOG.md (every number + source), REFERENCES.md, EQUATIONS.md,
+                 GOTCHAS.md, figures/
 media/           rollout videos, comparisons and previews (Matterport3D-derived, non-commercial)
 DECISIONS.md     every design decision and deviation from the paper, with the measurement behind it
 HANDOFF.md       session state through Stage 0′;  Agents.md: ground rules the work followed
 ```
 
-Suggested reading order: this README → [`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md) → [`DECISIONS.md`](DECISIONS.md)
+Suggested reading order: this README → [`paper/main.pdf`](paper/main.pdf) → [`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md) → [`DECISIONS.md`](DECISIONS.md)
 → [`docs/GOTCHAS.md`](docs/GOTCHAS.md).
 
 ## Data and checkpoints (not in this repository)
@@ -381,22 +388,34 @@ Suggested reading order: this README → [`docs/EXPERIMENTS.md`](docs/EXPERIMENT
 
 ## Citation
 
+If you use this code, results or media, please cite the report (GitHub's **"Cite this repository"** button reads
+[`CITATION.cff`](CITATION.cff)):
+
 ```bibtex
-@misc{jain2026vlnfourways,
-  title  = {Four Ways to Navigate: Vision-and-Language Navigation Policies on One GPU},
-  author = {Jain, Shubh},
-  year   = {2026},
-  howpublished = {\url{https://github.com/ShubhJain007/vln-four-ways}}
+@techreport{jain2026fourways,
+  title       = {Four Ways to Navigate: An Empirical Study of Vision-and-Language Navigation Policies on a Single GPU},
+  author      = {Jain, Shubh},
+  year        = {2026},
+  month       = {9},
+  institution = {GitHub},
+  url         = {https://github.com/ShubhJain007/vln-four-ways}
 }
 ```
 
-Please also cite the works this builds on, as their authors list them on arXiv:
+Please also cite the work this builds on. The core references are below; all 53 are listed in
+[`docs/REFERENCES.md`](docs/REFERENCES.md), with BibTeX in [`paper/references.bib`](paper/references.bib).
 
-- LatentPilot, [arXiv:2603.29165](https://arxiv.org/abs/2603.29165)
-- Robostral Navigate, [arXiv:2607.20785](https://arxiv.org/abs/2607.20785)
-- Chain-of-Visual-Thought, [arXiv:2511.19418](https://arxiv.org/abs/2511.19418)
-
-The models used are NVIDIA Cosmos-Reason2 and Cosmos3-Edge.
+| Role in this project | Work |
+|---|---|
+| Method reimplemented (①) | Hao et al., *LatentPilot*, [arXiv:2603.29165](https://arxiv.org/abs/2603.29165) |
+| Supervision used by ② | Bounhar et al., *Robostral Navigate*, [arXiv:2607.20785](https://arxiv.org/abs/2607.20785) |
+| Related latent-token method | Qin et al., *Chain-of-Visual-Thought*, [arXiv:2511.19418](https://arxiv.org/abs/2511.19418) |
+| Task and data | Anderson et al., *R2R*, [arXiv:1711.07280](https://arxiv.org/abs/1711.07280); Krantz et al., *VLN-CE*, [arXiv:2004.02857](https://arxiv.org/abs/2004.02857) |
+| Scenes and simulator | Chang et al., *Matterport3D*, [arXiv:1709.06158](https://arxiv.org/abs/1709.06158); Savva et al., *Habitat*, [arXiv:1904.01201](https://arxiv.org/abs/1904.01201) |
+| Metrics | Anderson et al., *SPL*, [arXiv:1807.06757](https://arxiv.org/abs/1807.06757); Ilharco et al., *nDTW*, [arXiv:1907.05446](https://arxiv.org/abs/1907.05446) |
+| Backbones (①②) | NVIDIA, [Cosmos-Reason2-2B](https://huggingface.co/nvidia/Cosmos-Reason2-2B); Wang et al., *Qwen2-VL*, [arXiv:2409.12191](https://arxiv.org/abs/2409.12191); Tschannen et al., *SigLIP 2*, [arXiv:2502.14786](https://arxiv.org/abs/2502.14786) |
+| Models (③④) | NVIDIA, [Cosmos3-Edge](https://huggingface.co/nvidia/Cosmos3-Edge); NVIDIA, *Cosmos WFM*, [arXiv:2501.03575](https://arxiv.org/abs/2501.03575); NVIDIA, *Cosmos-Reason1*, [arXiv:2503.15558](https://arxiv.org/abs/2503.15558) |
+| Fine-tuning | Hu et al., *LoRA*, [arXiv:2106.09685](https://arxiv.org/abs/2106.09685) |
 
 ## Licence
 
