@@ -5,6 +5,9 @@ point, how it was set up, what it measured, and what was decided because of it. 
 file they come from, are in [`EXPERIMENT_LOG.md`](EXPERIMENT_LOG.md). Design decisions are numbered `D*` as in
 [`../DECISIONS.md`](../DECISIONS.md).
 
+The work ran in three phases covering four architectures: Phase I is ① LatentPilot, Phase II is ② the pointing policy,
+and Phase III covers ③ the Cosmos3-Edge action (diffusion) model and ④ the Cosmos3-Edge reasoner used as a policy.
+
 - [0. Protocol](#0-protocol)
 - [1. Phase I: LatentPilot as specified](#1-phase-i-latentpilot-as-specified)
 - [2. Phase II: pointing supervision](#2-phase-ii-pointing-supervision)
@@ -251,7 +254,15 @@ image-text backbone lacks.
   abandoned after one logged step; no checkpoint was saved.
 - **Conclusion.** The motion prior is real, but instruction grounding is weak. Language has to come from elsewhere.
 
+  ![Edge guidance](figures/fig_edge_guidance.png)
+
 ### 3.3 The reasoner as a policy
+
+- **First look (qualitative).** Given a still frame, the reasoner produces plausible-looking waypoint lists. Asked
+  for the next action, it narrates the scene as a bystander ("A person enters the room through the archway"). It does
+  not know it is the camera, so an embodiment framing was added to every prompt (`src/nav/cosmos_prompts.py`).
+
+  ![reasoner zero-shot](figures/fig_reasoner_zeroshot.png)
 
 - **Zero-shot.** On 160 decision points from 40 trajectories, next-action accuracy is **32.5 %** against a 54.4 %
   majority baseline. Thinking mode does not help (33.1 %).

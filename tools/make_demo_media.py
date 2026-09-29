@@ -10,7 +10,10 @@ scan, sorted by scan id), put three views side by side on the same instruction:
 
 The expert stops when it reaches the goal; its last frame is held so the panels stay aligned in time.
 
-    python tools/make_demo_media.py            # writes media/comparisons/*.mp4 and media/previews/*.gif
+Reasoner clips: the Cosmos3-Edge reasoner's input window at saved probe decision points, with the expert label and the
+answers of both SFT checkpoints (results/probe_sft_final.json, results/probe_v3_final.json).
+
+    python tools/make_demo_media.py            # writes media/comparisons/*.mp4 and media/previews/reasoner_*.gif
 """
 import gzip
 import json
@@ -71,7 +74,44 @@ def gif(src, dst, seconds=18, width=780):
                     str(dst)], check=True)
 
 
+# Probe decision points whose transcripts were saved for both reasoner checkpoints (results/probe_*_final.json).
+REASONER_CASES = [("2azQ1b91cZZ", "1039", 225), ("8194nk5LbLH", "1141", 34)]
+
+
+def clean(text):
+    return " ".join(text.translate({ord(c): None for c in "',;:[]%\\"}).split())
+
+
+def reasoner_decision(scan, traj, t, out, width=440, ctx=120):
+    """The reasoner's input window (up to 8 s of the rendered 15 FPS walk, ending at decision frame t) with the
+    expert label and both SFT checkpoints' answers underneath. The model itself sees 8 of these frames at 1 FPS."""
+    preds = {}
+    for name, f in (("SFT v1", "probe_sft_final.json"), ("SFT v3", "probe_v3_final.json")):
+        for r in json.load(open(ROOT / "results" / f))["transcripts"]:
+            if (r["scan"], str(r["traj"]), int(r["t"])) == (scan, traj, t):
+                preds[name], preds["expert"] = r["pred"], r["label"]
+    d = ROOT / "data" / "video" / "val_unseen" / scan / f"traj{traj}"
+    instruction = json.loads((d / "meta.json").read_text())["instructions"]
+    instruction = instruction[0] if isinstance(instruction, list) else instruction.strip("[]'\" ").split("', '")[0]
+    lines = textwrap.wrap(clean(instruction), 58)[:4]
+    bar = 30 + 17 * len(lines) + 3 * 19
+    cap = "".join(f",drawtext=fontfile={FONT_REG}:text='{l}':x=8:y={width + 10 + 17 * k}:fontsize=13:fontcolor=white"
+                  for k, l in enumerate(lines))
+    for k, who in enumerate(("expert", "SFT v1", "SFT v3")):
+        colour = "white" if who == "expert" else ("0x7ee2b8" if preds[who] == preds["expert"] else "0xff8a65")
+        cap += (f",drawtext=fontfile={FONT}:text='{who} → {clean(preds[who])}':x=8:y={width + 18 + 17 * len(lines) + 19 * k}"
+                f":fontsize=14:fontcolor={colour}")
+    vf = (f"trim=start_frame={max(0, t - ctx + 1)}:end_frame={t + 1},setpts=PTS-STARTPTS,fps=6,"
+          f"scale={width}:-1,pad={width}:{width + bar}:0:0:black{cap},tpad=stop_mode=clone:stop_duration=2,"
+          f"split[a][b];[a]palettegen=max_colors=64[p];[b][p]paletteuse")
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(d / "frames.mp4"), "-vf", vf, str(out)], check=True)
+    return out
+
+
 def main():
+    for scan, traj, t in REASONER_CASES:
+        o = reasoner_decision(scan, traj, t, ROOT / "media" / "previews" / f"reasoner_{scan}_traj{traj}_t{t}.gif")
+        print("wrote", o.relative_to(ROOT))
     out_dir = ROOT / "media" / "comparisons"
     out_dir.mkdir(parents=True, exist_ok=True)
     made = []

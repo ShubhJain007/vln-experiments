@@ -42,6 +42,12 @@ come from two runs with the same configuration, not one.
 | `step100k_failures_ep02_8194nk5LbLH.gif` | Pointing failure: never approaches the goal (timeout) |
 | `step100k_failures_ep04_EU6Fwq7SyZv.gif` | Pointing failure: passes within 0.5 m of the goal and never stops (timeout) |
 | `step100k_failures_ep16_pLe4wQe7qrG.gif` | Pointing failure: passes 1.5 m from the goal, then stops 5.4 m away |
+| `reasoner_2azQ1b91cZZ_traj1039_t225.gif` | Cosmos3-Edge reasoner: its 8 s input window at a probe decision point where the expert stops. SFT v1 answers stop; SFT v3 answers move forward |
+| `reasoner_8194nk5LbLH_traj1141_t34.gif` | Cosmos3-Edge reasoner: mid-route, the expert moves forward. SFT v1 answers turn left; SFT v3 answers move forward |
+
+The reasoner clips are cut from the re-rendered 15 fps expert walks (`data/video/val_unseen`, not published) at the
+decision points whose transcripts are saved in `results/probe_sft_final.json` and `results/probe_v3_final.json`. No
+closed-loop videos were recorded for the Cosmos3-Edge policies.
 
 ## Licence of this media
 

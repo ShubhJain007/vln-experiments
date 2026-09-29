@@ -7,7 +7,12 @@ Figures
   fig_loss_balance.png   Stage 1: L_act vs lambda * L_pil over training and their ratio (DECISIONS.md D25)
   fig_stage0prime.png    Stage 0' Design A vs Design B training accuracy (D17 / D19)
   fig_probe_confusion.png  Reasoner SFT next-action probe: confusion matrix (results/probe_sft_final.json)
-  fig_navigation.png     SR and SPL of every evaluated policy vs the paper (numbers from logs/ and results/runs/)
+  fig_navigation.png     OS and strict SR of every evaluated policy vs the paper (docs/figures/navigation_rows.json)
+  fig_stop_threshold.png Pointing fusion: OS vs strict SR by STOP threshold, and strict SR over training
+  fig_bearing.png        Pointing: predicted vs expert bearing (logs/bearings.npy)
+  fig_layer_probe.png    STOP linear-probe AUC per backbone layer (logs/layerprobe_154820.log)
+  fig_edge_guidance.png  Cosmos3-Edge action model, zero-shot: guidance vs turn-sign / instruction following
+  fig_reasoner_zeroshot.png  Cosmos3-Edge reasoner, zero-shot: predicted waypoints on the probe frames
 """
 import json
 import pathlib
@@ -224,6 +229,92 @@ def fig_layer_probe():
     fig.savefig(OUT / "fig_layer_probe.png", dpi=160)
 
 
+def fig_edge():
+    """Cosmos3-Edge action model, zero-shot: does guidance make it follow language?"""
+    import re
+    g, sign = [], []
+    for line in open(ROOT / "logs" / "edge_ctrl_cfg.log"):
+        m = re.search(r"guidance_scale = ([0-9.]+)", line)
+        if m:
+            g.append(float(m.group(1)))
+        m = re.search(r"sign correct on (\d+)%", line)
+        if m:
+            sign.append(int(m.group(1)))
+    full = {}  # guidance -> (correct, swapped) turn-direction agreement with full R2R instructions
+    txt = open(ROOT / "logs" / "edge_policy_zs.log").read()
+    full[1.0] = tuple(float(x) for x in re.findall(r"turn direction\s+([0-9.]+)", txt)[:2])
+    cur = None
+    for line in open(ROOT / "logs" / "edge_policy_cfg.log"):
+        m = re.search(r"guidance_scale = ([0-9.]+)", line)
+        if m:
+            cur = float(m.group(1))
+        m = re.search(r"(correct|swapped): .*turn dir ([0-9.]+)", line)
+        if m and cur is not None:
+            full.setdefault(cur, [None, None])
+            full[cur] = list(full[cur])
+            full[cur][0 if m.group(1) == "correct" else 1] = float(m.group(2))
+    fig, (a, c) = plt.subplots(1, 2, figsize=(10, 3.6))
+    a.plot(g, sign, color=BLUE, marker="o", markersize=6)
+    for x, y in zip(g, sign):
+        a.text(x, y + 1.2, "%d%%" % y, ha="center", color=INK)
+    a.axhline(50, color=INK2, linewidth=1, linestyle="--")
+    a.text(g[-1], 52, "chance", ha="right", color=INK2)
+    a.set_ylim(40, 102)
+    a.set_xlabel("classifier-free guidance scale")
+    a.set_ylabel("turn sign correct (%)")
+    a.set_title("Short commands (\"turn left / right\"), n = 22")
+    ks = sorted(full)
+    x = np.arange(len(ks))
+    cor = [100 * full[k][0] for k in ks]
+    swp = [100 * full[k][1] for k in ks]
+    c.bar(x - 0.19, cor, 0.36, color=BLUE, edgecolor=SURFACE, linewidth=2, label="matching instruction")
+    c.bar(x + 0.19, swp, 0.36, color=ORANGE, edgecolor=SURFACE, linewidth=2, label="another episode's instruction")
+    for i in range(len(ks)):
+        c.text(i - 0.19, cor[i] + 1, "%.0f" % cor[i], ha="center", fontsize=8.5, color=INK)
+        c.text(i + 0.19, swp[i] + 1, "%.0f" % swp[i], ha="center", fontsize=8.5, color=INK)
+    c.axhline(50, color=INK2, linewidth=1, linestyle="--")
+    n = {1.0: 192}  # guidance 1 comes from edge_policy_zs.log (384 frames); 5 and 7.5 from edge_policy_cfg.log
+    c.set_xticks(x, ["guidance %g\n(n = %d)" % (k, n.get(k, 212)) for k in ks])
+    c.set_ylim(0, 85)
+    c.set_ylabel("turn direction agrees with expert (%)")
+    c.set_title("Full R2R instructions")
+    c.legend(frameon=False, loc="upper left", fontsize=8.5)
+    fig.suptitle("Cosmos3-Edge action model, zero-shot: language only reaches the sampler at high guidance",
+                 fontweight="bold", color=INK, fontsize=11)
+    fig.tight_layout()
+    fig.savefig(OUT / "fig_edge_guidance.png", dpi=160)
+
+
+def fig_reasoner_zeroshot():
+    """First reasoner probe (results/reasoner_probe.md): zero-shot 'navigation trajectory' points on the still frame."""
+    import re
+    md = open(ROOT / "results" / "reasoner_probe.md").read()
+    cases = re.split(r"^## ", md, flags=re.M)[1:]
+    fig, axes = plt.subplots(1, len(cases), figsize=(4 * len(cases), 4.6))
+    for a, case in zip(np.atleast_1d(axes), cases):
+        head = case.splitlines()[0].strip()
+        scan, traj = [t.strip() for t in head.split("/")]
+        instr = re.search(r"\*\*instruction:\*\* (.*)", case).group(1)
+        nav = case.split("### traj_nav", 1)[1].split("###", 1)[0]
+        pts = np.array([[int(u), int(v)] for u, v in re.findall(r'"point_2d": \[(\d+), (\d+)\]', nav)]) / 1000.0
+        img = plt.imread(ROOT / "logs" / "reasoner_frames" / f"{scan}_{traj.replace('traj', '')}.png")
+        h, w = img.shape[:2]
+        a.imshow(img)
+        a.plot(pts[:, 0] * w, pts[:, 1] * h, color="white", linewidth=4)
+        a.plot(pts[:, 0] * w, pts[:, 1] * h, color=BLUE, linewidth=2, marker="o", markersize=7,
+               markeredgecolor="white", markeredgewidth=1.5)
+        for k, (u, v) in enumerate(pts):
+            a.text(u * w + 9, v * h - 6, str(k + 1), color="white", fontsize=9, fontweight="bold")
+        wrapped = __import__("textwrap").wrap(instr, 52)
+        a.set_title("\n".join(wrapped[:3]) + (" …" if len(wrapped) > 3 else ""), fontsize=8, fontweight="normal",
+                    color=INK2)
+        a.set_xticks([]); a.set_yticks([]); a.grid(False)
+    fig.suptitle("Cosmos3-Edge reasoner, zero-shot: predicted navigation waypoints (single still frame)",
+                 fontweight="bold", color=INK, fontsize=11)
+    fig.tight_layout(rect=(0, 0, 1, 0.93))
+    fig.savefig(OUT / "fig_reasoner_zeroshot.png", dpi=160)
+
+
 def main(nav_rows=None):
     OUT.mkdir(parents=True, exist_ok=True)
     fig_loss_balance()
@@ -232,6 +323,8 @@ def main(nav_rows=None):
     fig_stop_threshold()
     fig_bearing()
     fig_layer_probe()
+    fig_edge()
+    fig_reasoner_zeroshot()
     if nav_rows:
         fig_navigation(nav_rows["rows"])
     print("wrote", sorted(p.name for p in OUT.glob("*.png")))
