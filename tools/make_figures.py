@@ -335,9 +335,9 @@ def fig_qualitative():
         (frame("media/rollouts/step100k_failures/ep16_pLe4wQe7qrG.mp4", last=True),
          "(c) Pointing: stops 5.4 m short\n(it passed within 1.5 m)"),
         (frame("media/previews/reasoner_2azQ1b91cZZ_traj1039_t225.gif", last=True),
-         "(d) Reasoner at the goal:\nv1 stops, v3 walks on"),
+         "(d) Reasoner decision probe\n(not a rollout): at the goal"),
         (frame("media/previews/reasoner_8194nk5LbLH_traj1141_t34.gif", last=True),
-         "(e) Reasoner mid-route:\nv1 turns, v3 goes straight"),
+         "(e) Reasoner decision probe\n(not a rollout): mid-route"),
     ]
     fig = plt.figure(figsize=(11, 8.6))
     g = fig.add_gridspec(2, 4, height_ratios=[1.05, 1.25], hspace=0.12, wspace=0.04)

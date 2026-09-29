@@ -650,8 +650,8 @@ SFT v3, step 1,500 & 8\,s & \na & \textbf{47.5} & 0.389 & 12.5\% \\
 \centering
 \includegraphics[width=\linewidth]{fig_qualitative.png}
 \caption{Rollouts in unseen buildings. (a) LatentPilot: same episode for the expert, Stage 1 at 10k steps and the final
-model. (b, c) Pointing failure modes. (d, e) Reasoner input windows at two decision points, with the expert's action and
-both fine-tuned versions' answers. Videos are in the repository.}
+model. (b, c) Pointing failure modes. (d, e) Reasoner decision probes, not rollouts: each is the frame at which the model was asked for its next action
+(the input is an expert's walk), with the expert's action and the answers of SFT v1 and v3. Videos are in the repository.}
 \label{fig:qual}
 \end{figure}
 
