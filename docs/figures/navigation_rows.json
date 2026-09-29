@@ -1,0 +1,109 @@
+{
+ "note": "R2R-CE val_unseen. OS = oracle success (episode ends once within 3 m; diagnostic mode). SR = strict success (the model's own STOP within 3 m; --strict). null = not measured. Percent.",
+ "rows": [
+  {
+   "label": "Stage 0' B",
+   "group": "LatentPilot",
+   "n": 150,
+   "os": 16.67,
+   "sr": null,
+   "source": "DECISIONS.md D19 (no log)"
+  },
+  {
+   "label": "Stage 1 learned",
+   "group": "LatentPilot",
+   "n": 150,
+   "os": 10.67,
+   "sr": null,
+   "source": "logs/evaln150_stage1_learned_final.log"
+  },
+  {
+   "label": "Stage 1 identity",
+   "group": "LatentPilot",
+   "n": 150,
+   "os": 17.33,
+   "sr": null,
+   "source": "logs/evaln150_stage1_identity_final.log"
+  },
+  {
+   "label": "Pointing 6 scans",
+   "group": "Pointing",
+   "n": 150,
+   "os": 6.67,
+   "sr": 4.0,
+   "source": "logs/evalsord_115012.log (thr 0.05)"
+  },
+  {
+   "label": "Pointing 16 scans",
+   "group": "Pointing",
+   "n": 150,
+   "os": 14.0,
+   "sr": 13.33,
+   "source": "logs/evalfinal150_232320.log (thr 0.05)"
+  },
+  {
+   "label": "+ history (61 scans)",
+   "group": "Pointing",
+   "n": 150,
+   "os": 22.67,
+   "sr": 18.0,
+   "source": "logs/evalsord_115012.log (pointing_hist, thr 0.05)"
+  },
+  {
+   "label": "full3 step 40k",
+   "group": "Pointing",
+   "n": 150,
+   "os": 31.33,
+   "sr": 24.67,
+   "source": "logs/sweep40k_002048.log (thr 0.10)"
+  },
+  {
+   "label": "+ layer fusion 120k",
+   "group": "Pointing",
+   "n": 150,
+   "os": 42.67,
+   "sr": 31.33,
+   "source": "logs/eval120k_220002.log (thr 0.20)"
+  },
+  {
+   "label": "Edge zero-shot",
+   "group": "Cosmos",
+   "n": 40,
+   "os": 7.5,
+   "sr": null,
+   "source": "logs/eval_edge_zeroshot.log"
+  },
+  {
+   "label": "Reasoner SFT v1",
+   "group": "Cosmos",
+   "n": 40,
+   "os": 17.5,
+   "sr": null,
+   "source": "results/runs/sft_final_direct.json"
+  },
+  {
+   "label": "Reasoner v3 final",
+   "group": "Cosmos",
+   "n": 40,
+   "os": 32.5,
+   "sr": null,
+   "source": "results/runs/v3_final_direct.json"
+  },
+  {
+   "label": "Reasoner v3 1.5k",
+   "group": "Cosmos",
+   "n": 40,
+   "os": 47.5,
+   "sr": null,
+   "source": "results/runs/v3_step1500_direct.json"
+  },
+  {
+   "label": "Paper, 7B (Table 3)",
+   "group": "Paper",
+   "n": "full split",
+   "os": 57.0,
+   "sr": 51.7,
+   "source": "docs/EQUATIONS.md (LatentPilot Table 3)"
+  }
+ ]
+}
