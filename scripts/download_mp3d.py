@@ -28,6 +28,9 @@ The whole bundle is one archive covering all 90 scenes (~15 GB, vs 1.3 TB for
 the full MP3D release). Only the scans this project needs are EXTRACTED.
 
 USAGE
+    # 0. sign the Matterport3D terms of use, then export the habitat-archive link you are sent
+    export MP3D_HABITAT_URL=<link from the Matterport3D team>
+
     # 1. see what will happen, download nothing
     python scripts/download_mp3d.py --dry-run
 
@@ -51,8 +54,9 @@ import shutil
 import urllib.request
 import zipfile
 
-BASE_URL = ""  # not published: the Matterport3D team emails the download link after you sign the terms of use
-HABITAT_ZIP_URL = os.environ.get("MP3D_HABITAT_URL", "")  # the habitat task-archive link from that email
+# Not published on purpose: the Matterport3D team emails the download link after you sign the terms of use.
+# Set MP3D_HABITAT_URL to the habitat task-archive link from that email.
+HABITAT_ZIP_URL = os.environ.get("MP3D_HABITAT_URL", "")
 TOS_URL = "http://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf"
 
 _ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -325,7 +329,7 @@ def main():
         print(f"  {split:11s}: {len(d['scans']):2d} scans, {d['episodes']} episodes")
     print(f"  TOTAL      : {len(scans)} scans (of 90 in the release)")
     print()
-    print(f"  archive : {HABITAT_ZIP_URL}")
+    print(f"  archive : {'MP3D_HABITAT_URL (set)' if HABITAT_ZIP_URL else 'MP3D_HABITAT_URL NOT SET'}")
     print(f"  approx  : ~15 GB download (the full MP3D release is 1.3 TB)")
     print(f"  out dir : {args.out}")
     print()
@@ -337,6 +341,11 @@ def main():
     if args.dry_run:
         print("  --dry-run: nothing downloaded.")
         return 0
+
+    if not HABITAT_ZIP_URL:
+        print("  MP3D_HABITAT_URL is not set. Sign the Matterport3D terms of use; the team emails you the\n"
+              f"  download link. Terms: {TOS_URL}")
+        return 1
 
     print("*" * 78)
     print("  By continuing you confirm you have agreed to the Matterport3D")

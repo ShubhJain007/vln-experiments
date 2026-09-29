@@ -318,6 +318,7 @@ python scripts/verify_env.py                       # backbone loads, d = 2048, N
 conda activate habitat_render && python scripts/verify_habitat.py --scene <scene .glb>
 
 # data: Matterport3D (terms of use required) + R2R-CE, expert rollouts
+export MP3D_HABITAT_URL=<link emailed to you after signing the Matterport3D terms>
 python scripts/download_mp3d.py && bash scripts/download_full.sh && bash scripts/collect_full.sh
 
 # ① LatentPilot
@@ -372,7 +373,7 @@ Suggested reading order: this README → [`docs/EXPERIMENTS.md`](docs/EXPERIMENT
 
 | What | Size | How to get it |
 |---|---|---|
-| Matterport3D scenes for Habitat | 32 GB for 17 scans (11 val_unseen + 6 train); more for all 72 | accept the [Matterport3D terms](http://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf), then `python scripts/download_mp3d.py` (resumable, verifies before extracting) |
+| Matterport3D scenes for Habitat | 32 GB for 17 scans (11 val_unseen + 6 train); more for all 72 | accept the [Matterport3D terms](http://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf), then set `MP3D_HABITAT_URL` to the link you are emailed and run `python scripts/download_mp3d.py` (resumable, verifies before extracting) |
 | R2R-CE episodes | small | VLN-CE release (`scripts/download_full.sh`) |
 | Expert rollouts, rendered frames, resampled video | ~42 GB | regenerate with `scripts/collect_full.sh`, `scripts/render_resampled.py` |
 | Base models | — | Hugging Face `nvidia/Cosmos-Reason2-2B`, `nvidia/Cosmos3-Edge` |
