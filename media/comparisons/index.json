@@ -1,0 +1,79 @@
+[
+ {
+  "idx": 0,
+  "scan": "2azQ1b91cZZ",
+  "episode_id": 10,
+  "geodesic_m": 7.11,
+  "file": "ep00_2azQ1b91cZZ_expert_vs_stage1.mp4"
+ },
+ {
+  "idx": 1,
+  "scan": "8194nk5LbLH",
+  "episode_id": 220,
+  "geodesic_m": 11.81,
+  "file": "ep01_8194nk5LbLH_expert_vs_stage1.mp4"
+ },
+ {
+  "idx": 2,
+  "scan": "EU6Fwq7SyZv",
+  "episode_id": 127,
+  "geodesic_m": 4.61,
+  "file": "ep02_EU6Fwq7SyZv_expert_vs_stage1.mp4"
+ },
+ {
+  "idx": 3,
+  "scan": "QUCTc6BB5sX",
+  "episode_id": 19,
+  "geodesic_m": 13.21,
+  "file": "ep03_QUCTc6BB5sX_expert_vs_stage1.mp4"
+ },
+ {
+  "idx": 4,
+  "scan": "TbHJrupSAjP",
+  "episode_id": 4,
+  "geodesic_m": 9.66,
+  "file": "ep04_TbHJrupSAjP_expert_vs_stage1.mp4"
+ },
+ {
+  "idx": 5,
+  "scan": "X7HyMhZNoso",
+  "episode_id": 46,
+  "geodesic_m": 10.05,
+  "file": "ep05_X7HyMhZNoso_expert_vs_stage1.mp4"
+ },
+ {
+  "idx": 6,
+  "scan": "Z6MFQCViBuw",
+  "episode_id": 205,
+  "geodesic_m": 11.51,
+  "file": "ep06_Z6MFQCViBuw_expert_vs_stage1.mp4"
+ },
+ {
+  "idx": 7,
+  "scan": "oLBMNvg9in8",
+  "episode_id": 28,
+  "geodesic_m": 11.02,
+  "file": "ep07_oLBMNvg9in8_expert_vs_stage1.mp4"
+ },
+ {
+  "idx": 8,
+  "scan": "pLe4wQe7qrG",
+  "episode_id": 412,
+  "geodesic_m": 4.52,
+  "file": "ep08_pLe4wQe7qrG_expert_vs_stage1.mp4"
+ },
+ {
+  "idx": 9,
+  "scan": "x8F5xyUWy9e",
+  "episode_id": 7,
+  "geodesic_m": 10.45,
+  "file": "ep09_x8F5xyUWy9e_expert_vs_stage1.mp4"
+ },
+ {
+  "idx": 10,
+  "scan": "zsNo4HB9uLZ",
+  "episode_id": 1,
+  "geodesic_m": 7.96,
+  "file": "ep10_zsNo4HB9uLZ_expert_vs_stage1.mp4"
+ }
+]
