@@ -1,0 +1,97 @@
+Loading weights:   0%|          | 0/670 [00:00<?, ?it/s]Loading weights:  11%|█         | 75/670 [00:00<00:00, 738.27it/s]Loading weights:  24%|██▍       | 163/670 [00:00<00:00, 812.09it/s]Loading weights:  37%|███▋      | 245/670 [00:00<00:00, 617.05it/s]Loading weights:  55%|█████▌    | 371/670 [00:00<00:00, 820.91it/s]Loading weights:  74%|███████▍  | 497/670 [00:00<00:00, 952.89it/s]Loading weights:  96%|█████████▌| 643/670 [00:00<00:00, 1106.54it/s]Loading weights: 100%|██████████| 670/670 [00:00<00:00, 960.69it/s] 
+reasoner loaded; GPU 4.54 GB
+
+=== 2azQ1b91cZZ/traj1039 ===
+Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.
+
+--- traj_gripper --- (5 points parsed)
+I will start by moving my gripper from its current position at [310, 539] to the doorway at [510, 506] to begin the task. Then I will travel to the right in the hallway, passing through the open space at [510, 506], and continue along the hallway toward the bathroom. Next, I will head down the hall and enter the bathroom first on my left, specifically aiming for the clear area at [520, 607]. Finally, I will stop in the doorway to the bathroom at [510, 506] to complete the instruction.
+
+So my next steps should look like this: [310, 539], [601, 573], [547, 747], [528, 639], [551, 569]
+</think>
+
+```json
+[
+  {"point_2d": [310, 539], "label": "gripper trajectory"},
+  {"point_2d": [601, 573], "lab
+
+--- traj_nav --- (5 points parsed)
+I will start by moving my gripper from its current position at [520, 563] to the wooden door at [630, 627] to open it, since that is the first step to leave the bedroom. After opening the door, I will move the gripper to the hallway at [505, 821] to begin navigating. I will then follow the hallway, taking a right turn, and proceed toward the bathroom, specifically aiming for the doorway at [540, 322] where I will stop upon entering. This sequence ensures I follow the instruction to exit the bedroom, turn right in the hallway, go down the hall, enter the bathroom on the left, and finally stop in the bathroom doorway.
+
+So my next steps should look like this: [520, 563], [678, 604], [545, 652],
+
+--- next_action --- (0 points parsed)
+Okay, let's see. The user provided  an indoor environment, probably a hallway or corridor. The camera is static, showing an archway leading to another room with a tiled floor and a mirror. There's a painting on the left and a partially visible chair on the right. The ceiling is wooden with beams.
+
+The question is asking for the next immediate action. Hmm. Since the camera is static, maybe the action would involve movement within the scene. The archway leads to another room, so perhaps someone entering through it. The chair is partially visible; maybe someone sits down. The mirror might reflect movement. The painting is there, but maybe not an action. The tiled floor could have someone walkin
+
+--- hierarchical --- (0 points parsed)
+Okay, let's break this down. The agent's task is to leave the bedroom, take a right in the hallway, go down the hall, enter the bathroom first on the left, and stop in the doorway. The current environment shows the agent in a hallway with a wooden door slightly ajar. The camera is focused on this door, and there's a painting and a box nearby.
+
+The agent has already turned right in the hallway and is now at the bathroom doorway. The next step after entering the bathroom would be to stop in the doorway. Since the door is ajar, the agent might need to open it fully to proceed. The next logical action would be to open the door to enter the bathroom. So the action should be "open wooden_door"
+</t
+
+=== 8194nk5LbLH/traj1141 ===
+Go right around the counter and turn left. Continue until you are at the end of the second orange couch.
+
+--- traj_gripper --- (5 points parsed)
+I will start by moving my gripper from its current position at [250, 847] to the open space between the first orange couch at [120, 764] and the second orange couch at [405, 814], which is located at [395, 805], to establish a clear path. Then I will go right around the counter, navigating past the kitchen cabinets at [575, 403] and [720, 390], and turn left toward the second orange couch at [405, 814]. I will continue moving until I reach the end of the second orange couch, making sure the trajectory stays clear of obstacles like the black countertop at [829, 772] and the glass‑fronted cabinets. This path lets me efficiently complete the task while avoiding collisions with the potted plant 
+
+--- traj_nav --- (5 points parsed)
+I will start by moving my gripper from its current spot at [357, 792] to the right, following the green trajectory line, so I can go around the counter. Once I’ve cleared the counter area, I’ll head left, steering toward the open space between the first orange couch at [106, 777] and the second one at [407, 800]. My aim is to bring the gripper to the end of the second orange couch, making sure I stay on the intended path and avoid any obstacles along the way.
+
+So my next steps should look like this: [357, 792], [390, 831], [447, 815], [382, 767], [388, 690]
+</think>
+
+```json
+[
+  {"point_2d": [357, 792], "label": "navigation trajectory"},
+  {"point_2d": [390, 831], "label": "navigation trajec
+
+--- next_action --- (0 points parsed)
+Okay, let's see. The video shows a modern kitchen with a dining table, chairs, a countertop, and a window. The camera is static, showing the whole space. The question is asking for the next immediate action.
+
+Hmm, in a kitchen setting, common actions might involve using the appliances, preparing food, or interacting with the furniture. The dining table is set with chairs, so maybe someone is about to sit down. Alternatively, the countertop has a sink, stove, and a small appliance. Maybe someone would start cooking or washing dishes. Since the camera is static, the action would be something that happens within the frame. The window has a plant, so maybe adjusting the blinds or watering the pl
+
+--- hierarchical --- (0 points parsed)
+Okay, let's break this down. The user provided a detailed description and a task that the agent is trying to complete. The task is to "Go right around the counter and turn left. Continue until you are at the end of the second orange couch." The agent's actions so far have resulted in a distorted image, which might indicate confusion or errors in navigation.
+
+First, I need to figure out what the agent is supposed to do next. The main goal is to navigate around the kitchen counter. The initial instruction says to go right around the counter and turn left. Since the current state shows the agent's movements as distorted, maybe they didn't follow the directions correctly. The kitchen has a count
+
+=== EU6Fwq7SyZv/traj1111 ===
+Walk forward to the sitting area to the right of the stairs. Walk to the wall of windows and take a right into the recreation room and stop before you reach the pool table.
+
+--- traj_gripper --- (5 points parsed)
+I will start by moving my gripper from its current position at [492, 471] forward along the wooden floor toward the sitting area to the right of the stairs at [768, 602]. Once I reach that area, I will continue moving toward the wall of windows at [829, 485] and then make a right turn into the recreation room. After the turn, I will proceed until I stop just before the pool table, which lies within the recreation room. This sequence should let me navigate from my starting point to the final destination while respecting the task instructions.
+
+So my next steps should look like this: [492, 471], [671, 536], [600, 438], [614, 442], [620, 411]
+</think>
+
+```json
+[
+  {"point_2d": [492, 471], "labe
+
+--- traj_nav --- (5 points parsed)
+I will start by moving forward from my current position, navigating through the open space at [434, 560] to approach the sitting area at [789, 610] on the right side of the stairs. Once I reach the sitting area, I will continue moving forward toward the wall of windows located at [705, 476] and then take a right turn into the recreation room. After entering the recreation room, I will proceed until I stop just before the pool table, which lies in the clear area at [447, 583] within the recreation room.
+
+So my next steps should look like this: [514, 563], [632, 514], [617, 467], [600, 467], [650, 464]
+</think>
+
+```json
+[
+  {"point_2d": [514, 563], "label": "navigation trajectory"},
+  {"point_
+
+--- next_action --- (0 points parsed)
+Okay, let's try to figure out what the next immediate action could be in this scenario. The video shows a rustic, industrial-style interior with a central staircase, exposed wooden beams, and various furniture and objects arranged on tables. The camera is at eye level, showing a wide view, and there's no movement or activity happening.
+
+First, I need to consider the elements present. The staircase is prominent, leading upwards. The tables have items like chairs, lamps, and decorative objects. The lighting is natural and soft, coming from large windows. The floor is polished wood, and the walls are white. The overall atmosphere is serene and slightly rustic.
+
+Since there's no current activity
+
+--- hierarchical --- (0 points parsed)
+Okay, let's break this down. The agent's task is to walk forward to the sitting area to the right of the stairs, then go to the wall of windows, take a right into the recreation room, and stop before the pool table.
+
+First, the current environment is a rustic interior with a wooden staircase in the center. The agent is probably near the stairs now. The next step after the stairs is the sitting area to the right. So the agent needs to move from the stairs to the right. The action here would be "turn right" to head towards the sitting area. Then, after reaching the sitting area, they need to go to the window wall. Once there, take another right into the recreation room. Finally, stop before th
+
+wrote /home/kneepolean/shubhj/latentpilot/results/reasoner_probe.md

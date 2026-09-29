@@ -1,0 +1,1540 @@
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:24:47:367279]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/10: 18 steps -> 64 frames (4.2s)  840 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1006: 66 steps -> 271 frames (18.0s)  2041 KB  0.8s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1030: 13 steps -> 53 frames (3.5s)  447 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1048: 40 steps -> 171 frames (11.3s)  1451 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1087: 18 steps -> 72 frames (4.7s)  532 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/115: 26 steps -> 112 frames (7.4s)  846 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1159: 74 steps -> 311 frames (20.7s)  2769 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1189: 44 steps -> 178 frames (11.8s)  1891 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/121: 16 steps -> 66 frames (4.3s)  565 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1213: 35 steps -> 142 frames (9.4s)  1720 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1255: 36 steps -> 144 frames (9.5s)  1138 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1264: 53 steps -> 210 frames (13.9s)  1949 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1288: 43 steps -> 176 frames (11.7s)  1067 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1294: 37 steps -> 156 frames (10.3s)  1546 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1339: 21 steps -> 91 frames (6.0s)  627 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1372: 21 steps -> 90 frames (5.9s)  919 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1381: 46 steps -> 197 frames (13.1s)  1658 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/139: 58 steps -> 233 frames (15.5s)  2445 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1393: 75 steps -> 310 frames (20.6s)  4051 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1414: 40 steps -> 166 frames (11.0s)  1673 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1432: 44 steps -> 183 frames (12.1s)  1505 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1441: 31 steps -> 136 frames (9.0s)  1395 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1453: 59 steps -> 249 frames (16.5s)  2550 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1459: 24 steps -> 109 frames (7.2s)  813 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1471: 37 steps -> 143 frames (9.5s)  1918 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1498: 40 steps -> 171 frames (11.3s)  1091 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1525: 56 steps -> 231 frames (15.3s)  1989 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/157: 36 steps -> 144 frames (9.5s)  1279 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1573: 34 steps -> 145 frames (9.6s)  1127 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1579: 29 steps -> 114 frames (7.5s)  848 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/16: 34 steps -> 137 frames (9.1s)  1805 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/160: 60 steps -> 255 frames (16.9s)  2624 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1606: 28 steps -> 116 frames (7.7s)  1161 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1621: 32 steps -> 127 frames (8.4s)  1397 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/166: 20 steps -> 79 frames (5.2s)  919 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1714: 36 steps -> 157 frames (10.4s)  1576 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1729: 50 steps -> 208 frames (13.8s)  1795 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1756: 60 steps -> 243 frames (16.1s)  2482 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1768: 35 steps -> 152 frames (10.1s)  1246 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/178: 31 steps -> 126 frames (8.3s)  1049 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1801: 49 steps -> 206 frames (13.7s)  1788 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/1816: 13 steps -> 48 frames (3.1s)  346 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/193: 39 steps -> 163 frames (10.8s)  910 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/214: 19 steps -> 76 frames (5.0s)  535 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/262: 54 steps -> 227 frames (15.1s)  2427 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/265: 34 steps -> 140 frames (9.3s)  1015 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/271: 10 steps -> 40 frames (2.6s)  316 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/277: 56 steps -> 226 frames (15.0s)  2167 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/286: 32 steps -> 127 frames (8.4s)  1683 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/313: 41 steps -> 164 frames (10.9s)  1464 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/325: 55 steps -> 223 frames (14.8s)  2030 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/328: 27 steps -> 114 frames (7.5s)  958 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/340: 42 steps -> 167 frames (11.1s)  2321 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/364: 22 steps -> 84 frames (5.5s)  492 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/394: 25 steps -> 103 frames (6.8s)  1343 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/403: 36 steps -> 146 frames (9.7s)  1373 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/43: 49 steps -> 199 frames (13.2s)  1872 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/448: 33 steps -> 136 frames (9.0s)  735 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/487: 42 steps -> 174 frames (11.5s)  1406 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/493: 35 steps -> 147 frames (9.7s)  1498 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/496: 36 steps -> 142 frames (9.4s)  1127 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/511: 23 steps -> 103 frames (6.8s)  842 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/541: 36 steps -> 163 frames (10.8s)  1209 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/61: 36 steps -> 149 frames (9.9s)  1064 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/622: 38 steps -> 151 frames (10.0s)  1315 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/643: 38 steps -> 150 frames (9.9s)  1738 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/70: 75 steps -> 307 frames (20.4s)  2948 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/718: 22 steps -> 94 frames (6.2s)  466 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/721: 26 steps -> 117 frames (7.7s)  913 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/757: 29 steps -> 127 frames (8.4s)  682 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/76: 67 steps -> 286 frames (19.0s)  3054 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/778: 61 steps -> 258 frames (17.1s)  2579 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/79: 27 steps -> 112 frames (7.4s)  890 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/799: 39 steps -> 163 frames (10.8s)  1255 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/802: 54 steps -> 216 frames (14.3s)  2326 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/805: 25 steps -> 106 frames (7.0s)  770 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/808: 32 steps -> 135 frames (8.9s)  1357 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/832: 47 steps -> 196 frames (13.0s)  1516 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/859: 58 steps -> 250 frames (16.6s)  2285 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/88: 64 steps -> 275 frames (18.3s)  2960 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/880: 25 steps -> 97 frames (6.4s)  887 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/931: 36 steps -> 149 frames (9.9s)  1060 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/958: 29 steps -> 115 frames (7.6s)  862 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  2azQ1b91cZZ/979: 22 steps -> 89 frames (5.9s)  799 KB  0.3s
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:25:26:891534]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/1078: 31 steps -> 119 frames (7.9s)  1446 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/1147: 42 steps -> 178 frames (11.8s)  2155 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/1210: 23 steps -> 99 frames (6.5s)  889 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/1234: 49 steps -> 205 frames (13.6s)  2313 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/1507: 32 steps -> 140 frames (9.3s)  1308 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/1591: 42 steps -> 178 frames (11.8s)  2175 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/1693: 20 steps -> 86 frames (5.7s)  844 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/220: 52 steps -> 223 frames (14.8s)  2249 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/289: 28 steps -> 120 frames (7.9s)  959 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/349: 71 steps -> 297 frames (19.7s)  3775 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/400: 23 steps -> 100 frames (6.6s)  1230 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/730: 52 steps -> 216 frames (14.3s)  2533 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  8194nk5LbLH/919: 43 steps -> 180 frames (11.9s)  2390 KB  0.5s
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:25:33:486924]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1204: 40 steps -> 167 frames (11.1s)  2473 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1231: 39 steps -> 157 frames (10.4s)  2605 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1243: 34 steps -> 145 frames (9.6s)  1771 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/127: 18 steps -> 77 frames (5.1s)  681 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1273: 34 steps -> 148 frames (9.8s)  2839 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1303: 33 steps -> 138 frames (9.1s)  2510 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1315: 51 steps -> 225 frames (14.9s)  4008 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1489: 37 steps -> 156 frames (10.3s)  1873 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1516: 38 steps -> 160 frames (10.6s)  2789 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1534: 42 steps -> 187 frames (12.4s)  3212 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1552: 22 steps -> 97 frames (6.4s)  1893 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1564: 35 steps -> 150 frames (9.9s)  2551 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1630: 28 steps -> 118 frames (7.8s)  1520 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1744: 25 steps -> 103 frames (6.8s)  1825 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/1810: 36 steps -> 161 frames (10.7s)  2198 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/196: 42 steps -> 188 frames (12.5s)  2488 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/202: 50 steps -> 216 frames (14.3s)  3207 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/211: 40 steps -> 161 frames (10.7s)  2737 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/280: 53 steps -> 215 frames (14.3s)  3637 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/295: 37 steps -> 149 frames (9.9s)  2693 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/316: 32 steps -> 126 frames (8.3s)  2155 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/319: 10 steps -> 36 frames (2.3s)  507 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/346: 46 steps -> 190 frames (12.6s)  3511 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/388: 36 steps -> 152 frames (10.1s)  2723 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/424: 26 steps -> 109 frames (7.2s)  1435 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/442: 48 steps -> 194 frames (12.9s)  2929 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/460: 22 steps -> 97 frames (6.4s)  1329 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/484: 28 steps -> 111 frames (7.3s)  1675 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/502: 23 steps -> 98 frames (6.5s)  1365 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/526: 25 steps -> 107 frames (7.1s)  1747 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/535: 46 steps -> 208 frames (13.8s)  3534 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/556: 37 steps -> 166 frames (11.0s)  2855 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/619: 24 steps -> 101 frames (6.7s)  1388 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/637: 52 steps -> 220 frames (14.6s)  3556 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/679: 35 steps -> 136 frames (9.0s)  2227 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/694: 36 steps -> 145 frames (9.6s)  2637 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/754: 51 steps -> 211 frames (14.0s)  3716 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/763: 22 steps -> 88 frames (5.8s)  1393 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/772: 14 steps -> 49 frames (3.2s)  839 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/775: 54 steps -> 241 frames (16.0s)  3317 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/781: 22 steps -> 92 frames (6.1s)  1240 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/883: 35 steps -> 156 frames (10.3s)  2063 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/886: 19 steps -> 69 frames (4.5s)  1238 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  EU6Fwq7SyZv/970: 39 steps -> 172 frames (11.4s)  2503 KB  0.5s
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:25:56:261726]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1003: 29 steps -> 119 frames (7.9s)  1111 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1021: 47 steps -> 191 frames (12.7s)  1527 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/103: 39 steps -> 166 frames (11.0s)  1033 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1042: 52 steps -> 212 frames (14.1s)  1112 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1060: 31 steps -> 122 frames (8.1s)  888 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1093: 40 steps -> 166 frames (11.0s)  928 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1096: 45 steps -> 178 frames (11.8s)  1257 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1105: 34 steps -> 139 frames (9.2s)  1041 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1114: 46 steps -> 182 frames (12.1s)  1804 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1129: 35 steps -> 147 frames (9.7s)  1376 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1138: 38 steps -> 162 frames (10.7s)  963 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1141: 27 steps -> 112 frames (7.4s)  668 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1156: 74 steps -> 303 frames (20.1s)  2374 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1180: 82 steps -> 345 frames (22.9s)  2156 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1183: 37 steps -> 153 frames (10.1s)  885 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1201: 32 steps -> 129 frames (8.5s)  927 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1207: 47 steps -> 193 frames (12.8s)  1210 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1228: 35 steps -> 146 frames (9.7s)  1259 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1327: 51 steps -> 218 frames (14.5s)  1721 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1345: 46 steps -> 184 frames (12.2s)  1340 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1351: 57 steps -> 228 frames (15.1s)  1728 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1357: 55 steps -> 231 frames (15.3s)  1604 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1396: 44 steps -> 187 frames (12.4s)  1429 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/142: 21 steps -> 88 frames (5.8s)  445 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1420: 66 steps -> 275 frames (18.3s)  1813 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1426: 44 steps -> 167 frames (11.1s)  1474 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1462: 34 steps -> 145 frames (9.6s)  784 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1465: 40 steps -> 157 frames (10.4s)  1417 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/148: 40 steps -> 167 frames (11.1s)  1132 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1504: 31 steps -> 126 frames (8.3s)  706 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/151: 55 steps -> 218 frames (14.5s)  1592 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1513: 40 steps -> 169 frames (11.2s)  1035 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1537: 48 steps -> 198 frames (13.1s)  1161 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1543: 31 steps -> 131 frames (8.7s)  596 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1561: 36 steps -> 151 frames (10.0s)  910 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1615: 32 steps -> 119 frames (7.9s)  547 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1699: 62 steps -> 252 frames (16.7s)  2133 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1705: 58 steps -> 235 frames (15.6s)  1795 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1717: 48 steps -> 197 frames (13.1s)  2037 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1723: 55 steps -> 227 frames (15.1s)  1787 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1741: 41 steps -> 180 frames (11.9s)  1629 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/175: 29 steps -> 121 frames (8.0s)  651 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1750: 72 steps -> 294 frames (19.5s)  2235 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1783: 42 steps -> 167 frames (11.1s)  1420 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/1804: 39 steps -> 167 frames (11.1s)  1258 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/19: 66 steps -> 274 frames (18.2s)  2172 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/190: 40 steps -> 160 frames (10.6s)  1226 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/208: 52 steps -> 212 frames (14.1s)  2038 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/238: 52 steps -> 202 frames (13.4s)  1585 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/334: 45 steps -> 183 frames (12.1s)  1483 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/379: 54 steps -> 217 frames (14.4s)  1300 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/421: 50 steps -> 204 frames (13.5s)  1282 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/427: 61 steps -> 238 frames (15.8s)  1781 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/433: 76 steps -> 311 frames (20.7s)  2515 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/454: 47 steps -> 199 frames (13.2s)  1184 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/481: 28 steps -> 120 frames (7.9s)  528 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/49: 69 steps -> 284 frames (18.9s)  1779 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/490: 35 steps -> 148 frames (9.8s)  944 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/499: 43 steps -> 178 frames (11.8s)  931 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/538: 26 steps -> 109 frames (7.2s)  644 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/568: 42 steps -> 168 frames (11.1s)  994 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/577: 63 steps -> 253 frames (16.8s)  2026 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/607: 40 steps -> 164 frames (10.9s)  1573 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/646: 60 steps -> 257 frames (17.1s)  1706 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/664: 74 steps -> 307 frames (20.4s)  1816 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/67: 50 steps -> 196 frames (13.0s)  1693 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/676: 22 steps -> 91 frames (6.0s)  503 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/700: 41 steps -> 173 frames (11.5s)  1235 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/739: 65 steps -> 266 frames (17.7s)  1696 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/751: 42 steps -> 179 frames (11.9s)  1161 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/784: 36 steps -> 152 frames (10.1s)  895 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/793: 46 steps -> 190 frames (12.6s)  1153 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/796: 37 steps -> 148 frames (9.8s)  837 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/82: 60 steps -> 244 frames (16.2s)  1293 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/841: 51 steps -> 206 frames (13.7s)  1345 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/874: 55 steps -> 226 frames (15.0s)  2166 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/877: 42 steps -> 167 frames (11.1s)  1465 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/889: 61 steps -> 243 frames (16.1s)  1645 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/94: 53 steps -> 206 frames (13.7s)  1411 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/943: 55 steps -> 222 frames (14.7s)  1198 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/952: 31 steps -> 128 frames (8.5s)  1228 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/97: 31 steps -> 132 frames (8.7s)  1154 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/976: 46 steps -> 196 frames (13.0s)  1189 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/988: 69 steps -> 282 frames (18.7s)  1800 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  QUCTc6BB5sX/994: 53 steps -> 211 frames (14.0s)  1323 KB  0.5s
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:26:41:331310]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1009: 31 steps -> 128 frames (8.5s)  650 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1012: 37 steps -> 159 frames (10.5s)  872 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1018: 40 steps -> 170 frames (11.3s)  1074 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1036: 34 steps -> 137 frames (9.1s)  1084 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/106: 28 steps -> 115 frames (7.6s)  737 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1063: 45 steps -> 183 frames (12.1s)  646 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1075: 41 steps -> 166 frames (11.0s)  1125 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1081: 48 steps -> 209 frames (13.9s)  1055 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1111: 27 steps -> 118 frames (7.8s)  1055 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1120: 42 steps -> 191 frames (12.7s)  1798 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1123: 29 steps -> 126 frames (8.3s)  678 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1126: 36 steps -> 160 frames (10.6s)  1487 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1150: 51 steps -> 203 frames (13.5s)  964 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1171: 31 steps -> 137 frames (9.1s)  1341 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1174: 55 steps -> 236 frames (15.7s)  1257 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1219: 55 steps -> 242 frames (16.1s)  2067 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1246: 32 steps -> 133 frames (8.8s)  777 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1270: 31 steps -> 124 frames (8.2s)  1023 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1276: 41 steps -> 173 frames (11.5s)  984 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1279: 57 steps -> 242 frames (16.1s)  1238 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1282: 30 steps -> 117 frames (7.7s)  833 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1306: 29 steps -> 121 frames (8.0s)  1100 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1312: 44 steps -> 174 frames (11.5s)  1617 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/133: 46 steps -> 198 frames (13.1s)  671 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1330: 59 steps -> 258 frames (17.1s)  2254 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1363: 27 steps -> 109 frames (7.2s)  741 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1366: 41 steps -> 175 frames (11.6s)  1210 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1369: 37 steps -> 167 frames (11.1s)  1098 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1405: 37 steps -> 162 frames (10.7s)  888 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1408: 23 steps -> 102 frames (6.7s)  600 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1417: 40 steps -> 168 frames (11.1s)  726 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1423: 48 steps -> 194 frames (12.9s)  1435 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1447: 41 steps -> 170 frames (11.3s)  1140 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1486: 41 steps -> 168 frames (11.1s)  1108 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1597: 33 steps -> 149 frames (9.9s)  1533 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1600: 50 steps -> 199 frames (13.2s)  1711 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1639: 69 steps -> 286 frames (19.0s)  2304 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1642: 22 steps -> 85 frames (5.6s)  502 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1648: 56 steps -> 234 frames (15.5s)  1554 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1654: 43 steps -> 176 frames (11.7s)  1038 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1660: 38 steps -> 158 frames (10.5s)  878 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/169: 49 steps -> 218 frames (14.5s)  2037 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1708: 44 steps -> 181 frames (12.0s)  781 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1711: 20 steps -> 82 frames (5.4s)  480 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/172: 34 steps -> 137 frames (9.1s)  940 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1762: 20 steps -> 90 frames (5.9s)  616 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1789: 32 steps -> 128 frames (8.5s)  849 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/181: 37 steps -> 164 frames (10.9s)  1085 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1822: 43 steps -> 179 frames (11.9s)  1254 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/1828: 30 steps -> 130 frames (8.6s)  738 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/22: 32 steps -> 130 frames (8.6s)  948 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/256: 13 steps -> 51 frames (3.3s)  341 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/259: 15 steps -> 56 frames (3.7s)  301 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/274: 40 steps -> 173 frames (11.5s)  983 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/298: 22 steps -> 91 frames (6.0s)  471 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/307: 40 steps -> 169 frames (11.2s)  845 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/331: 21 steps -> 82 frames (5.4s)  473 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/337: 31 steps -> 134 frames (8.9s)  677 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/34: 23 steps -> 90 frames (5.9s)  660 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/355: 41 steps -> 177 frames (11.7s)  1010 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/358: 45 steps -> 188 frames (12.5s)  1001 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/376: 30 steps -> 122 frames (8.1s)  872 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/4: 45 steps -> 202 frames (13.4s)  1104 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/406: 48 steps -> 201 frames (13.3s)  1259 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/409: 36 steps -> 154 frames (10.2s)  1050 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/451: 34 steps -> 147 frames (9.7s)  1478 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/472: 44 steps -> 186 frames (12.3s)  1141 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/517: 44 steps -> 182 frames (12.1s)  1150 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/523: 50 steps -> 210 frames (13.9s)  877 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/529: 15 steps -> 59 frames (3.9s)  423 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/565: 46 steps -> 193 frames (12.8s)  1827 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/58: 31 steps -> 134 frames (8.9s)  977 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/580: 34 steps -> 148 frames (9.8s)  900 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/589: 32 steps -> 130 frames (8.6s)  625 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/595: 39 steps -> 157 frames (10.4s)  1106 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/658: 14 steps -> 57 frames (3.7s)  454 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/697: 27 steps -> 114 frames (7.5s)  541 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/709: 26 steps -> 115 frames (7.6s)  789 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/760: 37 steps -> 154 frames (10.2s)  844 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/766: 31 steps -> 134 frames (8.9s)  1082 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/790: 24 steps -> 100 frames (6.6s)  707 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/814: 36 steps -> 157 frames (10.4s)  775 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/829: 59 steps -> 254 frames (16.9s)  793 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/835: 21 steps -> 96 frames (6.3s)  670 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/895: 77 steps -> 321 frames (21.3s)  2313 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/91: 23 steps -> 98 frames (6.5s)  451 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/928: 38 steps -> 163 frames (10.8s)  880 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  TbHJrupSAjP/991: 46 steps -> 193 frames (12.8s)  1728 KB  0.5s
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:27:21:502537]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1090: 21 steps -> 93 frames (6.1s)  394 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/112: 54 steps -> 236 frames (15.7s)  1884 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1153: 24 steps -> 98 frames (6.5s)  421 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1168: 45 steps -> 193 frames (12.8s)  847 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1177: 19 steps -> 78 frames (5.1s)  382 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/118: 31 steps -> 138 frames (9.1s)  498 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1186: 30 steps -> 112 frames (7.4s)  510 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1222: 55 steps -> 217 frames (14.4s)  1999 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1252: 57 steps -> 229 frames (15.2s)  1802 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1318: 47 steps -> 204 frames (13.5s)  596 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1336: 37 steps -> 156 frames (10.3s)  706 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1444: 34 steps -> 147 frames (9.7s)  1173 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1528: 37 steps -> 159 frames (10.5s)  450 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1567: 28 steps -> 114 frames (7.5s)  498 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1570: 26 steps -> 111 frames (7.3s)  432 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1627: 29 steps -> 126 frames (8.3s)  347 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1675: 29 steps -> 133 frames (8.8s)  558 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1738: 20 steps -> 81 frames (5.3s)  317 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1759: 49 steps -> 206 frames (13.7s)  855 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1795: 22 steps -> 94 frames (6.2s)  419 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/1813: 65 steps -> 261 frames (17.3s)  1939 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/217: 28 steps -> 115 frames (7.6s)  489 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/226: 31 steps -> 127 frames (8.4s)  462 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/241: 36 steps -> 155 frames (10.3s)  562 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/244: 32 steps -> 136 frames (9.0s)  500 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/304: 30 steps -> 114 frames (7.5s)  708 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/370: 38 steps -> 153 frames (10.1s)  602 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/373: 20 steps -> 87 frames (5.7s)  224 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/382: 49 steps -> 201 frames (13.3s)  2006 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/46: 51 steps -> 219 frames (14.5s)  889 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/463: 25 steps -> 108 frames (7.1s)  421 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/562: 50 steps -> 206 frames (13.7s)  1148 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/598: 24 steps -> 97 frames (6.4s)  363 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/601: 41 steps -> 166 frames (11.0s)  692 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/604: 27 steps -> 109 frames (7.2s)  456 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/613: 34 steps -> 149 frames (9.9s)  388 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/616: 34 steps -> 138 frames (9.1s)  577 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/634: 56 steps -> 235 frames (15.6s)  1562 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/652: 35 steps -> 142 frames (9.4s)  510 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/685: 23 steps -> 101 frames (6.7s)  433 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/688: 90 steps -> 357 frames (23.7s)  2828 KB  0.8s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/748: 78 steps -> 318 frames (21.1s)  2863 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/853: 41 steps -> 171 frames (11.3s)  768 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/856: 51 steps -> 206 frames (13.7s)  2276 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/901: 41 steps -> 173 frames (11.5s)  1534 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/925: 24 steps -> 102 frames (6.7s)  378 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  X7HyMhZNoso/985: 36 steps -> 152 frames (10.1s)  704 KB  0.4s
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:27:42:903469]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1000: 38 steps -> 160 frames (10.6s)  1790 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1027: 23 steps -> 83 frames (5.5s)  1079 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1057: 47 steps -> 189 frames (12.5s)  2772 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1102: 62 steps -> 256 frames (17.0s)  2968 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1132: 58 steps -> 239 frames (15.9s)  2350 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1162: 45 steps -> 185 frames (12.3s)  2079 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1192: 22 steps -> 89 frames (5.9s)  1037 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1216: 52 steps -> 217 frames (14.4s)  2573 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1225: 35 steps -> 133 frames (8.8s)  1508 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1237: 45 steps -> 182 frames (12.1s)  1897 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1249: 39 steps -> 151 frames (10.0s)  1909 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1297: 37 steps -> 147 frames (9.7s)  2118 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1300: 29 steps -> 105 frames (6.9s)  1487 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1309: 59 steps -> 238 frames (15.8s)  2440 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1390: 70 steps -> 283 frames (18.8s)  2935 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1399: 51 steps -> 216 frames (14.3s)  2535 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1492: 34 steps -> 140 frames (9.3s)  1874 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1495: 60 steps -> 241 frames (16.0s)  2847 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1555: 70 steps -> 287 frames (19.1s)  3369 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1558: 22 steps -> 95 frames (6.3s)  1058 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1585: 55 steps -> 226 frames (15.0s)  2772 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1588: 40 steps -> 163 frames (10.8s)  2416 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1618: 38 steps -> 154 frames (10.2s)  1730 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1651: 49 steps -> 199 frames (13.2s)  2376 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1657: 34 steps -> 140 frames (9.3s)  2218 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1696: 56 steps -> 218 frames (14.5s)  2526 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1786: 41 steps -> 165 frames (10.9s)  1953 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1819: 35 steps -> 139 frames (9.2s)  1586 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/1837: 57 steps -> 229 frames (15.2s)  2333 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/205: 48 steps -> 193 frames (12.8s)  2980 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/322: 28 steps -> 113 frames (7.5s)  1310 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/343: 19 steps -> 78 frames (5.1s)  939 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/391: 50 steps -> 205 frames (13.6s)  2460 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/397: 44 steps -> 181 frames (12.0s)  2216 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/430: 35 steps -> 136 frames (9.0s)  1790 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/457: 45 steps -> 175 frames (11.6s)  2174 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/469: 71 steps -> 285 frames (18.9s)  2992 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/547: 48 steps -> 196 frames (13.0s)  1999 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/550: 75 steps -> 300 frames (19.9s)  3719 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/559: 37 steps -> 135 frames (8.9s)  1858 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/574: 43 steps -> 174 frames (11.5s)  2349 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/586: 23 steps -> 98 frames (6.5s)  1340 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/592: 29 steps -> 119 frames (7.9s)  1358 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/610: 40 steps -> 163 frames (10.8s)  2536 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/625: 22 steps -> 79 frames (5.2s)  1107 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/667: 47 steps -> 179 frames (11.9s)  2113 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/703: 30 steps -> 109 frames (7.2s)  1478 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/823: 24 steps -> 97 frames (6.4s)  1073 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/847: 36 steps -> 148 frames (9.8s)  1916 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/871: 57 steps -> 230 frames (15.3s)  2829 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/904: 64 steps -> 250 frames (16.6s)  2514 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/916: 29 steps -> 121 frames (8.0s)  1511 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  Z6MFQCViBuw/964: 22 steps -> 95 frames (6.3s)  1164 KB  0.3s
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:28:11:471423]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1045: 42 steps -> 175 frames (11.6s)  1692 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1066: 34 steps -> 142 frames (9.4s)  1306 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1072: 34 steps -> 141 frames (9.3s)  1313 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/109: 35 steps -> 162 frames (10.7s)  1598 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1258: 56 steps -> 260 frames (17.3s)  2382 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/130: 27 steps -> 124 frames (8.2s)  807 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1324: 41 steps -> 177 frames (11.7s)  2031 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1342: 49 steps -> 229 frames (15.2s)  1905 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1402: 19 steps -> 76 frames (5.0s)  767 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1411: 23 steps -> 98 frames (6.5s)  920 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1429: 42 steps -> 176 frames (11.7s)  1686 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1450: 63 steps -> 267 frames (17.7s)  2858 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1456: 41 steps -> 180 frames (11.9s)  1752 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1468: 24 steps -> 103 frames (6.8s)  909 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1510: 61 steps -> 263 frames (17.5s)  2995 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1531: 25 steps -> 114 frames (7.5s)  818 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1540: 36 steps -> 170 frames (11.3s)  1021 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1546: 45 steps -> 189 frames (12.5s)  1706 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1576: 28 steps -> 131 frames (8.7s)  1042 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1609: 49 steps -> 217 frames (14.4s)  1891 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1666: 36 steps -> 159 frames (10.5s)  1522 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1672: 30 steps -> 138 frames (9.1s)  1173 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1687: 46 steps -> 197 frames (13.1s)  1820 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1702: 31 steps -> 146 frames (9.7s)  1277 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1735: 50 steps -> 220 frames (14.6s)  2106 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1747: 29 steps -> 123 frames (8.1s)  1216 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1792: 34 steps -> 137 frames (9.1s)  1228 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1825: 36 steps -> 170 frames (11.3s)  1021 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1831: 27 steps -> 110 frames (7.3s)  1010 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/1834: 40 steps -> 188 frames (12.5s)  1543 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/184: 33 steps -> 156 frames (10.3s)  1329 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/232: 53 steps -> 222 frames (14.7s)  2609 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/268: 13 steps -> 58 frames (3.8s)  479 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/28: 62 steps -> 264 frames (17.5s)  2875 KB  0.8s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/436: 33 steps -> 154 frames (10.2s)  1077 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/466: 33 steps -> 143 frames (9.5s)  1172 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/478: 24 steps -> 93 frames (6.1s)  947 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/508: 34 steps -> 133 frames (8.8s)  1273 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/532: 50 steps -> 227 frames (15.1s)  1845 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/64: 32 steps -> 148 frames (9.8s)  1247 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/661: 40 steps -> 172 frames (11.4s)  1452 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/682: 26 steps -> 108 frames (7.1s)  1470 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/691: 39 steps -> 175 frames (11.6s)  1734 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/706: 49 steps -> 223 frames (14.8s)  1743 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/724: 24 steps -> 91 frames (6.0s)  1235 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/727: 25 steps -> 112 frames (7.4s)  1025 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/733: 32 steps -> 141 frames (9.3s)  1354 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/736: 71 steps -> 316 frames (21.0s)  2704 KB  0.8s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/769: 48 steps -> 222 frames (14.7s)  1865 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/787: 37 steps -> 152 frames (10.1s)  1449 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/811: 16 steps -> 62 frames (4.1s)  951 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/838: 21 steps -> 95 frames (6.3s)  660 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/844: 38 steps -> 166 frames (11.0s)  1633 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/850: 82 steps -> 362 frames (24.1s)  3879 KB  0.8s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/907: 34 steps -> 142 frames (9.4s)  1306 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/937: 16 steps -> 62 frames (4.1s)  951 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/940: 52 steps -> 246 frames (16.3s)  1631 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/946: 53 steps -> 232 frames (15.4s)  2018 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  oLBMNvg9in8/997: 32 steps -> 138 frames (9.1s)  1159 KB  0.4s
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:28:43:809421]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  pLe4wQe7qrG/1483: 31 steps -> 131 frames (8.7s)  1695 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  pLe4wQe7qrG/1582: 34 steps -> 141 frames (9.3s)  1405 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  pLe4wQe7qrG/1624: 18 steps -> 75 frames (4.9s)  738 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  pLe4wQe7qrG/1777: 17 steps -> 64 frames (4.2s)  709 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  pLe4wQe7qrG/412: 9 steps -> 32 frames (2.1s)  324 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  pLe4wQe7qrG/649: 15 steps -> 59 frames (3.9s)  678 KB  0.2s
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:28:46:262037]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/100: 34 steps -> 137 frames (9.1s)  724 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1051: 43 steps -> 175 frames (11.6s)  896 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1054: 29 steps -> 122 frames (8.1s)  750 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1117: 27 steps -> 102 frames (6.7s)  663 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1144: 41 steps -> 177 frames (11.7s)  670 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1267: 36 steps -> 150 frames (9.9s)  1006 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1291: 39 steps -> 163 frames (10.8s)  1077 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1348: 32 steps -> 131 frames (8.7s)  641 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1378: 18 steps -> 73 frames (4.8s)  333 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1594: 21 steps -> 79 frames (5.2s)  463 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1603: 36 steps -> 156 frames (10.3s)  903 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1633: 37 steps -> 161 frames (10.7s)  597 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1663: 22 steps -> 83 frames (5.5s)  502 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1669: 25 steps -> 102 frames (6.7s)  464 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1726: 44 steps -> 185 frames (12.3s)  1085 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1780: 37 steps -> 153 frames (10.1s)  819 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/1798: 40 steps -> 161 frames (10.7s)  1051 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/187: 39 steps -> 163 frames (10.8s)  880 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/199: 27 steps -> 116 frames (7.7s)  513 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/223: 26 steps -> 110 frames (7.3s)  581 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/229: 48 steps -> 200 frames (13.3s)  1186 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/283: 20 steps -> 74 frames (4.9s)  481 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/31: 24 steps -> 98 frames (6.5s)  459 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/310: 23 steps -> 92 frames (6.1s)  519 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/520: 31 steps -> 130 frames (8.6s)  875 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/553: 24 steps -> 100 frames (6.6s)  528 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/583: 36 steps -> 141 frames (9.3s)  963 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/631: 26 steps -> 114 frames (7.5s)  739 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/640: 28 steps -> 111 frames (7.3s)  665 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/7: 36 steps -> 137 frames (9.1s)  937 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/817: 26 steps -> 102 frames (6.7s)  558 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/949: 33 steps -> 144 frames (9.5s)  869 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/973: 29 steps -> 121 frames (8.0s)  594 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  x8F5xyUWy9e/982: 36 steps -> 149 frames (9.9s)  712 KB  0.4s
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:28:58:962712]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1: 31 steps -> 126 frames (8.3s)  585 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1015: 31 steps -> 124 frames (8.2s)  741 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1024: 69 steps -> 281 frames (18.7s)  1371 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1033: 51 steps -> 209 frames (13.9s)  1144 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1039: 36 steps -> 139 frames (9.2s)  742 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1069: 55 steps -> 218 frames (14.5s)  1204 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1084: 10 steps -> 40 frames (2.6s)  182 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1099: 38 steps -> 154 frames (10.2s)  888 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1108: 39 steps -> 150 frames (9.9s)  811 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1135: 45 steps -> 184 frames (12.2s)  1219 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1165: 64 steps -> 263 frames (17.5s)  1587 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1195: 49 steps -> 206 frames (13.7s)  791 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1198: 14 steps -> 49 frames (3.2s)  187 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/124: 56 steps -> 232 frames (15.4s)  1037 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1240: 32 steps -> 139 frames (9.2s)  644 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1261: 37 steps -> 144 frames (9.5s)  809 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1285: 32 steps -> 132 frames (8.7s)  637 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/13: 51 steps -> 205 frames (13.6s)  1174 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1321: 39 steps -> 163 frames (10.8s)  542 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1333: 46 steps -> 184 frames (12.2s)  1132 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1354: 28 steps -> 109 frames (7.2s)  740 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/136: 26 steps -> 99 frames (6.5s)  498 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1360: 40 steps -> 171 frames (11.3s)  839 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1375: 41 steps -> 172 frames (11.4s)  860 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1384: 68 steps -> 276 frames (18.3s)  1481 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1387: 27 steps -> 112 frames (7.4s)  502 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1435: 44 steps -> 187 frames (12.4s)  910 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1438: 31 steps -> 133 frames (8.8s)  672 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/145: 25 steps -> 98 frames (6.5s)  511 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1474: 26 steps -> 104 frames (6.9s)  588 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1477: 39 steps -> 150 frames (9.9s)  930 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1480: 34 steps -> 143 frames (9.5s)  521 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1501: 41 steps -> 177 frames (11.7s)  869 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1519: 26 steps -> 107 frames (7.1s)  445 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1522: 20 steps -> 88 frames (5.8s)  311 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/154: 46 steps -> 181 frames (12.0s)  1135 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1549: 53 steps -> 221 frames (14.7s)  1093 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1612: 40 steps -> 172 frames (11.4s)  765 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/163: 37 steps -> 159 frames (10.5s)  527 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1636: 30 steps -> 132 frames (8.7s)  640 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1645: 17 steps -> 66 frames (4.3s)  340 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1678: 57 steps -> 236 frames (15.7s)  1403 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1681: 38 steps -> 149 frames (9.9s)  828 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1684: 59 steps -> 240 frames (15.9s)  1385 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1690: 31 steps -> 124 frames (8.2s)  705 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1720: 26 steps -> 104 frames (6.9s)  614 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1732: 24 steps -> 103 frames (6.8s)  403 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1753: 39 steps -> 168 frames (11.1s)  618 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1765: 27 steps -> 98 frames (6.5s)  635 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1771: 50 steps -> 211 frames (14.0s)  838 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1774: 24 steps -> 105 frames (6.9s)  425 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/1807: 74 steps -> 302 frames (20.1s)  1679 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/235: 43 steps -> 176 frames (11.7s)  992 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/247: 41 steps -> 176 frames (11.7s)  815 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/25: 63 steps -> 262 frames (17.4s)  1527 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/250: 27 steps -> 111 frames (7.3s)  565 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/253: 53 steps -> 217 frames (14.4s)  890 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/292: 38 steps -> 154 frames (10.2s)  778 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/301: 46 steps -> 198 frames (13.1s)  888 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/352: 32 steps -> 133 frames (8.8s)  697 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/361: 40 steps -> 164 frames (10.9s)  997 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/367: 44 steps -> 187 frames (12.4s)  823 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/37: 35 steps -> 140 frames (9.3s)  501 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/385: 49 steps -> 203 frames (13.5s)  1149 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/40: 70 steps -> 284 frames (18.9s)  1567 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/415: 36 steps -> 157 frames (10.4s)  676 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/418: 43 steps -> 163 frames (10.8s)  917 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/439: 34 steps -> 152 frames (10.1s)  783 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/445: 47 steps -> 186 frames (12.3s)  1059 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/475: 48 steps -> 199 frames (13.2s)  1076 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/505: 30 steps -> 127 frames (8.4s)  558 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/514: 41 steps -> 167 frames (11.1s)  805 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/52: 76 steps -> 317 frames (21.1s)  1677 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/544: 18 steps -> 77 frames (5.1s)  301 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/55: 52 steps -> 205 frames (13.6s)  1180 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/571: 45 steps -> 183 frames (12.1s)  1073 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/628: 23 steps -> 93 frames (6.1s)  455 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/655: 53 steps -> 227 frames (15.1s)  877 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/670: 43 steps -> 181 frames (12.0s)  911 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/673: 63 steps -> 262 frames (17.4s)  1346 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/712: 65 steps -> 264 frames (17.5s)  1398 KB  0.6s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/715: 49 steps -> 193 frames (12.8s)  1103 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/73: 34 steps -> 143 frames (9.5s)  841 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/742: 46 steps -> 188 frames (12.5s)  1048 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/745: 26 steps -> 108 frames (7.1s)  380 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/820: 27 steps -> 115 frames (7.6s)  399 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/826: 20 steps -> 74 frames (4.9s)  279 KB  0.2s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/85: 31 steps -> 122 frames (8.1s)  506 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/862: 47 steps -> 189 frames (12.5s)  945 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/865: 73 steps -> 303 frames (20.1s)  1764 KB  0.7s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/868: 39 steps -> 161 frames (10.7s)  764 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/892: 38 steps -> 144 frames (9.5s)  958 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/898: 32 steps -> 139 frames (9.2s)  684 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/910: 49 steps -> 209 frames (13.9s)  941 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/913: 42 steps -> 161 frames (10.7s)  924 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/922: 51 steps -> 216 frames (14.3s)  1127 KB  0.5s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/934: 46 steps -> 191 frames (12.7s)  942 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/955: 41 steps -> 171 frames (11.3s)  971 KB  0.4s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/961: 33 steps -> 134 frames (8.9s)  503 KB  0.3s
+Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.
+  zsNo4HB9uLZ/967: 30 steps -> 131 frames (8.7s)  410 KB  0.3s
+
+613 episodes  99,752 frames  829.6 MB  295.5s
+per episode: 163 frames  1322 KB  0.48s
+per frame:   8.1 KB  3.0 ms
+
+extrapolated to 613 episodes: 0.10 M frames, 0.8 GB, 0.1 GPU-hours

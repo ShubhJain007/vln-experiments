@@ -1,0 +1,21 @@
+flash_attn is installed but failed to import: /home/kneepolean/.local/lib/python3.10/site-packages/flash_attn_2_cuda.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c105ErrorC2ENS_14SourceLocationENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE. Falling back to native PyTorch attention.
+3 episodes, chunk=16 (17 frames)
+
+/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/utils/deprecation_utils.py:23: FutureWarning: `torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+Loading pipeline components...:   0%|          | 0/4 [00:00<?, ?it/s]The config attributes {'clip_output': False} were passed to AutoencoderKLWan, but are not expected and will be ignored. Please verify your config.json configuration file.
+The config attributes {'backbone_type': 'cosmos3_edge_nemotron_dense', 'temporal_compression_factor': 4} were passed to Cosmos3OmniTransformer, but are not expected and will be ignored. Please verify your config.json configuration file.
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][ALoading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 97.05it/s]
+Loading pipeline components...:  75%|███████▌  | 3/4 [00:00<00:00, 23.97it/s]Loading pipeline components...: 100%|██████████| 4/4 [00:00<00:00,  4.48it/s]
+pipeline on GPU, free 7.60 GB
+
+Traceback (most recent call last):
+  File "/home/kneepolean/shubhj/latentpilot/scripts/edge_zeroshot_id.py", line 93, in <module>
+    raise SystemExit(main())
+  File "/home/kneepolean/shubhj/latentpilot/scripts/edge_zeroshot_id.py", line 61, in main
+    action=CosmosActionCondition(
+  File "<string>", line 11, in __init__
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/pipelines/cosmos/pipeline_cosmos3_omni.py", line 366, in __post_init__
+    raise ValueError("`image` and `video` cannot both be None")
+ValueError: `image` and `video` cannot both be None

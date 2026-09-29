@@ -1,0 +1,57 @@
+######## fusion/step120000 (1.10ep) strict thr=0.15 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.2933
+    SPL   = 0.2444
+    OS    = 0.4000
+    nDTW  = 0.3505
+    NE    = 7.0527
+    model_stop        82  ( 54.7%)
+    timeout           68  ( 45.3%)
+    closest approach : mean  4.70  median  4.11  p25  1.98  min  0.10
+    ever within  3.0m :  40.0%
+    ever within  5.0m :  58.0%
+    ever within 10.0m :  92.7%
+    where it STOPPED : mean  4.45  median  3.54  within 3m 42.7%
+######## fusion/step120000 (1.10ep) strict thr=0.20 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.3133
+    SPL   = 0.2537
+    OS    = 0.4267
+    nDTW  = 0.3232
+    NE    = 7.2189
+    model_stop        69  ( 46.0%)
+    timeout           81  ( 54.0%)
+    closest approach : mean  4.61  median  3.95  p25  1.80  min  0.05
+    ever within  3.0m :  42.7%
+    ever within  5.0m :  58.0%
+    ever within 10.0m :  92.7%
+    where it STOPPED : mean  4.25  median  3.11  within 3m 49.3%
+######## fusion/step120000 (1.10ep) strict thr=0.10 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.2867
+    SPL   = 0.2425
+    OS    = 0.3667
+    nDTW  = 0.3631
+    NE    = 7.0260
+    model_stop        92  ( 61.3%)
+    timeout           58  ( 38.7%)
+    closest approach : mean  4.86  median  4.28  p25  2.29  min  0.10
+    ever within  3.0m :  36.7%
+    ever within  5.0m :  57.3%
+    ever within 10.0m :  92.7%
+    where it STOPPED : mean  5.04  median  4.04  within 3m 38.0%
+######## fusion/step120000 (1.10ep) strict thr=0.30 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.2933
+    SPL   = 0.2359
+    OS    = 0.4467
+    nDTW  = 0.2867
+    NE    = 7.5894
+    model_stop        53  ( 35.3%)
+    timeout           97  ( 64.7%)
+    closest approach : mean  4.45  median  3.64  p25  1.45  min  0.05
+    ever within  3.0m :  44.7%
+    ever within  5.0m :  60.0%
+    ever within 10.0m :  92.7%
+    where it STOPPED : mean  3.83  median  2.71  within 3m 54.7%
+######## EVAL120K DONE ########

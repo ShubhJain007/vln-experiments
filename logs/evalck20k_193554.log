@@ -1,0 +1,55 @@
+######## checkpoints/pointing_full3/step20000 --strict n=150 thr=0.05 ########
+Loading pointing policy from checkpoints/pointing_full3/step20000 ...
+  history_frames = 2 (stride 8, spans 16 steps) [from checkpoint config]
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.05  turn=7.5 deg
+  STRICT: success requires the model's OWN stop within 3 m
+
+split=val_unseen  episodes=150  scans=8
+
+
+====================================================================
+  POINTING EVAL — checkpoints/pointing_full3/step20000
+  split=val_unseen  n=150  stop_thr=0.05  STRICT (own STOP only)
+====================================================================
+    SR    = 0.0867
+    SPL   = 0.0853
+    OS    = 0.1000
+    nDTW  = 0.3320
+    NE    = 7.7184
+
+  TERMINATION:
+    model_stop       130  ( 86.7%)
+    within_radius      0  (  0.0%)
+    timeout           20  ( 13.3%)
+
+  p(stop) over 6,160 steps: mean 0.0091  p95 0.0349  max 0.1937
+    (threshold 0.05 would fire on 2.11% of steps)
+====================================================================
+######## checkpoints/pointing_full3/step20000 diagnostic n=150 thr=0.05 ########
+Loading pointing policy from checkpoints/pointing_full3/step20000 ...
+  history_frames = 2 (stride 8, spans 16 steps) [from checkpoint config]
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.05  turn=7.5 deg
+split=val_unseen  episodes=150  scans=8
+
+
+====================================================================
+  POINTING EVAL — checkpoints/pointing_full3/step20000
+  split=val_unseen  n=150  stop_thr=0.05  diagnostic (proximity break)
+====================================================================
+    SR    = 0.1000
+    SPL   = 0.0961
+    OS    = 0.1000
+    nDTW  = 0.3307
+    NE    = 7.7247
+
+  TERMINATION:
+    model_stop       115  ( 76.7%)
+    within_radius     15  ( 10.0%)
+    timeout           20  ( 13.3%)
+
+  p(stop) over 6,088 steps: mean 0.0088  p95 0.0336  max 0.1267
+    (threshold 0.05 would fire on 1.89% of steps)
+====================================================================
+######## DONE ########

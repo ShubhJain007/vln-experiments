@@ -1,0 +1,39 @@
+12:28:55 reasoner_direct JSON written; handing off
+7 arms, 40 episodes each -> /home/kneepolean/shubhj/latentpilot/results/ablations.md
+
+=== reasoner_diffusion_grounded ===
+  eval_cosmos_nav.py --policy diffusion_grounded
+  FAILED rc=1
+    return forward_call(*args, **kwargs)
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 360, in forward
+    x = self.conv1(x, feat_cache[idx])
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 172, in forward
+    x = F.pad(x, padding)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/functional.py", line 5096, in pad
+    return torch._C._nn.pad(input, pad, mode, value)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 344.00 MiB. GPU 0 has a total capacity of 15.56 GiB of which 12.94 MiB is free. Including non-PyTorch memory, this process has 14.59 GiB memory in use. Of the allocated memory 13.86 GiB is allocated by PyTorch, and 445.87 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+
+=== reasoner_diffusion_bare ===
+  eval_cosmos_nav.py --policy diffusion
+  FAILED rc=1
+    return forward_call(*args, **kwargs)
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 351, in forward
+    x = self.norm1(x)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 202, in forward
+    normalized = F.normalize(x.float() if needs_fp32_normalize else x, dim=(1 if self.channel_first else -1)).to(
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/functional.py", line 5374, in normalize
+    return input / denom
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 450.00 MiB. GPU 0 has a total capacity of 15.56 GiB of which 340.94 MiB is free. Including non-PyTorch memory, this process has 14.27 GiB memory in use. Of the allocated memory 13.70 GiB is allocated by PyTorch, and 284.83 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+
+=== r2r_av_reasoner ===
+  eval_edge.py --prompt-template You are an autonomous vehicle planning system. The video depicts the observation from the ve

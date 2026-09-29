@@ -1,0 +1,230 @@
+Loading weights:   0%|          | 0/670 [00:00<?, ?it/s]Loading weights:  10%|█         | 67/670 [00:00<00:00, 668.39it/s]Loading weights:  23%|██▎       | 155/670 [00:00<00:00, 784.41it/s]Loading weights:  35%|███▍      | 234/670 [00:00<00:00, 662.06it/s]Loading weights: 100%|██████████| 670/670 [00:00<00:00, 1570.81it/s]
+reasoner on GPU: 4.54 GB
+36 decision points from 12 trajectories; expert labels: {'turn left': 3, 'move forward': 18, 'stop': 12, 'turn right': 3}
+
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 1/36 expert=turn left    pred=stop         --  3.8s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 2/36 expert=move forward pred=stop         --  3.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 3/36 expert=stop         pred=turn left    --  1.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 4/36 expert=turn left    pred=turn right   --  2.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 5/36 expert=move forward pred=move forward OK  2.0s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 6/36 expert=stop         pred=move forward --  2.4s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 7/36 expert=move forward pred=move forward OK  3.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 8/36 expert=move forward pred=turn right   --  1.8s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 9/36 expert=stop         pred=move forward --  2.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 10/36 expert=turn right   pred=move forward --  1.2s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 11/36 expert=move forward pred=move forward OK  1.8s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 12/36 expert=stop         pred=move forward --  2.2s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 13/36 expert=move forward pred=move forward OK  1.9s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 14/36 expert=move forward pred=stop         --  3.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 15/36 expert=stop         pred=stop         OK  3.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 16/36 expert=move forward pred=None         --  2.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 17/36 expert=turn right   pred=move forward --  3.0s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 18/36 expert=stop         pred=move forward --  3.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 19/36 expert=move forward pred=move forward OK  2.8s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 20/36 expert=move forward pred=stop         --  3.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 21/36 expert=stop         pred=stop         OK  3.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 22/36 expert=turn right   pred=move forward --  2.9s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 23/36 expert=move forward pred=move forward OK  2.0s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 24/36 expert=stop         pred=stop         OK  1.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 25/36 expert=move forward pred=move forward OK  2.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 26/36 expert=move forward pred=turn left    --  2.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 27/36 expert=stop         pred=stop         OK  3.0s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 28/36 expert=move forward pred=turn left    --  1.8s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 29/36 expert=move forward pred=None         --  1.8s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 30/36 expert=stop         pred=stop         OK  3.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 31/36 expert=move forward pred=move forward OK  1.8s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 32/36 expert=move forward pred=stop         --  3.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 33/36 expert=stop         pred=stop         OK  1.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 34/36 expert=move forward pred=turn right   --  2.0s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 35/36 expert=turn left    pred=move forward --  2.4s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_full] 36/36 expert=stop         pred=move forward --  2.8s
+
+=== hier_full: accuracy 0.389  parse 0.94  recall {move forward: 0.44, turn left: 0.00, turn right: 0.00, stop: 0.50}  2.5s/call ===
+
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 1/36 expert=turn left    pred=move forward --  1.7s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 2/36 expert=move forward pred=turn left    --  1.7s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 3/36 expert=stop         pred=turn right   --  2.0s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 4/36 expert=turn left    pred=turn left    OK  1.7s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 5/36 expert=move forward pred=turn left    --  3.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 6/36 expert=stop         pred=turn right   --  2.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 7/36 expert=move forward pred=stop         --  3.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 8/36 expert=move forward pred=turn right   --  3.0s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 9/36 expert=stop         pred=stop         OK  3.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 10/36 expert=turn right   pred=move forward --  1.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 11/36 expert=move forward pred=move forward OK  2.0s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 12/36 expert=stop         pred=turn left    --  2.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 13/36 expert=move forward pred=turn right   --  2.4s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 14/36 expert=move forward pred=move forward OK  2.0s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 15/36 expert=stop         pred=turn right   --  1.7s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 16/36 expert=move forward pred=move forward OK  1.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 17/36 expert=turn right   pred=move forward --  2.0s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 18/36 expert=stop         pred=move forward --  1.7s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 19/36 expert=move forward pred=move forward OK  1.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 20/36 expert=move forward pred=move forward OK  1.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 21/36 expert=stop         pred=move forward --  1.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 22/36 expert=turn right   pred=None         --  2.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 23/36 expert=move forward pred=move forward OK  2.3s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 24/36 expert=stop         pred=stop         OK  3.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 25/36 expert=move forward pred=move forward OK  2.7s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 26/36 expert=move forward pred=move forward OK  1.8s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 27/36 expert=stop         pred=stop         OK  3.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 28/36 expert=move forward pred=turn left    --  1.4s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 29/36 expert=move forward pred=move forward OK  1.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 30/36 expert=stop         pred=stop         OK  1.6s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 31/36 expert=move forward pred=turn right   --  3.4s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 32/36 expert=move forward pred=turn right   --  1.8s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 33/36 expert=stop         pred=stop         OK  1.8s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 34/36 expert=move forward pred=turn left    --  1.8s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 35/36 expert=turn left    pred=turn right   --  3.5s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall] 36/36 expert=stop         pred=turn right   --  3.5s
+
+=== hier_overall: accuracy 0.417  parse 0.97  recall {move forward: 0.50, turn left: 0.33, turn right: 0.00, stop: 0.42}  2.3s/call ===
+
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 1/36 expert=turn left    pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 2/36 expert=move forward pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 3/36 expert=stop         pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 4/36 expert=turn left    pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 5/36 expert=move forward pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 6/36 expert=stop         pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 7/36 expert=move forward pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 8/36 expert=move forward pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 9/36 expert=stop         pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 10/36 expert=turn right   pred=move forward --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 11/36 expert=move forward pred=move forward OK  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 12/36 expert=stop         pred=move forward --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 13/36 expert=move forward pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 14/36 expert=move forward pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 15/36 expert=stop         pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 16/36 expert=move forward pred=move forward OK  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 17/36 expert=turn right   pred=move forward --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 18/36 expert=stop         pred=move forward --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 19/36 expert=move forward pred=move forward OK  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 20/36 expert=move forward pred=move forward OK  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 21/36 expert=stop         pred=move forward --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 22/36 expert=turn right   pred=move forward --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 23/36 expert=move forward pred=None         --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 24/36 expert=stop         pred=stop         OK  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 25/36 expert=move forward pred=stop         --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 26/36 expert=move forward pred=stop         --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 27/36 expert=stop         pred=stop         OK  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 28/36 expert=move forward pred=turn left    --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 29/36 expert=move forward pred=turn left    --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 30/36 expert=stop         pred=turn left    --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 31/36 expert=move forward pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 32/36 expert=move forward pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 33/36 expert=stop         pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 34/36 expert=move forward pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 35/36 expert=turn left    pred=turn right   --  0.1s
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  [hier_overall_nothink] 36/36 expert=stop         pred=turn right   --  0.1s
+
+=== hier_overall_nothink: accuracy 0.167  parse 0.97  recall {move forward: 0.22, turn left: 0.00, turn right: 0.00, stop: 0.17}  0.1s/call ===
+
+wrote /home/kneepolean/shubhj/latentpilot/results/reasoner_nav_probe.md / .json

@@ -1,0 +1,34 @@
+######## STRICT stop_threshold=0.10 ########
+    SR    = 0.1000
+    SPL   = 0.0889
+    OS    = 0.1833
+    nDTW  = 0.2373
+    NE    = 9.2059
+    model_stop        12  ( 20.0%)
+    within_radius      0  (  0.0%)
+    timeout           48  ( 80.0%)
+  p(stop) over 5,159 steps: mean 0.0099  p95 0.0297  max 0.1729
+    (threshold 0.1 would fire on 0.23% of steps)
+######## STRICT stop_threshold=0.05 ########
+    SR    = 0.1333
+    SPL   = 0.1204
+    OS    = 0.1500
+    nDTW  = 0.2889
+    NE    = 8.9577
+    model_stop        22  ( 36.7%)
+    within_radius      0  (  0.0%)
+    timeout           38  ( 63.3%)
+  p(stop) over 4,503 steps: mean 0.0084  p95 0.0234  max 0.1613
+    (threshold 0.05 would fire on 0.49% of steps)
+######## STRICT stop_threshold=0.03 ########
+    SR    = 0.1000
+    SPL   = 0.0967
+    OS    = 0.1000
+    nDTW  = 0.3041
+    NE    = 8.9228
+    model_stop        29  ( 48.3%)
+    within_radius      0  (  0.0%)
+    timeout           31  ( 51.7%)
+  p(stop) over 3,679 steps: mean 0.0074  p95 0.0188  max 0.1613
+    (threshold 0.03 would fire on 0.79% of steps)
+######## STRICT SWEEP DONE ########

@@ -1,0 +1,94 @@
+{
+ "n": 160,
+ "majority_baseline": 0.54375,
+ "variants": {
+  "hier_overall_nothink": {
+   "accuracy": 0.63125,
+   "parse_rate": 1.0,
+   "recall": {
+    "move forward": 0.8620689655172413,
+    "turn left": 0.7058823529411765,
+    "turn right": 0.625,
+    "stop": 0.1
+   },
+   "confusion": {
+    "move forward->move forward": 75,
+    "move forward->turn left": 6,
+    "move forward->turn right": 6,
+    "stop->move forward": 31,
+    "stop->stop": 4,
+    "stop->turn left": 2,
+    "stop->turn right": 3,
+    "turn left->move forward": 3,
+    "turn left->stop": 1,
+    "turn left->turn left": 12,
+    "turn left->turn right": 1,
+    "turn right->move forward": 6,
+    "turn right->turn right": 10
+   },
+   "mean_seconds": 0.21925590187311172
+  }
+ },
+ "transcripts": [
+  {
+   "variant": "hier_overall_nothink",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 99,
+   "label": "move forward",
+   "pred": "move forward",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.",
+   "answer": "move forward"
+  },
+  {
+   "variant": "hier_overall_nothink",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 108,
+   "label": "move forward",
+   "pred": "move forward",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.",
+   "answer": "move forward"
+  },
+  {
+   "variant": "hier_overall_nothink",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 195,
+   "label": "move forward",
+   "pred": "move forward",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.",
+   "answer": "move forward"
+  },
+  {
+   "variant": "hier_overall_nothink",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 225,
+   "label": "stop",
+   "pred": "move forward",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.",
+   "answer": "move forward"
+  },
+  {
+   "variant": "hier_overall_nothink",
+   "scan": "8194nk5LbLH",
+   "traj": 1141,
+   "t": 6,
+   "label": "turn left",
+   "pred": "turn left",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Go right around the counter and turn left. Continue until you are at the end of the second orange couch.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.",
+   "answer": "turn left"
+  },
+  {
+   "variant": "hier_overall_nothink",
+   "scan": "8194nk5LbLH",
+   "traj": 1141,
+   "t": 34,
+   "label": "move forward",
+   "pred": "move forward",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Go right around the counter and turn left. Continue until you are at the end of the second orange couch.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.",
+   "answer": "move forward"
+  }
+ ]
+}

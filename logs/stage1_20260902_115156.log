@@ -1,0 +1,32 @@
+######## STAGE 1 learned  started Wed Sep  2 11:51:56 EDT 2026 ########
+split=train  episodes=1665  steps=69606
+scans=6
+marginal-prior loss H(actions) = 0.9744  (uniform ln(4) = 1.3863)
+Eq.14 target coverage: 0.952 (steps with a v_bar_{t+2}; the rest are masked)
+
+mean ||v_bar|| = 14.798
+
+action prior: LEFT=0.183  FWD=0.639  RIGHT=0.154  STOP=0.024
+BASELINES  loss: uniform=1.3863  marginal=0.9744
+
+Eq.12/Eq.5 asymmetry: OK  (train=v_bar_{t+1}, eval=z_{t-1})
+pilot_mode=action_query   g_psi=learned   lambda=0.1
+LR cosine: warmup 100 -> peak 1.00e-04 -> 5.00e-06 at step 17400 (floor 5% of peak)
+epochs over 69,606 steps at batch 8: 2.00
+
+step     50  L   4.2325  L_act 2.7858  L_pil    14.468  acc 0.388  STOP-rec 0.000(n=7)  |z|  14.63  lr 5.10e-05  2.02 it/s
+step    100  L   2.0927  L_act 1.0317  L_pil    10.610  acc 0.593  STOP-rec 0.000(n=7)  |z|  15.14  lr 1.00e-04  2.04 it/s
+step    150  L   1.9488  L_act 1.0137  L_pil     9.351  acc 0.603  STOP-rec 0.000(n=9)  |z|  15.16  lr 1.00e-04  2.03 it/s
+step    200  L   1.7579  L_act 0.9402  L_pil     8.177  acc 0.662  STOP-rec 0.000(n=7)  |z|  15.42  lr 1.00e-04  2.03 it/s
+step    250  L   1.6713  L_act 0.9782  L_pil     6.931  acc 0.632  STOP-rec 0.000(n=9)  |z|  14.41  lr 1.00e-04  2.03 it/s
+step    300  L   1.5965  L_act 0.9685  L_pil     6.280  acc 0.657  STOP-rec 0.000(n=13)  |z|  15.48  lr 1.00e-04  2.02 it/s
+step    350  L   1.6093  L_act 0.9964  L_pil     6.130  acc 0.620  STOP-rec 0.000(n=12)  |z|  15.28  lr 1.00e-04  2.02 it/s
+step    400  L   1.6298  L_act 0.9906  L_pil     6.392  acc 0.660  STOP-rec 0.000(n=11)  |z|  15.15  lr 9.99e-05  2.02 it/s
+step    450  L   1.5903  L_act 0.9736  L_pil     6.167  acc 0.637  STOP-rec 0.000(n=7)  |z|  15.74  lr 9.99e-05  2.02 it/s
+step    500  L   1.5354  L_act 0.9757  L_pil     5.596  acc 0.618  STOP-rec 0.000(n=8)  |z|  15.03  lr 9.99e-05  2.02 it/s
+step    550  L   1.5069  L_act 0.9306  L_pil     5.763  acc 0.635  STOP-rec 0.000(n=7)  |z|  15.57  lr 9.98e-05  2.02 it/s
+step    600  L   1.4078  L_act 0.8593  L_pil     5.484  acc 0.695  STOP-rec 0.000(n=9)  |z|  15.08  lr 9.98e-05  2.02 it/s
+step    650  L   1.4554  L_act 0.9110  L_pil     5.444  acc 0.650  STOP-rec 0.000(n=4)  |z|  16.52  lr 9.98e-05  2.02 it/s
+step    700  L   1.4689  L_act 0.9333  L_pil     5.356  acc 0.665  STOP-rec 0.000(n=14)  |z|  14.71  lr 9.97e-05  2.00 it/s
+step    750  L   1.4117  L_act 0.9079  L_pil     5.038  acc 0.667  STOP-rec 0.000(n=11)  |z|  15.50  lr 9.97e-05  1.94 it/s
+step    800  L   1.4418  L_act 0.9105  L_pil     5.313  acc 0.655  STOP-rec 0.000(n=10)  |z|  14.78  lr 9.96e-05  1.90 it/s

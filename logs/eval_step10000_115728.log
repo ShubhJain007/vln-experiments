@@ -1,0 +1,32 @@
+v_bar reference: mean ||v_bar|| = 15.84
+Loading Stage 0' policy from checkpoints/stage1_learned/step10000 ...
+Loading weights:   0%|          | 0/626 [00:00<?, ?it/s]Loading weights:   4%|▍         | 26/626 [00:00<00:02, 256.32it/s]Loading weights:  20%|██        | 126/626 [00:00<00:00, 689.96it/s]Loading weights:  36%|███▌      | 224/626 [00:00<00:00, 821.78it/s]Loading weights:  50%|█████     | 316/626 [00:00<00:00, 858.19it/s]Loading weights:  72%|███████▏  | 451/626 [00:00<00:00, 1033.78it/s]Loading weights:  93%|█████████▎| 583/626 [00:00<00:00, 1129.76it/s]Loading weights: 100%|██████████| 626/626 [00:00<00:00, 964.68it/s] 
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+slot_mode = z
+split=val_unseen  episodes=30  scans=6
+
+  25/30  (0.15 ep/s)
+
+====================================================================
+  STAGE 0' EVAL — checkpoints/stage1_learned/step10000
+  slot_mode=z
+  split=val_unseen  n=30  diagnostic (3m early exit)
+====================================================================
+    SR    = 0.2667
+    SPL   = 0.2667
+    OS    = 0.2667
+    nDTW  = 0.3751
+    NE    = 7.8896
+
+  TERMINATION:
+    model_stop         0  (  0.0%)
+    within_radius      8  ( 26.7%)
+    timeout           22  ( 73.3%)
+
+  ||z_t|| over 2,573 steps: mean 15.19  min 13.31  max 17.89
+    (Stage 2 wants this DRIFT to shrink; record it as the Stage 0' reference)
+
+  Paper NaN row (Table 3): SR 51.7  SPL 47.1  NE 5.3  OS 57.0
+====================================================================

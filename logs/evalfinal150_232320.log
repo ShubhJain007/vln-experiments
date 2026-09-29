@@ -1,0 +1,21 @@
+######## pointing/final n=150 thr=0.05 --strict ########
+    SR    = 0.1333
+    SPL   = 0.1304
+    OS    = 0.1400
+    nDTW  = 0.3499
+    NE    = 7.3382
+    model_stop        86  ( 57.3%)
+    within_radius      0  (  0.0%)
+    timeout           64  ( 42.7%)
+  p(stop) over 8,726 steps: mean 0.0053  p95 0.0218  max 0.2245
+######## pointing/final n=150 thr=0.05 diagnostic ########
+    SR    = 0.1400
+    SPL   = 0.1400
+    OS    = 0.1400
+    nDTW  = 0.3523
+    NE    = 7.4026
+    model_stop        67  ( 44.7%)
+    within_radius     21  ( 14.0%)
+    timeout           62  ( 41.3%)
+  p(stop) over 8,444 steps: mean 0.0050  p95 0.0218  max 0.2245
+######## FINAL EVAL DONE ########

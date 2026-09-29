@@ -1,0 +1,13 @@
+Loading policy from checkpoints/stage1_learned/step10000 ...
+Loading weights:   0%|          | 0/626 [00:00<?, ?it/s]Loading weights:   2%|▏         | 15/626 [00:00<00:04, 141.81it/s]Loading weights:  16%|█▋        | 102/626 [00:00<00:00, 554.89it/s]Loading weights:  31%|███       | 194/626 [00:00<00:00, 717.63it/s]Loading weights:  46%|████▋     | 290/626 [00:00<00:00, 798.56it/s]Loading weights:  68%|██████▊   | 428/626 [00:00<00:00, 1000.41it/s]Loading weights:  89%|████████▉ | 558/626 [00:00<00:00, 1097.58it/s]Loading weights: 100%|██████████| 626/626 [00:00<00:00, 945.37it/s] 
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+[1/3] zsNo4HB9uLZ  'Exit the bedroom and turn left. Walk straight passing the gr...'
+  -> timeout  min_dist=7.96m  steps=101  saved recordings/step10000/ep00_zsNo4HB9uLZ.mp4
+[2/3] zsNo4HB9uLZ  'Walk out of the bedroom through the open door into the hallw...'
+  -> timeout  min_dist=6.23m  steps=101  saved recordings/step10000/ep01_zsNo4HB9uLZ.mp4
+[3/3] zsNo4HB9uLZ  'Go out of the room you're in.  Turn left.  Go poast the dini...'
+  -> timeout  min_dist=3.60m  steps=101  saved recordings/step10000/ep02_zsNo4HB9uLZ.mp4
+
+3 recordings written under recordings/step10000/

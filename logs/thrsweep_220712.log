@@ -1,0 +1,25 @@
+######## step20000 strict thr=0.15 ########
+    SR    = 0.1700
+    OS    = 0.1900
+    NE    = 8.5131
+    model_stop        54  ( 54.0%)
+    timeout           46  ( 46.0%)
+  p(stop) over 6,944 steps: mean 0.0193  p95 0.0864  max 0.3056
+    (threshold 0.15 would fire on 0.78% of steps)
+######## step20000 strict thr=0.30 ########
+    SR    = 0.1500
+    OS    = 0.2300
+    NE    = 9.0805
+    model_stop        29  ( 29.0%)
+    timeout           71  ( 71.0%)
+  p(stop) over 8,503 steps: mean 0.0309  p95 0.1378  max 0.4044
+    (threshold 0.3 would fire on 0.34% of steps)
+######## step20000 strict thr=0.50 ########
+    SR    = 0.1400
+    OS    = 0.3200
+    NE    = 9.3721
+    model_stop         3  (  3.0%)
+    timeout           97  ( 97.0%)
+  p(stop) over 9,849 steps: mean 0.0414  p95 0.2057  max 0.5576
+    (threshold 0.5 would fire on 0.03% of steps)
+######## SWEEP DONE ########

@@ -1,0 +1,36 @@
+v_bar reference: mean ||v_bar|| = 15.84
+Loading Stage 0' policy from checkpoints/stage1_learned/final ...
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+slot_mode = z
+split=val_unseen  episodes=150  scans=8
+
+  25/150  (0.25 ep/s)
+  50/150  (0.24 ep/s)
+  75/150  (0.26 ep/s)
+  100/150  (0.26 ep/s)
+  125/150  (0.25 ep/s)
+  150/150  (0.26 ep/s)
+
+====================================================================
+  STAGE 0' EVAL — checkpoints/stage1_learned/final
+  slot_mode=z
+  split=val_unseen  n=150  diagnostic (3m early exit)
+====================================================================
+    SR    = 0.1067
+    SPL   = 0.1067
+    OS    = 0.1067
+    nDTW  = 0.2768
+    NE    = 8.4955
+
+  TERMINATION:
+    model_stop         7  (  4.7%)
+    within_radius     16  ( 10.7%)
+    timeout          127  ( 84.7%)
+
+  ||z_t|| over 13,731 steps: mean 15.22  min 12.96  max 21.10
+    (Stage 2 wants this DRIFT to shrink; record it as the Stage 0' reference)
+
+  Paper NaN row (Table 3): SR 51.7  SPL 47.1  NE 5.3  OS 57.0
+====================================================================

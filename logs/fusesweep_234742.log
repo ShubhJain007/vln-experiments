@@ -1,0 +1,88 @@
+######## fusion/step20000 strict thr=0.05 n=150 ########
+Loading pointing policy from checkpoints/pointing_fusion/step20000 ...
+  history_frames = 2 (stride 8, spans 16 steps) [from checkpoint config]
+  head reads layers: (23, 26, 28)
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.05  turn=7.5 deg
+  STRICT: success requires the model's OWN stop within 3 m
+
+split=val_unseen  episodes=150  scans=8
+
+
+====================================================================
+  POINTING EVAL — checkpoints/pointing_fusion/step20000
+  split=val_unseen  n=150  stop_thr=0.05  STRICT (own STOP only)
+====================================================================
+    SR    = 0.0400
+    SPL   = 0.0400
+    OS    = 0.0600
+    nDTW  = 0.3280
+    NE    = 7.8952
+
+  TERMINATION:
+    model_stop       135  ( 90.0%)
+    within_radius      0  (  0.0%)
+    timeout           15  ( 10.0%)
+
+  p(stop) over 5,783 steps: mean 0.0081  p95 0.0359  max 0.2639
+    (threshold 0.05 would fire on 2.33% of steps)
+====================================================================
+######## fusion/step20000 strict thr=0.10 n=150 ########
+Loading pointing policy from checkpoints/pointing_fusion/step20000 ...
+  history_frames = 2 (stride 8, spans 16 steps) [from checkpoint config]
+  head reads layers: (23, 26, 28)
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.1  turn=7.5 deg
+  STRICT: success requires the model's OWN stop within 3 m
+
+split=val_unseen  episodes=150  scans=8
+
+
+====================================================================
+  POINTING EVAL — checkpoints/pointing_fusion/step20000
+  split=val_unseen  n=150  stop_thr=0.1  STRICT (own STOP only)
+====================================================================
+    SR    = 0.0867
+    SPL   = 0.0728
+    OS    = 0.1000
+    nDTW  = 0.3146
+    NE    = 7.9190
+
+  TERMINATION:
+    model_stop       114  ( 76.0%)
+    within_radius      0  (  0.0%)
+    timeout           36  ( 24.0%)
+
+  p(stop) over 8,173 steps: mean 0.0133  p95 0.0588  max 0.3097
+    (threshold 0.1 would fire on 1.39% of steps)
+====================================================================
+######## fusion/step20000 strict thr=0.20 n=150 ########
+Loading pointing policy from checkpoints/pointing_fusion/step20000 ...
+  history_frames = 2 (stride 8, spans 16 steps) [from checkpoint config]
+  head reads layers: (23, 26, 28)
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.2  turn=7.5 deg
+  STRICT: success requires the model's OWN stop within 3 m
+
+split=val_unseen  episodes=150  scans=8
+
+
+====================================================================
+  POINTING EVAL — checkpoints/pointing_fusion/step20000
+  split=val_unseen  n=150  stop_thr=0.2  STRICT (own STOP only)
+====================================================================
+    SR    = 0.1533
+    SPL   = 0.1170
+    OS    = 0.1933
+    nDTW  = 0.2862
+    NE    = 7.7728
+
+  TERMINATION:
+    model_stop        85  ( 56.7%)
+    within_radius      0  (  0.0%)
+    timeout           65  ( 43.3%)
+
+  p(stop) over 10,808 steps: mean 0.0223  p95 0.1035  max 0.5000
+    (threshold 0.2 would fire on 0.79% of steps)
+====================================================================
+######## FUSESWEEP DONE ########

@@ -1,0 +1,24 @@
+Loading weights:   0%|          | 0/626 [00:00<?, ?it/s]Loading weights:   4%|▎         | 23/626 [00:00<00:02, 228.01it/s]Loading weights:  22%|██▏       | 137/626 [00:00<00:00, 758.98it/s]Loading weights:  39%|███▉      | 247/626 [00:00<00:00, 913.95it/s]Loading weights:  83%|████████▎ | 519/626 [00:00<00:00, 1622.50it/s]Loading weights: 100%|██████████| 626/626 [00:00<00:00, 1432.07it/s]
+3000 steps across 3 scans
+  500/3000
+  1000/3000
+  1500/3000
+  2000/3000
+  2500/3000
+  3000/3000
+
+SHRINKAGE  (slope<1 => predictions pulled toward straight-ahead)
+  pred = 0.424 x true      (1.0 = calibrated)
+  mean |theta| on expert turns:  true  41.3d   pred  27.2d
+  mean |theta| on expert straight: true   0.1d   pred   4.2d
+
+DECISION-THRESHOLD SWEEP (applied to predictions only; no retraining)
+     thr  overall     FWD    LEFT   RIGHT
+    1.0d    0.473   0.262   0.781   0.835
+    2.0d    0.570   0.455   0.714   0.798
+    3.0d    0.633   0.586   0.670   0.750
+    4.0d    0.675   0.690   0.623   0.692
+    5.0d    0.709   0.769   0.585   0.652
+    6.0d    0.722   0.816   0.548   0.611
+    7.5d    0.733   0.873   0.487   0.552
+   10.0d    0.735   0.916   0.427   0.483

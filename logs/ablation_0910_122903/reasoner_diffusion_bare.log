@@ -1,0 +1,60 @@
+ARM "reasoner_diffusion_bare"  policy=diffusion  think=True  burst fwd=2 turn=2  patience=2
+split=val_unseen  episodes=40  scans=6
+
+Loading weights:   0%|          | 0/670 [00:00<?, ?it/s]Loading weights:   8%|▊         | 51/670 [00:00<00:01, 501.41it/s]Loading weights:  19%|█▊        | 124/670 [00:00<00:00, 623.13it/s]Loading weights:  31%|███▏      | 211/670 [00:00<00:00, 715.38it/s]Loading weights:  48%|████▊     | 321/670 [00:00<00:00, 863.50it/s]Loading weights: 100%|██████████| 670/670 [00:00<00:00, 1407.00it/s]
+flash_attn is installed but failed to import: /home/kneepolean/.local/lib/python3.10/site-packages/flash_attn_2_cuda.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c105ErrorC2ENS_14SourceLocationENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE. Falling back to native PyTorch attention.
+Loading pipeline components...:   0%|          | 0/4 [00:00<?, ?it/s]Loading pipeline components...:  25%|██▌       | 1/4 [00:00<00:02,  1.24it/s]The config attributes {'clip_output': False} were passed to AutoencoderKLWan, but are not expected and will be ignored. Please verify your config.json configuration file.
+The config attributes {'backbone_type': 'cosmos3_edge_nemotron_dense', 'temporal_compression_factor': 4} were passed to Cosmos3OmniTransformer, but are not expected and will be ignored. Please verify your config.json configuration file.
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][ALoading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 123.77it/s]
+Loading pipeline components...: 100%|██████████| 4/4 [00:00<00:00,  4.69it/s]
+[transformers] Kwargs passed to `processor.__call__` have to be in `processor_kwargs` dict, not in `**kwargs`
+  0%|          | 0/20 [00:00<?, ?it/s]  5%|▌         | 1/20 [00:00<00:03,  4.87it/s] 10%|█         | 2/20 [00:00<00:03,  5.00it/s] 15%|█▌        | 3/20 [00:00<00:03,  4.91it/s] 20%|██        | 4/20 [00:00<00:03,  4.98it/s] 25%|██▌       | 5/20 [00:01<00:02,  5.02it/s] 30%|███       | 6/20 [00:01<00:02,  5.04it/s] 35%|███▌      | 7/20 [00:01<00:02,  5.06it/s] 40%|████      | 8/20 [00:01<00:02,  5.07it/s] 45%|████▌     | 9/20 [00:01<00:02,  5.08it/s] 50%|█████     | 10/20 [00:01<00:01,  5.08it/s] 55%|█████▌    | 11/20 [00:02<00:01,  5.08it/s] 60%|██████    | 12/20 [00:02<00:01,  5.09it/s] 65%|██████▌   | 13/20 [00:02<00:01,  5.09it/s] 70%|███████   | 14/20 [00:02<00:01,  5.09it/s] 75%|███████▌  | 15/20 [00:02<00:00,  5.09it/s] 80%|████████  | 16/20 [00:03<00:00,  5.09it/s] 85%|████████▌ | 17/20 [00:03<00:00,  5.09it/s] 90%|█████████ | 18/20 [00:03<00:00,  5.10it/s] 95%|█████████▌| 19/20 [00:03<00:00,  5.10it/s]100%|██████████| 20/20 [00:03<00:00,  5.10it/s]100%|██████████| 20/20 [00:03<00:00,  5.07it/s]
+Traceback (most recent call last):
+  File "/home/kneepolean/shubhj/latentpilot/scripts/eval_cosmos_nav.py", line 182, in <module>
+    raise SystemExit(main())
+  File "/home/kneepolean/shubhj/latentpilot/scripts/eval_cosmos_nav.py", line 128, in main
+    r = rollout(sim, nav, e, args)
+  File "/home/kneepolean/shubhj/latentpilot/scripts/eval_cosmos_nav.py", line 62, in rollout
+    for name in nav.plan(cmd, frame):
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/kneepolean/shubhj/latentpilot/src/nav/cosmos_navigator.py", line 125, in plan
+    out = self.pipe(prompt=prompt,
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/pipelines/cosmos/pipeline_cosmos3_omni.py", line 1855, in __call__
+    decoded = self.vae.decode(z_raw).sample.to(in_dtype)
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/utils/accelerate_utils.py", line 46, in wrapper
+    return method(self, *args, **kwargs)
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 1237, in decode
+    decoded = self._decode(z).sample
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 1204, in _decode
+    out_ = self.decoder(x[:, :, i : i + 1, :, :], feat_cache=self._feat_map, feat_idx=self._conv_idx)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 898, in forward
+    x = up_block(x, feat_cache=feat_cache, feat_idx=feat_idx, first_chunk=first_chunk)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 703, in forward
+    x = resnet(x, feat_cache=feat_cache, feat_idx=feat_idx)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 351, in forward
+    x = self.norm1(x)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/kneepolean/miniconda3/envs/latentpilot/lib/python3.10/site-packages/diffusers/models/autoencoders/autoencoder_kl_wan.py", line 202, in forward
+    normalized = F.normalize(x.float() if needs_fp32_normalize else x, dim=(1 if self.channel_first else -1)).to(
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/functional.py", line 5374, in normalize
+    return input / denom
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 450.00 MiB. GPU 0 has a total capacity of 15.56 GiB of which 340.94 MiB is free. Including non-PyTorch memory, this process has 14.27 GiB memory in use. Of the allocated memory 13.70 GiB is allocated by PyTorch, and 284.83 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

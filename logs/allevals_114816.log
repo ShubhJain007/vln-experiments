@@ -1,0 +1,9 @@
+######## pointing_6scan/final  --strict  n=150 thr=0.05 ########
+Loading pointing policy from checkpoints/pointing_6scan/final ...
+  history_frames = 0 (stride 1, spans 0 steps) [no config; memoryless]
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.05  turn=7.5 deg
+  STRICT: success requires the model's OWN stop within 3 m
+
+split=val_unseen  episodes=150  scans=8
+

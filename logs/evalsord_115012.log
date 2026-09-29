@@ -1,0 +1,109 @@
+######## pointing_hist/final  --strict  n=150 thr=0.05 ########
+Loading pointing policy from checkpoints/pointing_hist/final ...
+  history_frames = 2 (stride 1, spans 2 steps) [from checkpoint config]
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.05  turn=7.5 deg
+  STRICT: success requires the model's OWN stop within 3 m
+
+split=val_unseen  episodes=150  scans=8
+
+
+====================================================================
+  POINTING EVAL — checkpoints/pointing_hist/final
+  split=val_unseen  n=150  stop_thr=0.05  STRICT (own STOP only)
+====================================================================
+    SR    = 0.1800
+    SPL   = 0.1680
+    OS    = 0.2267
+    nDTW  = 0.3937
+    NE    = 6.5540
+
+  TERMINATION:
+    model_stop       102  ( 68.0%)
+    within_radius      0  (  0.0%)
+    timeout           48  ( 32.0%)
+
+  p(stop) over 9,209 steps: mean 0.0056  p95 0.0275  max 0.1652
+    (threshold 0.05 would fire on 1.11% of steps)
+====================================================================
+######## pointing_hist/final  diagnostic  n=150 thr=0.05 ########
+Loading pointing policy from checkpoints/pointing_hist/final ...
+  history_frames = 2 (stride 1, spans 2 steps) [from checkpoint config]
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.05  turn=7.5 deg
+split=val_unseen  episodes=150  scans=8
+
+
+====================================================================
+  POINTING EVAL — checkpoints/pointing_hist/final
+  split=val_unseen  n=150  stop_thr=0.05  diagnostic (proximity break)
+====================================================================
+    SR    = 0.2267
+    SPL   = 0.2212
+    OS    = 0.2267
+    nDTW  = 0.4088
+    NE    = 6.6469
+
+  TERMINATION:
+    model_stop        70  ( 46.7%)
+    within_radius     34  ( 22.7%)
+    timeout           46  ( 30.7%)
+
+  p(stop) over 8,639 steps: mean 0.0049  p95 0.0243  max 0.1110
+    (threshold 0.05 would fire on 0.81% of steps)
+====================================================================
+######## pointing_6scan/final  --strict  n=150 thr=0.05 ########
+Loading pointing policy from checkpoints/pointing_6scan/final ...
+  history_frames = 0 (stride 8, spans 0 steps) [no config; memoryless]
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.05  turn=7.5 deg
+  STRICT: success requires the model's OWN stop within 3 m
+
+split=val_unseen  episodes=150  scans=8
+
+
+====================================================================
+  POINTING EVAL — checkpoints/pointing_6scan/final
+  split=val_unseen  n=150  stop_thr=0.05  STRICT (own STOP only)
+====================================================================
+    SR    = 0.0400
+    SPL   = 0.0372
+    OS    = 0.0667
+    nDTW  = 0.2376
+    NE    = 8.3687
+
+  TERMINATION:
+    model_stop        35  ( 23.3%)
+    within_radius      0  (  0.0%)
+    timeout          115  ( 76.7%)
+
+  p(stop) over 12,148 steps: mean 0.0010  p95 0.0015  max 0.8597
+    (threshold 0.05 would fire on 0.29% of steps)
+====================================================================
+######## pointing_6scan/final  diagnostic  n=150 thr=0.05 ########
+Loading pointing policy from checkpoints/pointing_6scan/final ...
+  history_frames = 0 (stride 8, spans 0 steps) [no config; memoryless]
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.05  turn=7.5 deg
+split=val_unseen  episodes=150  scans=8
+
+
+====================================================================
+  POINTING EVAL — checkpoints/pointing_6scan/final
+  split=val_unseen  n=150  stop_thr=0.05  diagnostic (proximity break)
+====================================================================
+    SR    = 0.0667
+    SPL   = 0.0667
+    OS    = 0.0667
+    nDTW  = 0.2527
+    NE    = 8.3619
+
+  TERMINATION:
+    model_stop        31  ( 20.7%)
+    within_radius     10  (  6.7%)
+    timeout          109  ( 72.7%)
+
+  p(stop) over 11,690 steps: mean 0.0009  p95 0.0015  max 0.8597
+    (threshold 0.05 would fire on 0.27% of steps)
+====================================================================
+######## ALL EVALS DONE Thu Sep  3 12:24:39 EDT 2026 ########

@@ -1,0 +1,1242 @@
+######## FULL collect started Thu Sep  3 00:49:51 EDT 2026 ########
+split=train  scans=61  episodes=10819
+out=/home/kneepolean/shubhj/latentpilot/data/rollouts
+primitives: {'move_forward': {'amount': 0.25}, 'turn_left': {'amount': 15.0}, 'turn_right': {'amount': 15.0}}
+
+17DRP5sb8fy: 75 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  25 episodes  (5.14/s)
+  50 episodes  (6.69/s)
+  75 episodes  (7.41/s)
+1LXtFkjw3qL: 162 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  100 episodes  (5.32/s)
+  125 episodes  (5.21/s)
+  150 episodes  (5.28/s)
+  175 episodes  (5.30/s)
+  200 episodes  (5.35/s)
+  225 episodes  (5.35/s)
+1pXnuDYAj8r: all 256 episodes already done, skipping
+29hnd4uzFmX: 192 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  250 episodes  (5.10/s)
+  275 episodes  (5.36/s)
+  300 episodes  (5.60/s)
+  325 episodes  (5.77/s)
+  350 episodes  (5.90/s)
+  375 episodes  (6.10/s)
+  400 episodes  (6.22/s)
+  425 episodes  (6.36/s)
+2n8kARJN3HM: all 268 episodes already done, skipping
+5LpN3gDmAk7: all 243 episodes already done, skipping
+5q7pvUzZiYa: 150 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  450 episodes  (6.12/s)
+  475 episodes  (6.02/s)
+  500 episodes  (6.04/s)
+  525 episodes  (5.96/s)
+  550 episodes  (5.88/s)
+  575 episodes  (5.87/s)
+759xd9YjKW5: 210 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  600 episodes  (5.57/s)
+  625 episodes  (5.52/s)
+  650 episodes  (5.41/s)
+  675 episodes  (5.34/s)
+  700 episodes  (5.30/s)
+  725 episodes  (5.20/s)
+  750 episodes  (5.14/s)
+  775 episodes  (5.09/s)
+7y3sRwLe3Va: 196 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  800 episodes  (4.90/s)
+  825 episodes  (4.91/s)
+  850 episodes  (4.95/s)
+  875 episodes  (4.97/s)
+  900 episodes  (4.99/s)
+  925 episodes  (5.00/s)
+  950 episodes  (4.97/s)
+  975 episodes  (4.97/s)
+82sE5b5pLXE: 195 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  1000 episodes  (4.91/s)
+  1025 episodes  (4.94/s)
+  1050 episodes  (4.95/s)
+  1075 episodes  (4.95/s)
+  1100 episodes  (4.98/s)
+  1125 episodes  (4.98/s)
+  1150 episodes  (5.01/s)
+  1175 episodes  (5.01/s)
+8WUmhLawc2A: all 279 episodes already done, skipping
+B6ByNegPMKs: all 252 episodes already done, skipping
+D7G3Y4RVNrH: 34 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  1200 episodes  (5.02/s)
+D7N2EKCX4Sj: 201 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  1225 episodes  (4.89/s)
+  1250 episodes  (4.87/s)
+  1275 episodes  (4.88/s)
+  1300 episodes  (4.86/s)
+  1325 episodes  (4.86/s)
+  1350 episodes  (4.84/s)
+  1375 episodes  (4.85/s)
+  1400 episodes  (4.85/s)
+E9uDoFAP3SH: all 265 episodes already done, skipping
+EDJbREhghzL: all 249 episodes already done, skipping
+GdvgFV5R1Z5: 21 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  1425 episodes  (4.86/s)
+HxpKQynjfin: 15 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  1450 episodes  (4.89/s)
+JF19kD82Mey: 63 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  1475 episodes  (4.84/s)
+  1500 episodes  (4.84/s)
+JeFG25nYj2p: all 279 episodes already done, skipping
+JmbYfDe2QKZ: 210 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  1525 episodes  (4.78/s)
+  1550 episodes  (4.79/s)
+  1575 episodes  (4.80/s)
+  1600 episodes  (4.82/s)
+  1625 episodes  (4.83/s)
+  1650 episodes  (4.83/s)
+  1675 episodes  (4.84/s)
+  1700 episodes  (4.86/s)
+PX4nDJXEHrG: all 240 episodes already done, skipping
+Pm6F8kyY3z2: 24 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  1725 episodes  (4.85/s)
+PuKPg4mmafe: 57 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  1750 episodes  (4.84/s)
+  1775 episodes  (4.81/s)
+  1800 episodes  (4.76/s)
+S9hNv5qa7GM: all 246 episodes already done, skipping
+SN83YJsR3w2: 232 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  1825 episodes  (4.62/s)
+  1850 episodes  (4.63/s)
+  1875 episodes  (4.61/s)
+  1900 episodes  (4.61/s)
+  1925 episodes  (4.60/s)
+  1950 episodes  (4.61/s)
+  1975 episodes  (4.59/s)
+  2000 episodes  (4.57/s)
+  2025 episodes  (4.56/s)
+ULsKaCPVFJR: 234 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  2050 episodes  (4.53/s)
+  2075 episodes  (4.55/s)
+  2100 episodes  (4.58/s)
+  2125 episodes  (4.60/s)
+  2150 episodes  (4.61/s)
+  2175 episodes  (4.63/s)
+  2200 episodes  (4.65/s)
+  2225 episodes  (4.66/s)
+  2250 episodes  (4.68/s)
+Uxmj2M2itWa: 228 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  2275 episodes  (4.66/s)
+  2300 episodes  (4.64/s)
+  2325 episodes  (4.63/s)
+  2350 episodes  (4.63/s)
+  2375 episodes  (4.62/s)
+  2400 episodes  (4.62/s)
+  2425 episodes  (4.63/s)
+  2450 episodes  (4.63/s)
+  2475 episodes  (4.62/s)
+V2XKFyX4ASd: 198 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  2500 episodes  (4.57/s)
+  2525 episodes  (4.58/s)
+  2550 episodes  (4.58/s)
+  2575 episodes  (4.57/s)
+  2600 episodes  (4.58/s)
+  2625 episodes  (4.58/s)
+  2650 episodes  (4.58/s)
+  2675 episodes  (4.58/s)
+VFuaQ6m2Qom: 150 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  2700 episodes  (4.53/s)
+  2725 episodes  (4.54/s)
+  2750 episodes  (4.54/s)
+  2775 episodes  (4.54/s)
+  2800 episodes  (4.54/s)
+  2825 episodes  (4.55/s)
+VLzqgDo317F: 162 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  2850 episodes  (4.51/s)
+  2875 episodes  (4.50/s)
+  2900 episodes  (4.49/s)
+  2925 episodes  (4.48/s)
+  2950 episodes  (4.47/s)
+  2975 episodes  (4.47/s)
+  3000 episodes  (4.47/s)
+VVfe2KiqLaN: 105 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  3025 episodes  (4.47/s)
+  3050 episodes  (4.48/s)
+  3075 episodes  (4.49/s)
+  3100 episodes  (4.51/s)
+Vvot9Ly1tCj: all 276 episodes already done, skipping
+VzqfbhrpDEA: 237 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  3125 episodes  (4.38/s)
+  3150 episodes  (4.32/s)
+  3175 episodes  (4.25/s)
+  3200 episodes  (4.20/s)
+  3225 episodes  (4.15/s)
+  3250 episodes  (4.09/s)
+  3275 episodes  (4.05/s)
+  3300 episodes  (4.00/s)
+  3325 episodes  (3.94/s)
+  3350 episodes  (3.90/s)
+XcA2TqTSSAj: 18 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+YmJkqBEsHnH: 9 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  3375 episodes  (3.89/s)
+ZMojNkEp431: 225 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  3400 episodes  (3.88/s)
+  3425 episodes  (3.88/s)
+  3450 episodes  (3.88/s)
+  3475 episodes  (3.88/s)
+  3500 episodes  (3.89/s)
+  3525 episodes  (3.89/s)
+  3550 episodes  (3.90/s)
+  3575 episodes  (3.90/s)
+  3600 episodes  (3.91/s)
+aayBHfsNo7d: 145 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  3625 episodes  (3.90/s)
+  3650 episodes  (3.91/s)
+  3675 episodes  (3.92/s)
+  3700 episodes  (3.92/s)
+  3725 episodes  (3.93/s)
+ac26ZMwG7aT: all 273 episodes already done, skipping
+b8cTxDM8gDG: 144 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  3750 episodes  (3.92/s)
+  3775 episodes  (3.93/s)
+  3800 episodes  (3.93/s)
+  3825 episodes  (3.93/s)
+  3850 episodes  (3.94/s)
+  3875 episodes  (3.94/s)
+cV4RVeZvu5T: 147 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  3900 episodes  (3.94/s)
+  3925 episodes  (3.95/s)
+  3950 episodes  (3.96/s)
+  3975 episodes  (3.97/s)
+  4000 episodes  (3.98/s)
+  4025 episodes  (3.99/s)
+dhjEzFoUFzH: 33 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  4050 episodes  (3.97/s)
+e9zR4mvMWw7: 141 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  4075 episodes  (3.96/s)
+  4100 episodes  (3.97/s)
+  4125 episodes  (3.98/s)
+  4150 episodes  (3.98/s)
+  4175 episodes  (4.00/s)
+  4200 episodes  (4.01/s)
+gTV8FGcVJC9: 202 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  4225 episodes  (3.93/s)
+  4250 episodes  (3.88/s)
+  4275 episodes  (3.82/s)
+  4300 episodes  (3.76/s)
+  4325 episodes  (3.70/s)
+  4350 episodes  (3.63/s)
+  4375 episodes  (3.59/s)
+  4400 episodes  (3.55/s)
+gZ6f7yhEvPG: 3 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+i5noydFURQK: 177 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  4425 episodes  (3.52/s)
+  4450 episodes  (3.53/s)
+  4475 episodes  (3.54/s)
+  4500 episodes  (3.55/s)
+  4525 episodes  (3.56/s)
+  4550 episodes  (3.57/s)
+  4575 episodes  (3.57/s)
+jh4fc5c5qoQ: 147 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  4600 episodes  (3.58/s)
+  4625 episodes  (3.59/s)
+  4650 episodes  (3.60/s)
+  4675 episodes  (3.60/s)
+  4700 episodes  (3.61/s)
+  4725 episodes  (3.62/s)
+kEZ7cmS4wCh: 196 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  4750 episodes  (3.61/s)
+  4775 episodes  (3.62/s)
+  4800 episodes  (3.61/s)
+  4825 episodes  (3.62/s)
+  4850 episodes  (3.62/s)
+  4875 episodes  (3.63/s)
+  4900 episodes  (3.63/s)
+  4925 episodes  (3.63/s)
+mJXqzFtmKg4: all 267 episodes already done, skipping
+p5wJjkQkbXX: 202 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  4950 episodes  (3.61/s)
+  4975 episodes  (3.61/s)
+  5000 episodes  (3.61/s)
+  5025 episodes  (3.62/s)
+  5050 episodes  (3.62/s)
+  5075 episodes  (3.62/s)
+  5100 episodes  (3.63/s)
+  5125 episodes  (3.63/s)
+pRbA3pwrgk9: 135 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  5150 episodes  (3.62/s)
+  5175 episodes  (3.63/s)
+  5200 episodes  (3.63/s)
+  5225 episodes  (3.64/s)
+  5250 episodes  (3.65/s)
+  5275 episodes  (3.65/s)
+qoiz87JEwZ2: 174 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  5300 episodes  (3.65/s)
+  5325 episodes  (3.65/s)
+  5350 episodes  (3.66/s)
+  5375 episodes  (3.66/s)
+  5400 episodes  (3.67/s)
+  5425 episodes  (3.68/s)
+r1Q1Z4BcV1o: 222 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  5450 episodes  (3.67/s)
+  5475 episodes  (3.67/s)
+  5500 episodes  (3.67/s)
+  5525 episodes  (3.67/s)
+  5550 episodes  (3.67/s)
+  5575 episodes  (3.67/s)
+  5600 episodes  (3.67/s)
+  5625 episodes  (3.67/s)
+  5650 episodes  (3.67/s)
+r47D5H71a5s: all 279 episodes already done, skipping
+rPc6DW4iMge: 231 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  5675 episodes  (3.66/s)
+  5700 episodes  (3.67/s)
+  5725 episodes  (3.68/s)
+  5750 episodes  (3.68/s)
+  5775 episodes  (3.69/s)
+  5800 episodes  (3.70/s)
+  5825 episodes  (3.71/s)
+  5850 episodes  (3.71/s)
+  5875 episodes  (3.72/s)
+  5900 episodes  (3.72/s)
+s8pcmisQ38h: 84 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  5925 episodes  (3.72/s)
+  5950 episodes  (3.72/s)
+  5975 episodes  (3.72/s)
+sKLMLpTHeUy: 237 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  6000 episodes  (3.72/s)
+  6025 episodes  (3.73/s)
+  6050 episodes  (3.73/s)
+  6075 episodes  (3.74/s)
+  6100 episodes  (3.75/s)
+  6125 episodes  (3.75/s)
+  6150 episodes  (3.76/s)
+  6175 episodes  (3.76/s)
+  6200 episodes  (3.77/s)
+sT4fr6TAbpF: all 252 episodes already done, skipping
+uNb9QFRL6hY: 159 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  6225 episodes  (3.75/s)
+  6250 episodes  (3.76/s)
+  6275 episodes  (3.76/s)
+  6300 episodes  (3.77/s)
+  6325 episodes  (3.78/s)
+  6350 episodes  (3.78/s)
+  6375 episodes  (3.78/s)
+ur6pFq6Qu1A: all 279 episodes already done, skipping
+vyrNrziPKCB: 234 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+  6400 episodes  (3.76/s)
+  6425 episodes  (3.76/s)
+  6450 episodes  (3.77/s)
+  6475 episodes  (3.77/s)
+  6500 episodes  (3.77/s)
+  6525 episodes  (3.77/s)
+  6550 episodes  (3.77/s)
+  6575 episodes  (3.77/s)
+  6600 episodes  (3.77/s)
+
+============================================================
+  episodes processed : 6616
+  saved (status=stop): 6616
+  truncated          : 0
+  failed             : 0
+  already done       : 4203
+  total steps saved  : 264187
+  mean steps/episode : 39.9
+  elapsed            : 1752.6s
+============================================================
+######## FULL collect finished Thu Sep  3 01:19:04 EDT 2026 ########

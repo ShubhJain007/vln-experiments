@@ -1,0 +1,43 @@
+######## STEP 1: n=150 evals started Wed Sep  2 18:37:44 EDT 2026 ########
+---- eval stage1_identity/final (n=150) ----
+    SR    = 0.1733
+    SPL   = 0.1720
+    OS    = 0.1733
+    nDTW  = 0.2680
+    NE    = 8.1705
+    model_stop         0  (  0.0%)
+    within_radius     26  ( 17.3%)
+    timeout          124  ( 82.7%)
+  ||z_t|| over 13,180 steps: mean 15.55  min 13.72  max 52.17
+  Paper NaN row (Table 3): SR 51.7  SPL 47.1  NE 5.3  OS 57.0
+---- eval stage1_learned/final (n=150) ----
+    SR    = 0.1067
+    SPL   = 0.1067
+    OS    = 0.1067
+    nDTW  = 0.2768
+    NE    = 8.4955
+    model_stop         7  (  4.7%)
+    within_radius     16  ( 10.7%)
+    timeout          127  ( 84.7%)
+  ||z_t|| over 13,731 steps: mean 15.22  min 12.96  max 21.10
+  Paper NaN row (Table 3): SR 51.7  SPL 47.1  NE 5.3  OS 57.0
+---- eval stage1_balanced/step10000 (n=150) ----
+    SR    = 0.0667
+    SPL   = 0.0667
+    OS    = 0.0667
+    nDTW  = 0.2751
+    NE    = 8.3559
+    model_stop        27  ( 18.0%)
+    within_radius     10  (  6.7%)
+    timeout          113  ( 75.3%)
+  ||z_t|| over 12,199 steps: mean 15.07  min 12.39  max 19.39
+  Paper NaN row (Table 3): SR 51.7  SPL 47.1  NE 5.3  OS 57.0
+######## STEP 1 finished Wed Sep  2 19:05:06 EDT 2026 ########
+######## STEP 2a: cache v_bar started Wed Sep  2 19:05:06 EDT 2026 ########
+split=train  episodes=4203  to encode=2538
+loading encoder in float32 (D7: fp32 is batch-invariant) ...
+  VRAM after load: 9.08 GB
+  100/2538 episodes  4,654 frames  27 fr/s  eta 59 min
+  200/2538 episodes  9,279 frames  27 fr/s  eta 56 min
+  300/2538 episodes  13,310 frames  27 fr/s  eta 54 min
+  400/2538 episodes  17,649 frames  27 fr/s  eta 51 min

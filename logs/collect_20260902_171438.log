@@ -1,0 +1,444 @@
+######## COLLECT rollouts started Wed Sep  2 17:14:38 EDT 2026 ########
+split=train  scans=10  episodes=2538
+out=/home/kneepolean/shubhj/latentpilot/data/rollouts
+primitives: {'move_forward': {'amount': 0.25}, 'turn_left': {'amount': 15.0}, 'turn_right': {'amount': 15.0}}
+
+1pXnuDYAj8r: 256 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:14:38:745440]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+  25 episodes  (2.06/s)
+  50 episodes  (3.01/s)
+  75 episodes  (3.36/s)
+  100 episodes  (3.45/s)
+  125 episodes  (3.68/s)
+  150 episodes  (3.78/s)
+  175 episodes  (3.77/s)
+  200 episodes  (3.86/s)
+  225 episodes  (3.95/s)
+  250 episodes  (3.99/s)
+2n8kARJN3HM: 268 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:15:42:175025]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+  275 episodes  (3.73/s)
+  300 episodes  (3.83/s)
+  325 episodes  (3.87/s)
+  350 episodes  (3.92/s)
+  375 episodes  (3.95/s)
+  400 episodes  (4.02/s)
+  425 episodes  (4.09/s)
+  450 episodes  (4.11/s)
+  475 episodes  (4.15/s)
+  500 episodes  (4.19/s)
+5LpN3gDmAk7: 243 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:16:42:582055]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+  525 episodes  (4.09/s)
+  550 episodes  (4.11/s)
+  575 episodes  (4.14/s)
+  600 episodes  (4.14/s)
+  625 episodes  (4.18/s)
+  650 episodes  (4.18/s)
+  675 episodes  (4.22/s)
+  700 episodes  (4.25/s)
+  725 episodes  (4.28/s)
+  750 episodes  (4.31/s)
+B6ByNegPMKs: 252 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:17:35:392751]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+  775 episodes  (3.99/s)
+  800 episodes  (4.05/s)
+  825 episodes  (4.08/s)
+  850 episodes  (4.11/s)
+  875 episodes  (4.13/s)
+  900 episodes  (4.14/s)
+  925 episodes  (4.17/s)
+  950 episodes  (4.20/s)
+  975 episodes  (4.23/s)
+  1000 episodes  (4.27/s)
+E9uDoFAP3SH: 265 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:18:35:784671]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+  1025 episodes  (4.11/s)
+  1050 episodes  (4.09/s)
+  1075 episodes  (4.08/s)
+  1100 episodes  (4.06/s)
+  1125 episodes  (4.05/s)
+  1150 episodes  (4.03/s)
+  1175 episodes  (4.02/s)
+  1200 episodes  (4.00/s)
+  1225 episodes  (3.99/s)
+  1250 episodes  (3.96/s)
+  1275 episodes  (3.94/s)
+EDJbREhghzL: 249 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:20:03:579882]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+  1300 episodes  (3.93/s)
+  1325 episodes  (3.95/s)
+  1350 episodes  (3.98/s)
+  1375 episodes  (4.01/s)
+  1400 episodes  (4.04/s)
+  1425 episodes  (4.07/s)
+  1450 episodes  (4.09/s)
+  1475 episodes  (4.11/s)
+  1500 episodes  (4.13/s)
+  1525 episodes  (4.14/s)
+PX4nDJXEHrG: 240 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:20:47:335786]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+  1550 episodes  (4.08/s)
+  1575 episodes  (4.08/s)
+  1600 episodes  (4.07/s)
+  1625 episodes  (4.07/s)
+  1650 episodes  (4.08/s)
+  1675 episodes  (4.08/s)
+  1700 episodes  (4.09/s)
+  1725 episodes  (4.10/s)
+  1750 episodes  (4.12/s)
+S9hNv5qa7GM: 246 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:21:47:459192]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+  1775 episodes  (4.10/s)
+  1800 episodes  (4.12/s)
+  1825 episodes  (4.14/s)
+  1850 episodes  (4.15/s)
+  1875 episodes  (4.17/s)
+  1900 episodes  (4.19/s)
+  1925 episodes  (4.21/s)
+  1950 episodes  (4.23/s)
+  1975 episodes  (4.25/s)
+  2000 episodes  (4.28/s)
+mJXqzFtmKg4: 267 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:22:30:045869]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+  2025 episodes  (4.23/s)
+  2050 episodes  (4.26/s)
+  2075 episodes  (4.28/s)
+  2100 episodes  (4.30/s)
+  2125 episodes  (4.31/s)
+  2150 episodes  (4.33/s)
+  2175 episodes  (4.34/s)
+  2200 episodes  (4.36/s)
+  2225 episodes  (4.37/s)
+  2250 episodes  (4.40/s)
+  2275 episodes  (4.40/s)
+sT4fr6TAbpF: 252 episodes to do (0 already done)
+Renderer: NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2 by NVIDIA Corporation
+OpenGL version: 4.6.0 NVIDIA 580.173.02
+Using optional features:
+    GL_ARB_vertex_array_object
+    GL_ARB_separate_shader_objects
+    GL_ARB_robustness
+    GL_ARB_texture_storage
+    GL_ARB_texture_view
+    GL_ARB_framebuffer_no_attachments
+    GL_ARB_invalidate_subdata
+    GL_ARB_texture_storage_multisample
+    GL_ARB_multi_bind
+    GL_ARB_direct_state_access
+    GL_ARB_get_texture_sub_image
+    GL_ARB_texture_filter_anisotropic
+    GL_KHR_debug
+    GL_KHR_parallel_shader_compile
+    GL_NV_depth_buffer_float
+Using driver workarounds:
+    no-forward-compatible-core-context
+    nv-egl-incorrect-gl11-function-pointers
+    no-layout-qualifiers-on-old-glsl
+    nv-zero-context-profile-mask
+    nv-implementation-color-read-format-dsa-broken
+    nv-cubemap-inconsistent-compressed-image-size
+    nv-cubemap-broken-full-compressed-image-query
+    nv-compressed-block-size-in-bits
+[17:23:16:975212]:[Warning]:[Metadata] SceneDatasetAttributes.cpp(107)::addNewSceneInstanceToDataset : Dataset : 'default' : Lighting Layout Attributes 'no_lights' specified in Scene Attributes but does not exist in dataset, so creating default.
+  2300 episodes  (4.38/s)
+  2325 episodes  (4.40/s)
+  2350 episodes  (4.42/s)
+  2375 episodes  (4.43/s)
+  2400 episodes  (4.44/s)
+  2425 episodes  (4.45/s)
+  2450 episodes  (4.46/s)
+  2475 episodes  (4.47/s)
+  2500 episodes  (4.48/s)
+  2525 episodes  (4.48/s)
+
+============================================================
+  episodes processed : 2538
+  saved (status=stop): 2538
+  truncated          : 0
+  failed             : 0
+  already done       : 0
+  total steps saved  : 101675
+  mean steps/episode : 40.1
+  elapsed            : 565.2s
+============================================================
+######## COLLECT rollouts finished Wed Sep  2 17:24:03 EDT 2026 ########
+######## CACHE v_bar started Wed Sep  2 17:24:03 EDT 2026 ########
+split=train  episodes=4203  to encode=2538
+loading encoder in float32 (D7: fp32 is batch-invariant) ...
+  VRAM after load: 9.08 GB
+Traceback (most recent call last):
+  File "/home/kneepolean/shubhj/latentpilot/src/data/cache_vbar.py", line 153, in <module>
+    raise SystemExit(main())
+  File "/home/kneepolean/shubhj/latentpilot/src/data/cache_vbar.py", line 114, in main
+    vbar = encode_vbar(enc, frames, args.batch_size)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/kneepolean/shubhj/latentpilot/src/data/cache_vbar.py", line 66, in encode_vbar
+    for v_t in enc.encode_batch(chunk):        # each (N_v, d)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/kneepolean/shubhj/latentpilot/src/model/vision_encoder.py", line 208, in encode_batch
+    out = self.model.model.get_image_features(
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/transformers/utils/generic.py", line 993, in wrapper
+    return func(*args, **translated)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/transformers/utils/generic.py", line 939, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/transformers/models/qwen3_vl/modeling_qwen3_vl.py", line 1047, in get_image_features
+    vision_output: BaseModelOutputWithDeepstackFeatures = self.visual(
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/transformers/utils/generic.py", line 1068, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/transformers/utils/output_capturing.py", line 262, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/home/kneepolean/.local/lib/python3.10/site-packages/transformers/models/qwen3_vl/modeling_qwen3_vl.py", line 706, in forward
+    pos_embeds = (self.pos_embed(interp_indices) * interp_weights[:, :, None]).sum(1)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 98.00 MiB. GPU 0 has a total capacity of 15.56 GiB of which 111.88 MiB is free. Process 234374 has 5.85 GiB memory in use. Including non-PyTorch memory, this process has 9.49 GiB memory in use. Of the allocated memory 9.24 GiB is allocated by PyTorch, and 7.47 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+######## CACHE v_bar finished Wed Sep  2 17:24:08 EDT 2026 ########
+######## STEP 2 DATA READY Wed Sep  2 17:24:08 EDT 2026 ########

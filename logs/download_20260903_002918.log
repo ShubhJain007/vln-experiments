@@ -1,0 +1,116 @@
+######## MP3D full download started Thu Sep  3 00:29:18 EDT 2026 ########
+==============================================================================
+  MP3D habitat-ready scene download
+==============================================================================
+  val_unseen : 11 scans, 1839 episodes
+  train      : 61 scans, 10819 episodes
+  TOTAL      : 72 scans (of 90 in the release)
+  archive : <MP3D_HABITAT_URL, not published>
+  approx  : ~15 GB download (the full MP3D release is 1.3 TB)
+  out dir : /home/kneepolean/shubhj/latentpilot/data/scene_datasets
+  Scans:
+    17DRP5sb8fy 1LXtFkjw3qL 1pXnuDYAj8r 29hnd4uzFmX 2azQ1b91cZZ 2n8kARJN3HM
+    5LpN3gDmAk7 5q7pvUzZiYa 759xd9YjKW5 7y3sRwLe3Va 8194nk5LbLH 82sE5b5pLXE
+    8WUmhLawc2A B6ByNegPMKs D7G3Y4RVNrH D7N2EKCX4Sj E9uDoFAP3SH EDJbREhghzL
+    EU6Fwq7SyZv GdvgFV5R1Z5 HxpKQynjfin JF19kD82Mey JeFG25nYj2p JmbYfDe2QKZ
+    PX4nDJXEHrG Pm6F8kyY3z2 PuKPg4mmafe QUCTc6BB5sX S9hNv5qa7GM SN83YJsR3w2
+    TbHJrupSAjP ULsKaCPVFJR Uxmj2M2itWa V2XKFyX4ASd VFuaQ6m2Qom VLzqgDo317F
+    VVfe2KiqLaN Vvot9Ly1tCj VzqfbhrpDEA X7HyMhZNoso XcA2TqTSSAj YmJkqBEsHnH
+    Z6MFQCViBuw ZMojNkEp431 aayBHfsNo7d ac26ZMwG7aT b8cTxDM8gDG cV4RVeZvu5T
+    dhjEzFoUFzH e9zR4mvMWw7 gTV8FGcVJC9 gZ6f7yhEvPG i5noydFURQK jh4fc5c5qoQ
+    kEZ7cmS4wCh mJXqzFtmKg4 oLBMNvg9in8 p5wJjkQkbXX pLe4wQe7qrG pRbA3pwrgk9
+    qoiz87JEwZ2 r1Q1Z4BcV1o r47D5H71a5s rPc6DW4iMge s8pcmisQ38h sKLMLpTHeUy
+    sT4fr6TAbpF uNb9QFRL6hY ur6pFq6Qu1A vyrNrziPKCB x8F5xyUWy9e zsNo4HB9uLZ
+******************************************************************************
+  By continuing you confirm you have agreed to the Matterport3D
+  terms of use:
+    http://kaldir.vc.cit.tum.de/matterport/MP_TOS.pdf
+******************************************************************************
+  Press ENTER to continue, or CTRL-C to abort: 
+Downloading (resumable -- rerun this script if interrupted):
+  already complete: /home/kneepolean/shubhj/latentpilot/data/scene_datasets/mp3d_habitat.zip (15.0GB)
+Verifying archive integrity ...
+  OK: 452 entries
+Extracting into /home/kneepolean/shubhj/latentpilot/data/scene_datasets ...
+  extracting 360 files for 72 scans ...
+  25/360 files  50/360 files  75/360 files  100/360 files  125/360 files  150/360 files  175/360 files  200/360 files  225/360 files  250/360 files  275/360 files  300/360 files  325/360 files  350/360 files  360/360 files
+scan               .glb  .navmesh  path
+------------------------------------------------------------------------------
+17DRP5sb8fy         yes       yes  mp3d/17DRP5sb8fy/17DRP5sb8fy.glb
+1LXtFkjw3qL         yes       yes  mp3d/1LXtFkjw3qL/1LXtFkjw3qL.glb
+1pXnuDYAj8r         yes       yes  mp3d/1pXnuDYAj8r/1pXnuDYAj8r.glb
+29hnd4uzFmX         yes       yes  mp3d/29hnd4uzFmX/29hnd4uzFmX.glb
+2azQ1b91cZZ         yes       yes  mp3d/2azQ1b91cZZ/2azQ1b91cZZ.glb
+2n8kARJN3HM         yes       yes  mp3d/2n8kARJN3HM/2n8kARJN3HM.glb
+5LpN3gDmAk7         yes       yes  mp3d/5LpN3gDmAk7/5LpN3gDmAk7.glb
+5q7pvUzZiYa         yes       yes  mp3d/5q7pvUzZiYa/5q7pvUzZiYa.glb
+759xd9YjKW5         yes       yes  mp3d/759xd9YjKW5/759xd9YjKW5.glb
+7y3sRwLe3Va         yes       yes  mp3d/7y3sRwLe3Va/7y3sRwLe3Va.glb
+8194nk5LbLH         yes       yes  mp3d/8194nk5LbLH/8194nk5LbLH.glb
+82sE5b5pLXE         yes       yes  mp3d/82sE5b5pLXE/82sE5b5pLXE.glb
+8WUmhLawc2A         yes       yes  mp3d/8WUmhLawc2A/8WUmhLawc2A.glb
+B6ByNegPMKs         yes       yes  mp3d/B6ByNegPMKs/B6ByNegPMKs.glb
+D7G3Y4RVNrH         yes       yes  mp3d/D7G3Y4RVNrH/D7G3Y4RVNrH.glb
+D7N2EKCX4Sj         yes       yes  mp3d/D7N2EKCX4Sj/D7N2EKCX4Sj.glb
+E9uDoFAP3SH         yes       yes  mp3d/E9uDoFAP3SH/E9uDoFAP3SH.glb
+EDJbREhghzL         yes       yes  mp3d/EDJbREhghzL/EDJbREhghzL.glb
+EU6Fwq7SyZv         yes       yes  mp3d/EU6Fwq7SyZv/EU6Fwq7SyZv.glb
+GdvgFV5R1Z5         yes       yes  mp3d/GdvgFV5R1Z5/GdvgFV5R1Z5.glb
+HxpKQynjfin         yes       yes  mp3d/HxpKQynjfin/HxpKQynjfin.glb
+JF19kD82Mey         yes       yes  mp3d/JF19kD82Mey/JF19kD82Mey.glb
+JeFG25nYj2p         yes       yes  mp3d/JeFG25nYj2p/JeFG25nYj2p.glb
+JmbYfDe2QKZ         yes       yes  mp3d/JmbYfDe2QKZ/JmbYfDe2QKZ.glb
+PX4nDJXEHrG         yes       yes  mp3d/PX4nDJXEHrG/PX4nDJXEHrG.glb
+Pm6F8kyY3z2         yes       yes  mp3d/Pm6F8kyY3z2/Pm6F8kyY3z2.glb
+PuKPg4mmafe         yes       yes  mp3d/PuKPg4mmafe/PuKPg4mmafe.glb
+QUCTc6BB5sX         yes       yes  mp3d/QUCTc6BB5sX/QUCTc6BB5sX.glb
+S9hNv5qa7GM         yes       yes  mp3d/S9hNv5qa7GM/S9hNv5qa7GM.glb
+SN83YJsR3w2         yes       yes  mp3d/SN83YJsR3w2/SN83YJsR3w2.glb
+TbHJrupSAjP         yes       yes  mp3d/TbHJrupSAjP/TbHJrupSAjP.glb
+ULsKaCPVFJR         yes       yes  mp3d/ULsKaCPVFJR/ULsKaCPVFJR.glb
+Uxmj2M2itWa         yes       yes  mp3d/Uxmj2M2itWa/Uxmj2M2itWa.glb
+V2XKFyX4ASd         yes       yes  mp3d/V2XKFyX4ASd/V2XKFyX4ASd.glb
+VFuaQ6m2Qom         yes       yes  mp3d/VFuaQ6m2Qom/VFuaQ6m2Qom.glb
+VLzqgDo317F         yes       yes  mp3d/VLzqgDo317F/VLzqgDo317F.glb
+VVfe2KiqLaN         yes       yes  mp3d/VVfe2KiqLaN/VVfe2KiqLaN.glb
+Vvot9Ly1tCj         yes       yes  mp3d/Vvot9Ly1tCj/Vvot9Ly1tCj.glb
+VzqfbhrpDEA         yes       yes  mp3d/VzqfbhrpDEA/VzqfbhrpDEA.glb
+X7HyMhZNoso         yes       yes  mp3d/X7HyMhZNoso/X7HyMhZNoso.glb
+XcA2TqTSSAj         yes       yes  mp3d/XcA2TqTSSAj/XcA2TqTSSAj.glb
+YmJkqBEsHnH         yes       yes  mp3d/YmJkqBEsHnH/YmJkqBEsHnH.glb
+Z6MFQCViBuw         yes       yes  mp3d/Z6MFQCViBuw/Z6MFQCViBuw.glb
+ZMojNkEp431         yes       yes  mp3d/ZMojNkEp431/ZMojNkEp431.glb
+aayBHfsNo7d         yes       yes  mp3d/aayBHfsNo7d/aayBHfsNo7d.glb
+ac26ZMwG7aT         yes       yes  mp3d/ac26ZMwG7aT/ac26ZMwG7aT.glb
+b8cTxDM8gDG         yes       yes  mp3d/b8cTxDM8gDG/b8cTxDM8gDG.glb
+cV4RVeZvu5T         yes       yes  mp3d/cV4RVeZvu5T/cV4RVeZvu5T.glb
+dhjEzFoUFzH         yes       yes  mp3d/dhjEzFoUFzH/dhjEzFoUFzH.glb
+e9zR4mvMWw7         yes       yes  mp3d/e9zR4mvMWw7/e9zR4mvMWw7.glb
+gTV8FGcVJC9         yes       yes  mp3d/gTV8FGcVJC9/gTV8FGcVJC9.glb
+gZ6f7yhEvPG         yes       yes  mp3d/gZ6f7yhEvPG/gZ6f7yhEvPG.glb
+i5noydFURQK         yes       yes  mp3d/i5noydFURQK/i5noydFURQK.glb
+jh4fc5c5qoQ         yes       yes  mp3d/jh4fc5c5qoQ/jh4fc5c5qoQ.glb
+kEZ7cmS4wCh         yes       yes  mp3d/kEZ7cmS4wCh/kEZ7cmS4wCh.glb
+mJXqzFtmKg4         yes       yes  mp3d/mJXqzFtmKg4/mJXqzFtmKg4.glb
+oLBMNvg9in8         yes       yes  mp3d/oLBMNvg9in8/oLBMNvg9in8.glb
+p5wJjkQkbXX         yes       yes  mp3d/p5wJjkQkbXX/p5wJjkQkbXX.glb
+pLe4wQe7qrG         yes       yes  mp3d/pLe4wQe7qrG/pLe4wQe7qrG.glb
+pRbA3pwrgk9         yes       yes  mp3d/pRbA3pwrgk9/pRbA3pwrgk9.glb
+qoiz87JEwZ2         yes       yes  mp3d/qoiz87JEwZ2/qoiz87JEwZ2.glb
+r1Q1Z4BcV1o         yes       yes  mp3d/r1Q1Z4BcV1o/r1Q1Z4BcV1o.glb
+r47D5H71a5s         yes       yes  mp3d/r47D5H71a5s/r47D5H71a5s.glb
+rPc6DW4iMge         yes       yes  mp3d/rPc6DW4iMge/rPc6DW4iMge.glb
+s8pcmisQ38h         yes       yes  mp3d/s8pcmisQ38h/s8pcmisQ38h.glb
+sKLMLpTHeUy         yes       yes  mp3d/sKLMLpTHeUy/sKLMLpTHeUy.glb
+sT4fr6TAbpF         yes       yes  mp3d/sT4fr6TAbpF/sT4fr6TAbpF.glb
+uNb9QFRL6hY         yes       yes  mp3d/uNb9QFRL6hY/uNb9QFRL6hY.glb
+ur6pFq6Qu1A         yes       yes  mp3d/ur6pFq6Qu1A/ur6pFq6Qu1A.glb
+vyrNrziPKCB         yes       yes  mp3d/vyrNrziPKCB/vyrNrziPKCB.glb
+x8F5xyUWy9e         yes       yes  mp3d/x8F5xyUWy9e/x8F5xyUWy9e.glb
+zsNo4HB9uLZ         yes       yes  mp3d/zsNo4HB9uLZ/zsNo4HB9uLZ.glb
+------------------------------------------------------------------------------
+72/72 scans complete
+Next step:
+  conda activate habitat_render
+  python scripts/verify_habitat.py --scene /home/kneepolean/shubhj/latentpilot/data/scene_datasets/mp3d/17DRP5sb8fy/17DRP5sb8fy.glb
+######## MP3D full download finished Thu Sep  3 00:30:43 EDT 2026 ########

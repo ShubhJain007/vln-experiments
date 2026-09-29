@@ -1,0 +1,43 @@
+######## fusion/step100000 (0.92ep) strict thr=0.20 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.1867
+    SPL   = 0.1612
+    OS    = 0.4000
+    nDTW  = 0.2576
+    NE    = 8.4483
+    model_stop        46  ( 30.7%)
+    timeout          104  ( 69.3%)
+    closest approach : mean  5.11  median  4.43  p25  2.13  min  0.10
+    ever within  3.0m :  40.0%
+    ever within  5.0m :  54.0%
+    ever within 10.0m :  88.7%
+    where it STOPPED : mean  3.96  median  3.26  within 3m 43.5%
+######## fusion/step100000 (0.92ep) strict thr=0.30 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.1667
+    SPL   = 0.1340
+    OS    = 0.4400
+    nDTW  = 0.1888
+    NE    = 8.8546
+    model_stop        19  ( 12.7%)
+    timeout          131  ( 87.3%)
+    closest approach : mean  4.89  median  4.38  p25  1.64  min  0.10
+    ever within  3.0m :  44.0%
+    ever within  5.0m :  54.7%
+    ever within 10.0m :  88.7%
+    where it STOPPED : mean  3.53  median  2.84  within 3m 63.2%
+######## fusion/step100000 (0.92ep) strict thr=0.15 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.2000
+    SPL   = 0.1805
+    OS    = 0.3733
+    nDTW  = 0.2952
+    NE    = 8.2723
+    model_stop        67  ( 44.7%)
+    timeout           83  ( 55.3%)
+    closest approach : mean  5.27  median  4.80  p25  2.16  min  0.10
+    ever within  3.0m :  37.3%
+    ever within  5.0m :  51.3%
+    ever within 10.0m :  88.7%
+    where it STOPPED : mean  5.08  median  3.96  within 3m 35.8%
+######## EVAL100K DONE ########

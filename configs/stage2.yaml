@@ -1,0 +1,18 @@
+# Stage 2 — scheduled sampling (Pilot-slot mixing).
+# AGENTS.md Sec. 5. NOT IN PAPER: this whole stage is a human-approved addition
+# fixing the Eq.12 (train, v_bar_{t+1}) vs Eq.5 (eval, z_{t-1}) mismatch.
+#
+# Every value below is marked because Sec. 5.4 states plainly: "These numbers
+# are NOT from the paper. Starting points to sweep, not ground truth."
+
+init_from:        "checkpoints/stage1_learned/final"   # Sec. 5.3 fine-tune, not fresh run
+lr_scale:         0.1     # NOT IN PAPER — fraction of Stage 1 LR (adapting, not training)
+p_selfpred_start: 0.0     # NOT IN PAPER
+p_selfpred_final: 0.5     # NOT IN PAPER — sweep {0.0, 0.25, 0.5}
+ramp_frac:        0.3     # NOT IN PAPER — fraction of fine-tune spent ramping p
+finetune_frac:    0.15    # NOT IN PAPER — length vs Stage 1, in steps
+unroll_window:    1       # NOT IN PAPER — Sec. 5.6 option (a), "short window"
+
+# Sec. 5.4 hard limit: do NOT exceed p_final = 0.75 without asking the human.
+# Above that the t+1 scaffold is gone and the task becomes unanchored two-step
+# extrapolation -- a different problem than the paper posed.

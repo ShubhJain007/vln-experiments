@@ -1,0 +1,35 @@
+Loading pointing policy from checkpoints/pointing_fusion/step120000 ...
+Loading weights:   0%|          | 0/626 [00:00<?, ?it/s]Loading weights:   2%|▏         | 15/626 [00:00<00:04, 146.25it/s]Loading weights:  19%|█▉        | 122/626 [00:00<00:00, 681.37it/s]Loading weights:  36%|███▌      | 226/626 [00:00<00:00, 839.43it/s]Loading weights:  74%|███████▍  | 463/626 [00:00<00:00, 1436.25it/s]Loading weights: 100%|██████████| 626/626 [00:00<00:00, 1388.40it/s]
+  history_frames = 2 (stride 8, spans 16 steps) [from checkpoint config]
+  head reads layers: (23, 26, 28)
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.2  turn=3.0 deg
+split=val_unseen  episodes=150  scans=8
+
+
+====================================================================
+  POINTING EVAL — checkpoints/pointing_fusion/step120000
+  split=val_unseen  n=150  stop_thr=0.2  diagnostic (proximity break)
+====================================================================
+    SR    = 0.3533
+    SPL   = 0.3471
+    OS    = 0.3533
+    nDTW  = 0.4072
+    NE    = 6.8954
+
+  TERMINATION:
+    model_stop        34  ( 22.7%)
+    within_radius     53  ( 35.3%)
+    timeout           63  ( 42.0%)
+
+  DISTANCE TO GOAL (m):
+    closest approach : mean  5.67  median  4.87  p25  2.94  min  2.73
+    final position   : mean  6.90  median  5.76
+    ever within  3.0m :  35.3%
+    ever within  5.0m :  51.3%
+    ever within 10.0m :  89.3%
+    where it STOPPED : mean  6.62  median  6.56  within 3m  0.0%
+
+  p(stop) over 10,261 steps: mean 0.0063  p95 0.0310  max 0.3608
+    (threshold 0.2 would fire on 0.33% of steps)
+====================================================================

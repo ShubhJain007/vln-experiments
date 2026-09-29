@@ -1,0 +1,29 @@
+Loading policy from checkpoints/stage1_learned/final ...
+Loading weights:   0%|          | 0/626 [00:00<?, ?it/s]Loading weights:   2%|▏         | 15/626 [00:00<00:04, 148.91it/s]Loading weights:  17%|█▋        | 108/626 [00:00<00:00, 606.32it/s]Loading weights:  32%|███▏      | 202/626 [00:00<00:00, 751.64it/s]Loading weights:  48%|████▊     | 300/626 [00:00<00:00, 838.93it/s]Loading weights:  66%|██████▋   | 416/626 [00:00<00:00, 952.00it/s]Loading weights:  89%|████████▉ | 559/626 [00:00<00:00, 1113.29it/s]Loading weights: 100%|██████████| 626/626 [00:00<00:00, 977.34it/s] 
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+[1/11] 2azQ1b91cZZ  'Walk into the living room and keep walking straight past the...'
+  -> timeout  min_dist=6.36m  steps=101  saved recordings/final_multiscene/ep00_2azQ1b91cZZ.mp4
+[2/11] 8194nk5LbLH  'Start in the middle of the large room head towards the door ...'
+  -> timeout  min_dist=11.81m  steps=101  saved recordings/final_multiscene/ep01_8194nk5LbLH.mp4
+[3/11] EU6Fwq7SyZv  'Turn around 180 degrees.  Go through the open door to the lo...'
+  -> timeout  min_dist=3.56m  steps=101  saved recordings/final_multiscene/ep02_EU6Fwq7SyZv.mp4
+[4/11] QUCTc6BB5sX  'Walk through the living room around the backside of the couc...'
+  -> timeout  min_dist=11.13m  steps=101  saved recordings/final_multiscene/ep03_QUCTc6BB5sX.mp4
+[5/11] TbHJrupSAjP  'Walk up the flight of stairs to the top. Turn and follow the...'
+  -> timeout  min_dist=9.07m  steps=101  saved recordings/final_multiscene/ep04_TbHJrupSAjP.mp4
+[6/11] X7HyMhZNoso  'Finish climbing the stairs and walk straight through the doo...'
+  -> timeout  min_dist=8.04m  steps=101  saved recordings/final_multiscene/ep05_X7HyMhZNoso.mp4
+[7/11] Z6MFQCViBuw  'Turn towards a large wooden manel, go forward through a door...'
+  -> timeout  min_dist=11.51m  steps=101  saved recordings/final_multiscene/ep06_Z6MFQCViBuw.mp4
+[8/11] oLBMNvg9in8  'Exit the room through the door on the right. Walk past the s...'
+  -> timeout  min_dist=11.02m  steps=101  saved recordings/final_multiscene/ep07_oLBMNvg9in8.mp4
+[9/11] pLe4wQe7qrG  'Walk past altar book stands. Wait under wooden rafter. ...'
+  -> timeout  min_dist=4.52m  steps=101  saved recordings/final_multiscene/ep08_pLe4wQe7qrG.mp4
+[10/11] x8F5xyUWy9e  'Go straight past the pool. Walk between the bar and chairs. ...'
+  -> timeout  min_dist=9.21m  steps=101  saved recordings/final_multiscene/ep09_x8F5xyUWy9e.mp4
+[11/11] zsNo4HB9uLZ  'Exit the bedroom and turn left. Walk straight passing the gr...'
+  -> timeout  min_dist=6.34m  steps=101  saved recordings/final_multiscene/ep10_zsNo4HB9uLZ.mp4
+
+11 recordings written under recordings/final_multiscene/

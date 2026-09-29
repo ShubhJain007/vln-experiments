@@ -1,0 +1,25 @@
+Loading pointing policy from checkpoints/pointing/step10000 ...
+Loading weights:   0%|          | 0/626 [00:00<?, ?it/s]Loading weights:   5%|▍         | 29/626 [00:00<00:02, 286.78it/s]Loading weights:  20%|██        | 127/626 [00:00<00:00, 691.32it/s]Loading weights:  36%|███▌      | 224/626 [00:00<00:00, 808.17it/s]Loading weights:  51%|█████     | 317/626 [00:00<00:00, 854.19it/s]Loading weights:  73%|███████▎  | 460/626 [00:00<00:00, 1057.38it/s]Loading weights:  92%|█████████▏| 578/626 [00:00<00:00, 1094.86it/s]Loading weights: 100%|██████████| 626/626 [00:00<00:00, 963.96it/s] 
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.5  turn=7.5 deg
+split=val_unseen  episodes=60  scans=7
+
+
+====================================================================
+  POINTING EVAL — checkpoints/pointing/step10000
+  split=val_unseen  n=60  stop_thr=0.5
+====================================================================
+    SR    = 0.2667
+    SPL   = 0.2653
+    OS    = 0.2667
+    nDTW  = 0.3220
+    NE    = 8.6583
+
+  TERMINATION:
+    model_stop         0  (  0.0%)
+    within_radius     16  ( 26.7%)
+    timeout           44  ( 73.3%)
+
+  p(stop) over 4,889 steps: mean 0.0132  p95 0.0440  max 0.2526
+    (threshold 0.5 would fire on 0.00% of steps)
+====================================================================

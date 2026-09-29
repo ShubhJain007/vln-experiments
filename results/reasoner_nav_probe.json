@@ -1,0 +1,263 @@
+{
+ "n": 36,
+ "majority_baseline": 0.5,
+ "variants": {
+  "hier_full": {
+   "accuracy": 0.3888888888888889,
+   "parse_rate": 0.9444444444444444,
+   "recall": {
+    "move forward": 0.4444444444444444,
+    "turn left": 0.0,
+    "turn right": 0.0,
+    "stop": 0.5
+   },
+   "confusion": {
+    "move forward->UNPARSED": 2,
+    "move forward->move forward": 8,
+    "move forward->stop": 4,
+    "move forward->turn left": 2,
+    "move forward->turn right": 2,
+    "stop->move forward": 5,
+    "stop->stop": 6,
+    "stop->turn left": 1,
+    "turn left->move forward": 1,
+    "turn left->stop": 1,
+    "turn left->turn right": 1,
+    "turn right->move forward": 3
+   },
+   "mean_seconds": 2.5480915904045105
+  },
+  "hier_overall": {
+   "accuracy": 0.4166666666666667,
+   "parse_rate": 0.9722222222222222,
+   "recall": {
+    "move forward": 0.5,
+    "turn left": 0.3333333333333333,
+    "turn right": 0.0,
+    "stop": 0.4166666666666667
+   },
+   "confusion": {
+    "move forward->move forward": 9,
+    "move forward->stop": 1,
+    "move forward->turn left": 4,
+    "move forward->turn right": 4,
+    "stop->move forward": 2,
+    "stop->stop": 5,
+    "stop->turn left": 1,
+    "stop->turn right": 4,
+    "turn left->move forward": 1,
+    "turn left->turn left": 1,
+    "turn left->turn right": 1,
+    "turn right->UNPARSED": 1,
+    "turn right->move forward": 2
+   },
+   "mean_seconds": 2.275127934084998
+  },
+  "hier_overall_nothink": {
+   "accuracy": 0.16666666666666666,
+   "parse_rate": 0.9722222222222222,
+   "recall": {
+    "move forward": 0.2222222222222222,
+    "turn left": 0.0,
+    "turn right": 0.0,
+    "stop": 0.16666666666666666
+   },
+   "confusion": {
+    "move forward->UNPARSED": 1,
+    "move forward->move forward": 4,
+    "move forward->stop": 2,
+    "move forward->turn left": 2,
+    "move forward->turn right": 9,
+    "stop->move forward": 3,
+    "stop->stop": 2,
+    "stop->turn left": 1,
+    "stop->turn right": 6,
+    "turn left->turn right": 3,
+    "turn right->move forward": 3
+   },
+   "mean_seconds": 0.12018325593736437
+  }
+ },
+ "transcripts": [
+  {
+   "variant": "hier_full",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 99,
+   "label": "turn left",
+   "pred": "stop",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nIn the video, the agent is trying to follow the instruction (a single step out of many to complete the overall task): \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+   "answer": "Okay, let's break this down. The agent's task is to leave the bedroom, take a right in the hallway, go down the hall, enter the bathroom first on the left, and stop in the doorway. The current instruction is the first part of that task.\n\nLooking at the video, the robot is in the bedroom. The camera starts by showing the bed, nightstand, painting, then pans right to the hallway. The hallway has a wooden door with a curtain. The robot needs to exit the bedroom. So the first action should be moving towards the hallway. Since the instruction says to take a right in the hallway, the robot needs to turn right upon entering the hallway. But wait, the robot is starting in the bedroom. So the first step is to move out of the bedroom into the hallway. The initial action would be moving forward to exit the bedroom. Then, once in the hallway, turn right. But the current step is \"Leave the bedroom and take a right in the hallway...\" So the next action after leaving the bedroom would be turning right. But the robot hasn't left the bedroom yet. Wait, the agent's current instruction is the first step: leave the bedroom. So the first action is moving out of the bedroom into the hallway. The video shows the camera pans right, showing the hallway and a wooden door. So the robot needs to exit the bedroom, perhaps through that door. So the next action would be moving towards the hallway, maybe moving forward to exit the bedroom. But the exact action depends on the robot's current position. If the robot is in the bedroom, the first step is to move out. Since the instruction is to leave the bedroom, the action would be \"move forward\" to exit the bedroom into the hallway. Then, once in the hallway, turn right. But the user's question is about the next action given the current instruction."
+  },
+  {
+   "variant": "hier_full",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 217,
+   "label": "move forward",
+   "pred": "stop",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nIn the video, the agent is trying to follow the instruction (a single step out of many to complete the overall task): \"Stop in the doorway to the bathroom.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+   "answer": "Okay, let's break this down. The agent's current instruction is to \"Stop in the doorway to the bathroom.\" The video shows a hallway leading to a room at the far end, with a rug and a doorway visible. The robot needs to navigate from the bedroom, take a right in the hallway, go down the hall, enter the bathroom on the left, and stop in the bathroom doorway.\n\nFirst, the robot is supposed to stop in the bathroom doorway. But looking at the video, the hallway has a room at the far end. The doorway shown is part of the hallway leading to that room. However, the task specifies entering the bathroom first on the left. So maybe the bathroom is located along the hallway, not just at the far end. \n\nIf the robot is currently in the hallway, taking a right initially, then moving down the hall, the bathroom might be on the left side as they go down. The instruction says to enter the bathroom first on the left, so the robot needs to turn left into the bathroom. But the current step is to stop in the doorway. If the robot has already reached the bathroom's location, the next action would be to stop. But if they haven't entered the bathroom yet, they might need to turn left into it. \n\nWait, the instruction says \"Stop in the doorway to the bathroom.\" So the robot needs to be in the doorway. If they're approaching the bathroom doorway, the next action would be to stop. But if they haven't arrived yet, maybe they need to turn left into the bathroom. However, the previous steps involved moving down the hall. The current step is the final part: stopping in the bathroom doorway. So if the robot is at the bathroom doorway, the action is stop. But if they're still moving towards it, maybe they need to turn left. But the instruction is to stop, so"
+  },
+  {
+   "variant": "hier_full",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 225,
+   "label": "stop",
+   "pred": "turn left",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nIn the video, the agent is trying to follow the instruction (a single step out of many to complete the overall task): \"Stop in the doorway to the bathroom.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+   "answer": "Okay, let's break this down. The agent's current instruction is to \"Stop in the doorway to the bathroom.\" The video is a hallway with the robot moving forward. The camera is moving towards the bathroom, which is at the end of the hallway on the left. The robot needs to enter the bathroom first on the left.\n\nSo, the robot is approaching the bathroom doorway. The previous action was moving forward along the hallway. Now, to stop in the doorway, the robot needs to position itself correctly. Since the bathroom is on the left, the next action would likely involve turning left to align with the doorway. The robot might need to adjust its orientation to face the bathroom entrance. Therefore, the next action should be turning left to prepare for entering the bathroom.\n</think>\n\nturn left"
+  },
+  {
+   "variant": "hier_full",
+   "scan": "8194nk5LbLH",
+   "traj": 1141,
+   "t": 54,
+   "label": "turn left",
+   "pred": "turn right",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Go right around the counter and turn left. Continue until you are at the end of the second orange couch.\"\nIn the video, the agent is trying to follow the instruction (a single step out of many to complete the overall task): \"Go right around the counter and turn left.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+   "answer": "Okay, let's break this down. The agent's current instruction is to \"Go right around the counter and turn left.\" The video shows a dining table with chairs on the right, a central pillar, orange couches, an orange door, and a mural. The robot's task is to navigate around the counter and turn left towards the end of the second orange couch.\n\nFirst, the agent needs to go right around the counter. The counter isn't explicitly shown in the video, but there's a dining table on the right. Maybe the counter is near the dining table. So the robot should move right towards the dining table area. Then, after going right, it needs to turn left. Turning left would mean changing direction towards the couches. The second orange couch is probably one of the couches shown, maybe the one closer to the orange door. The agent might need to navigate around the central pillar to reach the second couch. If the initial movement to the right around the counter isn't completed, the next action should be to continue moving right. Once around the counter, turning left would be the next step. But since the instruction is to go right first, the next action should be moving right around the counter. If the agent hasn't successfully navigated around the counter yet, the next action would be to continue moving right. So the predicted action is \"move right.\"\n</think>\n\nmove right"
+  },
+  {
+   "variant": "hier_full",
+   "scan": "8194nk5LbLH",
+   "traj": 1141,
+   "t": 98,
+   "label": "move forward",
+   "pred": "move forward",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Go right around the counter and turn left. Continue until you are at the end of the second orange couch.\"\nIn the video, the agent is trying to follow the instruction (a single step out of many to complete the overall task): \"Continue until you are at the end of the second orange couch.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+   "answer": "Okay, let's break this down. The agent's current instruction is to \"Continue until you are at the end of the second orange couch.\" The video shows a blue pillar on the right, a dark counter on the left, and two orange couches in the background. The camera is panning right, revealing more of the room, including the couches.\n\nThe agent needs to reach the end of the second orange couch. Since the camera is moving right and showing the couches, the agent might be moving towards them. The previous action was probably moving right to get into position. Now, to reach the end of the couch, the agent might need to adjust its position. If the agent is approaching the couch but hasn't reached the end yet, the next action could be to move forward to get closer. Alternatively, if it's already near, maybe turning left to align properly. But considering the instruction is to continue until reaching the end, moving forward makes sense as the next step to approach the couch's end.\n</think>\n\nmove forward"
+  },
+  {
+   "variant": "hier_full",
+   "scan": "8194nk5LbLH",
+   "traj": 1141,
+   "t": 118,
+   "label": "stop",
+   "pred": "move forward",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Go right around the counter and turn left. Continue until you are at the end of the second orange couch.\"\nIn the video, the agent is trying to follow the instruction (a single step out of many to complete the overall task): \"Continue until you are at the end of the second orange couch.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+   "answer": "Okay, let's break this down. The agent is supposed to \"Continue until you are at the end of the second orange couch.\" The current environment has a counter on the left, a couch on the right, and a mural in the background. The robot's previous actions aren't specified, but the instruction is part of a larger task to go right around the counter and turn left towards the end of the second orange couch.\n\nFirst, I need to figure out where the second orange couch is. The video shows a couch on the right side, light-colored, possibly beige or light brown. The user refers to a \"second orange couch,\" which might mean there's another couch further along. Since the current couch is on the right, moving right around the counter would lead the robot towards that second couch. The agent's next action should involve moving in that direction. The instruction says to continue until reaching the end of the second couch, so the next logical step is to keep moving forward along that path. The video does not show obstacles, so assuming the path is clear, the robot should just keep moving forward. No turns are needed yet because the instruction is to continue straight to the end of the couch. So the action would be \"move forward.\"\n</think>\n\nmove forward"
+  },
+  {
+   "variant": "hier_overall",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 99,
+   "label": "turn left",
+   "pred": "move forward",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+   "answer": "Okay, let's break this down. The agent's task is to leave the bedroom, take a right in the hallway, go down the hall, enter the bathroom first on the left, and stop in the doorway. The current state is that the camera is at the bedroom door, which is partially open. The robot needs to exit the bedroom.\n\nFirst, the robot has to move out of the bedroom. Since the door is partially open, the next action would be to move forward through the door. After exiting, the robot needs to take a right in the hallway. But since the next immediate action is just the first step, moving forward through the door is the logical next step. The subsequent actions would involve turning right and moving down the hall, but the question is about the very next action. So, \"move forward\" makes sense here as the robot exits the bedroom.\n</think>\n\nmove forward"
+  },
+  {
+   "variant": "hier_overall",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 217,
+   "label": "move forward",
+   "pred": "turn left",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+   "answer": "Okay, let's break this down. The agent's overall task is to leave the bedroom, take a right in the hallway, go down the hall, enter the bathroom first on the left, and stop in the bathroom doorway. The current state is that the camera (robot's perspective) is moving forward through a hallway with a textured floor and arched doorways. The robot has already taken a right in the hallway and is now moving down the hall towards the bathroom.\n\nThe next step after moving forward would be to enter the bathroom. Since the instruction says to enter the bathroom first on the left, the robot needs to turn left into the bathroom. The previous actions involved moving forward, so now the robot should adjust its direction to turn left into the bathroom. The video does not show any obstacles or stops yet, so the logical next action is turning left to enter the bathroom.\n</think>\n\nturn left"
+  },
+  {
+   "variant": "hier_overall",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 225,
+   "label": "stop",
+   "pred": "turn right",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+   "answer": "Okay, let's break this down. The agent is supposed to leave the bedroom, take a right in the hallway, go down the hall, enter the bathroom first on the left, and stop in the doorway. The current environment is a hallway with a camera moving forward. The robot's task involves navigating through specific steps.\n\nFirst, the agent needs to take a right in the hallway. Since the hallway is straight and the camera is moving forward, turning right would mean the robot should turn right at the end of the hallway. The video shows the hallway leads to a room on the right, so taking a right there makes sense. After that, they need to go down the hall and enter the bathroom on the left. The next action after turning right would be moving down the hallway towards the bathroom. The current step in the task is to take a right, so the next action should be turning right to follow the hallway's direction. The robot hasn't stopped yet, so the next action is likely turning right to navigate the hallway as instructed.\n</think>\n\nturn right"
+  },
+  {
+   "variant": "hier_overall",
+   "scan": "8194nk5LbLH",
+   "traj": 1141,
+   "t": 54,
+   "label": "turn left",
+   "pred": "turn left",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Go right around the counter and turn left. Continue until you are at the end of the second orange couch.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+   "answer": "Okay, let's break this down. The agent is supposed to navigate around the counter, turn left, and reach the end of the second orange couch. The current environment has a dining table on the right, a kitchen counter on the left, and two orange couches in the center. The robot's last action was moving forward and turning right towards the couches.\n\nSince the goal is to go right around the counter and turn left, the robot probably needs to adjust its path. After turning right, maybe it needs to move left to go around the counter. But wait, the counter is on the left side. To go right around it, the robot might need to move towards the right side of the counter. Then, after that, turn left to reach the second couch. The next action should be moving left to navigate around the counter. So the predicted action is move left.\n</think>\n\nmove left"
+  },
+  {
+   "variant": "hier_overall",
+   "scan": "8194nk5LbLH",
+   "traj": 1141,
+   "t": 98,
+   "label": "move forward",
+   "pred": "turn left",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Go right around the counter and turn left. Continue until you are at the end of the second orange couch.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+   "answer": "Okay, let's break this down. The agent needs to navigate around the counter and turn left, then continue until reaching the end of the second orange couch. The current environment has a counter on the left, a wall with a mural, and a couch in the background. The robot's camera is moving forward, panning right.\n\nFirst, the robot is near the counter on the left. The task says to go right around the counter. So the robot needs to move from the left side (near the counter) to the right side. Since the counter is on the left, moving right around it would mean turning right to go around the counter. Then, after moving right, it should turn left. But the next immediate action after the initial movement would be to navigate around the counter. Since the robot is moving forward and panning right, maybe it's already starting to go right. But the next action after moving forward might be to turn right to go around the counter. Wait, the instruction says \"go right around the counter\" So the robot needs to move right while avoiding the counter. Since the counter is on the left, moving right would require turning right to go around it. So the next action after moving forward would be to turn right to go around the counter. Then, after that, turn left towards the couch. But the question is about the next action. The current state is that the robot is moving forward, panning right. The next action would be to continue moving right around the counter. But the possible actions are move forward, turn left, turn right, stop. So if the robot is moving forward and needs to go right around the counter, maybe it needs to turn right to change direction. Alternatively, moving forward might not be enough; perhaps it needs to turn right to go around the counter. So the next action would be \"turn right\" to navigate around the counter"
+  },
+  {
+   "variant": "hier_overall",
+   "scan": "8194nk5LbLH",
+   "traj": 1141,
+   "t": 118,
+   "label": "stop",
+   "pred": "turn right",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Go right around the counter and turn left. Continue until you are at the end of the second orange couch.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+   "answer": "Okay, let's break this down. The agent is supposed to \"Go right around the counter and turn left. Continue until you are at the end of the second orange couch.\" The current environment has a counter on the left side of the room. The robot needs to navigate around it.\n\nFirst, the robot is probably starting from the entrance. The counter is on the left, so to go right around it, the robot would need to move to the right side of the counter. Since the counter is a long, dark structure extending into the room, the robot might need to turn right to go around it. Then, after going right, the next step is to turn left. But the goal is to reach the end of the second orange couch. The couches are on the right side, one peach and one orange. The second orange couch would be further along. So after turning left, the robot needs to continue moving until it's at the end of that couch. \n\nThe previous action might have been moving towards the counter. Now, to go right around the counter, the robot should turn right to navigate around the counter structure. Then, after that, turn left towards the couches. But the next immediate action after starting would be turning right to go around the counter. So the next action is likely \"turn right\" to maneuver around the counter before proceeding towards the couches.\n</think>\n\nturn right"
+  },
+  {
+   "variant": "hier_overall_nothink",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 99,
+   "label": "turn left",
+   "pred": "turn right",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.",
+   "answer": "turn right"
+  },
+  {
+   "variant": "hier_overall_nothink",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 217,
+   "label": "move forward",
+   "pred": "turn right",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.",
+   "answer": "turn right"
+  },
+  {
+   "variant": "hier_overall_nothink",
+   "scan": "2azQ1b91cZZ",
+   "traj": 1039,
+   "t": 225,
+   "label": "stop",
+   "pred": "turn right",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Leave the bedroom and take a right in the hallway Go down the hall and enter the bathroom first on your left. Stop in the doorway to the bathroom.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.",
+   "answer": "turn right"
+  },
+  {
+   "variant": "hier_overall_nothink",
+   "scan": "8194nk5LbLH",
+   "traj": 1141,
+   "t": 54,
+   "label": "turn left",
+   "pred": "turn right",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Go right around the counter and turn left. Continue until you are at the end of the second orange couch.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.",
+   "answer": "turn right"
+  },
+  {
+   "variant": "hier_overall_nothink",
+   "scan": "8194nk5LbLH",
+   "traj": 1141,
+   "t": 98,
+   "label": "move forward",
+   "pred": "turn right",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Go right around the counter and turn left. Continue until you are at the end of the second orange couch.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.",
+   "answer": "turn right"
+  },
+  {
+   "variant": "hier_overall_nothink",
+   "scan": "8194nk5LbLH",
+   "traj": 1141,
+   "t": 118,
+   "label": "stop",
+   "pred": "turn right",
+   "prompt": "You are a mobile robot navigating inside a building. The video depicts the observation from the robot's own forward-facing camera at eye level, ending at the present moment.\nThis is the overall task that the agent is trying to complete: \"Go right around the counter and turn left. Continue until you are at the end of the second orange couch.\"\nWhat should be the next action of the agent?\nChoose the robot's next action. Answer with exactly one of: move forward, turn left, turn right, stop.",
+   "answer": "turn right"
+  }
+ ]
+}

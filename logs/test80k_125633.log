@@ -1,0 +1,57 @@
+######## fusion/step80000 (0.73ep) strict thr=0.20 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.2267
+    SPL   = 0.1872
+    OS    = 0.4133
+    nDTW  = 0.2484
+    NE    = 7.8985
+    model_stop        36  ( 24.0%)
+    timeout          114  ( 76.0%)
+    closest approach : mean  4.66  median  3.53  p25  1.90  min  0.11
+    ever within  3.0m :  41.3%
+    ever within  5.0m :  55.3%
+    ever within 10.0m :  93.3%
+    where it STOPPED : mean  4.09  median  2.72  within 3m 52.8%
+######## fusion/step80000 (0.73ep) strict thr=0.15 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.2067
+    SPL   = 0.1697
+    OS    = 0.3733
+    nDTW  = 0.2694
+    NE    = 7.8855
+    model_stop        46  ( 30.7%)
+    timeout          104  ( 69.3%)
+    closest approach : mean  4.78  median  4.07  p25  2.07  min  0.11
+    ever within  3.0m :  37.3%
+    ever within  5.0m :  55.3%
+    ever within 10.0m :  93.3%
+    where it STOPPED : mean  4.51  median  3.34  within 3m 39.1%
+######## fusion/step80000 (0.73ep) strict thr=0.30 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.1933
+    SPL   = 0.1412
+    OS    = 0.4533
+    nDTW  = 0.1784
+    NE    = 8.3244
+    model_stop         7  (  4.7%)
+    timeout          143  ( 95.3%)
+    closest approach : mean  4.48  median  3.48  p25  1.11  min  0.11
+    ever within  3.0m :  45.3%
+    ever within  5.0m :  56.7%
+    ever within 10.0m :  93.3%
+    where it STOPPED : mean  2.00  median  2.12  within 3m 100.0%
+######## MATCHED BASELINE: full3/step60000 (0.55ep) thr=0.20 ########
+  head reads layers: final only
+    SR    = 0.2200
+    SPL   = 0.1891
+    OS    = 0.4133
+    nDTW  = 0.2669
+    NE    = 7.9937
+    model_stop        47  ( 31.3%)
+    timeout          103  ( 68.7%)
+    closest approach : mean  4.56  median  4.19  p25  1.63  min  0.04
+    ever within  3.0m :  41.3%
+    ever within  5.0m :  56.0%
+    ever within 10.0m :  92.7%
+    where it STOPPED : mean  3.95  median  3.00  within 3m 51.1%
+######## TEST80K DONE ########

@@ -1,0 +1,15 @@
+Loading weights:   0%|          | 0/626 [00:00<?, ?it/s]Loading weights:   2%|▏         | 13/626 [00:00<00:04, 129.13it/s]Loading weights:  20%|█▉        | 125/626 [00:00<00:00, 703.16it/s]Loading weights:  39%|███▉      | 246/626 [00:00<00:00, 931.98it/s]Loading weights:  78%|███████▊  | 487/626 [00:00<00:00, 1508.55it/s]Loading weights: 100%|██████████| 626/626 [00:00<00:00, 1396.78it/s]
+checkpoints/pointing_full3/step120000  history K=2 stride=8
+held-out steps: 900   distinct instructions: 80
+
+condition   u MAE  u corr  act agree  bear med  stop sep
+----------------------------------------------------------
+     real  0.0905   0.768      0.764      3.8d      5.1x
+  swapped  0.1248   0.517      0.686      5.5d      1.0x
+    empty  0.1164   0.430      0.603      7.3d      1.1x
+
+real -> swapped :  u corr 0.768->0.517 (-33%)   act 0.764->0.686 (-10%)
+real -> empty   :  u corr 0.768->0.430 (-44%)   act 0.764->0.603 (-21%)
+
+If `swapped` is close to `real`, the policy is ignoring the instruction and
+navigating on visual cues alone.

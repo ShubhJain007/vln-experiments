@@ -1,0 +1,44 @@
+Loading checkpoints/pointing_full3/step100000 ...
+Loading weights:   0%|          | 0/626 [00:00<?, ?it/s]Loading weights:   2%|▏         | 10/626 [00:00<00:06, 99.69it/s]Loading weights:  15%|█▌        | 94/626 [00:00<00:00, 533.65it/s]Loading weights:  29%|██▊       | 179/626 [00:00<00:00, 671.90it/s]Loading weights:  42%|████▏     | 260/626 [00:00<00:00, 721.10it/s]Loading weights:  64%|██████▍   | 403/626 [00:00<00:00, 974.17it/s]Loading weights:  98%|█████████▊| 615/626 [00:00<00:00, 1344.45it/s]Loading weights: 100%|██████████| 626/626 [00:00<00:00, 1019.19it/s]
+  history_frames = 2 (stride 8, spans 16 steps) [from checkpoint config]
+  loaded 224 LoRA tensors (r=16) + pointing head
+[00] 2azQ1b91cZZ    OK  model_stop   final  0.36m  min  0.36m  steps 28
+[01] 2azQ1b91cZZ    OK  model_stop   final  2.64m  min  0.12m  steps 40
+[02] 8194nk5LbLH    FAIL timeout      final 15.09m  min 11.81m  steps 101
+[03] 8194nk5LbLH    FAIL timeout      final 12.63m  min 11.81m  steps 101
+[04] EU6Fwq7SyZv    FAIL timeout      final  5.26m  min  0.49m  steps 101
+[05] EU6Fwq7SyZv    FAIL timeout      final  5.24m  min  3.01m  steps 101
+[06] QUCTc6BB5sX    FAIL timeout      final  5.83m  min  1.37m  steps 101
+[07] QUCTc6BB5sX    OK  model_stop   final  0.50m  min  0.50m  steps 72
+[08] TbHJrupSAjP    FAIL model_stop   final  5.68m  min  5.68m  steps 25
+[09] TbHJrupSAjP    FAIL model_stop   final  6.41m  min  5.43m  steps 41
+[10] X7HyMhZNoso    FAIL model_stop   final 10.33m  min  7.86m  steps 56
+[11] X7HyMhZNoso    FAIL model_stop   final  4.57m  min  4.57m  steps 45
+[12] Z6MFQCViBuw    FAIL model_stop   final 21.51m  min 11.51m  steps 41
+[13] Z6MFQCViBuw    FAIL timeout      final 29.28m  min 11.51m  steps 101
+[14] oLBMNvg9in8    FAIL timeout      final 10.94m  min  7.74m  steps 101
+[15] oLBMNvg9in8    FAIL model_stop   final  7.15m  min  7.05m  steps 34
+[16] pLe4wQe7qrG    FAIL model_stop   final  5.36m  min  1.53m  steps 64
+[17] pLe4wQe7qrG    FAIL model_stop   final  3.35m  min  3.35m  steps 22
+[18] x8F5xyUWy9e    OK  model_stop   final  2.98m  min  2.98m  steps 61
+[19] x8F5xyUWy9e    OK  model_stop   final  1.84m  min  1.84m  steps 56
+[20] zsNo4HB9uLZ    OK  model_stop   final  2.58m  min  2.58m  steps 35
+[21] zsNo4HB9uLZ    FAIL model_stop   final  8.49m  min  1.99m  steps 83
+
+16 failure recordings under recordings/step100k_failures/
+  ep02_8194nk5LbLH.mp4: timeout, ended 15.1m from goal (closest 11.8m)
+  ep03_8194nk5LbLH.mp4: timeout, ended 12.6m from goal (closest 11.8m)
+  ep04_EU6Fwq7SyZv.mp4: timeout, ended 5.3m from goal (closest 0.5m)
+  ep05_EU6Fwq7SyZv.mp4: timeout, ended 5.2m from goal (closest 3.0m)
+  ep06_QUCTc6BB5sX.mp4: timeout, ended 5.8m from goal (closest 1.4m)
+  ep08_TbHJrupSAjP.mp4: model_stop, ended 5.7m from goal (closest 5.7m)
+  ep09_TbHJrupSAjP.mp4: model_stop, ended 6.4m from goal (closest 5.4m)
+  ep10_X7HyMhZNoso.mp4: model_stop, ended 10.3m from goal (closest 7.9m)
+  ep11_X7HyMhZNoso.mp4: model_stop, ended 4.6m from goal (closest 4.6m)
+  ep12_Z6MFQCViBuw.mp4: model_stop, ended 21.5m from goal (closest 11.5m)
+  ep13_Z6MFQCViBuw.mp4: timeout, ended 29.3m from goal (closest 11.5m)
+  ep14_oLBMNvg9in8.mp4: timeout, ended 10.9m from goal (closest 7.7m)
+  ep15_oLBMNvg9in8.mp4: model_stop, ended 7.1m from goal (closest 7.1m)
+  ep16_pLe4wQe7qrG.mp4: model_stop, ended 5.4m from goal (closest 1.5m)
+  ep17_pLe4wQe7qrG.mp4: model_stop, ended 3.3m from goal (closest 3.3m)
+  ep21_zsNo4HB9uLZ.mp4: model_stop, ended 8.5m from goal (closest 2.0m)

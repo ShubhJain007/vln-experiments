@@ -1,0 +1,48 @@
+Loading weights:   0%|          | 0/626 [00:00<?, ?it/s]Loading weights:   0%|          | 1/626 [00:00<01:02,  9.99it/s]Loading weights:  16%|█▌        | 98/626 [00:00<00:00, 570.34it/s]Loading weights:  35%|███▌      | 221/626 [00:00<00:00, 867.45it/s]Loading weights:  54%|█████▍    | 337/626 [00:00<00:00, 981.01it/s]Loading weights: 100%|██████████| 626/626 [00:00<00:00, 1315.62it/s]
+checkpoints/pointing_fusion/step120000
+held-out val_unseen, 2500 non-STOP steps
+
+  400/2500
+  800/2500
+  1200/2500
+  1600/2500
+  2000/2500
+  2400/2500
+
+OVERALL action agreement: 0.771
+
+BY DISTANCE TO GOAL
+            bucket   steps   agree
+             0-3 m      96   0.615
+             3-5 m     795   0.789
+            5-10 m    1248   0.775
+             >10 m     361   0.762
+
+BY POSITION IN EPISODE
+            bucket   steps   agree
+             0-20%     520   0.775
+            20-40%     498   0.769
+            40-60%     507   0.753
+            60-80%     498   0.761
+           80-100%     477   0.799
+
+BY EXPERT ACTION
+            bucket   steps   agree
+               FWD    1563   0.901
+              LEFT     526   0.553
+             RIGHT     411   0.557
+
+BY INSTRUCTION LENGTH
+            bucket   steps   agree
+        short <20w     656   0.764
+        med 20-35w    1010   0.775
+         long >35w     834   0.772
+
+BY SCAN
+            bucket   steps   agree
+       2azQ1b91cZZ    2500   0.771
+
+CONFUSION (expert -> predicted)
+     FWD n= 1563: FWD=0.901  LEFT=0.032  RIGHT=0.067
+    LEFT n=  526: FWD=0.388  LEFT=0.553  RIGHT=0.059
+   RIGHT n=  411: FWD=0.428  LEFT=0.015  RIGHT=0.557

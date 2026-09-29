@@ -1,0 +1,6 @@
+=== turn threshold 3.0 deg ===
+=== turn threshold 4.0 deg ===
+=== turn threshold 5.0 deg ===
+=== turn threshold 7.5 deg ===
+=== turn threshold 10.0 deg ===
+SWEEP DONE

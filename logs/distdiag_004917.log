@@ -1,0 +1,17 @@
+######## pointing_fusion/step20000  strict thr=0.35  n=100 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.1900
+    OS    = 0.2800
+    NE    = 8.5861
+    model_stop        34  ( 34.0%)
+    timeout           66  ( 66.0%)
+  DISTANCE TO GOAL (m):
+    closest approach : mean  5.94  median  5.83  p25  2.74  min  0.12
+    final position   : mean  8.59  median  8.05
+    ever within  3.0m :  28.0%
+    ever within  5.0m :  41.0%
+    ever within 10.0m :  87.0%
+    where it STOPPED : mean  5.13  median  4.18  within 3m 38.2%
+######## pointing_full3/step20000  strict thr=0.35  n=100 ########
+  head reads layers: final only
+######## DIST DIAG DONE ########

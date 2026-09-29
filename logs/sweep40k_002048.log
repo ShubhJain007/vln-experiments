@@ -1,0 +1,28 @@
+######## step40000 strict thr=0.10 n=150 ########
+    SR    = 0.2467
+    SPL   = 0.2229
+    OS    = 0.3133
+    nDTW  = 0.3454
+    NE    = 7.0973
+    model_stop        94  ( 62.7%)
+    timeout           56  ( 37.3%)
+  p(stop) over 10,015 steps: mean 0.0125  p95 0.0577  max 0.1755
+######## step40000 strict thr=0.20 n=150 ########
+    SR    = 0.1800
+    SPL   = 0.1344
+    OS    = 0.4133
+    nDTW  = 0.2017
+    NE    = 7.9165
+    model_stop        26  ( 17.3%)
+    timeout          124  ( 82.7%)
+  p(stop) over 13,760 steps: mean 0.0215  p95 0.1015  max 0.2889
+######## step40000 strict thr=0.35 n=150 ########
+    SR    = 0.1067
+    SPL   = 0.0581
+    OS    = 0.4333
+    nDTW  = 0.1365
+    NE    = 8.1312
+    model_stop         0  (  0.0%)
+    timeout          150  (100.0%)
+  p(stop) over 15,000 steps: mean 0.0249  p95 0.1170  max 0.3197
+######## SWEEP40K DONE ########

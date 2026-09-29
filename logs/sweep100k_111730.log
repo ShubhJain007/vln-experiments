@@ -1,0 +1,28 @@
+######## step100000 strict thr=0.05 n=150 ########
+    SR    = 0.1600
+    SPL   = 0.1532
+    OS    = 0.1933
+    nDTW  = 0.4368
+    NE    = 7.0065
+    model_stop       137  ( 91.3%)
+    timeout           13  (  8.7%)
+  p(stop) over 6,130 steps: mean 0.0075  p95 0.0366  max 0.1587
+######## step100000 strict thr=0.10 n=150 ########
+    SR    = 0.2267
+    SPL   = 0.2059
+    OS    = 0.3067
+    nDTW  = 0.3947
+    NE    = 7.0768
+    model_stop       108  ( 72.0%)
+    timeout           42  ( 28.0%)
+  p(stop) over 8,735 steps: mean 0.0129  p95 0.0615  max 0.2240
+######## step100000 strict thr=0.20 n=150 ########
+    SR    = 0.2133
+    SPL   = 0.1863
+    OS    = 0.4333
+    nDTW  = 0.2646
+    NE    = 7.8095
+    model_stop        46  ( 30.7%)
+    timeout          104  ( 69.3%)
+  p(stop) over 12,602 steps: mean 0.0217  p95 0.0998  max 0.3495
+######## SWEEP100K DONE ########

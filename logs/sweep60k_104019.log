@@ -1,0 +1,46 @@
+######## fusion/step60000 strict thr=0.20 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.3000
+    SPL   = 0.2427
+    OS    = 0.4800
+    nDTW  = 0.2781
+    NE    = 7.1283
+    model_stop        41  ( 27.3%)
+    timeout          109  ( 72.7%)
+    closest approach : mean  4.03  median  3.28  p25  0.96  min  0.04
+    final position   : mean  7.13  median  6.49
+    ever within  3.0m :  48.0%
+    ever within  5.0m :  62.7%
+    ever within 10.0m :  97.3%
+    where it STOPPED : mean  3.71  median  2.53  within 3m 58.5%
+######## fusion/step60000 strict thr=0.35 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.2467
+    SPL   = 0.1734
+    OS    = 0.5000
+    nDTW  = 0.1957
+    NE    = 7.4983
+    model_stop         6  (  4.0%)
+    timeout          144  ( 96.0%)
+    closest approach : mean  3.89  median  3.08  p25  0.60  min  0.04
+    final position   : mean  7.50  median  6.89
+    ever within  3.0m :  50.0%
+    ever within  5.0m :  62.7%
+    ever within 10.0m :  97.3%
+    where it STOPPED : mean  1.32  median  1.07  within 3m 100.0%
+######## fusion/step60000 strict thr=0.50 n=150 ########
+  head reads layers: (23, 26, 28)
+    SR    = 0.2333
+    SPL   = 0.1517
+    OS    = 0.5000
+    nDTW  = 0.1775
+    NE    = 7.5995
+    model_stop         1  (  0.7%)
+    timeout          149  ( 99.3%)
+    closest approach : mean  3.86  median  3.08  p25  0.50  min  0.04
+    final position   : mean  7.60  median  7.03
+    ever within  3.0m :  50.0%
+    ever within  5.0m :  62.7%
+    ever within 10.0m :  97.3%
+    where it STOPPED : mean  1.32  median  1.32  within 3m 100.0%
+######## SWEEP60K DONE ########

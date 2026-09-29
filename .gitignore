@@ -1,0 +1,17 @@
+# Data, weights and generated media stay local (see README "Data and checkpoints")
+data/
+checkpoints/
+recordings/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.npz
+*.mp4
+*.mov
+# third-party papers (linked in README instead)
+docs/*.pdf
+# caches and stray pip artefacts
+__pycache__/
+.pytest_cache/
+=*
