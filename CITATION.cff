@@ -1,0 +1,85 @@
+cff-version: 1.2.0
+message: "If you use this code, results or media, please cite the report below and the works it builds on (docs/REFERENCES.md)."
+title: "Four Ways to Navigate: An Empirical Study of Vision-and-Language Navigation Policies on a Single GPU"
+type: software
+authors:
+  - family-names: Jain
+    given-names: Shubh
+repository-code: "https://github.com/ShubhJain007/vln-four-ways"
+date-released: 2026-09-29
+keywords:
+  - vision-and-language navigation
+  - R2R-CE
+  - habitat
+  - embodied AI
+  - LatentPilot
+preferred-citation:
+  type: report
+  title: "Four Ways to Navigate: An Empirical Study of Vision-and-Language Navigation Policies on a Single GPU"
+  authors:
+    - family-names: Jain
+      given-names: Shubh
+  year: 2026
+  month: 9
+  url: "https://github.com/ShubhJain007/vln-four-ways/blob/main/paper/main.pdf"
+references:
+  - type: article
+    title: "LatentPilot: Scene-Aware Vision-and-Language Navigation by Dreaming Ahead with Latent Visual Reasoning"
+    authors:
+      - family-names: Hao
+        given-names: Haihong
+      - name: "et al."
+    year: 2026
+    url: "https://arxiv.org/abs/2603.29165"
+  - type: article
+    title: "Robostral Navigate"
+    authors:
+      - family-names: Bounhar
+        given-names: Abdelaziz
+      - name: "et al."
+    year: 2026
+    url: "https://arxiv.org/abs/2607.20785"
+  - type: article
+    title: "Beyond the Nav-Graph: Vision-and-Language Navigation in Continuous Environments"
+    authors:
+      - family-names: Krantz
+        given-names: Jacob
+      - name: "et al."
+    year: 2020
+    url: "https://arxiv.org/abs/2004.02857"
+  - type: article
+    title: "Vision-and-Language Navigation: Interpreting visually-grounded navigation instructions in real environments"
+    authors:
+      - family-names: Anderson
+        given-names: Peter
+      - name: "et al."
+    year: 2018
+    url: "https://arxiv.org/abs/1711.07280"
+  - type: article
+    title: "Matterport3D: Learning from RGB-D Data in Indoor Environments"
+    authors:
+      - family-names: Chang
+        given-names: Angel
+      - name: "et al."
+    year: 2017
+    url: "https://arxiv.org/abs/1709.06158"
+  - type: article
+    title: "Habitat: A Platform for Embodied AI Research"
+    authors:
+      - family-names: Savva
+        given-names: Manolis
+      - name: "et al."
+    year: 2019
+    url: "https://arxiv.org/abs/1904.01201"
+  - type: software
+    title: "Cosmos-Reason2-2B"
+    authors:
+      - name: NVIDIA
+    year: 2025
+    url: "https://huggingface.co/nvidia/Cosmos-Reason2-2B"
+  - type: software
+    title: "Cosmos3-Edge"
+    authors:
+      - name: NVIDIA
+    year: 2026
+    url: "https://huggingface.co/nvidia/Cosmos3-Edge"

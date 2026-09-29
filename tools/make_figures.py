@@ -13,6 +13,7 @@ Figures
   fig_layer_probe.png    STOP linear-probe AUC per backbone layer (logs/layerprobe_154820.log)
   fig_edge_guidance.png  Cosmos3-Edge action model, zero-shot: guidance vs turn-sign / instruction following
   fig_reasoner_zeroshot.png  Cosmos3-Edge reasoner, zero-shot: predicted waypoints on the probe frames
+  fig_qualitative.png    Frames from the demo videos in media/ (LatentPilot, pointing, reasoner)
 """
 import json
 import pathlib
@@ -315,6 +316,44 @@ def fig_reasoner_zeroshot():
     fig.savefig(OUT / "fig_reasoner_zeroshot.png", dpi=160)
 
 
+def frame(src, t=None, last=False):
+    """One frame of a published demo video, via ffmpeg (seconds from start, or the last frame)."""
+    import subprocess
+    import tempfile
+    out = pathlib.Path(tempfile.mkdtemp()) / "f.png"
+    seek = ["-sseof", "-0.3"] if last else ["-ss", str(t)]
+    subprocess.run(["ffmpeg", "-v", "error", "-y", *seek, "-i", str(ROOT / src), "-frames:v", "1", str(out)], check=True)
+    return plt.imread(out)
+
+
+def fig_qualitative():
+    """Rollout frames from media/: LatentPilot comparison, pointing failures, reasoner decisions."""
+    top = frame("media/comparisons/ep09_x8F5xyUWy9e_expert_vs_stage1.mp4", t=14)
+    bottom = [
+        (frame("media/rollouts/step100k_failures/ep04_EU6Fwq7SyZv.mp4", t=8),
+         "(b) Pointing: 1.3 m from the goal,\np(stop) = 0.02; it never stops"),
+        (frame("media/rollouts/step100k_failures/ep16_pLe4wQe7qrG.mp4", last=True),
+         "(c) Pointing: stops 5.4 m short\n(it passed within 1.5 m)"),
+        (frame("media/previews/reasoner_2azQ1b91cZZ_traj1039_t225.gif", last=True),
+         "(d) Reasoner at the goal:\nv1 stops, v3 walks on"),
+        (frame("media/previews/reasoner_8194nk5LbLH_traj1141_t34.gif", last=True),
+         "(e) Reasoner mid-route:\nv1 turns, v3 goes straight"),
+    ]
+    fig = plt.figure(figsize=(11, 8.6))
+    g = fig.add_gridspec(2, 4, height_ratios=[1.05, 1.25], hspace=0.12, wspace=0.04)
+    a = fig.add_subplot(g[0, :])
+    a.imshow(top)
+    a.set_title("(a) LatentPilot, same episode: expert | Stage 1 step 10k (reaches 2.8 m) | Stage 1 final (never within 9 m)",
+                fontsize=9.5, fontweight="normal", color=INK)
+    a.axis("off")
+    for k, (img, cap) in enumerate(bottom):
+        b = fig.add_subplot(g[1, k])
+        b.imshow(img)
+        b.set_title(cap, fontsize=8.5, fontweight="normal", color=INK)
+        b.axis("off")
+    fig.savefig(OUT / "fig_qualitative.png", dpi=150, bbox_inches="tight")
+
+
 def main(nav_rows=None):
     OUT.mkdir(parents=True, exist_ok=True)
     fig_loss_balance()
@@ -325,6 +364,7 @@ def main(nav_rows=None):
     fig_layer_probe()
     fig_edge()
     fig_reasoner_zeroshot()
+    fig_qualitative()
     if nav_rows:
         fig_navigation(nav_rows["rows"])
     print("wrote", sorted(p.name for p in OUT.glob("*.png")))
