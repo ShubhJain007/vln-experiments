@@ -15,3 +15,5 @@ docs/*.pdf
 __pycache__/
 .pytest_cache/
 =*
+# published rollout videos (see media/README.md)
+!media/**/*.mp4

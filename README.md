@@ -65,6 +65,17 @@ Next-action probe (160 decision points on 40 trajectories, `results/probe_*.md`;
 The early v3 checkpoint beating the final one (47.5 vs 32.5 SR) is consistent with over-fitting to the small rollout corpus;
 with n = 40 the difference is suggestive, not conclusive.
 
+### Rollout videos
+
+41 closed-loop rollouts (Stage 1 learned Pilot Token at step 10k and final; pointing-policy failure cases), with the
+instruction, distance to goal, chosen action and STOP probability overlaid: [`media/`](media/). Left: Stage 1 final.
+Right: a pointing-policy failure.
+
+<p><img src="media/previews/final_multiscene_ep00_2azQ1b91cZZ.gif" width="280"> <img src="media/previews/step100k_failures_ep02_8194nk5LbLH.gif" width="280"></p>
+
+Rendered from Matterport3D scenes: non-commercial academic use only, under the
+[Matterport3D Terms of Use](http://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf).
+
 ---
 
 ## What is in this repository
@@ -81,6 +92,7 @@ tests/          one test file per equation group (311 tests)
 results/        probe reports and run summaries
 logs/           training and evaluation logs (text)
 docs/           EQUATIONS.md (every equation, extracted once), GOTCHAS.md (silent-failure findings, environment facts)
+media/          rollout videos and previews (Matterport3D-derived, non-commercial)
 AGENTS.md       ground rules the reproduction followed
 HANDOFF.md      session-by-session state (last full update: Stage 0 / 0′)
 DECISIONS.md    every deviation from the paper, with the measurement that justified it (D1–D27)
