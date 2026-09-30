@@ -4,7 +4,7 @@
 #   A) the real R2R instruction   -- tests whether it reasons about the task
 #   B) a fixed "move forward"     -- tests control with no task knowledge
 # If B beats A, the instruction is hurting rather than helping.
-PY=/home/kneepolean/miniconda3/envs/latentpilot/bin/python
+PY=${PY:-python}            # python of the latentpilot env (environment/latentpilot.yml)
 OUT=logs/edge_ablation_$(date +%m%d_%H%M%S); mkdir -p "$OUT"
 COMMON="--limit 40 --max-steps 100 --chunk 24 --steps 20 --guidance 7.5 --stop-patience 2"
 

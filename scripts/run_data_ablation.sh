@@ -16,8 +16,8 @@
 #
 # Big gap  -> data-limited; scaling to the full 61 scans is the priority.
 # Flat     -> data is not binding at this scale; the ceiling is elsewhere.
-PY=/home/kneepolean/miniconda3/envs/latentpilot/bin/python
-cd /home/kneepolean/shubhj/latentpilot || exit 1
+PY=${PY:-python}            # python of the latentpilot env (environment/latentpilot.yml)
+cd "$(dirname "$0")/.." || exit 1
 export PYTHONPATH="" HF_HUB_OFFLINE=1
 
 while pgrep -f "train_pointing.py --steps 20000 --batch-size 8 --out checkpoints/pointing$" >/dev/null; do sleep 60; done

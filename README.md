@@ -356,6 +356,9 @@ Exact versions are pinned in [`environment/`](environment/).
 ```bash
 conda env create -f environment/latentpilot.yml
 conda env create -f environment/habitat_render.yml
+# the shell scripts read these (default: `python` on PATH)
+export PY=$(conda run -n latentpilot which python)
+export HABITAT_PYTHON=$(conda run -n habitat_render which python)
 
 PYTHONPATH="" python -m pytest tests/ -q          # 311 tests, one file per equation group
 python scripts/verify_env.py                       # backbone loads, d = 2048, N_v = 196, VRAM

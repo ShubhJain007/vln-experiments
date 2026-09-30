@@ -2,8 +2,8 @@
 # Evaluate everything trained overnight. NOTE: no grep filter on the python
 # output -- the previous runner filtered to metric lines only, which silently
 # swallowed a TypeError and made four evals look like they produced nothing.
-PY=/home/kneepolean/miniconda3/envs/latentpilot/bin/python
-cd /home/kneepolean/shubhj/latentpilot || exit 1
+PY=${PY:-python}            # python of the latentpilot env (environment/latentpilot.yml)
+cd "$(dirname "$0")/.." || exit 1
 export PYTHONPATH="" HF_HUB_OFFLINE=1
 for ck in pointing_6scan/final pointing_hist/final; do
   for mode in "--strict" ""; do

@@ -6,8 +6,8 @@
 # Kept as a SEPARATE process rather than an edit, because bash reads a script
 # incrementally -- editing the file while it runs can make it execute garbage.
 
-PY_LP=/home/kneepolean/miniconda3/envs/latentpilot/bin/python
-cd /home/kneepolean/shubhj/latentpilot || exit 1
+PY_LP=${PY:-python}         # python of the latentpilot env (environment/latentpilot.yml)
+cd "$(dirname "$0")/.." || exit 1
 export PYTHONPATH="" HF_HUB_OFFLINE=1
 
 CK=checkpoints/stage1_16scan/final

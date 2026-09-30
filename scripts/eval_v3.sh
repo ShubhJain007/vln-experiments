@@ -1,7 +1,7 @@
 #!/bin/bash
-cd /home/kneepolean/shubhj/latentpilot
+cd "$(dirname "$0")/.." || exit 1
 export PYTHONPATH="" HF_HUB_OFFLINE=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
-PY=/home/kneepolean/miniconda3/envs/latentpilot/bin/python
+PY=${PY:-python}            # python of the latentpilot env (environment/latentpilot.yml)
 for CK in final step1500; do
   $PY -u scripts/eval_cosmos_nav.py --policy direct --no-think --limit 40 \
       --adapter checkpoints/reasoner_sft_v3/$CK --arm-name v3_${CK}_direct \

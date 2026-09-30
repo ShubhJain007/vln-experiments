@@ -16,12 +16,13 @@ prompt, guidance, chunk, scale, patience -- is written into its JSON.
 import argparse
 import datetime as dt
 import json
+import os
 import pathlib
 import subprocess
 import sys
 
 _ROOT = pathlib.Path(__file__).resolve().parents[1]
-PY = "/home/kneepolean/miniconda3/envs/latentpilot/bin/python"
+PY = os.environ.get("PY", sys.executable)  # python of the latentpilot env
 
 # TWO different prompt distributions, from two different components:
 #

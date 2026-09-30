@@ -392,4 +392,4 @@ reasoner on GPU: 4.54 GB
 
 === hier_full: accuracy 0.385  parse 0.91  recall {move forward: 0.51, turn left: 0.57, turn right: 0.30, stop: 0.08}  6.5s/call ===
 
-wrote /home/kneepolean/shubhj/latentpilot/results/reasoner_nav_probe_v2.md / .json
+wrote <repo>/results/reasoner_nav_probe_v2.md / .json

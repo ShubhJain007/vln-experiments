@@ -94,4 +94,4 @@ Okay, let's break this down. The agent's task is to walk forward to the sitting 
 
 First, the current environment is a rustic interior with a wooden staircase in the center. The agent is probably near the stairs now. The next step after the stairs is the sitting area to the right. So the agent needs to move from the stairs to the right. The action here would be "turn right" to head towards the sitting area. Then, after reaching the sitting area, they need to go to the window wall. Once there, take another right into the recreation room. Finally, stop before th
 
-wrote /home/kneepolean/shubhj/latentpilot/results/reasoner_probe.md
+wrote <repo>/results/reasoner_probe.md

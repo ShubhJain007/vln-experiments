@@ -1,6 +1,6 @@
 ######## FULL collect started Thu Sep  3 00:49:51 EDT 2026 ########
 split=train  scans=61  episodes=10819
-out=/home/kneepolean/shubhj/latentpilot/data/rollouts
+out=<repo>/data/rollouts
 primitives: {'move_forward': {'amount': 0.25}, 'turn_left': {'amount': 15.0}, 'turn_right': {'amount': 15.0}}
 
 17DRP5sb8fy: 75 episodes to do (0 already done)

@@ -7,7 +7,7 @@
   TOTAL      : 72 scans (of 90 in the release)
   archive : <MP3D_HABITAT_URL, not published>
   approx  : ~15 GB download (the full MP3D release is 1.3 TB)
-  out dir : /home/kneepolean/shubhj/latentpilot/data/scene_datasets
+  out dir : <repo>/data/scene_datasets
   Scans:
     17DRP5sb8fy 1LXtFkjw3qL 1pXnuDYAj8r 29hnd4uzFmX 2azQ1b91cZZ 2n8kARJN3HM
     5LpN3gDmAk7 5q7pvUzZiYa 759xd9YjKW5 7y3sRwLe3Va 8194nk5LbLH 82sE5b5pLXE
@@ -28,10 +28,10 @@
 ******************************************************************************
   Press ENTER to continue, or CTRL-C to abort: 
 Downloading (resumable -- rerun this script if interrupted):
-  already complete: /home/kneepolean/shubhj/latentpilot/data/scene_datasets/mp3d_habitat.zip (15.0GB)
+  already complete: <repo>/data/scene_datasets/mp3d_habitat.zip (15.0GB)
 Verifying archive integrity ...
   OK: 452 entries
-Extracting into /home/kneepolean/shubhj/latentpilot/data/scene_datasets ...
+Extracting into <repo>/data/scene_datasets ...
   extracting 360 files for 72 scans ...
   25/360 files  50/360 files  75/360 files  100/360 files  125/360 files  150/360 files  175/360 files  200/360 files  225/360 files  250/360 files  275/360 files  300/360 files  325/360 files  350/360 files  360/360 files
 scan               .glb  .navmesh  path
@@ -112,5 +112,5 @@ zsNo4HB9uLZ         yes       yes  mp3d/zsNo4HB9uLZ/zsNo4HB9uLZ.glb
 72/72 scans complete
 Next step:
   conda activate habitat_render
-  python scripts/verify_habitat.py --scene /home/kneepolean/shubhj/latentpilot/data/scene_datasets/mp3d/17DRP5sb8fy/17DRP5sb8fy.glb
+  python scripts/verify_habitat.py --scene <repo>/data/scene_datasets/mp3d/17DRP5sb8fy/17DRP5sb8fy.glb
 ######## MP3D full download finished Thu Sep  3 00:30:43 EDT 2026 ########

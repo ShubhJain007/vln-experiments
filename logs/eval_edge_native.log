@@ -1,4 +1,4 @@
-flash_attn is installed but failed to import: /home/kneepolean/.local/lib/python3.10/site-packages/flash_attn_2_cuda.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c105ErrorC2ENS_14SourceLocationENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE. Falling back to native PyTorch attention.
+flash_attn is installed but failed to import: <user-local>/lib/python3.10/site-packages/flash_attn_2_cuda.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c105ErrorC2ENS_14SourceLocationENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE. Falling back to native PyTorch attention.
 Cosmos3-Edge policy  chunk=24  guidance=7.5  steps=20  scale=7.47
 split=val_unseen  episodes=40  scans=6
 

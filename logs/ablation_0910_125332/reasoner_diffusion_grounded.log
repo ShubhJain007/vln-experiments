@@ -2,7 +2,7 @@ ARM "reasoner_diffusion_grounded"  policy=diffusion_grounded  think=True  burst 
 split=val_unseen  episodes=40  scans=6
 
 Loading weights:   0%|          | 0/670 [00:00<?, ?it/s]Loading weights:  11%|█         | 71/670 [00:00<00:00, 705.16it/s]Loading weights:  23%|██▎       | 155/670 [00:00<00:00, 775.37it/s]Loading weights:  35%|███▍      | 233/670 [00:00<00:00, 634.99it/s]Loading weights: 100%|██████████| 670/670 [00:00<00:00, 1513.94it/s]
-flash_attn is installed but failed to import: /home/kneepolean/.local/lib/python3.10/site-packages/flash_attn_2_cuda.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c105ErrorC2ENS_14SourceLocationENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE. Falling back to native PyTorch attention.
+flash_attn is installed but failed to import: <user-local>/lib/python3.10/site-packages/flash_attn_2_cuda.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c105ErrorC2ENS_14SourceLocationENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE. Falling back to native PyTorch attention.
 Loading pipeline components...:   0%|          | 0/4 [00:00<?, ?it/s]Loading pipeline components...:  25%|██▌       | 1/4 [00:00<00:02,  1.23it/s]The config attributes {'backbone_type': 'cosmos3_edge_nemotron_dense', 'temporal_compression_factor': 4} were passed to Cosmos3OmniTransformer, but are not expected and will be ignored. Please verify your config.json configuration file.
 
 Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][ALoading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 113.99it/s]

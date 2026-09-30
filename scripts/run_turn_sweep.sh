@@ -5,7 +5,7 @@
 # accuracy-optimal threshold need not be the success-optimal one.
 # Full logs kept -- a previous runner grepped stdout to metric lines and
 # silently swallowed a TypeError, reporting four "completed" evals with no data.
-PY=/home/kneepolean/miniconda3/envs/latentpilot/bin/python
+PY=${PY:-python}            # python of the latentpilot env (environment/latentpilot.yml)
 CK=checkpoints/pointing_fusion/step120000
 OUT=logs/turnsweep_$(date +%m%d_%H%M%S)
 mkdir -p "$OUT"
