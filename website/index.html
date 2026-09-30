@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VLN Experiments</title>
+<meta name="description" content="An evaluation study of four approaches to Vision-and-Language Navigation on one GPU: latent reasoning (LatentPilot), pointing (Robostral-style), Cosmos3-Edge action diffusion and a Cosmos3-Edge reasoner.">
+<meta property="og:title" content="Evaluating Four Approaches to Vision-and-Language Navigation">
+<meta property="og:description" content="Offline training, zero-shot evaluation in unseen buildings: what worked, what failed, and why.">
+<meta property="og:image" content="media/previews/compare_ep09_x8F5xyUWy9e.gif">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fcfcfb; --surface: #ffffff; --ink: #0b0b0b; --ink2: #52514e; --muted: #7a7975; --line: #e4e3df;
+  --accent: #2a78d6; --accent-ink: #ffffff; --chip: #f1f0ec; --good: #1a8f63; --bad: #c4552a;
+  --probe: #fff4dc; --probe-ink: #7a5300; --roll: #e5f0fc; --roll-ink: #1d5aa3; --fig: #eceaf6; --fig-ink: #4b3f8f;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111110; --surface: #1a1a19; --ink: #ecebe7; --ink2: #b3b1ab; --muted: #8d8b85; --line: #2c2b29;
+    --accent: #5a9be6; --accent-ink: #0b0b0b; --chip: #242322; --good: #4cc491; --bad: #ee8a5f;
+    --probe: #3a2e12; --probe-ink: #f2c14e; --roll: #152a44; --roll-ink: #8cbcf2; --fig: #26223d; --fig-ink: #b9adf2;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111110; --surface: #1a1a19; --ink: #ecebe7; --ink2: #b3b1ab; --muted: #8d8b85; --line: #2c2b29;
+  --accent: #5a9be6; --accent-ink: #0b0b0b; --chip: #242322; --good: #4cc491; --bad: #ee8a5f;
+  --probe: #3a2e12; --probe-ink: #f2c14e; --roll: #152a44; --roll-ink: #8cbcf2; --fig: #26223d; --fig-ink: #b9adf2;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 Inter, system-ui, -apple-system, sans-serif; }
+main { max-width: 980px; margin: 0 auto; padding: 0 16px 64px; }
+a { color: var(--accent); }
+img { max-width: 100%; height: auto; display: block; }
+figure img { width: 100%; }
+.row figure img { width: 100%; }
+.grid4 > *, .row > * { min-width: 0; }
+header.hero { text-align: center; padding: 56px 0 24px; }
+header.hero h1 { font-size: clamp(28px, 5vw, 44px); line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.02em; }
+header.hero .sub { font-size: clamp(16px, 2.4vw, 20px); color: var(--ink2); margin: 0 0 18px; }
+.author { font-size: 18px; font-weight: 600; margin: 0; }
+.affil { color: var(--muted); margin: 2px 0 20px; font-size: 14px; }
+.buttons { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: var(--ink);
+  color: var(--bg); text-decoration: none; font-weight: 600; font-size: 14px; }
+.btn.secondary { background: var(--chip); color: var(--ink); }
+.btn svg { width: 16px; height: 16px; }
+section { margin-top: 56px; }
+h2 { font-size: 26px; margin: 0 0 12px; letter-spacing: -0.01em; }
+h3 { font-size: 19px; margin: 28px 0 8px; }
+p { margin: 0 0 12px; }
+.lead { color: var(--ink2); }
+figure { margin: 18px 0; }
+figcaption { color: var(--ink2); font-size: 14px; margin-top: 8px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+.teaser figcaption { text-align: center; }
+.tldr { font-size: 17px; }
+.grid4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 16px; }
+.approach .num { font-weight: 700; color: var(--accent); font-size: 14px; }
+.approach h4 { margin: 2px 0 6px; font-size: 16px; }
+.approach .res { font-weight: 600; margin-top: 8px; }
+.approach p { font-size: 14px; color: var(--ink2); margin: 0; }
+.tag { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; margin-right: 6px; vertical-align: middle; }
+.tag.roll { background: var(--roll); color: var(--roll-ink); }
+.tag.probe { background: var(--probe); color: var(--probe-ink); }
+.tag.fig { background: var(--fig); color: var(--fig-ink); }
+.row { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.row figure { margin: 0; }
+.howto { font-size: 14px; color: var(--ink2); border-left: 3px solid var(--line); padding: 2px 0 2px 12px; margin: 10px 0 14px; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 640px; }
+th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: left; }
+thead th { color: var(--ink2); font-weight: 600; }
+tr.best td { font-weight: 700; }
+tr.paper td { color: var(--muted); font-style: italic; }
+td.nm { color: var(--muted); }
+.note { font-size: 13px; color: var(--muted); margin-top: 8px; }
+ol.findings { padding-left: 20px; }
+ol.findings li { margin-bottom: 10px; }
+pre { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; overflow-x: auto;
+  font: 13px/1.5 "JetBrains Mono", ui-monospace, monospace; position: relative; }
+.copy { position: absolute; top: 8px; right: 8px; font: 600 12px Inter, sans-serif; background: var(--chip); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.fail { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--bad); border-radius: 10px; padding: 14px 16px; margin: 14px 0; }
+.fail h4 { margin: 0 0 6px; font-size: 15px; }
+.fail p, .fail li { font-size: 14.5px; }
+.why { font-size: 14.5px; color: var(--ink2); }
+table.plain { min-width: 0; }
+table.plain th, table.plain td { text-align: center; white-space: normal; }
+table.plain td:first-child, table.plain th:first-child { text-align: left; }
+table.plain img { margin: 0 auto 4px; }
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.themebtn { position: fixed; top: 12px; right: 12px; background: var(--chip); color: var(--ink); border: 1px solid var(--line);
+  border-radius: 999px; padding: 6px 12px; font: 600 12px Inter, sans-serif; cursor: pointer; }
+@media (max-width: 600px) { header.hero { padding-top: 48px; } section { margin-top: 40px; } }
+</style>
+</head>
+<body>
+<button class="themebtn" id="themebtn" aria-label="Toggle colour theme">◐ theme</button>
+<main>
+
+<header class="hero">
+  <h1>Evaluating Four Approaches to Vision-and-Language Navigation</h1>
+  <p class="sub">An experimental study on a single GPU: offline training, zero-shot evaluation in unseen buildings</p>
+  <p class="author">Shubh Jain</p>
+  <p class="affil">September 2026 · technical report · an evaluation study, not a new method</p>
+  <div class="buttons">
+    <a class="btn" href="paper.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Report (PDF)</a>
+    <a class="btn" href="https://github.com/ShubhJain007/vln-experiments"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.550-.29-5.24-1.28-5.24-5.690 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+    <a class="btn secondary" href="https://github.com/ShubhJain007/vln-experiments/tree/main/model_cards">Model cards</a>
+    <a class="btn secondary" href="#demos">Demos</a>
+    <a class="btn secondary" href="#bibtex">BibTeX</a>
+  </div>
+</header>
+
+<figure class="teaser">
+  <img src="media/previews/compare_ep09_x8F5xyUWy9e.gif" alt="Side-by-side rollout: expert, LatentPilot at step 10k, LatentPilot final" loading="eager">
+  <figcaption>The same unseen episode, three agents driving: the expert, LatentPilot after 10k training steps (reaches
+  2.8&nbsp;m from the goal), and fully trained LatentPilot (never closer than 9.2&nbsp;m).</figcaption>
+</figure>
+
+<section>
+  <h2>What this is</h2>
+  <p class="tldr">We took four recent ideas for turning a pretrained vision-language or video model into a robot that
+  follows spoken route instructions (R2R-CE, Habitat). We built each one on a single 16&nbsp;GB GPU and measured how
+  well it navigates in buildings it has never seen. Every trained model gets <strong>one round of offline imitation
+  learning</strong> and is then evaluated <strong>zero-shot</strong>. There is no data flywheel, no RL fine-tuning and
+  no on-policy data, so the numbers show each idea's <em>raw</em> capability, not its full recipe.</p>
+
+  <div class="grid4">
+    <div class="card approach"><div class="num">①</div><h4>Latent reasoning</h4>
+      <p>LatentPilot, reimplemented. The model "thinks" in one latent token per step: fewer tokens, faster, native
+      visual reasoning.</p>
+      <div class="res">OS 10.7 % <span class="note">(control 17.3 %)</span></div></div>
+    <div class="card approach"><div class="num">②</div><h4>Pointing + controller</h4>
+      <p>Inspired by Mistral AI's Robostral Navigate: point at the next waypoint in the image. No RL.</p>
+      <div class="res">SR 22.7 % <span class="note">(OS 42.7 %)</span></div></div>
+    <div class="card approach"><div class="num">③</div><h4>Video diffusion actions</h4>
+      <p>NVIDIA Cosmos3-Edge's action stream, used zero-shot to sample ego-motion from video.</p>
+      <div class="res">OS 7.5 %</div></div>
+    <div class="card approach"><div class="num">④</div><h4>Video reasoner policy</h4>
+      <p>The Cosmos3-Edge reasoner, fine-tuned to answer "what next?" from its own recent video.</p>
+      <div class="res">OS 47.5 % <span class="note">(no correct stops)</span></div></div>
+  </div>
+  <p class="note">SR: stopped within 3&nbsp;m of the goal by its own decision. OS: came within 3&nbsp;m at some point.
+  Across all four approaches, <strong>stopping, not reaching, is the bottleneck</strong>.</p>
+</section>
+
+<section>
+  <h2>The four architectures</h2>
+  <figure class="card">
+    <img src="assets/architectures.png" alt="Diagrams of the four architectures" loading="lazy">
+    <figcaption>All four share the task interface: 448×448 RGB, an English instruction, and the actions FORWARD
+    0.25&nbsp;m, LEFT/RIGHT 15° and STOP, with at most 100 steps.</figcaption>
+  </figure>
+</section>
+
+<section id="demos">
+  <h2>Demos, and what failed</h2>
+  <p><span class="tag roll">closed-loop rollout</span>the model drives.
+  <span class="tag probe">decision probe</span>the model answers one question and does not drive.
+  <span class="tag fig">figure</span>a measurement; no video was recorded.</p>
+
+  <h3>① Latent reasoning (LatentPilot) <span class="tag roll">closed-loop rollout</span></h3>
+  <p class="why"><strong>Why try it:</strong> a model that reasons in latent tokens instead of words or extra frames
+  would need fewer tokens, run faster, and reason visually. LatentPilot's single Pilot Token predicts the next-but-one
+  frame and is fed back as memory. <strong>Not run:</strong> the paper's data flywheel and Stage 2 (scheduled
+  sampling). We evaluate Stage 1 as is.</p>
+  <p class="howto">Left: the expert. Middle: LatentPilot after 10k steps. Right: the fully trained LatentPilot. The
+  yellow line is the live distance to the goal.</p>
+  <figure><img src="media/previews/compare_ep00_2azQ1b91cZZ.gif" alt="LatentPilot comparison" loading="lazy">
+    <figcaption>Step 10k gets within 3.4&nbsp;m of the goal; the final model's closest point is 6.4&nbsp;m.
+    <a href="https://github.com/ShubhJain007/vln-experiments/tree/main/media/comparisons">All 11 scenes</a>.</figcaption></figure>
+  <div class="fail"><h4>What failed: the fully trained model wanders and almost never stops (OS 10.7 % vs 17.3 % for the control)</h4>
+    <p><strong>Most plausible cause: the training shortcut.</strong> During training the Pilot slot holds the
+    <em>true</em> embedding of the next frame, which reveals the action just taken. Training accuracy jumps from 78 %
+    without a slot to 98 % with one (92 % vs 78 % at matched steps), so the model learns to read the action off the
+    slot. At test time the slot holds its own prediction and the shortcut is gone. Predicting the future 2.25× better
+    did not help. Loss-balance drift contributes, but an adaptive λ that removed it did not recover navigation. The
+    flywheel and scheduled sampling, which were not run, are what would close this gap.</p></div>
+  <figure class="card"><img src="figures/fig_lp_failure.png" alt="LatentPilot failure evidence" loading="lazy"></figure>
+
+  <h3>② Pointing + controller <span class="tag roll">closed-loop rollout</span></h3>
+  <p class="why"><strong>Why try it:</strong> <a href="https://arxiv.org/abs/2607.20785">Robostral Navigate</a> by
+  Mistral AI points at the next waypoint in the image, turning navigation into grounding. Their 8&nbsp;B model is
+  trained on 2.4&nbsp;M trajectories and then with online RL, reaching 77.4&nbsp;%. <strong>We test the raw idea:</strong>
+  2&nbsp;B, 61 buildings, supervised only, <strong>no RL</strong>, and a simple geometric controller.</p>
+  <p class="howto">The <strong>cyan cross-hair</strong> is where the model aims, and the controller turns toward it.
+  Green is the expert's next waypoint. <code>p(stop)</code> is its STOP probability, and a red border marks a failure.</p>
+  <div class="row">
+    <figure><img src="media/previews/step100k_failures_ep02_8194nk5LbLH.gif" alt="Never approaches" loading="lazy"><figcaption>Never approaches the goal (an early turn is missed).</figcaption></figure>
+    <figure><img src="media/previews/step100k_failures_ep04_EU6Fwq7SyZv.gif" alt="Never stops" loading="lazy"><figcaption>Passes within 0.5&nbsp;m; never stops.</figcaption></figure>
+    <figure><img src="media/previews/step100k_failures_ep16_pLe4wQe7qrG.gif" alt="Stops short" loading="lazy"><figcaption>Passes 1.5&nbsp;m away, then stops 5.4&nbsp;m short.</figcaption></figure>
+  </div>
+  <div class="fail"><h4>What failed: under-turning, weak STOP, no recovery</h4>
+    <p>Of 150 episodes, 22.7 % stop at the goal, 8.7 % run out of steps near it, 23.3 % stop in the wrong place, and
+    45.3 % run out of steps far away.</p>
+    <ol>
+      <li><strong>Under-turning.</strong> When the expert turns, the model predicts FORWARD 39–43 % of the time. Its
+      predicted bearing is 0.42× the true bearing: a regression head hedges toward "straight".</li>
+      <li><strong>Weak STOP.</strong> STOP is 2.5 % of labels, and the signal sits mid-network (layer 15 AUC 0.72,
+      output 0.44). Only 49 % of its stops land within 3&nbsp;m.</li>
+      <li><strong>No recovery.</strong> Imitation only sees expert states. Robostral's RL phase teaches recovery; it was
+      not run.</li>
+    </ol></div>
+  <div class="row">
+    <figure class="card"><img src="figures/fig_pointing_failure.png" alt="Pointing failure breakdown" loading="lazy"></figure>
+    <figure class="card"><img src="figures/fig_bearing.png" alt="Bearing shrinkage" loading="lazy"></figure>
+  </div>
+
+  <h3>③ Cosmos3-Edge action model <span class="tag fig">figure</span></h3>
+  <p class="why"><strong>Why try it:</strong> a video world model's action head already knows how cameras move. Used
+  <strong>zero-shot</strong>, with no training.</p>
+  <p class="howto">Left: how often "turn left/right" turns the right way as guidance rises. Right: with full
+  instructions, blue uses the right instruction and orange uses another episode's.</p>
+  <figure class="card"><img src="figures/fig_edge_guidance.png" alt="Edge guidance figure" loading="lazy"></figure>
+  <div class="fail"><h4>What failed: it ignores the instruction and stalls (OS 7.5 %)</h4>
+    <p>At normal guidance, the right and wrong instructions score about the same (59 % vs 53 %). It was pretrained on
+    short motion captions, not multi-sentence routes, and a fixed "The camera moves forward." prompt did as well
+    (15 %). The motion prior is real (yaw correlation 0.84–0.99), but many sampled chunks contain too little motion to
+    become a single step. Two such chunks in a row end the episode, which happened in 75 % of episodes.</p></div>
+
+  <h3>④ Cosmos3-Edge reasoner <span class="tag probe">decision probe</span></h3>
+  <p class="why"><strong>Why try it:</strong> a physical-reasoning VLM that sees how the view changed over the last few
+  seconds might decide "what next?" better than a classifier. Zero-shot it answered as a bystander ("A person enters
+  the room…"), so it was fine-tuned on expert decisions.</p>
+  <p class="howto">Each clip shows <strong>one</strong> model. It plays exactly the video that model receives at one
+  moment of an <strong>expert's</strong> walk, then shows what the expert did and that model's answer.
+  <strong>SFT v1</strong>: turn- and stop-heavy data (25 % STOP labels), ~1&nbsp;s of video. <strong>SFT v3</strong>:
+  uniform data (5 % STOP), 8&nbsp;s of video. A v2 run was stopped early and never evaluated.</p>
+  <div class="tablewrap"><table class="plain">
+    <thead><tr><th></th><th>SFT v1</th><th>SFT v3</th></tr></thead>
+    <tbody>
+      <tr><td style="white-space:normal">Case A: at the goal. The expert <strong>stops</strong>.</td>
+        <td><img src="media/previews/reasoner_v1_2azQ1b91cZZ_t225.gif" alt="v1 case A" loading="lazy" style="width:260px">v1: stop ✓</td>
+        <td><img src="media/previews/reasoner_v3_2azQ1b91cZZ_t225.gif" alt="v3 case A" loading="lazy" style="width:260px">v3: move forward ✗</td></tr>
+      <tr><td style="white-space:normal">Case B: mid-route. The expert goes <strong>forward</strong>.</td>
+        <td><img src="media/previews/reasoner_v1_8194nk5LbLH_t34.gif" alt="v1 case B" loading="lazy" style="width:260px">v1: turn left ✗</td>
+        <td><img src="media/previews/reasoner_v3_8194nk5LbLH_t34.gif" alt="v3 case B" loading="lazy" style="width:260px">v3: move forward ✓</td></tr>
+    </tbody></table></div>
+  <div class="fail"><h4>What failed: v3 reaches the goal region most often (47.5 %) but never stops there; v1 stops constantly</h4>
+    <p><strong>Most plausible cause: each version copies its training label mix.</strong> v1 trained on 25 % STOP and
+    ends 65 % of episodes by stopping in the wrong place. v3 trained on 5 % STOP and rarely stops. Stopping also
+    requires knowing how much of the instruction is done, which 8&nbsp;s of video cannot show. With no closed-loop
+    training, it never practised recovering. Offline accuracy (63–68 %) did not predict closed-loop success.</p></div>
+  <figure class="card"><img src="figures/fig_reasoner_failure.png" alt="Reasoner failure breakdown" loading="lazy"></figure>
+</section>
+
+<section>
+  <h2>Results</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Approach</th><th>Variant</th><th>n</th><th>SR</th><th>end-SR</th><th>OS</th><th>nDTW</th><th>NE (m)</th></tr></thead>
+    <tbody>
+      <tr><td>① Latent reasoning</td><td>Stage 1, learned G<sub>ψ</sub></td><td>150</td><td class="nm">n/m</td><td class="nm">n/m</td><td>10.7</td><td>0.277</td><td>8.50</td></tr>
+      <tr><td>① Latent reasoning</td><td>identity G<sub>ψ</sub> (control)</td><td>150</td><td class="nm">n/m</td><td class="nm">n/m</td><td>17.3</td><td>0.268</td><td>8.17</td></tr>
+      <tr><td>② Pointing</td><td>16 scans, final layer</td><td>150</td><td class="nm">n/r</td><td>13.3</td><td>14.0</td><td>0.350</td><td>7.34</td></tr>
+      <tr><td>② Pointing</td><td>+ history, 61 scans</td><td>150</td><td class="nm">n/r</td><td>18.0</td><td>22.7</td><td>0.394</td><td>6.55</td></tr>
+      <tr><td>② Pointing</td><td>+ longer schedule</td><td>150</td><td class="nm">n/r</td><td>24.7</td><td>31.3</td><td>0.345</td><td>7.10</td></tr>
+      <tr class="best"><td>② Pointing</td><td>+ layer fusion</td><td>150</td><td>22.7</td><td>31.3</td><td>42.7</td><td>0.323</td><td>7.22</td></tr>
+      <tr><td>③ Edge action</td><td>zero-shot, CFG 7.5</td><td>40</td><td class="nm">n/m</td><td class="nm">n/m</td><td>7.5</td><td>0.276</td><td>8.81</td></tr>
+      <tr><td>④ Edge reasoner</td><td>SFT v1</td><td>40</td><td class="nm">n/m</td><td class="nm">n/m</td><td>17.5</td><td>0.365</td><td>7.41</td></tr>
+      <tr class="best"><td>④ Edge reasoner</td><td>SFT v3, step 1,500</td><td>40</td><td class="nm">n/m</td><td class="nm">n/m</td><td>47.5</td><td>0.389</td><td>6.41</td></tr>
+      <tr class="paper"><td>LatentPilot paper</td><td>7B, full split, flywheel</td><td>1,839</td><td>51.7–54.0</td><td>–</td><td>57.0</td><td>–</td><td>5.3</td></tr>
+      <tr class="paper"><td>Robostral Navigate</td><td>8B, SFT + RL</td><td>1,839</td><td>77.4</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">R2R-CE <code>val_unseen</code>. SR: the agent's own STOP within 3&nbsp;m (standard). end-SR: the episode
+  ended within 3&nbsp;m, including by running out of steps. OS: came within 3&nbsp;m. n/m: not measured, because the
+  evaluation ended on arrival. n/r: not recoverable from the logs. Thresholds were tuned on this split. n = 40 gives
+  roughly ±15 points.</p>
+  <figure class="card"><img src="figures/fig_navigation.png" alt="All metrics for every policy" loading="lazy"></figure>
+</section>
+
+<section>
+  <h2>Key findings</h2>
+  <ol class="findings">
+    <li><strong>Training on privileged future frames can teach a shortcut.</strong> LatentPilot's Stage 1 fits its
+    training data by reading the next frame from the Pilot slot, and the shortcut is gone at test time.</li>
+    <li><strong>Stopping, not reaching, is the bottleneck.</strong> The best pointing model came within 3&nbsp;m in
+    42.7 % of episodes but stopped there in 22.7 %. The reasoner reached the goal region in 47.5 % and stopped there
+    in none.</li>
+    <li><strong>Offline probes picked the wrong model twice.</strong> Rank policies closed-loop.</li>
+    <li><strong>STOP lives mid-network</strong>: AUC 0.72 at layer 15, 0.44 at the output layer.</li>
+    <li><strong>Data first.</strong> 6 → 16 buildings tripled the pointing policy's success, and fixing three label bugs
+    took label/expert agreement from 0.69 to 0.97.</li>
+  </ol>
+</section>
+
+<section id="bibtex">
+  <h2>BibTeX</h2>
+<pre id="bib"><button class="copy" id="copybtn">Copy</button>@techreport{jain2026vlnexperiments,
+  title       = {Evaluating Four Approaches to Vision-and-Language Navigation:
+                 An Experimental Study on a Single GPU},
+  author      = {Jain, Shubh},
+  year        = {2026},
+  institution = {GitHub},
+  url         = {https://github.com/ShubhJain007/vln-experiments}
+}</pre>
+  <p class="note">This study evaluates LatentPilot (<a href="https://arxiv.org/abs/2603.29165">arXiv:2603.29165</a>) and
+  ideas from Robostral Navigate by Mistral AI (<a href="https://arxiv.org/abs/2607.20785">arXiv:2607.20785</a>) and
+  NVIDIA Cosmos. All 53 references are in
+  <a href="https://github.com/ShubhJain007/vln-experiments/blob/main/docs/REFERENCES.md">REFERENCES.md</a>.</p>
+</section>
+
+<footer>
+  Code: MIT licence. Report text: CC BY 4.0. All rollout imagery is rendered from Matterport3D and may be used only for
+  non-commercial academic purposes, under the <a href="http://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf">Matterport3D
+  Terms of Use</a>. Base models keep their NVIDIA licences.
+</footer>
+</main>
+<script>
+(function () {
+  var root = document.documentElement, key = "vln-theme";
+  try { var saved = localStorage.getItem(key); if (saved) root.setAttribute("data-theme", saved); } catch (e) {}
+  document.getElementById("themebtn").addEventListener("click", function () {
+    var dark = root.getAttribute("data-theme") === "dark" ||
+      (!root.getAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var next = dark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem(key, next); } catch (e) {}
+  });
+  document.getElementById("copybtn").addEventListener("click", function () {
+    var text = document.getElementById("bib").innerText.replace(/^Copy\s*/, "");
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () {
+      var b = document.getElementById("copybtn"); b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1500);
+    });
+  });
+})();
+</script>
+</body>
+</html>

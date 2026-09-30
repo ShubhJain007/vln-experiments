@@ -82,10 +82,16 @@ def clean(text):
     return " ".join(text.translate({ord(c): None for c in "',;:[]%\\"}).split())
 
 
-def reasoner_decision(scan, traj, t, out, width=480, ctx=120, hold=5.0):
+# name, one-line description, context the version was trained and evaluated with (source frames at 15 fps)
+VERSIONS = {"v1": ("SFT v1", "first fine-tune: turn/stop-heavy data, ~1 s of video", 16),
+            "v3": ("SFT v3", "final fine-tune: uniform data, 8 s of video", 120)}
+
+
+def reasoner_decision(scan, traj, t, out, version, width=420, hold=5.0):
     """A decision probe, NOT a closed-loop rollout. Part 1 plays the reasoner's input: the last 8 s of the rendered expert
     walk up to decision frame t (the model sees 8 of these frames, 1 per second). Part 2 freezes on frame t and shows
-    the question, the expert's action and what each fine-tuned reasoner answered (results/probe_*_final.json)."""
+    the question, the expert's action and what ONE fine-tuned version (`version`: v1 or v3) answered
+    (results/probe_*_final.json). One GIF per version, so each clip shows exactly one model."""
     import tempfile
     preds = {}
     for name, f in (("v1", "probe_sft_final.json"), ("v3", "probe_v3_final.json")):
@@ -109,31 +115,27 @@ def reasoner_decision(scan, traj, t, out, width=480, ctx=120, hold=5.0):
     frame_y = top
     instr = txt(10, frame_y + width + 8, "Instruction:", 13, "0xbbbbbb", True) + "".join(
         txt(10, frame_y + width + 26 + 17 * k, l, 13) for k, l in enumerate(lines))
-    lo = max(0, t - ctx + 1)
+    lo = max(0, t - VERSIONS[version][2] + 1)
     secs = (t - lo + 1) / 15.0
     part1 = (f"[0]trim=start_frame={lo}:end_frame={t + 1},setpts=PTS-STARTPTS,fps=6,scale={width}:{width},"
              f"pad={width}:{H}:0:{top}:black"
-             + txt(10, 8, "DECISION PROBE  -  not a rollout", 17, "0xf2c14e", True)
-             + txt(10, 31, f"Playing the {secs:.0f} s of camera view the reasoner receives as input", 13)
+             + txt(10, 8, f"{VERSIONS[version][0]}  |  decision probe, not a rollout", 17, "0xf2c14e", True)
+             + txt(10, 31, f"The last {secs:.1f} s of an expert's walk: this model's whole input", 13)
              + instr + "[a]")
-    ok = {k: preds[k] == preds["expert"] for k in ("v1", "v3")}
-    y0 = frame_y + 70
+    ok = preds[version] == preds["expert"]
+    y0 = frame_y + 80
     card = (f",drawbox=x=0:y={frame_y}:w={width}:h={width}:color=black@0.72:t=fill"
-            + txt(24, y0, "DECISION POINT", 20, "0xf2c14e", True)
-            + txt(24, y0 + 30, "What should the robot do now?", 15)
-            + txt(24, y0 + 80, "Expert (ground truth)", 14, "0xbbbbbb")
-            + txt(24, y0 + 100, preds["expert"].upper(), 22, "white", True)
-            + txt(24, y0 + 150, "SFT v1 answered", 14, "0xbbbbbb")
-            + txt(24, y0 + 170, preds["v1"].upper() + ("   ✓ correct" if ok["v1"] else "   ✗ wrong"), 22,
-                  "0x7ee2b8" if ok["v1"] else "0xff8a65", True)
-            + txt(24, y0 + 220, "SFT v3 answered", 14, "0xbbbbbb")
-            + txt(24, y0 + 240, preds["v3"].upper() + ("   ✓ correct" if ok["v3"] else "   ✗ wrong"), 22,
-                  "0x7ee2b8" if ok["v3"] else "0xff8a65", True)
-            + txt(24, y0 + 300, "v1 = first fine-tune: onset-balanced data, ~1 s of video", 12, "0xbbbbbb")
-            + txt(24, y0 + 318, "v3 = final fine-tune: uniform data, 8 s of video", 12, "0xbbbbbb"))
+            + txt(22, y0, "DECISION POINT", 20, "0xf2c14e", True)
+            + txt(22, y0 + 30, "What should the robot do now?", 15)
+            + txt(22, y0 + 85, "The expert did", 14, "0xbbbbbb")
+            + txt(22, y0 + 105, preds["expert"].upper(), 22, "white", True)
+            + txt(22, y0 + 160, f"{VERSIONS[version][0]} answered", 14, "0xbbbbbb")
+            + txt(22, y0 + 180, preds[version].upper() + ("   ✓ correct" if ok else "   ✗ wrong"), 22,
+                  "0x7ee2b8" if ok else "0xff8a65", True)
+            + txt(22, y0 + 245, f"{VERSIONS[version][0]} = {VERSIONS[version][1]}", 12, "0xbbbbbb"))
     part2 = (f"[0]trim=start_frame={t}:end_frame={t + 1},setpts=PTS-STARTPTS,scale={width}:{width},"
-             f"loop=loop={int(hold * 6)}:size=1:start=0,fps=6,pad={width}:{H}:0:{top}:black"
-             + txt(10, 8, "DECISION PROBE  -  the models' answers", 17, "0xf2c14e", True)
+             f"loop=loop={int(hold * 6) - 1}:size=1:start=0,setpts=N/6/TB,pad={width}:{H}:0:{top}:black"
+             + txt(10, 8, f"{VERSIONS[version][0]}  |  its answer", 17, "0xf2c14e", True)
              + txt(10, 31, "Frozen at the moment the question is asked", 13)
              + instr + card + "[b]")
     graph = (part1 + ";" + part2 + ";[a][b]concat=n=2:v=1,split[c][e];[c]palettegen=max_colors=96[p];[e][p]paletteuse")
@@ -143,8 +145,9 @@ def reasoner_decision(scan, traj, t, out, width=480, ctx=120, hold=5.0):
 
 def main():
     for scan, traj, t in REASONER_CASES:
-        o = reasoner_decision(scan, traj, t, ROOT / "media" / "previews" / f"reasoner_{scan}_traj{traj}_t{t}.gif")
-        print("wrote", o.relative_to(ROOT))
+        for v in VERSIONS:
+            o = reasoner_decision(scan, traj, t, ROOT / "media" / "previews" / f"reasoner_{v}_{scan}_t{t}.gif", v)
+            print("wrote", o.relative_to(ROOT))
     out_dir = ROOT / "media" / "comparisons"
     out_dir.mkdir(parents=True, exist_ok=True)
     made = []

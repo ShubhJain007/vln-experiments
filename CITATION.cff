@@ -1,11 +1,13 @@
 cff-version: 1.2.0
 message: "If you use this code, results or media, please cite the report below and the works it builds on (docs/REFERENCES.md)."
-title: "Four Ways to Navigate: An Empirical Study of Vision-and-Language Navigation Policies on a Single GPU"
+title: "Evaluating Four Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU"
 type: software
 authors:
   - family-names: Jain
     given-names: Shubh
-repository-code: "https://github.com/ShubhJain007/vln-four-ways"
+repository-code: "https://github.com/ShubhJain007/vln-experiments"
+url: "https://shubhjain007.github.io/vln-experiments/"
+license: MIT
 date-released: 2026-09-29
 keywords:
   - vision-and-language navigation
@@ -15,13 +17,13 @@ keywords:
   - LatentPilot
 preferred-citation:
   type: report
-  title: "Four Ways to Navigate: An Empirical Study of Vision-and-Language Navigation Policies on a Single GPU"
+  title: "Evaluating Four Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU"
   authors:
     - family-names: Jain
       given-names: Shubh
   year: 2026
   month: 9
-  url: "https://github.com/ShubhJain007/vln-four-ways/blob/main/paper/main.pdf"
+  url: "https://github.com/ShubhJain007/vln-experiments/blob/main/paper/main.pdf"
 references:
   - type: article
     title: "LatentPilot: Scene-Aware Vision-and-Language Navigation by Dreaming Ahead with Latent Visual Reasoning"

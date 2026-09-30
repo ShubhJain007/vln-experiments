@@ -42,10 +42,13 @@ come from two runs with the same configuration, not one.
 | `step100k_failures_ep02_8194nk5LbLH.gif` | Pointing failure: never approaches the goal (timeout) |
 | `step100k_failures_ep04_EU6Fwq7SyZv.gif` | Pointing failure: passes within 0.5 m of the goal and never stops (timeout) |
 | `step100k_failures_ep16_pLe4wQe7qrG.gif` | Pointing failure: passes 1.5 m from the goal, then stops 5.4 m away |
-| `reasoner_2azQ1b91cZZ_traj1039_t225.gif` | Cosmos3-Edge reasoner **decision probe, not a rollout**. It plays the 8 s of an expert's walk that the reasoner receives, then freezes on an answer card. At the goal the expert stops; SFT v1 answers stop ✓, SFT v3 answers move forward ✗ |
-| `reasoner_8194nk5LbLH_traj1141_t34.gif` | The same kind of decision probe, mid-route. The expert moves forward; SFT v1 answers turn left ✗, SFT v3 answers move forward ✓ (only 2 s of input exist this early in the walk) |
+| `reasoner_v1_2azQ1b91cZZ_t225.gif` | Reasoner **SFT v1**, decision probe (not a rollout), case A at the goal: plays the ~1 s of an expert's walk that v1 receives, then its answer, stop ✓ |
+| `reasoner_v3_2azQ1b91cZZ_t225.gif` | Reasoner **SFT v3**, same moment: plays the 8 s that v3 receives, then its answer, move forward ✗ |
+| `reasoner_v1_8194nk5LbLH_t34.gif` | Reasoner **SFT v1**, case B mid-route (the expert goes forward): turn left ✗ |
+| `reasoner_v3_8194nk5LbLH_t34.gif` | Reasoner **SFT v3**, case B: move forward ✓ (only 2.3 s of walk exist before this moment) |
 
-The reasoner clips are cut from the re-rendered 15 fps expert walks (`data/video/val_unseen`, not published) at the
+Each reasoner clip shows exactly one model version and plays exactly the context that version was trained and
+evaluated with. The clips are cut from the re-rendered 15 fps expert walks (`data/video/val_unseen`, not published) at the
 decision points whose transcripts are saved in `results/probe_sft_final.json` and `results/probe_v3_final.json`. No
 closed-loop videos were recorded for the Cosmos3-Edge policies.
 

@@ -5,6 +5,11 @@ point, how it was set up, what it measured, and what was decided because of it. 
 file they come from, are in [`EXPERIMENT_LOG.md`](EXPERIMENT_LOG.md). Design decisions are numbered `D*` as in
 [`../DECISIONS.md`](../DECISIONS.md).
 
+**This is an evaluation study, not a new method.** Every trained model gets one round of offline imitation learning
+on expert demonstrations and is then evaluated zero-shot in unseen buildings. LatentPilot's data flywheel, Robostral's
+online RL fine-tuning, DAgger and any other on-policy data are **not** used. The numbers measure each idea's raw
+capability, not its full recipe.
+
 The work ran in three phases covering four architectures: Phase I is ① LatentPilot, Phase II is ② the pointing policy,
 and Phase III covers ③ the Cosmos3-Edge action (diffusion) model and ④ the Cosmos3-Edge reasoner used as a policy.
 
@@ -29,7 +34,9 @@ of size `n` takes the **first n episodes** of the split, so `n = 40` covers 6 sc
 different `n` are on different episodes and are not paired.
 
 **Metrics** (`src/eval/metrics.py`). NE is the final distance to the goal. OS (oracle success) means the agent came
-within 3 m at any point. SR means the agent *stopped* within 3 m. SPL weights SR by path efficiency. nDTW measures path
+within 3 m at any point. **SR** means the agent's own STOP was within 3 m (the standard definition). **end-SR** means
+the episode *ended* within 3 m, by STOP or at the 100-step limit. The evaluation script's "SR" field is end-SR; SR is
+recovered from the logged stopping positions where these exist. SPL weights end-SR by path efficiency. nDTW measures path
 fidelity to the reference path; both paths are resampled to 0.25 m (D13).
 
 **Two evaluation modes.** This distinction matters for every number in this document.
@@ -37,10 +44,10 @@ fidelity to the reference path; both paths are resampled to 0.25 m (D13).
 | Mode | Episode ends when | What "SR" measures | Used by |
 |---|---|---|---|
 | *diagnostic* (default) | the agent's own STOP, 100 steps, **or the agent coming within 3 m** | nothing beyond OS: SR = OS by construction | all Stage 0/0′/1, all Cosmos3-Edge and all reasoner evaluations |
-| *strict* (`--strict`) | the agent's own STOP or 100 steps | true self-stop success, comparable to the paper | pointing evaluations marked strict |
+| *strict* (`--strict`) | the agent's own STOP or 100 steps | end-SR; SR is recovered where stopping positions were logged | pointing evaluations marked strict |
 
 Diagnostic mode was built to measure whether a policy can *reach* the goal before it had learned to stop. Its SR
-column is reported here as **OS**. The only true SR numbers in this project come from the pointing policy.
+column is reported here as **OS**. The only SR numbers in this project come from the later pointing runs.
 
 **Tuning caveat.** Every STOP threshold and the turn threshold were chosen on `val_unseen`, the same split they are
 reported on. A `val_seen` set (778 episodes) was collected to fix this, but was never used. Treat the best pointing numbers
@@ -52,6 +59,11 @@ the attention projections (6.4 M trainable parameters).
 ---
 
 ## 1. Phase I: LatentPilot as specified
+
+**Why this idea.** If a VLM could reason in latent space instead of in words or extra frames, it would use far fewer
+tokens per step, run faster, and reason visually in its native embedding space. LatentPilot is a concrete version of
+this: one latent token per step is the model's only memory. **Not run here:** the paper's data flywheel (the model drives,
+an expert corrects, the model retrains) and Stage 2 scheduled sampling.
 
 LatentPilot adds a *Pilot Token* `z_t` to a VLN policy: a latent that is trained (`L_pil`) to predict the visual
 embedding two steps ahead, `v̄_{t+2}`, and is fed back into the next step, so the policy "dreams ahead". The paper trains
@@ -122,11 +134,20 @@ nDTW 0.753, NE 2.87 m). The action prior is 62–64 % FORWARD.
 
   The learned Pilot token *predicts* the future 2.25× better and *navigates* worse. At n = 30 the gap had looked like
   10 % vs 40 %; n = 150 shrank it, but the learned version still lost. The gate (D25) failed on both halves.
-- **Why: loss balance drifts** ([figure](figures/fig_loss_balance.png)). λ = 0.1 balances the two losses only at
+- **A contributing cause: the loss balance drifts** ([figure](figures/fig_loss_balance.png)). λ = 0.1 balances the two losses only at
   initialisation. `L_act` then falls ~51× and `L_pil` only ~4.8×. By step 17,400, `λ·L_pil` is 5.5× `L_act`, so most of
   the gradient goes to predicting frames rather than choosing actions.
 
   ![loss balance](figures/fig_loss_balance.png)
+
+- **The more plausible cause: a train-time shortcut** (analysed after the fact; [figure](figures/fig_lp_failure.png)).
+  The Pilot slot is teacher-forced during training with the *true* embedding of the next frame, which reveals the
+  action just taken. Training accuracy is 78 % without a slot (Stage 0), and 98 % with one (Stage 0′ and Stage 1). At
+  matched steps (7k–8k) the gap is still 78 % vs 92 %. At test time the slot holds the model's own prediction and the
+  shortcut is gone. The flywheel and Stage 2, which were not run, are the parts of the method meant to close exactly
+  this gap. The decisive check, a teacher-forced evaluation with the model's own `z_{t-1}` in the slot, was not run.
+
+  ![LatentPilot failure](figures/fig_lp_failure.png)
 
 - **Follow-up: adaptive λ (D26).** λ was recomputed every step to hold `λ·L_pil / L_act` at 0.9; everything else was the
   same. The run was stopped at step 10,750. At step 10,000 it scored OS 6.7 % (n = 150), no better, while its own STOP
@@ -140,8 +161,10 @@ nDTW 0.753, NE 2.87 m). The action prior is 62–64 % FORWARD.
 ## 2. Phase II: pointing supervision
 
 **Why pivot.** Phase I's failures were all about the *output*: a 4-way classifier with a 62 % FORWARD prior that never
-learned to stop. [Robostral Navigate](https://arxiv.org/abs/2607.20785) (§2.2) supervises a VLM to *point* at the next
-waypoint in the image and leaves motion to a controller. This keeps the backbone's grounding ability and removes the
+learned to stop. [Robostral Navigate](https://arxiv.org/abs/2607.20785) (§2.2), by Mistral AI, supervises an 8 B VLM to
+*point* at the next waypoint in the image and leaves motion to a controller. It reaches 73.4 % with supervised
+training on 2.4 M trajectories and 77.4 % after online RL. We test the raw idea: a 2 B model, supervised only, with **no
+RL fine-tuning** and a geometric controller. This keeps the backbone's grounding ability and removes the
 class prior from the learning problem (D27).
 
 **Design.** The model outputs a point `(u, v)` in the image, a visibility flag and a STOP probability. A bearing
@@ -168,7 +191,7 @@ controller turns 15° if the bearing to the point is above 7.5° and otherwise m
 
 - **Why.** "Pointing beats LatentPilot" compared 4,203 episodes against 1,665, a confound.
 - **Setup.** The same run restricted to the 6 LatentPilot scans (identical steps, seed and schedule).
-- **Result.** Strict SR fell to **4.0 %** from 13.3 %, even though its training loss was *lower* (0.076 vs 0.396). It
+- **Result.** end-SR fell to **4.0 %** from 13.3 %, even though its training loss was *lower* (0.076 vs 0.396). It
   overfit.
 - **Conclusion.** Data was the binding constraint. The next step was the full 61-scan training corpus (10,819 episodes).
 
@@ -178,12 +201,12 @@ controller turns 15° if the bearing to the point is above 7.5° and otherwise m
   ahead".
 - **Setup.** K = 2 history frames on the full 61 scans, 7 h (0.35 epoch). The run used stride 1 instead of the intended
   8, because of a launcher bug found afterwards.
-- **Result.** Strict SR **18.0 %**, OS 22.7 % (n = 150). This is not a clean ablation, because the data grew at the same
+- **Result.** end-SR **18.0 %**, OS 22.7 % (n = 150). This is not a clean ablation, because the data grew at the same
   time.
 
 ### 2.5 Long run, and what the policy actually uses (`pointing_full3`)
 
-- 3-epoch schedule with K = 2 at stride 8, stopped at step 131k (1.2 epochs). The best strict SR was **24.7 %** (step 40k,
+- 3-epoch schedule with K = 2 at stride 8, stopped at step 131k (1.2 epochs). The best end-SR was **24.7 %** (step 40k,
   threshold 0.10).
 - **Does it read the instruction?** (teacher-forced, 900 held-out steps.) Action agreement was 0.764 with the real
   instruction, 0.686 with another episode's and 0.603 with none. STOP separation collapsed from 5.1× to 1.0×. The policy
@@ -194,15 +217,16 @@ controller turns 15° if the bearing to the point is above 7.5° and otherwise m
 
 ![layer probe](figures/fig_layer_probe.png)
 
-### 2.6 Multi-layer fusion head (D29): best true SR in this project
+### 2.6 Multi-layer fusion head (D29): best SR in this project
 
 - **Setup.** The head reads layers 23, 26 and 28 (chosen by searching 570 layer combinations with the probe). Otherwise
   it matches the long run: K = 2 at stride 8, 61 scans, a 1.5-epoch schedule stopped at step 124k (1.1 epochs).
-- **Result.** At step 120k with threshold 0.20, n = 150, strict: **SR 31.3 %, SPL 25.4 %, OS 42.7 %, nDTW 0.323,
-  NE 7.22 m**.
-- **Honest reading.** At a matched point (threshold 0.20, similar epoch), fusion step 80k scored 22.7 % and the
-  final-layer head at step 60k scored 22.0 %, essentially no difference. SR over training is non-monotonic
-  (15.3 → 30.0 → 22.7 → 18.7 → 31.3 %), so how much fusion itself adds is not established. Some of the headline number
+- **Result.** At step 120k with threshold 0.20, n = 150: **SR 22.7 %** (own STOP within 3 m), end-SR 31.3 %, SPL 25.4 %,
+  OS 42.7 %, nDTW 0.323, NE 7.22 m. Of the 69 own stops, 34 were within 3 m. 13 further episodes ended within 3 m
+  only because they ran out of steps.
+- **Honest reading.** At a matched point (threshold 0.20, similar epoch), fusion step 80k scored end-SR 22.7 % (SR
+  12.7 %) and the final-layer head at step 60k scored 22.0 % (SR 16.0 %), so there was no benefit. end-SR over training is
+  non-monotonic (15.3 → 30.0 → 22.7 → 18.7 → 31.3 %), so how much fusion itself adds is not established. Some of the headline number
   comes from choosing the checkpoint and threshold on the test split.
 
 ![stop threshold](figures/fig_stop_threshold.png)
@@ -220,7 +244,9 @@ controller turns 15° if the bearing to the point is above 7.5° and otherwise m
 - **Would a lower turn threshold fix it?** A closed-loop sweep (diagnostic, n = 150) gave OS 35.3 / 41.3 / 42.0 /
   **42.7** / 40.0 % at 3 / 4 / 5 / 7.5 / 10°. It would not: lower thresholds turn more often but zig-zag. 7.5° was kept.
   The 42.7 % from this sweep is an OS number and was later quoted as the "pointing baseline". At the same settings,
-  strict SR is 31.3 %.
+  end-SR is 31.3 % and SR 22.7 %.
+
+  ![pointing failure](figures/fig_pointing_failure.png)
 - **Rollouts** of `pointing_full3` step 100k: 6 of 22 episodes succeed by the model's own STOP. The 16 failures split
   into never approaching the goal, passing within 0.5 m without stopping, and stopping 3–10 m short
   ([`media/rollouts/step100k_failures/`](../media/rollouts/step100k_failures/)).
@@ -283,9 +309,15 @@ image-text backbone lacks.
 - **What 47.5 % does and does not show.**
   - It is the highest *oracle* success in the project, above the pointing policy's 42.7 %.
   - It comes from a diagnostic evaluation: none of the 5 own-STOPs fired within 3 m, and only 1 % of commands were
-    STOP. Strict SR was not measured, and would very likely be far lower.
+    STOP. SR was not measured, and would very likely be far lower.
   - It is one run with stochastic decoding (top-p 0.8, temperature 0.7) on 40 episodes (±15 points).
   - The v1 → v3 change altered three things at once (sampling, context, projector), so which one mattered is unknown.
+
+- **What fails, and why.** Each version reproduces its training label mix. v1 (25 % STOP labels) ends 65 % of episodes by
+  stopping, always more than 3 m from the goal. v3 (5 % STOP labels) rarely stops. Stopping also needs a sense of how much
+  of the instruction is done, which 8 s of video cannot give.
+
+  ![reasoner failure](figures/fig_reasoner_failure.png)
 
 ### 3.4 Probe accuracy did not predict closed-loop success
 
@@ -309,7 +341,7 @@ compounding error, recovery or stopping. Rank policies closed-loop.
 2. **Measure the gap between the eval and the claim.** A proximity break made SR identical to OS in most of this
    project's evaluations. A number reported as SR has to come from `--strict`.
 3. **Zero-shot and teacher-forced probes rank badly.** Twice, in §1.3 and §3.4, a probe picked the wrong winner.
-4. **Data dominates at this scale.** For the pointing policy, 6 → 16 scans tripled strict SR (4.0 → 13.3 %), and the
+4. **Data dominates at this scale.** For the pointing policy, 6 → 16 scans tripled end-SR (4.0 → 13.3 %), and the
    61-scan runs with history reached 18–31 %.
 5. **The final layer is not always where the answer is.** STOP was linearly decodable at layer 15 (AUC 0.72) and not at
    all at the output layer (0.44).
@@ -326,9 +358,11 @@ corrected in the current README:
 
 | Earlier claim | Correction |
 |---|---|
-| Reasoner v3 "SR 47.5 % / SPL 47.4 %", compared with the paper's SR 54.0 | Diagnostic mode: this is **OS 47.5 %**. Strict SR was not measured; no own STOP landed within 3 m. |
+| Reasoner v3 "SR 47.5 % / SPL 47.4 %", compared with the paper's SR 54.0 | Diagnostic mode: this is **OS 47.5 %**. SR was not measured; no own STOP landed within 3 m. |
 | LatentPilot and reasoner tables labelled SR | All diagnostic: reported as OS |
-| Pointing results: step 10k 26.7 %, full3 15.0 % | The first is diagnostic OS (n = 60). The best strict result (fusion, **SR 31.3 %**, n = 150) and the history run were missing. |
+| Pointing results: step 10k 26.7 %, full3 15.0 % | The first is diagnostic OS (n = 60). The best result (fusion, n = 150) and the history run were missing. |
+| Pointing "strict SR 31.3 %" (second README) | The evaluation counted an episode as a success if it *ended* within 3 m, including at the step limit. With the standard definition (own STOP within 3 m) the best result is **SR 22.7 %**; 31.3 % is end-SR. SR is recoverable only for runs that logged stopping positions. |
+| LatentPilot failure "because the loss balance drifts" | Drift is real but secondary: removing it did not help. The more plausible cause is a train-time shortcut through the teacher-forced Pilot slot (§1.4). |
 | Reasoner uses "a 16-frame context" | Only SFT v1 did. v3 samples 8 frames at 1 fps from 120 source frames. |
 | "held-out `L_pil` 3.02 vs 6.80" | These are final *training* values. No held-out `L_pil` was computed. |
 | "never learned to stop (`model_stop` 0–4.7 % in every checkpoint)" | The adaptive-λ checkpoint stopped in 18 % of episodes, and Stage 0′ in 30–39 % |

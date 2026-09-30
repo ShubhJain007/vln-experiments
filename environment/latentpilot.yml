@@ -1,0 +1,11 @@
+# Model code, training and the evaluation driver.   conda env create -f environment/latentpilot.yml
+# Versions are the ones every result in this repository was produced with (CUDA 12.1, RTX 4070 Ti SUPER).
+name: latentpilot
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu121
+      - -r requirements.txt   # resolved relative to this file
