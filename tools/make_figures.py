@@ -14,6 +14,9 @@ Figures
   fig_edge_guidance.png  Cosmos3-Edge action model, zero-shot: guidance vs turn-sign / instruction following
   fig_reasoner_zeroshot.png  Cosmos3-Edge reasoner, zero-shot: predicted waypoints on the probe frames
   fig_qualitative.png    Frames from the demo videos in media/ (LatentPilot, pointing, reasoner)
+  fig_lp_failure.png     Why trained LatentPilot fails: training fit, future prediction and navigation, learned vs identity
+  fig_pointing_failure.png  How pointing episodes end, and the teacher-forced action confusion
+  fig_reasoner_failure.png  How reasoner episodes end, and STOP rate vs training-label mix
 """
 import json
 import pathlib
@@ -121,40 +124,55 @@ def fig_probe_confusion():
 
 
 def fig_navigation(rows):
-    """Oracle success (light) and strict self-stop success (solid) per policy, from docs/figures/navigation_rows.json."""
+    """Per policy: OS (light), end-SR (medium) and standard SR (solid), from docs/figures/navigation_rows.json."""
     colors = {"LatentPilot": BLUE, "Pointing": ORANGE, "Cosmos": AQUA, "Paper": INK2}
-    fig, a = plt.subplots(figsize=(11, 4.4))
+    fig, a = plt.subplots(figsize=(11.5, 4.6))
+    w = 0.27
     for i, r in enumerate(rows):
         c = colors[r["group"]]
-        a.bar(i - 0.19, r["os"], 0.36, color=c, alpha=0.35, edgecolor=SURFACE, linewidth=2)
-        a.text(i - 0.19, r["os"] + 0.8, "%.0f" % r["os"], ha="center", fontsize=7.5, color=INK2)
-        if r["sr"] is not None:
-            a.bar(i + 0.19, r["sr"], 0.36, color=c, edgecolor=SURFACE, linewidth=2)
-            a.text(i + 0.19, r["sr"] + 0.8, "%.0f" % r["sr"], ha="center", fontsize=7.5, color=INK)
-        else:
-            a.text(i + 0.19, 1.2, "n/m", ha="center", fontsize=7, color=INK2, rotation=90)
+        for j, (key, alpha) in enumerate((("os", 0.3), ("sr_end", 0.6), ("sr", 1.0))):
+            x = i + (j - 1) * w
+            v = r.get(key)
+            if isinstance(v, (int, float)):
+                a.bar(x, v, w, color=c, alpha=alpha, edgecolor=SURFACE, linewidth=1.5)
+                a.text(x, v + 0.8, "%.0f" % v, ha="center", fontsize=7, color=INK if alpha == 1.0 else INK2)
+            elif not (r["group"] == "Paper" and key == "sr_end"):
+                a.text(x, 1.0, "n/r" if v == "n/r" else "n/m", ha="center", fontsize=6.5, color=INK2, rotation=90)
     a.set_xticks(range(len(rows)), ["%s\n(n=%s)" % (r["label"], r["n"]) for r in rows], fontsize=7.5, rotation=30, ha="right")
     a.set_ylabel("% of episodes")
-    a.set_title("R2R-CE val_unseen: oracle success (light) vs strict self-stop success (solid; n/m = not measured)")
-    for g, c in colors.items():
-        a.bar(0, 0, color=c, label=g)
-    a.legend(frameon=False, loc="upper left", fontsize=8)
+    a.set_title("R2R-CE val_unseen, three bars per policy: OS (light) · end-SR (medium) · SR (solid)")
+    from matplotlib.patches import Patch
+    handles = [Patch(color=c, label=g) for g, c in colors.items()]
+    handles += [Patch(color=INK2, alpha=a_, label=l) for a_, l in ((0.3, "OS: came within 3 m"),
+                (0.6, "end-SR: ended within 3 m"), (1.0, "SR: stopped within 3 m"))]
+    a.legend(handles=handles, frameon=False, loc="upper left", fontsize=8, ncol=2)
+    a.text(len(rows) - 0.5, -21, "n/m = not measured (diagnostic evaluation)   n/r = not recoverable from logs",
+           ha="right", fontsize=7.5, color=INK2)
     fig.tight_layout()
     fig.savefig(OUT / "fig_navigation.png", dpi=160)
 
 
 def eval_blocks(log):
-    """Blocks '######## <ckpt> strict thr=X n=N' followed by 'SR = ..', 'OS = ..' lines."""
+    """Blocks '######## <ckpt> strict thr=X n=N' followed by 'SR = ..', 'OS = ..', 'model_stop K', 'where it STOPPED ...
+    within 3m P%'. SR in the logs is end-SR (final position within 3 m, STOP not required); the standard SR (own STOP
+    within 3 m) is model_stop x P / n, available only where 'where it STOPPED' was logged."""
     import re
     out, cur = [], None
     for line in open(ROOT / "logs" / log):
-        m = re.match(r"#+ (\S+).*?thr=([0-9.]+)", line)
+        m = re.match(r"#+ (.*?)thr=([0-9.]+)", line)
         if m:
-            cur = {"ckpt": m.group(1), "thr": float(m.group(2))}
+            n = re.search(r"n=(\d+)", line)
+            cur = {"ckpt": m.group(1).strip(), "thr": float(m.group(2)), "n": int(n.group(1)) if n else 150}
             out.append(cur)
         m = re.match(r"\s+(SR|SPL|OS)\s+=\s+([0-9.]+)", line)
         if m and cur is not None and m.group(1) not in cur:
             cur[m.group(1)] = float(m.group(2))
+        m = re.match(r"\s+model_stop\s+(\d+)\s+\(", line)
+        if m and cur is not None and "stops" not in cur:
+            cur["stops"] = int(m.group(1))
+        m = re.search(r"where it STOPPED.*within 3m\s+([0-9.]+)%", line)
+        if m and cur is not None and "stops" in cur:
+            cur["SR_std"] = round(cur["stops"] * float(m.group(1)) / 100) / cur["n"]
     return out
 
 
@@ -162,28 +180,158 @@ def fig_stop_threshold():
     b = sorted(eval_blocks("eval120k_220002.log"), key=lambda r: r["thr"])
     steps = [(20, "fusesweep_234742.log"), (60, "sweep60k_104019.log"), (80, "test80k_125633.log"),
              (100, "eval100k_185222.log"), (120, "eval120k_220002.log")]
-    fig, (a, c) = plt.subplots(1, 2, figsize=(10, 3.6))
+    fig, (a, c) = plt.subplots(1, 2, figsize=(10.5, 3.8))
     t = [r["thr"] for r in b]
     a.plot(t, [100 * r["OS"] for r in b], color=BLUE, marker="o", markersize=5)
     a.plot(t, [100 * r["SR"] for r in b], color=ORANGE, marker="o", markersize=5)
-    a.text(t[0], 100 * b[0]["OS"] + 1.0, "oracle success (OS)", color=INK)
-    a.text(t[0], 100 * b[0]["SR"] + 1.0, "strict success (SR)", color=INK)
+    a.plot(t, [100 * r["SR_std"] for r in b], color=AQUA, marker="o", markersize=5)
+    a.legend(["OS: came within 3 m", "end-SR: ended within 3 m", "SR: stopped within 3 m"], frameon=False,
+             fontsize=8, loc="lower left")
+    a.set_ylim(8, 48)
     a.set_xlabel("STOP probability threshold")
     a.set_ylabel("% of episodes (n = 150)")
     a.set_title("Fusion, step 120k: the STOP threshold trade-off")
-    sr = []
+    end, std = [], []
     for k, log in steps:
         rows = [r for r in eval_blocks(log) if abs(r["thr"] - 0.20) < 1e-9 and "fusion" in r["ckpt"]]
-        sr.append(100 * rows[0]["SR"] if rows else np.nan)
-    c.plot([k for k, _ in steps], sr, color=ORANGE, marker="o", markersize=5)
-    for (k, _), v in zip(steps, sr):
+        end.append(100 * rows[0]["SR"] if rows else np.nan)
+        std.append(100 * rows[0]["SR_std"] if rows and "SR_std" in rows[0] else np.nan)
+    ks = [k for k, _ in steps]
+    c.plot(ks, end, color=ORANGE, marker="o", markersize=5, label="end-SR (ended within 3 m)")
+    c.plot(ks, std, color=AQUA, marker="o", markersize=5, label="SR (stopped within 3 m)")
+    for k, v, w in zip(ks, end, std):
         c.text(k, v + 1.2, "%.1f" % v, ha="center", fontsize=8, color=INK)
+        if not np.isnan(w):
+            c.text(k, w - 3.0, "%.1f" % w, ha="center", fontsize=8, color=INK)
     c.set_xlabel("training step (thousands)")
-    c.set_ylabel("strict SR % (thr 0.20, n = 150)")
-    c.set_title("Fusion: strict SR over training (non-monotonic)")
+    c.set_ylabel("% of episodes (thr 0.20, n = 150)")
+    c.set_title("Fusion over training (SR not logged at 20k)")
     c.set_ylim(0, 40)
+    c.legend(frameon=False, loc="lower right", fontsize=8)
     fig.tight_layout()
     fig.savefig(OUT / "fig_stop_threshold.png", dpi=160)
+
+
+def fig_lp_failure():
+    """Why fully trained LatentPilot fails: it fits its 6 training buildings better and predicts the future better,
+    yet navigates worse than the identity control."""
+    L, I = trainlog("stage1_learned"), trainlog("stage1_identity")
+    fig, (a, b, c) = plt.subplots(1, 3, figsize=(12, 3.8), gridspec_kw={"width_ratios": [2.4, 1, 1]})
+    curves = ((trainlog("stage0"), INK2, "Stage 0: no Pilot slot", "--"),
+              (trainlog("stage0prime_B"), AQUA, "Stage 0′: slot fed the true next frame", "-"),
+              (L, BLUE, "Stage 1, learned G_ψ", "-"), (I, ORANGE, "Stage 1, identity G_ψ (control)", "-"))
+    for log, col, name, ls in curves:
+        st = np.array([r["step"] for r in log])
+        acc = smooth(np.array([r["acc"] for r in log]))
+        a.plot(st[:len(acc)], 100 * acc, color=col, label=name, linestyle=ls)
+    a.set_xlabel("training step")
+    a.set_ylabel("training action accuracy (%)")
+    a.set_title("(a) Training accuracy jumps once the slot sees the next frame")
+    a.legend(frameon=False, loc="lower right", fontsize=7.5)
+    names = ["learned", "identity"]
+    lpil = [L[-1]["l_pil"], I[-1]["l_pil"]]
+    b.bar(names, lpil, color=[BLUE, ORANGE], width=0.6, edgecolor=SURFACE, linewidth=2)
+    for i, v in enumerate(lpil):
+        b.text(i, v + 0.12, "%.2f" % v, ha="center", color=INK)
+    b.set_ylabel("L_pil at end of training")
+    b.set_title("(b) Future prediction\n(lower = better)")
+    os_ = [10.67, 17.33]  # logs/evaln150_stage1_{learned,identity}_final.log
+    c.bar(names, os_, color=[BLUE, ORANGE], width=0.6, edgecolor=SURFACE, linewidth=2)
+    for i, v in enumerate(os_):
+        c.text(i, v + 0.4, "%.1f %%" % v, ha="center", color=INK)
+    c.set_ylabel("oracle success (%, n = 150)")
+    c.set_title("(c) Navigation, unseen\nbuildings (higher = better)")
+    c.set_ylim(0, 22)
+    fig.tight_layout()
+    fig.savefig(OUT / "fig_lp_failure.png", dpi=160)
+
+
+def fig_pointing_failure():
+    """How the best pointing policy's episodes end, and which actions it gets wrong."""
+    r = [x for x in eval_blocks("eval120k_220002.log") if abs(x["thr"] - 0.20) < 1e-9][0]
+    n = r["n"]
+    ok = round(r["SR_std"] * n)
+    end_ok = round(r["SR"] * n)
+    parts = [("stopped within 3 m\n(success)", ok, AQUA, 1.0),
+             ("ran out of steps\nwithin 3 m", end_ok - ok, AQUA, 0.45),
+             ("stopped > 3 m away", r["stops"] - ok, ORANGE, 1.0),
+             ("ran out of steps\n> 3 m away", n - r["stops"] - (end_ok - ok), "#b9b7b1", 1.0)]
+    fig, (a, b) = plt.subplots(1, 2, figsize=(11, 3.4), gridspec_kw={"width_ratios": [1.5, 1]})
+    left = 0
+    for name, k, col, al in parts:
+        v = 100 * k / n
+        a.barh([0], [v], left=left, color=col, alpha=al, edgecolor=SURFACE, linewidth=2, height=0.5,
+               label=name.replace("\n", " "))
+        a.text(left + v / 2, 0, "%.1f %%" % v, ha="center", va="center", fontsize=9.5, color=INK, fontweight="bold")
+        left += v
+    a.legend(frameon=False, fontsize=8, loc="upper center", bbox_to_anchor=(0.5, -0.28), ncol=2)
+    a.set_xlim(0, 100)
+    a.set_ylim(-0.4, 0.4)
+    a.set_yticks([])
+    a.set_xlabel("% of 150 episodes")
+    a.set_title("(a) How episodes end (fusion step 120k, STOP threshold 0.20)")
+    a.grid(False)
+    conf = {"FWD": (0.901, 0.032, 0.067), "LEFT": (0.388, 0.553, 0.059), "RIGHT": (0.428, 0.015, 0.557)}  # failanalysis log
+    xs = list(conf)
+    bottom = np.zeros(3)
+    for j, (lab, col) in enumerate((("predicted FORWARD", "#b9b7b1"), ("predicted LEFT", BLUE), ("predicted RIGHT", ORANGE))):
+        vals = np.array([100 * conf[x][j] for x in xs])
+        b.bar(xs, vals, bottom=bottom, color=col, edgecolor=SURFACE, linewidth=2, width=0.6, label=lab)
+        for i, v in enumerate(vals):
+            if v > 8:
+                b.text(i, bottom[i] + v / 2, "%.0f" % v, ha="center", va="center", fontsize=8.5, color=INK)
+        bottom += vals
+    b.set_xlabel("expert's action")
+    b.set_ylabel("% of steps (teacher-forced)")
+    b.set_title("(b) Missed turns become FORWARD")
+    b.legend(frameon=False, fontsize=7.5, loc="upper center", bbox_to_anchor=(0.5, -0.22), ncol=3)
+    fig.tight_layout()
+    fig.savefig(OUT / "fig_pointing_failure.png", dpi=160)
+
+
+def fig_reasoner_failure():
+    """Reasoner: how closed-loop episodes end, and how often it says STOP vs how often STOP was in its training data."""
+    runs = [("v1, step 1,250", "sft_step1250_direct"), ("v1, final", "sft_final_direct"),
+            ("v3, final", "v3_final_direct"), ("v3, step 1,500", "v3_step1500_direct")]
+    d = {k: json.load(open(ROOT / "results" / "runs" / f"{f}.json")) for k, f in runs}
+    fig, (a, b) = plt.subplots(1, 2, figsize=(11, 3.6), gridspec_kw={"width_ratios": [1.5, 1]})
+    cats = [("term_within_radius", "reached 3 m of the goal", AQUA), ("term_model_stop", "said STOP (> 3 m away)", ORANGE),
+            ("term_timeout", "ran out of steps", "#b9b7b1")]
+    for i, (k, _) in enumerate(runs):
+        left = 0
+        tot = sum(d[k][c] for c, _, _ in cats)
+        for c, name, col in cats:
+            v = 100 * d[k][c] / tot
+            a.barh(i, v, left=left, color=col, edgecolor=SURFACE, linewidth=2, height=0.62, label=name if i == 0 else None)
+            if v >= 7:
+                a.text(left + v / 2, i, "%.0f" % v, ha="center", va="center", fontsize=8.5, color=INK)
+            left += v
+    a.set_yticks(range(len(runs)), [k for k, _ in runs])
+    a.invert_yaxis()
+    a.set_xlim(0, 100)
+    a.set_xlabel("% of 40 episodes (diagnostic evaluation)")
+    a.set_title("(a) How closed-loop episodes end")
+    a.legend(frameon=False, fontsize=8, loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=3)
+    a.grid(False)
+    train = {"v1": 25.0, "v3": 5.0}  # STOP share of SFT labels (logs/train_reasoner_{sft,v3}.log)
+    said = {"v1": 100 * d["v1, final"]["commands"]["stop"], "v3": 100 * d["v3, step 1,500"]["commands"]["stop"]}
+    ended = {"v1": 100 * d["v1, final"]["term_model_stop"] / 40, "v3": 100 * d["v3, step 1,500"]["term_model_stop"] / 40}
+    x = np.arange(2)
+    w = 0.26
+    for j, (vals, lab, col) in enumerate(((train, "STOP share of training labels", "#b9b7b1"),
+                                          (said, "STOP share of its commands", BLUE),
+                                          (ended, "episodes it ended with STOP", ORANGE))):
+        v = [vals["v1"], vals["v3"]]
+        b.bar(x + (j - 1) * w, v, w, color=col, edgecolor=SURFACE, linewidth=2, label=lab)
+        for i, y in enumerate(v):
+            b.text(x[i] + (j - 1) * w, y + 1, "%.0f" % y, ha="center", fontsize=8, color=INK)
+    b.set_xticks(x, ["SFT v1 (final)", "SFT v3 (step 1,500)"])
+    b.set_ylabel("%")
+    b.set_ylim(0, 75)
+    b.set_title("(b) STOP follows the training mix")
+    b.legend(frameon=False, fontsize=7.5, loc="upper right")
+    fig.tight_layout()
+    fig.savefig(OUT / "fig_reasoner_failure.png", dpi=160)
 
 
 def fig_bearing():
@@ -334,10 +482,10 @@ def fig_qualitative():
          "(b) Pointing: 1.3 m from the goal,\np(stop) = 0.02; it never stops"),
         (frame("media/rollouts/step100k_failures/ep16_pLe4wQe7qrG.mp4", last=True),
          "(c) Pointing: stops 5.4 m short\n(it passed within 1.5 m)"),
-        (frame("media/previews/reasoner_2azQ1b91cZZ_traj1039_t225.gif", last=True),
-         "(d) Reasoner decision probe\n(not a rollout): at the goal"),
-        (frame("media/previews/reasoner_8194nk5LbLH_traj1141_t34.gif", last=True),
-         "(e) Reasoner decision probe\n(not a rollout): mid-route"),
+        (frame("media/previews/reasoner_v1_2azQ1b91cZZ_t225.gif", last=True),
+         "(d) Reasoner SFT v1, decision\nprobe at the goal: stop ✓"),
+        (frame("media/previews/reasoner_v3_2azQ1b91cZZ_t225.gif", last=True),
+         "(e) Reasoner SFT v3, same moment:\nmove forward ✗"),
     ]
     fig = plt.figure(figsize=(11, 8.6))
     g = fig.add_gridspec(2, 4, height_ratios=[1.05, 1.25], hspace=0.12, wspace=0.04)
@@ -365,6 +513,9 @@ def main(nav_rows=None):
     fig_edge()
     fig_reasoner_zeroshot()
     fig_qualitative()
+    fig_lp_failure()
+    fig_pointing_failure()
+    fig_reasoner_failure()
     if nav_rows:
         fig_navigation(nav_rows["rows"])
     print("wrote", sorted(p.name for p in OUT.glob("*.png")))

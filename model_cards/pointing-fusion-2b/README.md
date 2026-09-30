@@ -19,9 +19,14 @@ metrics:
 
 # Pointing policy with layer fusion (Cosmos-Reason2-2B + LoRA): VLN on R2R-CE
 
-The best policy in *Four Ways to Navigate* ([report](https://github.com/ShubhJain007/vln-four-ways/blob/main/paper/main.pdf),
-[code](https://github.com/ShubhJain007/vln-four-ways)): approach ② in the paper, with **strict self-stop success 31.3 %** on
+The best policy in *Evaluating Four Approaches to Vision-and-Language Navigation* ([report](https://github.com/ShubhJain007/vln-experiments/blob/main/paper/main.pdf),
+[code](https://github.com/ShubhJain007/vln-experiments)): approach ②, with **success rate 22.7 %** (own STOP within 3 m) on
 150 unseen R2R-CE episodes.
+
+The idea comes from [Robostral Navigate](https://arxiv.org/abs/2607.20785) by Mistral AI: point at the next waypoint in
+the image instead of choosing an action. This model tests that idea's **raw capability**: a 2 B model, 61 buildings,
+supervised imitation only, **no RL fine-tuning** (Robostral adds online RL), and a geometric controller instead of a
+learned low-level policy. It is evaluated zero-shot in unseen buildings.
 
 > **Weights:** not published yet. Checkpoint `pointing_fusion/step120000` (LoRA adapter + head, 25 MB) is kept by the
 > author. This card documents it so that the result can be reproduced and understood.
@@ -63,20 +68,26 @@ expert's own actions on 97.2 % of steps.
 R2R-CE `val_unseen`, first 150 episodes (8 buildings), strict mode, where success requires the model's own STOP
 within 3 m:
 
-| STOP threshold | SR | SPL | OS | nDTW | NE (m) |
-|---|---|---|---|---|---|
-| 0.10 | 28.7 | 24.3 | 36.7 | 0.363 | 7.03 |
-| 0.15 | 29.3 | 24.4 | 40.0 | 0.351 | 7.05 |
-| **0.20** | **31.3** | **25.4** | 42.7 | 0.323 | 7.22 |
-| 0.30 | 29.3 | 23.6 | 44.7 | 0.287 | 7.59 |
+| STOP threshold | SR (own STOP ≤ 3 m) | end-SR (ended ≤ 3 m) | SPL* | OS | nDTW | NE (m) |
+|---|---|---|---|---|---|---|
+| 0.10 | 23.3 | 28.7 | 24.3 | 36.7 | 0.363 | 7.03 |
+| 0.15 | 23.3 | 29.3 | 24.4 | 40.0 | 0.351 | 7.05 |
+| **0.20** | **22.7** | **31.3** | 25.4 | 42.7 | 0.323 | 7.22 |
+| 0.30 | 19.3 | 29.3 | 23.6 | 44.7 | 0.287 | 7.59 |
 
-The threshold was chosen on this same split, so these numbers are optimistic. For comparison, the paper that
-approach ① reimplements reports SR 51.7–54.0 with a 7 B model on the full split.
+SR is the standard R2R-CE success rate. end-SR also counts episodes that ran out of steps within 3 m; it is what the
+evaluation script originally reported as SR. \* SPL is computed with end-SR as the success criterion.
+
+The threshold was chosen on this same split, so these numbers are optimistic. For comparison, Robostral Navigate
+(8 B, 2.4 M trajectories) reports 73.4 % with supervised training alone and 77.4 % after RL.
 
 ## Limitations
 
 - **Under-turning:** the predicted bearing is 0.42× the expert's, so many turns are missed and taken as FORWARD.
-- **Stopping:** the policy passes near the goal without stopping, or stops several metres short. OS exceeds SR by 11 points.
+- **Stopping:** the policy passes near the goal without stopping, or stops several metres short. Only 49 % of its own
+  stops are within 3 m, and OS exceeds SR by 20 points.
+- **No recovery training:** imitation learning only sees expert states. Robostral's RL phase exists to teach recovery,
+  and it was not run.
 - **Instruction dependence:** STOP separation collapses when the instruction is swapped. The policy uses language, but
   its stopping behaviour is fragile.
 - **Evaluation size:** a single evaluation on 150 episodes, with no seeds repeated.
@@ -94,12 +105,12 @@ python scripts/record_pointing.py --checkpoint checkpoints/pointing_fusion/step1
 ## Citation
 
 ```bibtex
-@techreport{jain2026fourways,
-  title       = {Four Ways to Navigate: An Empirical Study of Vision-and-Language Navigation Policies on a Single GPU},
+@techreport{jain2026vlnexperiments,
+  title       = {Evaluating Four Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU},
   author      = {Jain, Shubh},
   year        = {2026},
   institution = {GitHub},
-  url         = {https://github.com/ShubhJain007/vln-four-ways}
+  url         = {https://github.com/ShubhJain007/vln-experiments}
 }
 ```
 

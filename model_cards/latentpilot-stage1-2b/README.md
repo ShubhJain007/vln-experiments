@@ -17,10 +17,18 @@ tags:
 
 # LatentPilot Stage 1 at 2 B (reimplementation): learned and identity-control checkpoints
 
-Approach ① of *Four Ways to Navigate* ([report](https://github.com/ShubhJain007/vln-four-ways/blob/main/paper/main.pdf),
-[code](https://github.com/ShubhJain007/vln-four-ways)). This is a from-scratch reimplementation of
+Approach ① of *Evaluating Four Approaches to Vision-and-Language Navigation* ([report](https://github.com/ShubhJain007/vln-experiments/blob/main/paper/main.pdf),
+[code](https://github.com/ShubhJain007/vln-experiments)). This is a from-scratch reimplementation of
 [LatentPilot](https://arxiv.org/abs/2603.29165) (Hao et al., 2026; the official code was not released) on a 2 B
 backbone. It is published as a **negative result**: at this scale the method's Stage 1 gate fails.
+
+**Why this method.** If a VLM could reason in latent space instead of in words or extra frames, it would use far
+fewer tokens per step, run faster, and reason visually in its native embedding space. LatentPilot carries a single
+Pilot Token forward as the model's only memory, trained to predict the embedding of the frame two steps ahead.
+
+**What was and was not run.** Stages 0, 0′ and 1 with offline expert demonstrations, evaluated zero-shot in unseen
+buildings. The paper's **data flywheel** (the model drives, an expert corrects, the model retrains) and Stage 2
+(scheduled sampling) were **not** run, so this measures Stage 1's raw capability, not the full method.
 
 > **Weights:** not published yet. `stage1_learned/final` and `stage1_identity/final` (LoRA adapter + Pilot module,
 > 33 MB each) are kept by the author.
@@ -54,9 +62,14 @@ within 3 m), so the success column is **oracle success**, not SR.
 | learned `G_ψ` | 3.02 | 10.7 % | 0.277 | 8.50 | 4.7 % |
 | identity `G_ψ` (control) | 6.80 | 17.3 % | 0.268 | 8.17 | 0 % |
 
-The learned Pilot Token predicts future frames 2.25× better, but navigates worse. The cause is **loss-balance drift**:
-`λ·L_pil / L_act` rises from 0.52 at initialisation to 5.5 at the end of training. An adaptive-λ run removed the drift
-but did not recover navigation (OS 6.7 %).
+The learned Pilot Token predicts future frames 2.25× better, but navigates worse.
+
+**Most plausible cause: a training shortcut.** During training the Pilot slot holds the *true* embedding of the next
+frame, which reveals the action just taken; at test time it holds the model's own prediction. Training accuracy jumps
+from 78 % without the slot (Stage 0) to 98 % with it, and 78 % vs 92 % at matched steps. The model learns to read the
+action off the slot, a shortcut that is gone at test time. Loss-balance drift (`λ·L_pil / L_act` rises from 0.52 to
+5.5) contributes, but an adaptive λ that removed it did not recover navigation (OS 6.7 %). The flywheel and scheduled
+sampling, which were not run, are the parts of the method designed to close this gap.
 
 ## Limitations
 
@@ -79,12 +92,12 @@ python scripts/record_episode.py --checkpoint checkpoints/stage1_learned/final -
 ## Citation
 
 ```bibtex
-@techreport{jain2026fourways,
-  title       = {Four Ways to Navigate: An Empirical Study of Vision-and-Language Navigation Policies on a Single GPU},
+@techreport{jain2026vlnexperiments,
+  title       = {Evaluating Four Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU},
   author      = {Jain, Shubh},
   year        = {2026},
   institution = {GitHub},
-  url         = {https://github.com/ShubhJain007/vln-four-ways}
+  url         = {https://github.com/ShubhJain007/vln-experiments}
 }
 ```
 

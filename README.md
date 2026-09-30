@@ -1,74 +1,87 @@
-# Four Ways to Navigate: Vision-and-Language Navigation Policies on One GPU
+# Evaluating Four Approaches to Vision-and-Language Navigation
 
-[![Project page](https://img.shields.io/badge/project-page-2a78d6)](https://shubhjain007.github.io/vln-four-ways/)
-[![Paper](https://img.shields.io/badge/paper-PDF-b31b1b)](paper/main.pdf)
+**An experimental study on a single GPU.** This repository evaluates existing ideas; it does not propose a new method.
+
+[![Project page](https://img.shields.io/badge/project-page-2a78d6)](https://shubhjain007.github.io/vln-experiments/)
+[![Paper](https://img.shields.io/badge/report-PDF-b31b1b)](paper/main.pdf)
 [![Model cards](https://img.shields.io/badge/model-cards-ffcc4d)](model_cards/README.md)
 [![License: MIT](https://img.shields.io/badge/code-MIT-1baf7a)](LICENSE)
 [![Python 3.10](https://img.shields.io/badge/python-3.10-3776ab)](environment/latentpilot.yml)
 [![Cite](https://img.shields.io/badge/cite-CITATION.cff-555)](CITATION.cff)
 
-**Four architectures for Vision-and-Language Navigation in continuous environments (R2R-CE), each built and evaluated
-on a single 16 GB GPU:**
+We took four recent ideas for turning a pretrained vision-language or video model into a robot that follows spoken
+route instructions (R2R-CE, Habitat). We built each one on a single 16 GB GPU and measured how well it navigates in
+buildings it has never seen:
 
-1. a latent "dream-ahead" policy (a from-scratch reimplementation of
-   [LatentPilot](https://arxiv.org/abs/2603.29165));
-2. a waypoint-pointing policy with a geometric controller;
-3. a pretrained video-diffusion action model (Cosmos3-Edge);
-4. a fine-tuned video reasoner used directly as the policy.
+| | Approach | Where the idea comes from | What we measure |
+|---|---|---|---|
+| ① | **Latent reasoning** | LatentPilot ([arXiv:2603.29165](https://arxiv.org/abs/2603.29165)), reimplemented from scratch | Can the model "think" in latent tokens instead of words or extra frames? |
+| ② | **Pointing + controller** | Robostral Navigate by Mistral AI ([arXiv:2607.20785](https://arxiv.org/abs/2607.20785)) | Does pointing at the next waypoint in the image beat choosing an action? |
+| ③ | **Video diffusion action model** | NVIDIA Cosmos3-Edge action stream, used as is | Does a video world model's motion prior transfer to navigation? |
+| ④ | **Video reasoner as the policy** | NVIDIA Cosmos3-Edge reasoner, fine-tuned | Can a physical-reasoning VLM pick the next move from its own video? |
 
-What worked, what failed, and why.
+**What "raw capability" means here.** Every trained model gets exactly one round of offline imitation learning on
+expert demonstrations. It is then evaluated zero-shot in the 11 unseen `val_unseen` buildings, with no further
+adaptation. None of the methods' "extra rounds" were run:
+- LatentPilot's **data flywheel** (the model drives, an expert corrects, the model retrains) was not run.
+- Robostral's **online RL fine-tuning** was not run.
+- No DAgger or on-policy data collection was used.
 
-🌐 **Project page:** [shubhjain007.github.io/vln-four-ways/](https://shubhjain007.github.io/vln-four-ways/)
-📄 **Technical report:** [`paper/main.pdf`](paper/main.pdf) — *Four Ways to Navigate: An Empirical Study of
-Vision-and-Language Navigation Policies on a Single GPU* (19 pages, LaTeX source in [`paper/`](paper/)).
-📚 **References:** [`docs/REFERENCES.md`](docs/REFERENCES.md) (53 works; BibTeX in
-[`paper/references.bib`](paper/references.bib)).
+The numbers therefore show how far each idea gets on its own, at small scale. They do not show what each method
+reaches with its full recipe.
 
-> **Status (Sept 2026): research code, finished and not maintained.** Results are on subsets of R2R-CE `val_unseen`
-> (n = 40–150), with thresholds tuned on that split. Read [Caveats](#caveats) before quoting a number.
+🌐 **Project page:** [shubhjain007.github.io/vln-experiments](https://shubhjain007.github.io/vln-experiments/)
+📄 **Technical report:** [`paper/main.pdf`](paper/main.pdf), with LaTeX source in [`paper/`](paper/)
+📚 **References:** [`docs/REFERENCES.md`](docs/REFERENCES.md) (53 works; BibTeX in [`paper/references.bib`](paper/references.bib))
+
+> **Status (Sept 2026): research code, finished and not maintained.** Results are on subsets of `val_unseen`
+> (n = 40–150), with thresholds tuned on that split. Read [Metrics](#results) and [Caveats](#caveats) before quoting a
+> number.
 
 ---
 
-## Demos
+## Demos, and what failed
 
-All demos are in **unseen** Matterport3D buildings: the agent gets one English instruction and sees only its own camera.
-The demos are not all the same kind, so check the type before reading one:
+All demos take place in **unseen** Matterport3D buildings. The agent gets one English instruction and sees only its
+own camera. Each section below shows the demo, says how to read it, and then explains **what failed and why**, with
+the evidence.
 
-| | Approach | Demo type | What it shows |
-|---|---|---|---|
-| ① | LatentPilot | **closed-loop rollouts** (the model drives) | expert, model at step 10k and final model, side by side on the same episode |
-| ② | Pointing policy | **closed-loop rollouts** (the model drives) | three failure modes, with the model's aim point drawn on each frame |
-| ③ | Cosmos3-Edge reasoner | **decision probes** (the model does *not* drive) | the video the model is given at one moment, then what it answered |
-| ④ | Cosmos3-Edge action model | **figure** (no videos were recorded) | how strongly language steers its motion |
+| | Approach | Demo type |
+|---|---|---|
+| ① | Latent reasoning (LatentPilot) | **closed-loop rollouts**: the model drives |
+| ② | Pointing + controller | **closed-loop rollouts**: the model drives |
+| ③ | Cosmos3-Edge action model | **measurement figure**: no videos were recorded |
+| ④ | Cosmos3-Edge reasoner | **decision probes**: the model answers one question and does not drive |
 
-### ① LatentPilot: a better frame predictor became a worse navigator
+### ① Latent reasoning (LatentPilot)
 
-**What you're seeing:** three agents given the same instruction in the same building, playing side by side. Each panel
-is what that agent's camera saw as it moved.
-- **Left, the expert:** it follows the human-annotated reference path. Its panel freezes when it arrives.
-- **Middle, LatentPilot after 10k training steps.**
-- **Right, the fully trained LatentPilot.**
+**Why try it.** A VLM that could reason in latent space rather than in words or extra frames would need far fewer
+tokens per step and run faster. It would also reason visually, in its native embedding space. LatentPilot does this
+with a single *Pilot Token*: the model is trained to predict the embedding of the frame two steps ahead, and that
+prediction is fed back as its only memory. There are no history frames and no chain-of-thought text.
 
-Under each LatentPilot panel, the yellow line is the step number and the live distance to the goal.
-**What to notice:** training longer made the model *worse* at getting to the goal (finding 1 below).
+**What we ran.** Stages 0, 0′ and 1 of the paper, re-derived equation by equation, on 6 training buildings (1,665
+expert episodes). We **did not run the paper's data flywheel** (rounds in which the model drives, an expert corrects
+it and the model retrains) or its Stage 2 (scheduled sampling).
+
+**What you're seeing.** Three agents, the same instruction, the same building, side by side:
+- **left:** the expert on the reference path; its panel freezes when it arrives;
+- **middle:** LatentPilot after 10k training steps;
+- **right:** the fully trained LatentPilot.
+
+The yellow line under each model panel is the step number and the live distance to the goal.
 
 <p align="center">
   <img src="media/previews/compare_ep09_x8F5xyUWy9e.gif" width="780"><br>
-  <sub>Same episode, three agents. Left: the expert on the reference path. Middle: LatentPilot after 10k training steps,
-  which comes within 2.8 m of the goal. Right: the fully trained model, which never gets closer than 9.2 m.</sub>
-</p>
-
-<p align="center">
-  <img src="media/previews/compare_ep00_2azQ1b91cZZ.gif" width="780"><br>
-  <sub>Another scene: the step-10k policy gets within 3.4 m, the final one 6.4 m.</sub>
+  <sub>Step 10k comes within 2.8 m of the goal. The fully trained model never gets closer than 9.2 m.</sub>
 </p>
 
 <details>
-<summary><b>All 11 scenes: expert vs LatentPilot at step 10k vs final</b> (side-by-side mp4s)</summary>
+<summary><b>All 11 scenes: expert vs step 10k vs final</b></summary>
 
 | Scene | Geodesic | Step 10k: closest | Final: closest | Video |
 |---|---|---|---|---|
-| 2azQ1b91cZZ | 7.1 m | 3.4 m | 6.4 m | [mp4](media/comparisons/ep00_2azQ1b91cZZ_expert_vs_stage1.mp4) |
+| 2azQ1b91cZZ | 7.1 m | 3.4 m | 6.4 m | [mp4](media/comparisons/ep00_2azQ1b91cZZ_expert_vs_stage1.mp4) · [gif](media/previews/compare_ep00_2azQ1b91cZZ.gif) |
 | 8194nk5LbLH | 11.8 m | 11.8 m | 11.8 m | [mp4](media/comparisons/ep01_8194nk5LbLH_expert_vs_stage1.mp4) |
 | EU6Fwq7SyZv | 4.6 m | 4.3 m | 3.6 m | [mp4](media/comparisons/ep02_EU6Fwq7SyZv_expert_vs_stage1.mp4) |
 | QUCTc6BB5sX | 13.2 m | 9.0 m | 11.1 m | [mp4](media/comparisons/ep03_QUCTc6BB5sX_expert_vs_stage1.mp4) |
@@ -80,266 +93,231 @@ Under each LatentPilot panel, the yellow line is the step number and the live di
 | x8F5xyUWy9e | 10.5 m | **2.8 m ✓** | 9.2 m | [mp4](media/comparisons/ep09_x8F5xyUWy9e_expert_vs_stage1.mp4) |
 | zsNo4HB9uLZ | 8.0 m | 8.0 m | 6.3 m | [mp4](media/comparisons/ep10_zsNo4HB9uLZ_expert_vs_stage1.mp4) |
 
-"Closest" is the minimum distance to the goal. When it equals the geodesic, the agent never got closer than its start.
-The step-10k policy comes from an earlier training run whose checkpoint was later overwritten
-([details](docs/EXPERIMENTS.md#5-corrections-to-earlier-reports)). The final checkpoint in single view:
-
-<img src="media/previews/final_multiscene_ep00_2azQ1b91cZZ.gif" width="300">
+"Closest" is the minimum distance to the goal; when it equals the geodesic, the agent never got closer than its start.
+The step-10k policy is from an earlier run with the same configuration, whose checkpoint was later overwritten.
 </details>
 
-### ② Pointing policy: best true success, and its three failure modes
+#### What failed: the fully trained model
 
-**What you're seeing:** the pointing policy driving on its own. On every frame:
-- the **cyan cross-hair** is the spot in the image the model wants to go to next, and a simple controller turns toward it;
-- a **green cross-hair**, when visible, is where the expert's next waypoint actually is;
-- the bottom text is the step, the current and closest distance to the goal, the action taken, and `p(stop)`, the model's
-  STOP probability (it stops once this passes a threshold);
-- a **red border** on the last frame means the episode failed.
+**The symptom.** The final model wanders and almost never stops. It reached the goal region in 10.7 % of 150 unseen
+episodes; a control with the future-prediction part switched off (identity `G_ψ`) reached 17.3 %. In the 11 recorded
+scenes it reached 3 m of the goal in none, while the earlier step-10k checkpoint reached it in one.
 
-At step 100k it succeeded by its own STOP in 6 of 22 recorded episodes. The GIFs below are three failures, one per
-failure type ([all 16 failure videos](media/rollouts/step100k_failures/)):
+**Most plausible cause: during training the Pilot slot leaks the answer.** LatentPilot trains with the slot filled by
+the *true* embedding of the **next** frame, and at test time fills it with the model's own prediction. The next frame
+shows the result of the current action (whether the view rotated or moved forward), so during training the action
+can be read off the slot. The evidence is below:
+- **(a) Training accuracy jumps once the slot sees the next frame.** It rises from 78 % without a slot (Stage 0) to 98 %
+  with one (Stage 0′ and Stage 1). At matched training steps (7k–8k) the gap is still 78 % vs 92 %. The model is
+  learning a shortcut, not better navigation.
+- **(b), (c) Predicting the future better did not help.** The learned Pilot Token predicts the future 2.25× better than
+  the control, and navigates worse. At test time the shortcut is gone, and a policy that leaned on it cannot fall back
+  on anything.
+- **The earlier checkpoint was better.** Step 10k, with a weaker shortcut, beat the final model (OS 26.7 % vs 10.0 % at
+  n = 30).
+
+<img src="docs/figures/fig_lp_failure.png" width="860">
+
+**A contributing cause: the loss balance drifts.** With λ = 0.1 the future-prediction loss ends up with 5.5× the action
+loss's weight (below). An adaptive λ removed the drift but did **not** recover navigation (OS 6.7 %), so the drift is
+not the main problem.
+
+<img src="docs/figures/fig_loss_balance.png" width="720">
+
+**Why the full recipe might not fail this way.** These are the mechanisms LatentPilot adds after Stage 1, and we did
+not run them:
+- the data flywheel, which trains on the model's own trajectories;
+- Stage 2 scheduled sampling, which gradually replaces the true next frame with the model's prediction.
+
+Both expose the model to its own latents during training, which is exactly what removes the shortcut. Our result says
+Stage 1 alone does not transfer at 2 B parameters and 6 buildings. It does not say the full method fails.
+
+### ② Pointing + controller (inspired by Robostral Navigate)
+
+**Why try it.** [Robostral Navigate](https://arxiv.org/abs/2607.20785) by **Mistral AI** points at the next waypoint
+in the camera image instead of classifying an action. This turns navigation into the grounding problem VLMs are
+pretrained for. Their 8 B model is trained on 2.4 M simulated trajectories and then fine-tuned with **online RL**. It
+reports 73.4 % success with supervised training alone and 77.4 % after RL. We tested the idea's **raw capability**:
+- a 2 B model;
+- 61 buildings (10.8 k episodes);
+- supervised learning only, **no RL fine-tuning**;
+- a simple geometric controller in place of their learned low-level policy.
+
+**What you're seeing.** The pointing policy driving on its own:
+- the **cyan cross-hair** is where the model wants to go next, and the controller turns toward it;
+- a **green cross-hair**, when shown, is the expert's actual next waypoint;
+- `p(stop)` is its STOP probability;
+- a **red border** marks a failed episode.
 
 | Never approaches the goal | Passes within 0.5 m, never stops | Passes 1.5 m from the goal, stops 5.4 m away |
 |---|---|---|
 | <img src="media/previews/step100k_failures_ep02_8194nk5LbLH.gif" width="250"> | <img src="media/previews/step100k_failures_ep04_EU6Fwq7SyZv.gif" width="250"> | <img src="media/previews/step100k_failures_ep16_pLe4wQe7qrG.gif" width="250"> |
 
-### ③ Cosmos3-Edge reasoner: decision probes (the model is not driving here)
+(Recordings of the step-100k checkpoint: it succeeded in 6 of 22 recorded episodes; [all 16 failures](media/rollouts/step100k_failures/).)
 
-No closed-loop videos were recorded for the reasoner, so these clips show its *decisions*, not its driving. Each clip
-has two parts:
-1. **The input.** The camera video the reasoner is handed at one moment of an **expert's** walk: up to the last 8 s,
-   ending "now". The walking you see is the expert's, not the model's.
-2. **The answer card.** The clip freezes at that moment and asks "What should the robot do now?" It then shows the
-   expert's actual next action and what each fine-tuned reasoner answered, marked ✓ correct or ✗ wrong.
+#### What failed, and why
 
-**v1 and v3** are two fine-tuned versions of the same reasoner:
-- **SFT v1**, the first fine-tune: trained on data that over-samples turns and stops, and sees about 1 s of video.
-- **SFT v3**, the final fine-tune: trained on uniformly sampled data, and sees 8 s of video.
+**How the best model's 150 episodes end** (panel a below):
+- **22.7 %** stop within 3 m of the goal (success);
+- 8.7 % run out of steps near the goal;
+- 23.3 % stop in the wrong place;
+- 45.3 % run out of steps far away.
 
-There is no v2 in the results. That run (uniform sampling, short context) was stopped after 200 steps, and its idea was
-folded into v3.
+There are three causes, in order of impact:
+1. **It under-turns.** When the expert turns, the model predicts FORWARD 39–43 % of the time and almost never the wrong
+   direction (panel b). The predicted bearing is only 0.42× the true one (second figure). A regression head trained on
+   targets that are usually "straight ahead" learns to hedge toward straight. The first GIF is this: an early turn is
+   missed and the agent never recovers.
+2. **STOP is weak.**
+   - STOP is only 2.5 % of the training labels.
+   - The signal is readable in the middle of the network (layer 15, AUC 0.72) but not at the output layer (0.44).
+   - Only 49 % of its own stops land within 3 m.
+   The second and third GIFs are the two sides of this: it passes the goal without stopping, or it stops at a
+   look-alike spot.
+3. **It never learned to recover.** Supervised imitation only ever sees expert states. Robostral's RL phase exists to
+   teach recovery from the model's own mistakes, and we did not run it.
 
-| Case A: at the goal. The expert stops; v1 says stop ✓; v3 says move forward ✗ | Case B: mid-route. The expert goes forward; v1 says turn left ✗; v3 says move forward ✓ |
-|---|---|
-| <img src="media/previews/reasoner_2azQ1b91cZZ_traj1039_t225.gif" width="380"> | <img src="media/previews/reasoner_8194nk5LbLH_traj1141_t34.gif" width="380"> |
+<img src="docs/figures/fig_pointing_failure.png" width="860">
+<img src="docs/figures/fig_bearing.png" width="420">
 
-**What to notice:** each version has the opposite weakness. v1 turns and stops too eagerly: in closed loop it stops
-in 65 % of episodes. v3 goes straight well but almost never says stop, which is why it reaches the goal region most
-often (47.5 %) but does not stop there. Case B is only 2 s long because the decision comes 2 s into the walk.
+### ③ Cosmos3-Edge action model (video diffusion, zero-shot)
 
-**Before fine-tuning** (figure below, still images, no video): the reasoner could sketch a plausible path of five
-waypoints (blue dots, numbered in order) on a single frame. But when asked for its *next action* it
-answered as a bystander watching a static camera. On the left-hand scene it said: *"A person enters the room through the
-archway, drawn by the reflection in the mirror or the painting's subject."* It did not know it was the agent. That observation motivated the
-embodiment prompt and the fine-tuning.
+**Why try it.** NVIDIA's video world model has an action stream trained to produce camera and robot motion from video.
+If that motion prior transfers, it could supply what a small VLM lacks. We used it **zero-shot**, with no training at
+all.
 
-![reasoner zero-shot](docs/figures/fig_reasoner_zeroshot.png)
-
-### ④ Cosmos3-Edge action model (video diffusion): motion prior yes, language no
-
-No videos were recorded for this policy; this is a measurement figure. **Left:** given "turn left" or "turn right",
-how often the model turns the right way, as the guidance strength goes up. **Right:** with full R2R instructions, how
-often its turn direction matches the expert. Blue bars use the right instruction; orange bars use another episode's
-instruction as a control. **What to notice:** at low guidance the right and wrong instructions score about the same, so
-the model largely ignores the language.
+**What you're seeing** (no videos were recorded; this is a measurement figure).
+- **Left:** given "turn left" or "turn right", how often the model turns the right way as the guidance strength rises.
+- **Right:** with full R2R instructions, how often its turn direction matches the expert. Blue bars use the right
+  instruction; orange bars use another episode's instruction as a control.
 
 ![edge guidance](docs/figures/fig_edge_guidance.png)
 
-All media: [`media/README.md`](media/README.md). Matterport3D-derived, non-commercial academic use only.
+#### What failed, and why
+
+**The symptom.** It reached the goal region in only 7.5 % of 40 episodes. 75 % of episodes ended early.
+
+**Cause 1: it ignores the instruction.** At normal guidance, the right and wrong instructions score about the same
+(59 % vs 53 %). Even at guidance 7.5, turn direction matches the expert only 68 % of the time. Its action captions in
+pretraining are short motion or scene descriptions, not multi-sentence routes. A fixed prompt, "The camera moves
+forward.", did at least as well as the real instruction (15 % vs 7.5 %).
+
+**Cause 2: it stalls.** The motion prior is real (yaw correlation 0.84–0.99 with our camera motion). But its sampled
+motion chunks often contain too little movement to become even one step. Two such chunks in a row end the episode,
+which is why most episodes stop early.
+
+### ④ Cosmos3-Edge reasoner as the policy (decision probes)
+
+**Why try it.** A reasoning VLM trained on physical video might decide "what next?" better than an action classifier.
+It can also see how the view has changed over the last few seconds. Zero-shot it did not work: asked for the next
+action, it described the room as a bystander ("A person enters the room through the archway…"). We therefore
+fine-tuned it on expert decisions. There are two versions:
+
+| Version | Training data | Video it sees |
+|---|---|---|
+| **SFT v1** | over-samples turns and stops (25 % STOP labels) | the last ~1 s |
+| **SFT v3** | uniformly sampled decisions (5 % STOP labels) | the last 8 s |
+
+(A v2 run was stopped after 200 steps and never evaluated.)
+
+**What you're seeing.** Each clip shows **one** model. It plays exactly the video that model is given at one moment
+of an **expert's** walk; the model is not driving. The clip then freezes and shows the question, what the expert did,
+and that model's answer.
+
+| | SFT v1 | SFT v3 |
+|---|---|---|
+| **Case A: at the goal.** The expert stops. | <img src="media/previews/reasoner_v1_2azQ1b91cZZ_t225.gif" width="300"><br>v1: **stop ✓** | <img src="media/previews/reasoner_v3_2azQ1b91cZZ_t225.gif" width="300"><br>v3: **move forward ✗** |
+| **Case B: mid-route.** The expert goes forward. | <img src="media/previews/reasoner_v1_8194nk5LbLH_t34.gif" width="300"><br>v1: **turn left ✗** | <img src="media/previews/reasoner_v3_8194nk5LbLH_t34.gif" width="300"><br>v3: **move forward ✓** |
+
+#### What failed, and why
+
+**The symptom.** In closed loop (n = 40), v3 reached the goal region most often of any approach (47.5 %), but it never
+stopped there: none of its own STOPs landed within 3 m. v1 ended 65 % of its episodes by saying STOP, always in the
+wrong place.
+
+**Most plausible cause: each version reproduces its training label mix** (figure below). v1 trained on 25 % STOP
+labels and stops constantly. v3 trained on 5 % and almost never stops, so its episodes end by running out of steps
+(40 %). Deciding to stop also requires knowing *how much of the instruction is done*. With at most 8 s of video and no
+memory beyond that, neither version can know this. Fine-tuning on expert frames only, with no closed-loop training,
+means it never practised recovering from its own errors. Its offline next-action accuracy (63–68 %) did not predict
+closed-loop success.
+
+<img src="docs/figures/fig_reasoner_failure.png" width="860">
+
+Before fine-tuning, on still frames, the reasoner could sketch a plausible route:
+
+![reasoner zero-shot](docs/figures/fig_reasoner_zeroshot.png)
+
+All media is listed in [`media/README.md`](media/README.md). It is Matterport3D-derived and for non-commercial
+academic use only.
 
 ---
-
-## Abstract
-
-We compare four ways of turning a pretrained vision-language or video model into an instruction-following navigation
-policy in Habitat (R2R-CE, unseen scenes). Everything is trained with LoRA on one RTX 4070 Ti SUPER.
-
-**(1) LatentPilot.** A reimplementation of arXiv:2603.29165 on `Cosmos-Reason2-2B`, whose code was never released. A
-*Pilot Token* is trained to predict the visual embedding two steps ahead and fed back, so the policy "dreams ahead". Its
-Stage 1 gate **fails** at this scale. The learned token predicts future frames 2.25× better than an identity control but
-reaches the goal less often (oracle success 10.7 % vs 17.3 %, n = 150), because the loss balance drifts 10× during
-training.
-
-**(2) Pointing.** The same backbone predicts *where in the image to go*, and a bearing controller turns that into
-actions. Fixing its labels, scaling data to 61 buildings, adding frame history and reading STOP from intermediate layers
-reaches **strict success 31.3 % / SPL 25.4 %** (n = 150). This is the best true success rate in the project.
-
-**(3) Cosmos3-Edge action model.** The action stream of NVIDIA's video world model, used zero-shot. It recovers our
-ego-motion from video (yaw correlation 0.84–0.99) but follows full instructions only weakly, reaching oracle success of
-7.5 %.
-
-**(4) Cosmos3-Edge reasoner.** The reasoning tower of the same model, fine-tuned to output the next command from 8 s of
-video. It reaches the goal region in **47.5 %** of 40 episodes, the highest oracle success here, but almost never stops
-there.
-
-The paper reports SR 51.7–54.0 with a 7 B model on full data.
-
-## The four architectures
-
-All four share the task interface. The input is RGB 448 × 448 plus the instruction. The primitive actions are FORWARD
-0.25 m, LEFT/RIGHT 15° and STOP, with at most 100 steps per episode.
-
-### 1. LatentPilot: latent "dream-ahead" tokens
-
-```mermaid
-flowchart LR
-  F["frame t<br/>(SigLIP-2, frozen)"] --> B
-  I[instruction] --> B
-  Z["Pilot slot z_(t-1)"] --> B
-  B["Cosmos-Reason2-2B<br/>LoRA r=16, explicit mRoPE"] --> A["action query → LM head<br/>FWD / LEFT / RIGHT / STOP"]
-  B --> G["pilot hidden → G_ψ → z_t"]
-  G -.->|"L_pil: predict v̄ of frame t+2"| T[("future frame<br/>embedding")]
-  G -->|"fed back next step"| Z
-```
-
-- **Idea** ([paper](https://arxiv.org/abs/2603.29165)). Make the policy imagine the near future in latent space. The
-  Pilot token is regressed onto the frozen encoder's embedding of the frame two steps ahead and carried into the next
-  step.
-- **Built.** Stages 0, 0′ and 1, re-derived equation by equation ([`docs/EQUATIONS.md`](docs/EQUATIONS.md)). Actions
-  are existing vocabulary tokens. The layout is image-first, because the paper's literal layout gave 21 % zero-shot
-  instruction following against 78 %.
-- **Result.** Stage 1 learned `G_ψ` reached OS 10.7 % against 17.3 % for the identity control (n = 150). The gate
-  failed. Stage 2 was not run.
-- **Lesson.** An auxiliary prediction loss whose weight is balanced only at initialisation takes over the gradient
-  (5.5× the action loss by the end). A better predictor was not a better navigator at 2 B parameters and 1,665 episodes.
-
-### 2. Pointing + controller
-
-```mermaid
-flowchart LR
-  F["frame t + 2 history frames<br/>(8 steps apart)"] --> B
-  I[instruction] --> B
-  B["Cosmos-Reason2-2B<br/>LoRA r=16"] --> L["hidden states of<br/>layers 23, 26, 28"]
-  L --> H["pointing head<br/>(u, v), visible, p(stop)"]
-  H --> C{"bearing controller"}
-  C -->|"abs(bearing) > 7.5°"| TURN["turn 15°"]
-  C -->|"otherwise"| FWD["forward 0.25 m"]
-  H -->|"p(stop) > 0.2"| ST["STOP"]
-```
-
-- **Idea** ([Robostral Navigate](https://arxiv.org/abs/2607.20785) §2.2). Ask the VLM *where* to go, a grounding
-  problem it is pretrained for, instead of *which of 4 actions*, a classification problem with a 62 % FORWARD prior.
-- **Built.** A 12–49 k-parameter head on the action-query hidden state. Its labels are the first displaced reference
-  waypoint, with decoupled horizons. Label/expert agreement went from 0.69 to 0.97 after fixing three silent bugs.
-- **Result.** Strict SR rose from 4.0 % (6 buildings) to 13.3 % (16 buildings), then 18.0 % (61 buildings with history)
-  and **31.3 %** (layer fusion).
-- **Lesson.** Data was the binding constraint. STOP was linearly decodable in the middle of the network (layer 15 AUC
-  0.72), but not at the final layer (0.44). The remaining failures are under-turning, because the predicted bearing is
-  0.42× the true one, and stopping in the wrong place.
-
-### 3. Cosmos3-Edge action model (video diffusion policy)
-
-```mermaid
-flowchart LR
-  F["current view"] --> P
-  I["instruction as the<br/>action-caption prompt"] --> P
-  P["Cosmos3-Edge policy mode<br/>(diffusion, domain av)<br/>CFG 7.5, 20 steps"] --> K["24-step chunk of<br/>9-D ego-pose deltas"]
-  K --> S["× translation scale 7.47"] --> R["replayed as<br/>FWD / LEFT / RIGHT"]
-```
-
-- **Idea.** A video world model trained on driving and robot footage should already know how an egocentric camera
-  moves, so it could supply the motion prior the 2 B VLM lacks.
-- **Built.** Zero-shot use of the pretrained action stream. Chunks are converted to primitives and re-planned after
-  each chunk. The translation scale was fitted on re-rendered 15 fps video. A flow-matching post-training run was started
-  and abandoned.
-- **Result.** Inverse dynamics transfers: yaw correlation 0.837 on our video (0.987 after re-rendering at 15 fps). As a
-  policy it reached OS 7.5 % (n = 40). A fixed "move forward" prompt did as well or better (15 %, n = 20).
-- **Lesson.** The motion prior is real, but instruction grounding needs guidance ≈ 7.5, and even then turn direction
-  agrees with the expert only 68 % of the time.
-
-### 4. Cosmos3-Edge reasoner as a direct policy
-
-```mermaid
-flowchart LR
-  V["last 8 s of own view<br/>(120 frames → 8 at 1 fps)"] --> R
-  I["embodiment prompt<br/>+ instruction"] --> R
-  R["Cosmos3-Edge reasoner<br/>LoRA on LM (+ projector)"] --> C["one command:<br/>move forward / turn left /<br/>turn right / stop"]
-  C --> X["burst: 2 × FWD or 2 × 15° turn,<br/>then re-plan"]
-```
-
-- **Idea.** Use the model's language side to decide, reading a short video of where the agent has been, so that
-  turn onsets and "have I arrived" become visible over time.
-- **Built.** Zero-shot probes first. Then SFT on 43–45 k decision points from expert rollouts. v1 used onset-balanced
-  sampling and a 16-frame context; v3 used uniform sampling, an 8 s window and a trainable projector. A hybrid, in which
-  the reasoner's command is passed to the diffusion model as a caption, was tried and did not finish.
-- **Result.** Next-action probe accuracy went from 32.5 % zero-shot to 67.5 % (v1) and 63.1 % (v3). Closed-loop OS was
-  17.5 % (v1) and **47.5 %** (v3 at step 1,500). Strict SR was not measured.
-- **Lesson.** Probe accuracy did not predict closed-loop success. The best closed-loop reasoner reaches the goal region
-  most often of all four, but its own STOP never fired within 3 m.
 
 ## Results
 
 ![Navigation results](docs/figures/fig_navigation.png)
 
-**Read the two metrics carefully.** *OS* (oracle success) counts an episode if the agent ever came within 3 m of the
-goal. *SR* counts it only if the agent **stopped** within 3 m by itself. Most evaluations here ran in a diagnostic mode
-that ends the episode on arrival, which makes SR identical to OS; those are reported as OS. True SR exists only for the
-pointing policy, evaluated with `--strict`. Details: [`docs/EXPERIMENTS.md` §0](docs/EXPERIMENTS.md#0-protocol).
+**Three success metrics, from strictest to loosest:**
+- **SR:** the agent's own STOP was within 3 m of the goal. This is the standard R2R-CE definition.
+- **end-SR:** the episode *ended* within 3 m, by STOP or by running out of steps. Our "strict" runs originally reported
+  this number as SR.
+- **OS:** the agent came within 3 m at any point (oracle success).
 
-| Architecture | Variant | n (scans) | SR (strict) | SPL | OS | nDTW | NE (m) |
-|---|---|---|---|---|---|---|---|
-| ① LatentPilot | Stage 1, learned `G_ψ` (as specified) | 150 (8) | not measured | — | 10.7 | 0.277 | 8.50 |
-| ① LatentPilot | identity `G_ψ` control | 150 (8) | not measured | — | 17.3 | 0.268 | 8.17 |
-| ② Pointing | 16 scans, final layer | 150 (8) | 13.3 | 13.0 | 14.0 | 0.350 | 7.34 |
-| ② Pointing | + history, 61 scans | 150 (8) | 18.0 | 16.8 | 22.7 | 0.394 | 6.55 |
-| ② Pointing | + history, 3-epoch schedule (step 40k) | 150 (8) | 24.7 | 22.3 | 31.3 | 0.345 | 7.10 |
-| ② Pointing | **+ layer fusion (step 120k)** | 150 (8) | **31.3** | **25.4** | 42.7 | 0.323 | 7.22 |
-| ③ Edge action model | zero-shot, guidance 7.5 | 40 (6) | not measured | — | 7.5 | 0.276 | 8.81 |
-| ④ Edge reasoner | SFT v1 | 40 (6) | not measured | — | 17.5 | 0.365 | 7.41 |
-| ④ Edge reasoner | **SFT v3, step 1,500** | 40 (6) | not measured¹ | — | **47.5** | 0.389 | 6.41 |
-| *Paper* | *Table 3 NaN row (7 B, full split)* | 1,839 (11) | *51.7* | *47.1* | *57.0* | — | *5.3* |
-| *Paper* | *Stage 1 / flywheel round 1* | 1,839 (11) | *~54.0* | *~48.5* | — | — | — |
+Most evaluations ended the episode as soon as the agent came within 3 m, so they measure only OS. SR can be recovered
+from the logs only where the stopping position was recorded.
 
-¹ None of its own STOP decisions fell within 3 m of the goal, so its strict SR would be far below 47.5 %.
+| Approach | Variant | n (scans) | SR | end-SR | SPL* | OS | nDTW | NE (m) |
+|---|---|---|---|---|---|---|---|---|
+| ① Latent reasoning | Stage 1, learned `G_ψ` (as specified) | 150 (8) | n/m | n/m | — | 10.7 | 0.277 | 8.50 |
+| ① Latent reasoning | identity `G_ψ` control | 150 (8) | n/m | n/m | — | 17.3 | 0.268 | 8.17 |
+| ② Pointing | 16 scans, final layer | 150 (8) | n/r | 13.3 | 13.0 | 14.0 | 0.350 | 7.34 |
+| ② Pointing | + history, 61 scans | 150 (8) | n/r | 18.0 | 16.8 | 22.7 | 0.394 | 6.55 |
+| ② Pointing | + longer schedule (step 40k) | 150 (8) | n/r | 24.7 | 22.3 | 31.3 | 0.345 | 7.10 |
+| ② Pointing | **+ layer fusion (step 120k)** | 150 (8) | **22.7** | **31.3** | 25.4 | 42.7 | 0.323 | 7.22 |
+| ③ Edge action model | zero-shot, guidance 7.5 | 40 (6) | n/m | n/m | — | 7.5 | 0.276 | 8.81 |
+| ④ Edge reasoner | SFT v1 | 40 (6) | n/m | n/m | — | 17.5 | 0.365 | 7.41 |
+| ④ Edge reasoner | **SFT v3, step 1,500** | 40 (6) | n/m¹ | n/m | — | **47.5** | 0.389 | 6.41 |
+| *LatentPilot paper* | *7 B, full split, with flywheel* | 1,839 (11) | *51.7–54.0* | — | *47.1–48.5* | *57.0* | — | *5.3* |
+| *Robostral Navigate* | *8 B, 2.4 M trajectories, SFT + RL* | 1,839 (11) | *77.4* | — | — | — | — | — |
 
-Pointing rows use STOP thresholds between 0.05 and 0.20, chosen on this split. Every evaluation, including rows not
-shown, is in [`docs/EXPERIMENT_LOG.md` §3](docs/EXPERIMENT_LOG.md#3-consolidated-navigation-evaluations-r2r-ce-val_unseen).
+- n/m: not measured, because the evaluation ended on arrival. n/r: not recoverable from the logs.
+- \* SPL uses end-SR as its success criterion.
+- ¹ None of its 5 own STOPs were within 3 m, so its SR would be far below its 47.5 % OS.
+- Pointing rows use STOP thresholds between 0.05 and 0.20, chosen on this split.
 
-## Key findings
-
-**1. LatentPilot's Stage 1 fails because the loss balance drifts.** λ = 0.1 balances the two losses only at
-initialisation. The action loss then falls ~51× and the Pilot loss ~4.8×, so by the end 5.5× more gradient goes to
-predicting frames than to choosing actions. An adaptive λ removed the drift but did not recover navigation (OS 6.7 %).
-This is a scale-limited finding, not a refutation of the paper.
-
-<img src="docs/figures/fig_loss_balance.png" width="720">
-
-**2. Offline probes picked the wrong model twice.** Untrained, the Pilot-last design kept 59 % instruction following
-and the action-query design 29 %. After training, the first scored 0 % in closed loop and the second 16.7 %. For the
-reasoner, the checkpoint with the best probe accuracy (67.5 %) navigated worse than one at 63.1 %. Rank policies
-closed-loop.
-
-**3. STOP is decodable, just not from the last layer.** A linear probe finds STOP at AUC 0.72 in layer 15 and 0.44
-(below chance) at the output layer, which is the layer the head was reading. Fusing layers 23/26/28 gave the best strict
-SR (31.3 %). A matched comparison shows little difference at equal training, so the size of the fusion effect is not
-established.
-
-<img src="docs/figures/fig_layer_probe.png" width="720">
-
-**4. The pointing policy under-turns.** Its predicted bearing is 0.42× the true bearing. Missed turns become FORWARD
-(39–43 %) and almost never go the wrong way. Lowering the turn threshold does not fix this in closed loop.
-
-<img src="docs/figures/fig_bearing.png" width="720">
-
-**5. Stopping, not reaching, is the bottleneck for all four.** OS exceeds SR for every policy. For the pointing policy,
-a higher STOP threshold stops less often: OS keeps rising while strict SR peaks at 0.20.
+Every evaluation is listed in [`docs/EXPERIMENT_LOG.md` §3](docs/EXPERIMENT_LOG.md#3-consolidated-navigation-evaluations-r2r-ce-val_unseen).
 
 <img src="docs/figures/fig_stop_threshold.png" width="820">
 
-**6. Silent bugs rivalled any modelling change:**
-- Qwen3-VL silently drops mRoPE when fed `inputs_embeds` (hidden relative L2 0.42–0.50).
-- bf16 targets change by 7 % with batch size.
-- The paper's literal Eq. 5 layout gives 21 % zero-shot instruction following, against 78 % for image-first.
-- Pointing labels agreed with the expert 69 % of the time until three bugs were fixed (97 %).
-- One run trained with the wrong history stride for 7 h.
+## Key findings
 
-See [`docs/GOTCHAS.md`](docs/GOTCHAS.md).
+1. **Training on privileged future frames can teach a shortcut.** LatentPilot's Stage 1 fits its training data
+   (98 %) by reading the next frame out of the Pilot slot. The shortcut is gone at test time. The method's later stages
+   (flywheel, scheduled sampling) are what would close the gap.
+2. **Stopping, not reaching, is the bottleneck for every approach.** The best pointing model came within 3 m in 42.7 %
+   of episodes but stopped there in 22.7 %. The reasoner reached the goal region in 47.5 % and stopped there in none.
+3. **Offline probes picked the wrong model twice.** Once for the Pilot-slot design, once for the reasoner version.
+   Rank policies closed-loop.
+4. **The STOP decision lives mid-network.** A linear probe reads it at AUC 0.72 in layer 15, but 0.44 at the output
+   layer.
 
-The full narrative, one section per experiment with why it was run, setup, result and decision, is in
+   <img src="docs/figures/fig_layer_probe.png" width="640">
+5. **Data first.** Going from 6 to 16 buildings tripled the pointing policy's end-SR (4.0 → 13.3 %). Fixing three
+   silent label bugs raised label/expert agreement from 0.69 to 0.97.
+6. **Silent bugs rivalled any modelling change.** Examples: mRoPE dropped with `inputs_embeds`; bf16 targets that
+   depend on batch size; the paper's literal token layout (21 % vs 78 % instruction following); a history stride trained
+   wrong for 7 h; and a success metric that did not require STOP. See [`docs/GOTCHAS.md`](docs/GOTCHAS.md).
+
+The full narrative, one section per experiment with why it was run, the setup, the result and the decision, is in
 **[`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md)**.
 
 ## Caveats
 
+- **SR definition.** Our "strict" runs counted an episode as successful if it *ended* within 3 m, including by running
+  out of steps. Standard SR also requires the agent's own STOP. Both are reported, and standard SR could be recovered
+  only for the later runs.
+- **Raw capability only.** Each method got one offline round of imitation learning. There was no data flywheel
+  (LatentPilot), no RL fine-tuning (Robostral) and no DAgger, so none of the numbers is the method's ceiling.
 - **Thresholds were tuned on the test split.** STOP and turn thresholds were chosen on `val_unseen`. A `val_seen` set
   was collected for selection but never used, so the best pointing numbers are optimistic.
 - **Small, unpaired evaluations.** Evaluations use n = 150 (8 scans) for ① and ②, and n = 40 (6 scans) for ③ and ④.
@@ -360,7 +338,7 @@ Weights are not published yet (each is a 25–33 MB LoRA adapter).
 
 | Model | Approach | Base model | Result on R2R-CE `val_unseen` | Card |
 |---|---|---|---|---|
-| `pointing_fusion/step120000` | ② pointing + controller | Cosmos-Reason2-2B | **strict SR 31.3 %**, SPL 25.4 (n = 150) | [card](model_cards/pointing-fusion-2b/README.md) |
+| `pointing_fusion/step120000` | ② pointing + controller | Cosmos-Reason2-2B | **SR 22.7 %** (end-SR 31.3 %, OS 42.7 %; n = 150) | [card](model_cards/pointing-fusion-2b/README.md) |
 | `reasoner_sft_v3/step1500` | ④ Cosmos3-Edge reasoner | Cosmos3-Edge | OS 47.5 % (n = 40, diagnostic) | [card](model_cards/reasoner-sft-v3/README.md) |
 | `stage1_learned/final`, `stage1_identity/final` | ① LatentPilot | Cosmos-Reason2-2B | OS 10.7 % / 17.3 % (n = 150, diagnostic) | [card](model_cards/latentpilot-stage1-2b/README.md) |
 
@@ -456,13 +434,13 @@ If you use this code, results or media, please cite the report (GitHub's **"Cite
 [`CITATION.cff`](CITATION.cff)):
 
 ```bibtex
-@techreport{jain2026fourways,
-  title       = {Four Ways to Navigate: An Empirical Study of Vision-and-Language Navigation Policies on a Single GPU},
+@techreport{jain2026vlnexperiments,
+  title       = {Evaluating Four Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU},
   author      = {Jain, Shubh},
   year        = {2026},
   month       = {9},
   institution = {GitHub},
-  url         = {https://github.com/ShubhJain007/vln-four-ways}
+  url         = {https://github.com/ShubhJain007/vln-experiments}
 }
 ```
 
@@ -471,8 +449,8 @@ Please also cite the work this builds on. The core references are below; all 53 
 
 | Role in this project | Work |
 |---|---|
-| Method reimplemented (①) | Hao et al., *LatentPilot*, [arXiv:2603.29165](https://arxiv.org/abs/2603.29165) |
-| Supervision used by ② | Bounhar et al., *Robostral Navigate*, [arXiv:2607.20785](https://arxiv.org/abs/2607.20785) |
+| Method reimplemented (①, latent reasoning) | Hao et al., *LatentPilot*, [arXiv:2603.29165](https://arxiv.org/abs/2603.29165) |
+| Inspiration for ② (Mistral AI) | Bounhar et al., *Robostral Navigate*, [arXiv:2607.20785](https://arxiv.org/abs/2607.20785) |
 | Related latent-token method | Qin et al., *Chain-of-Visual-Thought*, [arXiv:2511.19418](https://arxiv.org/abs/2511.19418) |
 | Task and data | Anderson et al., *R2R*, [arXiv:1711.07280](https://arxiv.org/abs/1711.07280); Krantz et al., *VLN-CE*, [arXiv:2004.02857](https://arxiv.org/abs/2004.02857) |
 | Scenes and simulator | Chang et al., *Matterport3D*, [arXiv:1709.06158](https://arxiv.org/abs/1709.06158); Savva et al., *Habitat*, [arXiv:1904.01201](https://arxiv.org/abs/1904.01201) |

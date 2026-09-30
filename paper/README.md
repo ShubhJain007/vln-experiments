@@ -1,6 +1,6 @@
 # Technical report
 
-**Four Ways to Navigate: An Empirical Study of Vision-and-Language Navigation Policies on a Single GPU**:
+**Evaluating Four Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU**:
 [`main.pdf`](main.pdf) (19 pages).
 
 | File | What it is |
