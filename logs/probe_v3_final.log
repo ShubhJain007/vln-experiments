@@ -326,4 +326,4 @@ reasoner on GPU: 4.54 GB
 
 === hier_overall_nothink: accuracy 0.631  parse 1.00  recall {move forward: 0.86, turn left: 0.71, turn right: 0.62, stop: 0.10}  0.2s/call ===
 
-wrote /home/kneepolean/shubhj/latentpilot/results/probe_v3_final.md / .json
+wrote <repo>/results/probe_v3_final.md / .json

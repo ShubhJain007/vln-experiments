@@ -1,6 +1,6 @@
 ######## COLLECT rollouts started Wed Sep  2 17:14:38 EDT 2026 ########
 split=train  scans=10  episodes=2538
-out=/home/kneepolean/shubhj/latentpilot/data/rollouts
+out=<repo>/data/rollouts
 primitives: {'move_forward': {'amount': 0.25}, 'turn_left': {'amount': 15.0}, 'turn_right': {'amount': 15.0}}
 
 1pXnuDYAj8r: 256 episodes to do (0 already done)
@@ -411,33 +411,33 @@ split=train  episodes=4203  to encode=2538
 loading encoder in float32 (D7: fp32 is batch-invariant) ...
   VRAM after load: 9.08 GB
 Traceback (most recent call last):
-  File "/home/kneepolean/shubhj/latentpilot/src/data/cache_vbar.py", line 153, in <module>
+  File "<repo>/src/data/cache_vbar.py", line 153, in <module>
     raise SystemExit(main())
-  File "/home/kneepolean/shubhj/latentpilot/src/data/cache_vbar.py", line 114, in main
+  File "<repo>/src/data/cache_vbar.py", line 114, in main
     vbar = encode_vbar(enc, frames, args.batch_size)
-  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+  File "<user-local>/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
     return func(*args, **kwargs)
-  File "/home/kneepolean/shubhj/latentpilot/src/data/cache_vbar.py", line 66, in encode_vbar
+  File "<repo>/src/data/cache_vbar.py", line 66, in encode_vbar
     for v_t in enc.encode_batch(chunk):        # each (N_v, d)
-  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+  File "<user-local>/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
     return func(*args, **kwargs)
-  File "/home/kneepolean/shubhj/latentpilot/src/model/vision_encoder.py", line 208, in encode_batch
+  File "<repo>/src/model/vision_encoder.py", line 208, in encode_batch
     out = self.model.model.get_image_features(
-  File "/home/kneepolean/.local/lib/python3.10/site-packages/transformers/utils/generic.py", line 993, in wrapper
+  File "<user-local>/lib/python3.10/site-packages/transformers/utils/generic.py", line 993, in wrapper
     return func(*args, **translated)
-  File "/home/kneepolean/.local/lib/python3.10/site-packages/transformers/utils/generic.py", line 939, in wrapper
+  File "<user-local>/lib/python3.10/site-packages/transformers/utils/generic.py", line 939, in wrapper
     output = func(self, *args, **kwargs)
-  File "/home/kneepolean/.local/lib/python3.10/site-packages/transformers/models/qwen3_vl/modeling_qwen3_vl.py", line 1047, in get_image_features
+  File "<user-local>/lib/python3.10/site-packages/transformers/models/qwen3_vl/modeling_qwen3_vl.py", line 1047, in get_image_features
     vision_output: BaseModelOutputWithDeepstackFeatures = self.visual(
-  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+  File "<user-local>/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
     return self._call_impl(*args, **kwargs)
-  File "/home/kneepolean/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+  File "<user-local>/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
     return forward_call(*args, **kwargs)
-  File "/home/kneepolean/.local/lib/python3.10/site-packages/transformers/utils/generic.py", line 1068, in wrapper
+  File "<user-local>/lib/python3.10/site-packages/transformers/utils/generic.py", line 1068, in wrapper
     output = func(self, *args, **kwargs)
-  File "/home/kneepolean/.local/lib/python3.10/site-packages/transformers/utils/output_capturing.py", line 262, in wrapper
+  File "<user-local>/lib/python3.10/site-packages/transformers/utils/output_capturing.py", line 262, in wrapper
     outputs = func(self, *args, **kwargs)
-  File "/home/kneepolean/.local/lib/python3.10/site-packages/transformers/models/qwen3_vl/modeling_qwen3_vl.py", line 706, in forward
+  File "<user-local>/lib/python3.10/site-packages/transformers/models/qwen3_vl/modeling_qwen3_vl.py", line 706, in forward
     pos_embeds = (self.pos_embed(interp_indices) * interp_weights[:, :, None]).sum(1)
 torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 98.00 MiB. GPU 0 has a total capacity of 15.56 GiB of which 111.88 MiB is free. Process 234374 has 5.85 GiB memory in use. Including non-PyTorch memory, this process has 9.49 GiB memory in use. Of the allocated memory 9.24 GiB is allocated by PyTorch, and 7.47 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
 ######## CACHE v_bar finished Wed Sep  2 17:24:08 EDT 2026 ########

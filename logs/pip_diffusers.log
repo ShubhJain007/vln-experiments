@@ -38,4 +38,4 @@ ultralytics 8.4.18 requires opencv-python>=4.6.0, which is not installed.
 datasets 5.0.1 requires fsspec[http]<=2026.6.0,>=2023.1.0, but you have fsspec 2026.7.0 which is incompatible.
 
 [notice] A new release of pip is available: 26.0.1 -> 26.2.1
-[notice] To update, run: /home/kneepolean/miniconda3/envs/latentpilot/bin/python3.10 -m pip install --upgrade pip
+[notice] To update, run: <conda>/envs/latentpilot/bin/python3.10 -m pip install --upgrade pip

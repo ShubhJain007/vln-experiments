@@ -383,7 +383,7 @@ formula `(448/16)²/2² `, `image_token_id` count, and encoder output rows.
 
 ### 1. Tests (no data needed, <1s)
 ```bash
-cd /home/kneepolean/shubhj/latentpilot
+cd <repo root>
 conda activate latentpilot
 python -m pytest tests/test_predictability_probe.py -q
 ```

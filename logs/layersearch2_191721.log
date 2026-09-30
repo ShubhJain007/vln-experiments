@@ -8,9 +8,9 @@ stop base rate: train 0.0420  test 0.0270
 
  layer   u corr     act  stop AUC  stop sep
 --------------------------------------------
-/home/kneepolean/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py:3045: RuntimeWarning: invalid value encountered in divide
+<user-local>/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py:3045: RuntimeWarning: invalid value encountered in divide
   c /= stddev[:, None]
-/home/kneepolean/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py:3046: RuntimeWarning: invalid value encountered in divide
+<user-local>/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py:3046: RuntimeWarning: invalid value encountered in divide
   c /= stddev[None, :]
      0      nan   0.646     0.514    0.0000
      1   -0.144   0.226     0.522    0.0755

@@ -13,6 +13,8 @@ import pathlib
 import socket
 import subprocess
 
+import os
+
 import numpy as np
 
 _ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -20,9 +22,8 @@ _sys.path.insert(0, str(_ROOT / "src"))
 
 from eval.ipc import recv_msg, send_msg  # noqa: E402
 
-DEFAULT_WORKER_PY = pathlib.Path(
-    "/home/kneepolean/miniconda3/envs/habitat_render/bin/python"
-)
+# Python of the habitat_render env (environment/habitat_render.yml); override with HABITAT_PYTHON.
+DEFAULT_WORKER_PY = pathlib.Path(os.environ.get("HABITAT_PYTHON", "python"))
 WORKER_SCRIPT = _ROOT / "src" / "eval" / "habitat_worker.py"
 
 

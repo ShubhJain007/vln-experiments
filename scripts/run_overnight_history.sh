@@ -8,8 +8,8 @@
 # tokens against 196, and the batch that fits with the GPU shared (2) is not
 # the batch that fits with it free. Hard-coding a batch size here would either
 # waste the card or OOM six hours in.
-PY=/home/kneepolean/miniconda3/envs/latentpilot/bin/python
-cd /home/kneepolean/shubhj/latentpilot || exit 1
+PY=${PY:-python}            # python of the latentpilot env (environment/latentpilot.yml)
+cd "$(dirname "$0")/.." || exit 1
 export PYTHONPATH="" HF_HUB_OFFLINE=1
 
 STRIDE=8

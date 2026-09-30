@@ -1,15 +1,15 @@
 ######## COLLECT rollouts started Wed Sep  2 17:13:22 EDT 2026 ########
 split=train  scans=10  episodes=2538
-out=/home/kneepolean/shubhj/latentpilot/data/rollouts
+out=<repo>/data/rollouts
 primitives: {'move_forward': {'amount': 0.25}, 'turn_left': {'amount': 15.0}, 'turn_right': {'amount': 15.0}}
 
 1pXnuDYAj8r: 256 episodes to do (0 already done)
 Traceback (most recent call last):
-  File "/home/kneepolean/shubhj/latentpilot/src/data/collect_rollouts.py", line 418, in <module>
+  File "<repo>/src/data/collect_rollouts.py", line 418, in <module>
     raise SystemExit(main())
-  File "/home/kneepolean/shubhj/latentpilot/src/data/collect_rollouts.py", line 381, in main
+  File "<repo>/src/data/collect_rollouts.py", line 381, in main
     sim = make_simulator(glb, tuple(args.resolution))
-  File "/home/kneepolean/shubhj/latentpilot/src/data/collect_rollouts.py", line 98, in make_simulator
+  File "<repo>/src/data/collect_rollouts.py", line 98, in make_simulator
     import habitat_sim
 ModuleNotFoundError: No module named 'habitat_sim'
 ######## COLLECT rollouts finished Wed Sep  2 17:13:22 EDT 2026 ########

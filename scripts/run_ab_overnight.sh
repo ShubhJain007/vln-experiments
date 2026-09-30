@@ -16,8 +16,8 @@
 #  * python -u AND grep --line-buffered -- without both, output sits in a pipe
 #    buffer for hours and the run cannot be monitored while it happens.
 
-PY=/home/kneepolean/miniconda3/envs/latentpilot/bin/python
-cd /home/kneepolean/shubhj/latentpilot || exit 1
+PY=${PY:-python}            # python of the latentpilot env (environment/latentpilot.yml)
+cd "$(dirname "$0")/.." || exit 1
 export PYTHONPATH=""
 
 STEPS=17400          # 2 full epochs over 69,606 training pairs

@@ -82,7 +82,7 @@ Format: **id · date · stage**, then Question / Why / Setup / Result / Conclusi
 - Source: DECISIONS.md:88-113; docs/GOTCHAS.md §2; HANDOFF.md:64-75.
 
 **D7 · 08-31 · Stage 1 target cache. v̄ cached in fp32**
-- Result: The same frame at batch 3 vs batch 1 differs by **~7% relative L2** in bf16 (cosine 0.998). In fp32 the difference is **8e-6**. `cache_vbar_when_free.sh` states fp32 is batch-invariant to 1.3e-6 while bf16 is 6.8e-2.
+- Result: The same frame at batch 3 vs batch 1 differs by **~7% relative L2** in bf16 (cosine 0.998). In fp32 the difference is **8e-6**. `scripts/archive/cache_vbar_when_free.sh` states fp32 is batch-invariant to 1.3e-6 while bf16 is 6.8e-2.
 - Accepted residual (not measured): v_t is left in bf16.
 - Source: DECISIONS.md:117-137; GOTCHAS §1.
 
@@ -285,11 +285,11 @@ Format: **id · date · stage**, then Question / Why / Setup / Result / Conclusi
 - Evals:
   - step8000, n=30: SR/SPL/OS 0.1333, nDTW 0.2804, NE 8.6863, model_stop 0%.
   - step10000, n=150: SR/SPL/OS 0.0667, nDTW 0.2751, NE 8.3559, model_stop 27 (18.0%).
-- Conclusion (from D27 and `run_step1_then_step2.sh`): "the lambda axis was flat (balanced vs learned, p=0.333)". The p-value computation is not in any source.
+- Conclusion (from D27 and `scripts/archive/run_step1_then_step2.sh`): "the lambda axis was flat (balanced vs learned, p=0.333)". The p-value computation is not in any source.
 - Source: `logs/lambdafix_20260902_170524.log`, `logs/eval_balanced_step8000_181830.log`, `logs/evaln150_stage1_balanced_step10000.log`, `scripts/run_lambda_fix.sh`, `src/train/train_stage1.py:97,239,615`.
 
 **E-14 · 09-02 18:37-19:05 · Stage 1. n=150 re-evaluation ("STEP 1")**
-- Why: At n=30 every CI spans about 0.24; n=150 narrows that to about 0.11 (`run_step1_then_step2.sh` header).
+- Why: At n=30 every CI spans about 0.24; n=150 narrows that to about 0.11 (`scripts/archive/run_step1_then_step2.sh` header).
 - Result, n=150 (8 scans), diagnostic:
 
   | Checkpoint | SR | SPL | OS | nDTW | NE | model_stop | ‖z‖ max |
@@ -311,7 +311,7 @@ Format: **id · date · stage**, then Question / Why / Setup / Result / Conclusi
 **E-16 · 09-02 19:23-19:37 · pointing data. Re-collect 16 train scans (4,203 episodes) and val_unseen (1,839) with per-step rotations and intrinsics**
 - Why: Yaw reconstructed from actions is exact 93.8% of the time, but about 6% are 15° off.
 - Result: After re-collection LEFT = +15.000°, RIGHT = −15.000°, FWD = 0.000° exactly. This invalidates the cached vbar.npy.
-- Source: `logs/recollect_20260902_192305.log`, `scripts/recollect_with_poses.sh`, DECISIONS.md:827-837.
+- Source: `logs/recollect_20260902_192305.log`, `scripts/archive/recollect_with_poses.sh`, DECISIONS.md:827-837.
 
 **D27 · 09-02 ~19:30-20:14 (human-directed pivot) · pointing. Robostral pointing replaces 4-way action classification**
 - Q: Do the pointing labels agree with the expert's own actions?
@@ -344,7 +344,7 @@ Format: **id · date · stage**, then Question / Why / Setup / Result / Conclusi
 - Q: Is the ceiling data or architecture? This also un-confounds "pointing beats LatentPilot (p=0.0055)", which compared 4,203 against 1,665 episodes.
 - Setup: `run_data_ablation.sh`. Same 20,000 steps × batch 8, same seed and LR schedule, restricted to the 6 LatentPilot scans (1,665 episodes / 69,606 steps, 2.30 epochs).
 - Training: final act-agree 0.825 (training loss 0.0756, lower than the 16-scan run's 0.3955).
-- In-script evals produced no output (the runner swallowed an error; see the comment in `run_all_evals.sh`). Re-evaluated at 09-03 12:24 with n=150, thr 0.05: **strict SR 0.0400** / SPL 0.0372 / OS 0.0667; diagnostic 0.0667. For comparison, the 16-scan final gives strict 0.1333.
+- In-script evals produced no output (the runner swallowed an error; see the comment in `scripts/archive/run_all_evals.sh`). Re-evaluated at 09-03 12:24 with n=150, thr 0.05: **strict SR 0.0400** / SPL 0.0372 / OS 0.0667; diagnostic 0.0667. For comparison, the 16-scan final gives strict 0.1333.
 - Conclusion (implied): more data helps. No explicit conclusion is written anywhere.
 - Source: `logs/dataablation_223555.log`, `logs/evalsord_115012.log`, `checkpoints/pointing_6scan/trainlog.json`.
 
@@ -536,7 +536,7 @@ Format: **id · date · stage**, then Question / Why / Setup / Result / Conclusi
   - `reasoner_diffusion_bare`: OOM.
   - `r2r_av_reasoner`: started with no episodes logged.
   - `av_action_only`, `r2r_av_action`, `fixed_forward`: never ran.
-- Source: `logs/ablation_driver*.log`, `logs/ablation_0910_*/`, `results/salvaged/*.log`, `scripts/{run_ablations.py,handoff_ablation.sh,queue_after.sh,run_remaining.sh}`.
+- Source: `logs/ablation_driver*.log`, `logs/ablation_0910_*/`, `results/salvaged/*.log`, `scripts/run_ablations.py`, `scripts/archive/{handoff_ablation.sh,queue_after.sh,run_remaining.sh}`.
 
 **E-42 · 09-10 11:13 · reasoner. Nav probe v1 (zero-shot, video)**
 - Setup: 36 decision points / 12 trajectories, 16-frame context at 15 FPS, horizon 8 frames. Majority baseline **0.500**.
@@ -828,7 +828,7 @@ The base Cosmos3-Edge weights sit outside `checkpoints/` subfolders (`checkpoint
 8. **pointing_hist was trained with history stride 1, not the intended 8** (`run_overnight_history.sh` sets STRIDE=8; the log and config show stride 1). This matches the "silently trained the wrong stride for 7 hours" note in `run_full3epoch.sh`.
 9. **D26, D28 and D29 are referenced in code and scripts but have no entries in DECISIONS.md**, which jumps D25 → D27. D19 also appears before D18 in the file.
 10. **The D19 and D23 closed-loop numbers and the D15 Stage 0 eval have no logs in the repo.** The D19 "Stage 0 16.7%" row has no n or other metrics.
-11. The p-values ("p=0.333" in D27 and `run_step1_then_step2.sh`; "p=0.0055" in `run_data_ablation.sh`) have no computation in any source.
+11. The p-values ("p=0.333" in D27 and `scripts/archive/run_step1_then_step2.sh`; "p=0.0055" in `run_data_ablation.sh`) have no computation in any source.
 12. **D18 vs D21 baselines disagree:** global mean 17.9 vs constant 18.48, and z=v̄_t 8.2 vs persistence 7.82. They were probably measured on different frame sets, but this is not stated. D18 gives ‖v̄‖ ≈ 15.8, while training logs print mean ‖v̄‖ = 14.798 (train split) and eval logs 15.84.
 13. **Expert nDTW:** D13 says the expert "now scores nDTW 0.80", but the full-split validation gives 0.7544 (train) and 0.7529 (val_unseen). D14's expert mean NE of 2.91 m vs HANDOFF's 2.88 / 2.87 m.
 14. **`eval_edge_native.log` is identical, episode for episode, to `eval_edge_zeroshot.log`** (SR 0.0750). Either a duplicate run or deterministic; its intended difference ("native") is undocumented.

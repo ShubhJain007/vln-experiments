@@ -1,6 +1,6 @@
 ######## val_seen collect started Fri Sep  4 11:20:53 EDT 2026 ########
 split=val_seen  scans=53  episodes=778
-out=/home/kneepolean/shubhj/latentpilot/data/rollouts
+out=<repo>/data/rollouts
 primitives: {'move_forward': {'amount': 0.25}, 'turn_left': {'amount': 15.0}, 'turn_right': {'amount': 15.0}}
 
 17DRP5sb8fy: 6 episodes to do (0 already done)

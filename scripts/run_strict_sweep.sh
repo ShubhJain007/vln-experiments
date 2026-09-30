@@ -5,8 +5,8 @@
 # fire when the agent is already >3 m from the goal, i.e. it is structurally
 # guaranteed to be a failure. This is the first measurement that can show a
 # non-zero agent-initiated SR.
-PY=/home/kneepolean/miniconda3/envs/latentpilot/bin/python
-cd /home/kneepolean/shubhj/latentpilot || exit 1
+PY=${PY:-python}            # python of the latentpilot env (environment/latentpilot.yml)
+cd "$(dirname "$0")/.." || exit 1
 export PYTHONPATH="" HF_HUB_OFFLINE=1
 
 # Wait for the threshold sweep to finish so they do not fight over the GPU.

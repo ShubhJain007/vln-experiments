@@ -6,8 +6,8 @@
 # the user ALREADY accepted when downloading the first 27 scans; it is the same
 # dataset and the same agreement, and the user explicitly requested the full
 # download. MP3D remains RESEARCH-ONLY -- see D-notes on licensing.
-PY=/home/kneepolean/miniconda3/envs/latentpilot/bin/python
-cd /home/kneepolean/shubhj/latentpilot || exit 1
+PY=${PY:-python}            # python of the latentpilot env (environment/latentpilot.yml)
+cd "$(dirname "$0")/.." || exit 1
 export PYTHONPATH=""
 echo "######## MP3D full download started $(date) ########"
 yes "" | $PY -u scripts/download_mp3d.py --episodes 99999 2>&1 \

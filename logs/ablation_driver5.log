@@ -1,4 +1,4 @@
-8 arms, 40 episodes each -> /home/kneepolean/shubhj/latentpilot/results/ablations.md
+8 arms, 40 episodes each -> <repo>/results/ablations.md
 
 === reasoner_diffusion_grounded ===
   eval_cosmos_nav.py --policy diffusion_grounded

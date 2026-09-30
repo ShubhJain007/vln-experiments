@@ -1,4 +1,4 @@
-flash_attn is installed but failed to import: /home/kneepolean/.local/lib/python3.10/site-packages/flash_attn_2_cuda.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c105ErrorC2ENS_14SourceLocationENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE. Falling back to native PyTorch attention.
+flash_attn is installed but failed to import: <user-local>/lib/python3.10/site-packages/flash_attn_2_cuda.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c105ErrorC2ENS_14SourceLocationENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE. Falling back to native PyTorch attention.
 16 trajectories across 11 scans
 16 usable; mean |yaw| in chosen window 2.48 deg
 

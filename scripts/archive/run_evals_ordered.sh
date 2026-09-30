@@ -2,8 +2,8 @@
 # Full-corpus model FIRST (61 scans / 10,819 episodes), then the 6-scan ablation.
 # No grep on the metric output -- the previous runner filtered stdout to metric
 # lines only and silently swallowed a TypeError, making four evals look empty.
-PY=/home/kneepolean/miniconda3/envs/latentpilot/bin/python
-cd /home/kneepolean/shubhj/latentpilot || exit 1
+PY=${PY:-python}            # python of the latentpilot env (environment/latentpilot.yml)
+cd "$(dirname "$0")/../.." || exit 1
 export PYTHONPATH="" HF_HUB_OFFLINE=1
 for ck in pointing_hist/final pointing_6scan/final; do
   for mode in "--strict" ""; do

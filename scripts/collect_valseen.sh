@@ -6,8 +6,8 @@
 # val_unseen -- that is test-set tuning and is optimistic. val_seen uses
 # TRAINING scenes with held-out episodes, so tuning there never touches the
 # test scenes.
-PY_HAB=/home/kneepolean/miniconda3/envs/habitat_render/bin/python
-cd /home/kneepolean/shubhj/latentpilot || exit 1
+PY_HAB=${HABITAT_PYTHON:-python}   # python of the habitat_render env (environment/habitat_render.yml)
+cd "$(dirname "$0")/.." || exit 1
 echo "######## val_seen collect started $(date) ########"
 PYTHONPATH=src $PY_HAB -u src/data/collect_rollouts.py --split val_seen 2>&1 \
   | grep --line-buffered -viE "^\[|warning|nv-|Lighting Layout|no-layout"

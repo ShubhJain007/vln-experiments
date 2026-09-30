@@ -10,8 +10,8 @@
 # is ~6.1 GB, which does not fit together on a 15.56 GB card (D7 forbids
 # dropping to bf16 -- it would corrupt the Eq. 14 targets).
 
-PY_LP=/home/kneepolean/miniconda3/envs/latentpilot/bin/python
-cd /home/kneepolean/shubhj/latentpilot || exit 1
+PY_LP=${PY:-python}         # python of the latentpilot env (environment/latentpilot.yml)
+cd "$(dirname "$0")/../.." || exit 1
 export PYTHONPATH="" HF_HUB_OFFLINE=1
 
 N=150

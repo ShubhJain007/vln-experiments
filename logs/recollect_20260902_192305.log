@@ -1,6 +1,6 @@
 ######## RECOLLECT train (16 scans) started Wed Sep  2 19:23:05 EDT 2026 ########
 split=train  scans=16  episodes=4203
-out=/home/kneepolean/shubhj/latentpilot/data/rollouts
+out=<repo>/data/rollouts
 primitives: {'move_forward': {'amount': 0.25}, 'turn_left': {'amount': 15.0}, 'turn_right': {'amount': 15.0}}
 
 1pXnuDYAj8r: 256 episodes to do (0 already done)
@@ -537,7 +537,7 @@ Using driver workarounds:
 ######## RECOLLECT train finished Wed Sep  2 19:33:09 EDT 2026 ########
 ######## RECOLLECT val_unseen started Wed Sep  2 19:33:09 EDT 2026 ########
 split=val_unseen  scans=11  episodes=1839
-out=/home/kneepolean/shubhj/latentpilot/data/rollouts
+out=<repo>/data/rollouts
 primitives: {'move_forward': {'amount': 0.25}, 'turn_left': {'amount': 15.0}, 'turn_right': {'amount': 15.0}}
 
 2azQ1b91cZZ: 252 episodes to do (0 already done)
