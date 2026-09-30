@@ -23,11 +23,26 @@ Vision-and-Language Navigation Policies on a Single GPU* (19 pages, LaTeX source
 
 ## Demos
 
-Every video below is a closed-loop run in an **unseen** Matterport3D building. The agent hears one English instruction
-and acts from its own camera. Recordings play at 4 fps. The overlay shows the instruction, distance to goal, the chosen
-action and the STOP probability.
+All demos are in **unseen** Matterport3D buildings: the agent gets one English instruction and sees only its own camera.
+The demos are not all the same kind, so check the type before reading one:
+
+| | Approach | Demo type | What it shows |
+|---|---|---|---|
+| ① | LatentPilot | **closed-loop rollouts** (the model drives) | expert, model at step 10k and final model, side by side on the same episode |
+| ② | Pointing policy | **closed-loop rollouts** (the model drives) | three failure modes, with the model's aim point drawn on each frame |
+| ③ | Cosmos3-Edge reasoner | **decision probes** (the model does *not* drive) | the video the model is given at one moment, then what it answered |
+| ④ | Cosmos3-Edge action model | **figure** (no videos were recorded) | how strongly language steers its motion |
 
 ### ① LatentPilot: a better frame predictor became a worse navigator
+
+**What you're seeing:** three agents given the same instruction in the same building, playing side by side. Each panel
+is what that agent's camera saw as it moved.
+- **Left, the expert:** it follows the human-annotated reference path. Its panel freezes when it arrives.
+- **Middle, LatentPilot after 10k training steps.**
+- **Right, the fully trained LatentPilot.**
+
+Under each LatentPilot panel, the yellow line is the step number and the live distance to the goal.
+**What to notice:** training longer made the model *worse* at getting to the goal (finding 1 below).
 
 <p align="center">
   <img src="media/previews/compare_ep09_x8F5xyUWy9e.gif" width="780"><br>
@@ -66,27 +81,46 @@ The step-10k policy comes from an earlier training run whose checkpoint was late
 
 ### ② Pointing policy: best true success, and its three failure modes
 
-The policy draws a cross-hair (cyan) where it wants to go next, and a controller turns toward it. At step 100k it
-succeeded by its own STOP in 6 of 22 recorded episodes. The failures fall into three kinds
-([all 16 videos](media/rollouts/step100k_failures/)):
+**What you're seeing:** the pointing policy driving on its own. On every frame:
+- the **cyan cross-hair** is the spot in the image the model wants to go to next, and a simple controller turns toward it;
+- a **green cross-hair**, when visible, is where the expert's next waypoint actually is;
+- the bottom text is the step, the current and closest distance to the goal, the action taken, and `p(stop)`, the model's
+  STOP probability (it stops once this passes a threshold);
+- a **red border** on the last frame means the episode failed.
+
+At step 100k it succeeded by its own STOP in 6 of 22 recorded episodes. The GIFs below are three failures, one per
+failure type ([all 16 failure videos](media/rollouts/step100k_failures/)):
 
 | Never approaches the goal | Passes within 0.5 m, never stops | Passes 1.5 m from the goal, stops 5.4 m away |
 |---|---|---|
 | <img src="media/previews/step100k_failures_ep02_8194nk5LbLH.gif" width="250"> | <img src="media/previews/step100k_failures_ep04_EU6Fwq7SyZv.gif" width="250"> | <img src="media/previews/step100k_failures_ep16_pLe4wQe7qrG.gif" width="250"> |
 
-### ③ Cosmos3-Edge reasoner as the policy: what it sees and what it decides
+### ③ Cosmos3-Edge reasoner: decision probes (the model is not driving here)
 
-The reasoner receives the last 8 s of its own camera view (sampled to 8 frames; v1 saw only the last ~1 s) and the
-instruction, and answers with one command. Below is its input window at two probe decision points, with the expert's action and the answers of two
-fine-tuned versions (green: matches the expert, orange: does not).
+No closed-loop videos were recorded for the reasoner, so these clips show its *decisions*, not its driving. Each clip
+has two parts:
+1. **The input.** The camera video the reasoner is handed at one moment of an **expert's** walk: up to the last 8 s,
+   ending "now". The walking you see is the expert's, not the model's.
+2. **The answer card.** The clip freezes at that moment and asks "What should the robot do now?" It then shows the
+   expert's actual next action and what each fine-tuned reasoner answered, marked ✓ correct or ✗ wrong.
 
-| At the goal: the expert stops, v1 stops, v3 walks on | Mid-route: v1 turns needlessly, v3 goes straight |
+**v1 and v3** are two fine-tuned versions of the same reasoner:
+- **SFT v1**, the first fine-tune: trained on data that over-samples turns and stops, and sees about 1 s of video.
+- **SFT v3**, the final fine-tune: trained on uniformly sampled data, and sees 8 s of video.
+
+There is no v2 in the results. That run (uniform sampling, short context) was stopped after 200 steps, and its idea was
+folded into v3.
+
+| Case A: at the goal. The expert stops; v1 says stop ✓; v3 says move forward ✗ | Case B: mid-route. The expert goes forward; v1 says turn left ✗; v3 says move forward ✓ |
 |---|---|
-| <img src="media/previews/reasoner_2azQ1b91cZZ_traj1039_t225.gif" width="360"> | <img src="media/previews/reasoner_8194nk5LbLH_traj1141_t34.gif" width="360"> |
+| <img src="media/previews/reasoner_2azQ1b91cZZ_traj1039_t225.gif" width="380"> | <img src="media/previews/reasoner_8194nk5LbLH_traj1141_t34.gif" width="380"> |
 
-These two clips show why neither version is finished. v1 over-turns and v3 almost never stops.
+**What to notice:** each version has the opposite weakness. v1 turns and stops too eagerly: in closed loop it stops
+in 65 % of episodes. v3 goes straight well but almost never says stop, which is why it reaches the goal region most
+often (47.5 %) but does not stop there. Case B is only 2 s long because the decision comes 2 s into the walk.
 
-Before fine-tuning, the reasoner could sketch a path on a still frame (below), but when asked for its *next action* it
+**Before fine-tuning** (figure below, still images, no video): the reasoner could sketch a plausible path of five
+waypoints (blue dots, numbered in order) on a single frame. But when asked for its *next action* it
 answered as a bystander watching a static camera. On the left-hand scene it said: *"A person enters the room through the
 archway, drawn by the reflection in the mirror or the painting's subject."* It did not know it was the agent. That observation motivated the
 embodiment prompt and the fine-tuning.
@@ -95,8 +129,11 @@ embodiment prompt and the fine-tuning.
 
 ### ④ Cosmos3-Edge action model (video diffusion): motion prior yes, language no
 
-No closed-loop videos were recorded for this policy. Its zero-shot behaviour is summarised by the figure below: turning
-follows a short command only at high classifier-free guidance, and full R2R instructions barely steer it.
+No videos were recorded for this policy; this is a measurement figure. **Left:** given "turn left" or "turn right",
+how often the model turns the right way, as the guidance strength goes up. **Right:** with full R2R instructions, how
+often its turn direction matches the expert. Blue bars use the right instruction; orange bars use another episode's
+instruction as a control. **What to notice:** at low guidance the right and wrong instructions score about the same, so
+the model largely ignores the language.
 
 ![edge guidance](docs/figures/fig_edge_guidance.png)
 

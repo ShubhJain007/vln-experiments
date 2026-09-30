@@ -82,31 +82,64 @@ def clean(text):
     return " ".join(text.translate({ord(c): None for c in "',;:[]%\\"}).split())
 
 
-def reasoner_decision(scan, traj, t, out, width=440, ctx=120):
-    """The reasoner's input window (up to 8 s of the rendered 15 FPS walk, ending at decision frame t) with the
-    expert label and both SFT checkpoints' answers underneath. The model itself sees 8 of these frames at 1 FPS."""
+def reasoner_decision(scan, traj, t, out, width=480, ctx=120, hold=5.0):
+    """A decision probe, NOT a closed-loop rollout. Part 1 plays the reasoner's input: the last 8 s of the rendered expert
+    walk up to decision frame t (the model sees 8 of these frames, 1 per second). Part 2 freezes on frame t and shows
+    the question, the expert's action and what each fine-tuned reasoner answered (results/probe_*_final.json)."""
+    import tempfile
     preds = {}
-    for name, f in (("SFT v1", "probe_sft_final.json"), ("SFT v3", "probe_v3_final.json")):
+    for name, f in (("v1", "probe_sft_final.json"), ("v3", "probe_v3_final.json")):
         for r in json.load(open(ROOT / "results" / f))["transcripts"]:
             if (r["scan"], str(r["traj"]), int(r["t"])) == (scan, traj, t):
                 preds[name], preds["expert"] = r["pred"], r["label"]
     d = ROOT / "data" / "video" / "val_unseen" / scan / f"traj{traj}"
     instruction = json.loads((d / "meta.json").read_text())["instructions"]
     instruction = instruction[0] if isinstance(instruction, list) else instruction.strip("[]'\" ").split("', '")[0]
-    lines = textwrap.wrap(clean(instruction), 58)[:4]
-    bar = 30 + 17 * len(lines) + 3 * 19
-    cap = "".join(f",drawtext=fontfile={FONT_REG}:text='{l}':x=8:y={width + 10 + 17 * k}:fontsize=13:fontcolor=white"
-                  for k, l in enumerate(lines))
-    for k, who in enumerate(("expert", "SFT v1", "SFT v3")):
-        colour = "white" if who == "expert" else ("0x7ee2b8" if preds[who] == preds["expert"] else "0xff8a65")
-        cap += (f",drawtext=fontfile={FONT}:text='{who} → {clean(preds[who])}':x=8:y={width + 18 + 17 * len(lines) + 19 * k}"
-                f":fontsize=14:fontcolor={colour}")
-    vf = (f"trim=start_frame={max(0, t - ctx + 1)}:end_frame={t + 1},setpts=PTS-STARTPTS,fps=6,"
-          f"scale={width}:-1,pad={width}:{width + bar}:0:0:black{cap},tpad=stop_mode=clone:stop_duration=2,"
-          f"split[a][b];[a]palettegen=max_colors=64[p];[b][p]paletteuse")
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(d / "frames.mp4"), "-vf", vf, str(out)], check=True)
-    return out
+    tmp = pathlib.Path(tempfile.mkdtemp())
 
+    def txt(x, y, text, size=14, colour="white", bold=False):
+        f = tmp / f"t{len(list(tmp.glob('*.txt')))}.txt"
+        f.write_text(text)
+        return (f",drawtext=fontfile={FONT if bold else FONT_REG}:textfile={f}:expansion=none:x={x}:y={y}"
+                f":fontsize={size}:fontcolor={colour}")
+
+    top, lines = 54, textwrap.wrap(" ".join(instruction.split()), 60)[:4]
+    bottom = 28 + 17 * len(lines)
+    H = top + width + bottom
+    frame_y = top
+    instr = txt(10, frame_y + width + 8, "Instruction:", 13, "0xbbbbbb", True) + "".join(
+        txt(10, frame_y + width + 26 + 17 * k, l, 13) for k, l in enumerate(lines))
+    lo = max(0, t - ctx + 1)
+    secs = (t - lo + 1) / 15.0
+    part1 = (f"[0]trim=start_frame={lo}:end_frame={t + 1},setpts=PTS-STARTPTS,fps=6,scale={width}:{width},"
+             f"pad={width}:{H}:0:{top}:black"
+             + txt(10, 8, "DECISION PROBE  -  not a rollout", 17, "0xf2c14e", True)
+             + txt(10, 31, f"Playing the {secs:.0f} s of camera view the reasoner receives as input", 13)
+             + instr + "[a]")
+    ok = {k: preds[k] == preds["expert"] for k in ("v1", "v3")}
+    y0 = frame_y + 70
+    card = (f",drawbox=x=0:y={frame_y}:w={width}:h={width}:color=black@0.72:t=fill"
+            + txt(24, y0, "DECISION POINT", 20, "0xf2c14e", True)
+            + txt(24, y0 + 30, "What should the robot do now?", 15)
+            + txt(24, y0 + 80, "Expert (ground truth)", 14, "0xbbbbbb")
+            + txt(24, y0 + 100, preds["expert"].upper(), 22, "white", True)
+            + txt(24, y0 + 150, "SFT v1 answered", 14, "0xbbbbbb")
+            + txt(24, y0 + 170, preds["v1"].upper() + ("   ✓ correct" if ok["v1"] else "   ✗ wrong"), 22,
+                  "0x7ee2b8" if ok["v1"] else "0xff8a65", True)
+            + txt(24, y0 + 220, "SFT v3 answered", 14, "0xbbbbbb")
+            + txt(24, y0 + 240, preds["v3"].upper() + ("   ✓ correct" if ok["v3"] else "   ✗ wrong"), 22,
+                  "0x7ee2b8" if ok["v3"] else "0xff8a65", True)
+            + txt(24, y0 + 300, "v1 = first fine-tune: onset-balanced data, ~1 s of video", 12, "0xbbbbbb")
+            + txt(24, y0 + 318, "v3 = final fine-tune: uniform data, 8 s of video", 12, "0xbbbbbb"))
+    part2 = (f"[0]trim=start_frame={t}:end_frame={t + 1},setpts=PTS-STARTPTS,scale={width}:{width},"
+             f"loop=loop={int(hold * 6)}:size=1:start=0,fps=6,pad={width}:{H}:0:{top}:black"
+             + txt(10, 8, "DECISION PROBE  -  the models' answers", 17, "0xf2c14e", True)
+             + txt(10, 31, "Frozen at the moment the question is asked", 13)
+             + instr + card + "[b]")
+    graph = (part1 + ";" + part2 + ";[a][b]concat=n=2:v=1,split[c][e];[c]palettegen=max_colors=96[p];[e][p]paletteuse")
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(d / "frames.mp4"), "-filter_complex", graph, str(out)],
+                   check=True)
+    return out
 
 def main():
     for scan, traj, t in REASONER_CASES:
