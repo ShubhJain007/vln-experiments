@@ -6,6 +6,8 @@ authors:
   - family-names: Jain
     given-names: Shubh
 repository-code: "https://github.com/ShubhJain007/vln-four-ways"
+url: "https://shubhjain007.github.io/vln-four-ways/"
+license: MIT
 date-released: 2026-09-29
 keywords:
   - vision-and-language navigation

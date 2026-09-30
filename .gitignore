@@ -17,3 +17,4 @@ __pycache__/
 =*
 # published rollout videos (see media/README.md)
 !media/**/*.mp4
+_site/

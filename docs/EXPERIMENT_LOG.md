@@ -206,11 +206,11 @@ Format: **id · date · stage**, then Question / Why / Setup / Result / Conclusi
 ### Stage 0' (09-02)
 
 **E-10 · 09-02 00:31 (aborted) and 00:54-05:42 · Stage 0'. Design A vs B training (NaN-row reproduction)**
-- Setup: `scripts/run_ab_overnight.sh`, `train_stage0_prime.py`, 17,400 steps (2 epochs over 69,606 pairs), batch 8, 6 scans / 1,665 episodes, cosine LR (warmup 100, peak 1e-4, floor 5e-6), no L_pil. A: pilot_mode = last. B: pilot_mode = action_query. The first launch at 00:31 was aborted after about 2,650 steps (`ab_overnight_aborted.log`).
+- Setup: `scripts/run_ab_overnight.sh`, `train_stage0_prime.py`, 17,400 steps (2 epochs over 69,606 pairs), batch 8, 6 scans / 1,665 episodes, cosine LR (warmup 100, peak 1e-4, floor 5e-6), no L_pil. A: pilot_mode = last. B: pilot_mode = action_query. The first launch at 00:31 was aborted after about 2,650 steps (`logs/ab_overnight_aborted.log`).
 - Result: A ran 00:54-03:18 and B ran 03:18-05:42.
   - Final logged step: A loss 0.1555, acc 0.9725, STOP recall 0.769; B loss 0.1190, acc 0.975, STOP recall 0.769.
   - D19's quoted "loss 0.070 vs 0.082, acc 0.984 vs 0.983, STOP recall 0.761 vs 0.770" equals the mean of the last 20 trainlog entries (recomputed: A 0.070 / 0.984 / 0.761 and B 0.082 / 0.982 / 0.770).
-- Source: `ab_overnight.log`, `ab_overnight_aborted.log`, `checkpoints/stage0prime_{A,B}/trainlog.json`.
+- Source: `logs/ab_overnight.log`, `logs/ab_overnight_aborted.log`, `checkpoints/stage0prime_{A,B}/trainlog.json`.
 
 **D19 · 09-02 · Stage 0'. Closed-loop reverses D17: B beats A**
 - Setup: Stage 0' A and B final checkpoints, val_unseen **n=150**, diagnostic mode.
@@ -748,8 +748,8 @@ The key takeaway is that offline probe accuracy did **not** predict closed-loop 
 | Dir | Base model | Data | Steps / batch | Saved checkpoints | Purpose | Log / config |
 |---|---|---|---|---|---|---|
 | `stage0/` | Cosmos-Reason2-2B + LoRA r16 | 6 scans / 1,665 eps / 69,606 steps | 8,000 × 8 | step500…step8000, final (PEFT adapter_model.safetensors) | Memoryless Stage 0 (failed, D15) | trainlog.json only |
-| `stage0prime_A/` | same + Pilot (Design A) | same | 17,400 × 8 (2 ep) | final only (full model.safetensors, the D24 bug) | NaN-row reproduction, pilot last | ab_overnight.log; trainlog.json |
-| `stage0prime_B/` | same + Pilot (Design B, action_query) | same | 17,400 × 8 | final only | same, with action query | ab_overnight.log; trainlog.json |
+| `stage0prime_A/` | same + Pilot (Design A) | same | 17,400 × 8 (2 ep) | final only (full model.safetensors, the D24 bug) | NaN-row reproduction, pilot last | logs/ab_overnight.log; trainlog.json |
+| `stage0prime_B/` | same + Pilot (Design B, action_query) | same | 17,400 × 8 | final only | same, with action query | logs/ab_overnight.log; trainlog.json |
 | `stage1_learned/` | Cosmos-Reason2-2B + LoRA + Pilot B + learned G_psi, λ=0.1 | 6 scans | 17,400 × 8 | step2000…16000, final (adapter.pt + pilot.pt). Step2000-10000 were overwritten by run #2 | Stage 1 claim | stage1_20260902_120059.log; trainlog.json |
 | `stage1_identity/` | same, G_psi frozen to identity | 6 scans | 17,400 × 8 | step2000…16000, final | Gate (b) control | same log; trainlog.json |
 | `stage1_balanced/` | same, adaptive λ (ratio 0.9) | 6 scans | Planned 17,400 × 8; killed about 10,750 | step2000…10000 | D26 λ-drift fix | lambdafix_20260902_170524.log (no trainlog.json) |

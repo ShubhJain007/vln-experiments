@@ -136,7 +136,7 @@ Our contributions are:
   \node[mdlbox, right=4mm of b, text width=13mm] (h) {head on layers 23/26/28};
   \node[outbox, below=4mm of h, text width=17mm] (c) {bearing controller: turn if $|\theta|>7.5^\circ$};
   \node[outbox, above=3mm of h] (s) {STOP if $p>\tau$};
-  \draw[arr] (f.east) -- (b.west |- f.east); \draw[arr] (x.east) -- (b.west |- x.east);
+  \draw[arr] (f.east) -- ([yshift=2.5mm]b.west); \draw[arr] (x.east) -- ([yshift=-2.5mm]b.west);
   \draw[arr] (b) -- (h); \draw[arr] (h) -- node[right, font=\scriptsize]{$(u,v)$} (c); \draw[arr] (h) -- (s);
 \end{tikzpicture}\par
 {\small (b) Pointing + controller}
@@ -151,7 +151,7 @@ Our contributions are:
        {Cosmos3-Edge action stream (diffusion, CFG 7.5)};
   \node[outbox, right=4mm of p, text width=16mm] (k) {24-step chunk of 9-D ego-pose deltas};
   \node[outbox, below=3mm of k, text width=16mm] (r) {replayed as FWD / L / R};
-  \draw[arr] (f.east) -- (p.west |- f.east); \draw[arr] (x.east) -- (p.west |- x.east);
+  \draw[arr] (f.east) -- ([yshift=2.5mm]p.west); \draw[arr] (x.east) -- ([yshift=-2.5mm]p.west);
   \draw[arr] (p) -- (k); \draw[arr] (k) -- (r);
 \end{tikzpicture}\par
 {\small (c) Cosmos3-Edge action model (zero-shot)}
@@ -164,7 +164,7 @@ Our contributions are:
        {Cosmos3-Edge reasoner + LoRA SFT};
   \node[outbox, right=4mm of r, text width=16mm] (c) {one command: forward / left / right / stop};
   \node[outbox, below=3mm of c, text width=16mm] (b) {burst of 2 primitives, re-plan};
-  \draw[arr] (v.east) -- (r.west |- v.east); \draw[arr] (x.east) -- (r.west |- x.east);
+  \draw[arr] (v.east) -- ([yshift=2.5mm]r.west); \draw[arr] (x.east) -- ([yshift=-2.5mm]r.west);
   \draw[arr] (r) -- (c); \draw[arr] (c) -- (b);
 \end{tikzpicture}\par
 {\small (d) Cosmos3-Edge reasoner as a direct policy}

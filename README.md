@@ -1,5 +1,12 @@
 # Four Ways to Navigate: Vision-and-Language Navigation Policies on One GPU
 
+[![Project page](https://img.shields.io/badge/project-page-2a78d6)](https://shubhjain007.github.io/vln-four-ways/)
+[![Paper](https://img.shields.io/badge/paper-PDF-b31b1b)](paper/main.pdf)
+[![Model cards](https://img.shields.io/badge/model-cards-ffcc4d)](model_cards/README.md)
+[![License: MIT](https://img.shields.io/badge/code-MIT-1baf7a)](LICENSE)
+[![Python 3.10](https://img.shields.io/badge/python-3.10-3776ab)](environment/latentpilot.yml)
+[![Cite](https://img.shields.io/badge/cite-CITATION.cff-555)](CITATION.cff)
+
 **Four architectures for Vision-and-Language Navigation in continuous environments (R2R-CE), each built and evaluated
 on a single 16 GB GPU:**
 
@@ -11,6 +18,7 @@ on a single 16 GB GPU:**
 
 What worked, what failed, and why.
 
+🌐 **Project page:** [shubhjain007.github.io/vln-four-ways/](https://shubhjain007.github.io/vln-four-ways/)
 📄 **Technical report:** [`paper/main.pdf`](paper/main.pdf) — *Four Ways to Navigate: An Empirical Study of
 Vision-and-Language Navigation Policies on a Single GPU* (19 pages, LaTeX source in [`paper/`](paper/)).
 📚 **References:** [`docs/REFERENCES.md`](docs/REFERENCES.md) (53 works; BibTeX in
@@ -345,16 +353,32 @@ The full narrative, one section per experiment with why it was run, setup, resul
 - **Different backbone and scale from the paper** (2 B vs 7 B parameters, 6–61 scans vs full data). These results
   describe this scale; they do not settle whether the paper is right.
 
+## Model zoo
+
+Every trained model reported in the paper has a model card in Hugging Face format ([`model_cards/`](model_cards/README.md)).
+Weights are not published yet (each is a 25–33 MB LoRA adapter).
+
+| Model | Approach | Base model | Result on R2R-CE `val_unseen` | Card |
+|---|---|---|---|---|
+| `pointing_fusion/step120000` | ② pointing + controller | Cosmos-Reason2-2B | **strict SR 31.3 %**, SPL 25.4 (n = 150) | [card](model_cards/pointing-fusion-2b/README.md) |
+| `reasoner_sft_v3/step1500` | ④ Cosmos3-Edge reasoner | Cosmos3-Edge | OS 47.5 % (n = 40, diagnostic) | [card](model_cards/reasoner-sft-v3/README.md) |
+| `stage1_learned/final`, `stage1_identity/final` | ① LatentPilot | Cosmos-Reason2-2B | OS 10.7 % / 17.3 % (n = 150, diagnostic) | [card](model_cards/latentpilot-stage1-2b/README.md) |
+
 ## Reproduction
 
 Two conda environments are needed, because no habitat-sim build supports Python 3.10:
 
 | Env | Python | Contains | Used for |
 |---|---|---|---|
-| `latentpilot` | 3.10 | torch, transformers, peft, diffusers | model code, training, evaluation driver |
-| `habitat_render` | 3.9 | habitat-sim 0.3.3, habitat-lab | rendering and simulation (separate worker process) |
+| `latentpilot` | 3.10 | torch 2.5.1 (CUDA 12.1), transformers 5.16, peft 0.20, diffusers 0.40 | model code, training, evaluation driver |
+| `habitat_render` | 3.9 | habitat-sim 0.3.3 (headless, with Bullet) | rendering and simulation (separate worker process) |
+
+Exact versions are pinned in [`environment/`](environment/).
 
 ```bash
+conda env create -f environment/latentpilot.yml
+conda env create -f environment/habitat_render.yml
+
 PYTHONPATH="" python -m pytest tests/ -q          # 311 tests, one file per equation group
 python scripts/verify_env.py                       # backbone loads, d = 2048, N_v = 196, VRAM
 conda activate habitat_render && python scripts/verify_habitat.py --scene <scene .glb>
@@ -402,6 +426,9 @@ tools/           make_figures.py (docs/figures from logs), make_demo_media.py (d
 tests/           one test file per equation group (311 tests)
 results/         probe reports and closed-loop run summaries (JSON)
 logs/            every training and evaluation log (text)
+website/         project page (index.html); deployed to GitHub Pages by .github/workflows/pages.yml
+model_cards/     Hugging Face-format model cards for every trained model
+environment/     pinned conda / pip environments
 paper/           technical report: main.tex, references.bib (53 entries), figures/, main.pdf (build: make -C paper)
 docs/            EXPERIMENTS.md (narrative), EXPERIMENT_LOG.md (every number + source), REFERENCES.md, EQUATIONS.md,
                  GOTCHAS.md, figures/
@@ -454,11 +481,12 @@ Please also cite the work this builds on. The core references are below; all 53 
 | Models (③④) | NVIDIA, [Cosmos3-Edge](https://huggingface.co/nvidia/Cosmos3-Edge); NVIDIA, *Cosmos WFM*, [arXiv:2501.03575](https://arxiv.org/abs/2501.03575); NVIDIA, *Cosmos-Reason1*, [arXiv:2503.15558](https://arxiv.org/abs/2503.15558) |
 | Fine-tuning | Hu et al., *LoRA*, [arXiv:2106.09685](https://arxiv.org/abs/2106.09685) |
 
-## Licence
+## Licences
 
-No licence has been chosen for the code yet, so default copyright applies. Third-party models and datasets keep their own
-licences (NVIDIA model licences, VLN-CE / R2R).
-
-**Media** in `media/` and the frames in `docs/figures/` are rendered from Matterport3D scenes. They are for
-**non-commercial academic use only**, under the
-[Matterport3D Terms of Use](http://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf).
+| What | Licence |
+|---|---|
+| Code (`src/`, `scripts/`, `tools/`, `tests/`, `website/`) | [MIT](LICENSE) |
+| Report text (`paper/`) and documentation (`docs/`) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| Rendered imagery: `media/`, and figures showing scenes (`fig_qualitative`, `fig_reasoner_zeroshot`) | derived from Matterport3D: **non-commercial academic use only**, under the [Matterport3D Terms of Use](http://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf) |
+| Adapters built on Cosmos-Reason2-2B / Cosmos3-Edge | subject to the base models' licences: [NVIDIA Open Model License](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license) / [OpenMDW-1.1](https://openmdw.ai/license/1-1/) |
+| R2R / VLN-CE episodes, Habitat | their own licences (see [`docs/REFERENCES.md`](docs/REFERENCES.md)) |

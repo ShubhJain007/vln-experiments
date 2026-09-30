@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four Ways to Navigate</title>
+<meta name="description" content="An empirical study of four Vision-and-Language Navigation policies on a single GPU: LatentPilot, pointing, Cosmos3-Edge action diffusion and a fine-tuned Cosmos3-Edge reasoner.">
+<meta property="og:title" content="Four Ways to Navigate: VLN Policies on a Single GPU">
+<meta property="og:description" content="LatentPilot reimplementation, pointing + controller, Cosmos3-Edge action model and reasoner, compared on R2R-CE.">
+<meta property="og:image" content="media/previews/compare_ep09_x8F5xyUWy9e.gif">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fcfcfb; --surface: #ffffff; --ink: #0b0b0b; --ink2: #52514e; --muted: #7a7975; --line: #e4e3df;
+  --accent: #2a78d6; --accent-ink: #ffffff; --chip: #f1f0ec; --good: #1a8f63; --bad: #c4552a;
+  --probe: #fff4dc; --probe-ink: #7a5300; --roll: #e5f0fc; --roll-ink: #1d5aa3; --fig: #eceaf6; --fig-ink: #4b3f8f;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111110; --surface: #1a1a19; --ink: #ecebe7; --ink2: #b3b1ab; --muted: #8d8b85; --line: #2c2b29;
+    --accent: #5a9be6; --accent-ink: #0b0b0b; --chip: #242322; --good: #4cc491; --bad: #ee8a5f;
+    --probe: #3a2e12; --probe-ink: #f2c14e; --roll: #152a44; --roll-ink: #8cbcf2; --fig: #26223d; --fig-ink: #b9adf2;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111110; --surface: #1a1a19; --ink: #ecebe7; --ink2: #b3b1ab; --muted: #8d8b85; --line: #2c2b29;
+  --accent: #5a9be6; --accent-ink: #0b0b0b; --chip: #242322; --good: #4cc491; --bad: #ee8a5f;
+  --probe: #3a2e12; --probe-ink: #f2c14e; --roll: #152a44; --roll-ink: #8cbcf2; --fig: #26223d; --fig-ink: #b9adf2;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 Inter, system-ui, -apple-system, sans-serif; }
+main { max-width: 980px; margin: 0 auto; padding: 0 16px 64px; }
+a { color: var(--accent); }
+img { max-width: 100%; height: auto; display: block; }
+figure img { width: 100%; }
+.row figure img { width: 100%; }
+.grid4 > *, .row > * { min-width: 0; }
+header.hero { text-align: center; padding: 56px 0 24px; }
+header.hero h1 { font-size: clamp(28px, 5vw, 44px); line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.02em; }
+header.hero .sub { font-size: clamp(16px, 2.4vw, 20px); color: var(--ink2); margin: 0 0 18px; }
+.author { font-size: 18px; font-weight: 600; margin: 0; }
+.affil { color: var(--muted); margin: 2px 0 20px; font-size: 14px; }
+.buttons { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: var(--ink);
+  color: var(--bg); text-decoration: none; font-weight: 600; font-size: 14px; }
+.btn.secondary { background: var(--chip); color: var(--ink); }
+.btn svg { width: 16px; height: 16px; }
+section { margin-top: 56px; }
+h2 { font-size: 26px; margin: 0 0 12px; letter-spacing: -0.01em; }
+h3 { font-size: 19px; margin: 28px 0 8px; }
+p { margin: 0 0 12px; }
+.lead { color: var(--ink2); }
+figure { margin: 18px 0; }
+figcaption { color: var(--ink2); font-size: 14px; margin-top: 8px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+.teaser figcaption { text-align: center; }
+.tldr { font-size: 17px; }
+.grid4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 16px; }
+.approach .num { font-weight: 700; color: var(--accent); font-size: 14px; }
+.approach h4 { margin: 2px 0 6px; font-size: 16px; }
+.approach .res { font-weight: 600; margin-top: 8px; }
+.approach p { font-size: 14px; color: var(--ink2); margin: 0; }
+.tag { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; margin-right: 6px; vertical-align: middle; }
+.tag.roll { background: var(--roll); color: var(--roll-ink); }
+.tag.probe { background: var(--probe); color: var(--probe-ink); }
+.tag.fig { background: var(--fig); color: var(--fig-ink); }
+.row { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.row figure { margin: 0; }
+.howto { font-size: 14px; color: var(--ink2); border-left: 3px solid var(--line); padding: 2px 0 2px 12px; margin: 10px 0 14px; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 640px; }
+th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: left; }
+thead th { color: var(--ink2); font-weight: 600; }
+tr.best td { font-weight: 700; }
+tr.paper td { color: var(--muted); font-style: italic; }
+td.nm { color: var(--muted); }
+.note { font-size: 13px; color: var(--muted); margin-top: 8px; }
+ol.findings { padding-left: 20px; }
+ol.findings li { margin-bottom: 10px; }
+pre { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; overflow-x: auto;
+  font: 13px/1.5 "JetBrains Mono", ui-monospace, monospace; position: relative; }
+.copy { position: absolute; top: 8px; right: 8px; font: 600 12px Inter, sans-serif; background: var(--chip); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.themebtn { position: fixed; top: 12px; right: 12px; background: var(--chip); color: var(--ink); border: 1px solid var(--line);
+  border-radius: 999px; padding: 6px 12px; font: 600 12px Inter, sans-serif; cursor: pointer; }
+@media (max-width: 600px) { header.hero { padding-top: 48px; } section { margin-top: 40px; } }
+</style>
+</head>
+<body>
+<button class="themebtn" id="themebtn" aria-label="Toggle colour theme">◐ theme</button>
+<main>
+
+<header class="hero">
+  <h1>Four Ways to Navigate</h1>
+  <p class="sub">An Empirical Study of Vision-and-Language Navigation Policies on a Single GPU</p>
+  <p class="author">Shubh Jain</p>
+  <p class="affil">September 2026 · technical report</p>
+  <div class="buttons">
+    <a class="btn" href="paper.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Paper (PDF)</a>
+    <a class="btn" href="https://github.com/ShubhJain007/vln-four-ways"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+    <a class="btn secondary" href="https://github.com/ShubhJain007/vln-four-ways/tree/main/model_cards">Model cards</a>
+    <a class="btn secondary" href="#demos">Demos</a>
+    <a class="btn secondary" href="#bibtex">BibTeX</a>
+  </div>
+</header>
+
+<figure class="teaser">
+  <img src="media/previews/compare_ep09_x8F5xyUWy9e.gif" alt="Side-by-side rollout: expert, LatentPilot at step 10k, LatentPilot final" loading="eager">
+  <figcaption>The same unseen episode, three agents driving: the expert on the reference path, LatentPilot after 10k
+  training steps (reaches 2.8 m from the goal), and fully trained LatentPilot (never closer than 9.2 m).
+  Training further made it a better predictor of future frames, and a worse navigator.</figcaption>
+</figure>
+
+<section>
+  <h2>TL;DR</h2>
+  <p class="tldr">We built and compared four ways to turn a pretrained vision-language or video model into a policy
+  that follows English route instructions in unseen buildings (R2R-CE, Habitat), each trained on one 16&nbsp;GB GPU.
+  Supervising <em>where to go</em> with image-space pointing gave the best true success, <strong>31.3&nbsp;%</strong>.
+  A fine-tuned video reasoner reached the goal region most often, <strong>47.5&nbsp;%</strong>, but almost never
+  stopped there. A from-scratch reimplementation of LatentPilot failed the method's own gate at this scale.
+  Across all four, <strong>stopping, not reaching, is the bottleneck</strong>.</p>
+
+  <div class="grid4">
+    <div class="card approach"><div class="num">①</div><h4>LatentPilot (reimplemented)</h4>
+      <p>A latent "Pilot Token" is trained to predict the next-but-one frame embedding and fed back.</p>
+      <div class="res">OS 10.7 % <span class="note">(identity control: 17.3 %)</span></div></div>
+    <div class="card approach"><div class="num">②</div><h4>Pointing + controller</h4>
+      <p>The VLM points at the next waypoint in the image, and a bearing controller turns it into actions.</p>
+      <div class="res">Strict SR 31.3 %, SPL 25.4</div></div>
+    <div class="card approach"><div class="num">③</div><h4>Cosmos3-Edge action model</h4>
+      <p>A pretrained video-diffusion action stream, used zero-shot to sample ego-motion.</p>
+      <div class="res">OS 7.5 %</div></div>
+    <div class="card approach"><div class="num">④</div><h4>Cosmos3-Edge reasoner</h4>
+      <p>A video reasoner fine-tuned to answer "what next?" from 8&nbsp;s of its own view.</p>
+      <div class="res">OS 47.5 % <span class="note">(never stopped within 3 m)</span></div></div>
+  </div>
+  <p class="note">OS = oracle success: came within 3&nbsp;m of the goal at some point. SR = strict success: stopped
+  within 3&nbsp;m by its own decision. Only ② was evaluated strictly.</p>
+</section>
+
+<section>
+  <h2>Abstract</h2>
+  <p class="lead">We study four ways of turning a pretrained vision-language or video model into an instruction-following
+  navigation policy for Vision-and-Language Navigation in continuous environments (R2R-CE). Every model is trained with
+  low-rank adapters on one 16&nbsp;GB consumer GPU:</p>
+  <ul class="lead">
+    <li>a from-scratch reimplementation of LatentPilot, whose Pilot Token is trained to predict the visual embedding
+    two steps ahead and is fed back as a recurrent latent;</li>
+    <li>a waypoint-pointing policy whose image-space prediction drives a bearing controller;</li>
+    <li>the pretrained action stream of the Cosmos3-Edge video world model, used zero-shot as a diffusion policy;</li>
+    <li>the reasoning tower of the same model, fine-tuned to output the next command from eight seconds of egocentric
+    video.</li>
+  </ul>
+  <p class="lead">At this scale the LatentPilot objective fails the method's own gate. The learned Pilot Token predicts
+  future frames 2.25× better than an identity control, yet reaches the goal less often (10.7&nbsp;% vs.
+  17.3&nbsp;%). We trace this to a loss balance that drifts by an order of magnitude during training.</p>
+  <p class="lead">Pointing supervision benefits from label corrections, more data, frame history and reading STOP from
+  intermediate layers. With these it reaches a strict self-stop success of 31.3&nbsp;% (SPL 25.4) on 150 unseen
+  episodes. The zero-shot diffusion policy recovers ego-motion from video but follows full instructions only weakly.
+  The fine-tuned reasoner reaches the goal region most often (47.5&nbsp;%) but almost never stops there.</p>
+</section>
+
+<section>
+  <h2>The four architectures</h2>
+  <figure class="card">
+    <img src="assets/architectures.png" alt="Diagrams of the four architectures" loading="lazy">
+    <figcaption>All four share the task interface: 448×448 RGB, an English instruction, and the primitives FORWARD
+    0.25&nbsp;m, LEFT/RIGHT 15° and STOP, with at most 100 steps per episode.</figcaption>
+  </figure>
+</section>
+
+<section id="demos">
+  <h2>Demos</h2>
+  <p>All demos take place in <strong>unseen</strong> Matterport3D buildings. They are not all the same kind: the
+  label on each tells you whether the model is actually driving.</p>
+  <p><span class="tag roll">closed-loop rollout</span>the model drives, from its own camera.
+  <span class="tag probe">decision probe</span>the model is shown a moment of an expert's walk and asked what to do; it
+  does not drive. <span class="tag fig">figure</span>a measurement; no video was recorded.</p>
+
+  <h3>① LatentPilot <span class="tag roll">closed-loop rollout</span></h3>
+  <p class="howto">Three agents with the same instruction in the same building. From left to right: the expert (its
+  panel freezes when it arrives), LatentPilot after 10k steps, and the final LatentPilot. The yellow line is the live
+  distance to the goal. Watch the final model wander away from a goal the earlier checkpoint almost reached.</p>
+  <figure><img src="media/previews/compare_ep00_2azQ1b91cZZ.gif" alt="LatentPilot comparison, scene 2azQ1b91cZZ" loading="lazy">
+    <figcaption>Another scene: the step-10k model gets within 3.4&nbsp;m of the goal; the final model's closest point
+    is 6.4&nbsp;m. <a href="https://github.com/ShubhJain007/vln-four-ways/tree/main/media/comparisons">All 11 scenes (mp4)</a>.</figcaption></figure>
+
+  <h3>② Pointing + controller <span class="tag roll">closed-loop rollout</span></h3>
+  <p class="howto">The <strong>cyan cross-hair</strong> is where the model wants to go next, and the controller turns
+  toward it. A green cross-hair, when shown, is the expert's actual next waypoint. <code>p(stop)</code> is the model's
+  STOP probability, and a red border marks a failed episode. It succeeded in 6 of 22 recorded episodes; the three
+  failure types are below.</p>
+  <div class="row">
+    <figure><img src="media/previews/step100k_failures_ep02_8194nk5LbLH.gif" alt="Pointing failure: never approaches" loading="lazy"><figcaption>Never approaches the goal.</figcaption></figure>
+    <figure><img src="media/previews/step100k_failures_ep04_EU6Fwq7SyZv.gif" alt="Pointing failure: passes without stopping" loading="lazy"><figcaption>Passes within 0.5&nbsp;m and never stops.</figcaption></figure>
+    <figure><img src="media/previews/step100k_failures_ep16_pLe4wQe7qrG.gif" alt="Pointing failure: stops short" loading="lazy"><figcaption>Passes 1.5&nbsp;m from the goal, then stops 5.4&nbsp;m away.</figcaption></figure>
+  </div>
+
+  <h3>④ Cosmos3-Edge reasoner <span class="tag probe">decision probe</span></h3>
+  <p class="howto">Each clip plays the video the reasoner receives at one moment of an <strong>expert's</strong> walk,
+  then freezes on the question "what should the robot do now?". It then shows the expert's action and the answers of
+  two fine-tuned versions. <strong>SFT v1</strong> saw about 1&nbsp;s of video and trained on turn- and stop-heavy
+  data. <strong>SFT v3</strong> saw 8&nbsp;s and trained on uniform data. (A v2 run was stopped after 200 steps.)</p>
+  <div class="row">
+    <figure><img src="media/previews/reasoner_2azQ1b91cZZ_traj1039_t225.gif" alt="Reasoner decision probe at the goal" loading="lazy">
+      <figcaption>At the goal: the expert stops. v1 says stop ✓; v3 says move forward ✗.</figcaption></figure>
+    <figure><img src="media/previews/reasoner_8194nk5LbLH_traj1141_t34.gif" alt="Reasoner decision probe mid-route" loading="lazy">
+      <figcaption>Mid-route: the expert goes forward. v1 says turn left ✗; v3 says move forward ✓.</figcaption></figure>
+  </div>
+  <figure class="card"><img src="figures/fig_reasoner_zeroshot.png" alt="Zero-shot reasoner waypoints" loading="lazy">
+    <figcaption>Before fine-tuning (still frames): the reasoner sketches plausible waypoints. Asked for the next
+    action, it answered as a bystander instead: "A person enters the room through the archway…". It did not know it
+    was the agent.</figcaption></figure>
+
+  <h3>③ Cosmos3-Edge action model <span class="tag fig">figure</span></h3>
+  <p class="howto">Left: how often "turn left/right" produces a turn in the right direction, as guidance strength rises.
+  Right: with full instructions, blue uses the right instruction and orange uses another episode's. At low guidance
+  the two score about the same, so the language barely reaches the model.</p>
+  <figure class="card"><img src="figures/fig_edge_guidance.png" alt="Edge guidance figure" loading="lazy"></figure>
+</section>
+
+<section>
+  <h2>Results</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Approach</th><th>Variant</th><th>n</th><th>SR</th><th>SPL</th><th>OS</th><th>nDTW</th><th>NE (m)</th></tr></thead>
+    <tbody>
+      <tr><td>① LatentPilot</td><td>Stage 1, learned G<sub>ψ</sub></td><td>150</td><td class="nm">n/m</td><td class="nm">–</td><td>10.7</td><td>0.277</td><td>8.50</td></tr>
+      <tr><td>① LatentPilot</td><td>identity G<sub>ψ</sub> (control)</td><td>150</td><td class="nm">n/m</td><td class="nm">–</td><td>17.3</td><td>0.268</td><td>8.17</td></tr>
+      <tr><td>② Pointing</td><td>16 scans, final layer</td><td>150</td><td>13.3</td><td>13.0</td><td>14.0</td><td>0.350</td><td>7.34</td></tr>
+      <tr><td>② Pointing</td><td>+ history, 61 scans</td><td>150</td><td>18.0</td><td>16.8</td><td>22.7</td><td>0.394</td><td>6.55</td></tr>
+      <tr><td>② Pointing</td><td>+ longer schedule</td><td>150</td><td>24.7</td><td>22.3</td><td>31.3</td><td>0.345</td><td>7.10</td></tr>
+      <tr class="best"><td>② Pointing</td><td>+ layer fusion</td><td>150</td><td>31.3</td><td>25.4</td><td>42.7</td><td>0.323</td><td>7.22</td></tr>
+      <tr><td>③ Edge action</td><td>zero-shot, CFG 7.5</td><td>40</td><td class="nm">n/m</td><td class="nm">–</td><td>7.5</td><td>0.276</td><td>8.81</td></tr>
+      <tr><td>④ Edge reasoner</td><td>SFT v1</td><td>40</td><td class="nm">n/m</td><td class="nm">–</td><td>17.5</td><td>0.365</td><td>7.41</td></tr>
+      <tr class="best"><td>④ Edge reasoner</td><td>SFT v3, step 1,500</td><td>40</td><td class="nm">n/m</td><td class="nm">–</td><td>47.5</td><td>0.389</td><td>6.41</td></tr>
+      <tr class="paper"><td>LatentPilot paper</td><td>7B, full split</td><td>1,839</td><td>51.7–54.0</td><td>47.1–48.5</td><td>57.0</td><td>–</td><td>5.3</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">R2R-CE <code>val_unseen</code>. n/m: not measured. Those evaluations ended an episode on arrival, so
+  they measure reaching (OS), not stopping (SR). Thresholds were tuned on this split. n = 40 gives roughly ±15 points.</p>
+  <figure class="card"><img src="figures/fig_navigation.png" alt="Oracle vs strict success for every policy" loading="lazy"></figure>
+</section>
+
+<section>
+  <h2>Key findings</h2>
+  <ol class="findings">
+    <li><strong>A better predictor was a worse navigator.</strong> LatentPilot's auxiliary loss is balanced only at
+    initialisation. By the end of training it takes 5.5× the action loss's weight.</li>
+    <li><strong>Offline probes picked the wrong model twice.</strong> The same happened with a zero-shot layout probe
+    and with next-action accuracy for the reasoner. Rank policies closed-loop.</li>
+    <li><strong>STOP lives mid-network.</strong> A linear probe finds it at AUC 0.72 in layer 15, but 0.44 (below
+    chance) at the output layer.</li>
+    <li><strong>The pointing policy under-turns.</strong> Its predicted bearing is 0.42× the true bearing, so turns are
+    missed as FORWARD.</li>
+    <li><strong>Data first.</strong> Going from 6 to 16 buildings tripled strict success. Fixing three silent label
+    bugs took label/expert agreement from 0.69 to 0.97.</li>
+  </ol>
+  <div class="row">
+    <figure class="card"><img src="figures/fig_loss_balance.png" alt="Loss balance drift" loading="lazy"></figure>
+    <figure class="card"><img src="figures/fig_layer_probe.png" alt="Layer probe" loading="lazy"></figure>
+  </div>
+</section>
+
+<section id="bibtex">
+  <h2>BibTeX</h2>
+<pre id="bib"><button class="copy" id="copybtn">Copy</button>@techreport{jain2026fourways,
+  title       = {Four Ways to Navigate: An Empirical Study of Vision-and-Language
+                 Navigation Policies on a Single GPU},
+  author      = {Jain, Shubh},
+  year        = {2026},
+  institution = {GitHub},
+  url         = {https://github.com/ShubhJain007/vln-four-ways}
+}</pre>
+  <p class="note">This work builds on LatentPilot (<a href="https://arxiv.org/abs/2603.29165">arXiv:2603.29165</a>),
+  Robostral Navigate (<a href="https://arxiv.org/abs/2607.20785">arXiv:2607.20785</a>), R2R and VLN-CE, Habitat,
+  Matterport3D and NVIDIA Cosmos. All 53 references are listed in
+  <a href="https://github.com/ShubhJain007/vln-four-ways/blob/main/docs/REFERENCES.md">REFERENCES.md</a>.</p>
+</section>
+
+<footer>
+  Code: MIT licence. Report text: CC BY 4.0. All rollout imagery is rendered from Matterport3D and may be used only for
+  non-commercial academic purposes, under the <a href="http://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf">Matterport3D
+  Terms of Use</a>. Base models keep their NVIDIA licences.
+</footer>
+</main>
+<script>
+(function () {
+  var root = document.documentElement, key = "vln-theme";
+  try { var saved = localStorage.getItem(key); if (saved) root.setAttribute("data-theme", saved); } catch (e) {}
+  document.getElementById("themebtn").addEventListener("click", function () {
+    var dark = root.getAttribute("data-theme") === "dark" ||
+      (!root.getAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var next = dark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem(key, next); } catch (e) {}
+  });
+  document.getElementById("copybtn").addEventListener("click", function () {
+    var text = document.getElementById("bib").innerText.replace(/^Copy\s*/, "");
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () {
+      var b = document.getElementById("copybtn"); b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1500);
+    });
+  });
+})();
+</script>
+</body>
+</html>
