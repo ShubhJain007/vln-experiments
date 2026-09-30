@@ -11,7 +11,7 @@
 # dropping to bf16 -- it would corrupt the Eq. 14 targets).
 
 PY_LP=${PY:-python}         # python of the latentpilot env (environment/latentpilot.yml)
-cd "$(dirname "$0")/.." || exit 1
+cd "$(dirname "$0")/../.." || exit 1
 export PYTHONPATH="" HF_HUB_OFFLINE=1
 
 N=150

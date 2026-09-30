@@ -16,7 +16,7 @@
 # Rendering rollouts needs the former; caching v_bar needs the latter.
 PY_HAB=${HABITAT_PYTHON:-python}   # python of the habitat_render env (environment/habitat_render.yml)
 PY_LP=${PY:-python}         # python of the latentpilot env (environment/latentpilot.yml)
-cd "$(dirname "$0")/.." || exit 1
+cd "$(dirname "$0")/../.." || exit 1
 export PYTHONPATH="" HF_HUB_OFFLINE=1
 
 NEW_SCANS="1pXnuDYAj8r 2n8kARJN3HM 5LpN3gDmAk7 B6ByNegPMKs E9uDoFAP3SH \

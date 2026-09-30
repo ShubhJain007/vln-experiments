@@ -1,5 +1,5 @@
 #!/bin/bash
-cd "$(dirname "$0")/.." || exit 1
+cd "$(dirname "$0")/../.." || exit 1
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True PYTHONPATH="" HF_HUB_OFFLINE=1
 exec "${PY:-python}" -u scripts/run_ablations.py \
   --limit 40 --chunk 24 --steps 20 --guidance 7.5 --stop-patience 2 \

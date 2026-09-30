@@ -9,7 +9,7 @@
 # Silently-wrong labels are the most expensive kind; 20 minutes of rendering is
 # cheaper than debugging them later.
 PY_HAB=${HABITAT_PYTHON:-python}   # python of the habitat_render env (environment/habitat_render.yml)
-cd "$(dirname "$0")/.." || exit 1
+cd "$(dirname "$0")/../.." || exit 1
 
 echo "######## RECOLLECT train (16 scans) started $(date) ########"
 PYTHONPATH=src $PY_HAB -u src/data/collect_rollouts.py --split train --overwrite 2>&1 \

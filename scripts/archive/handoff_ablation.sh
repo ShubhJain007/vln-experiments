@@ -3,7 +3,7 @@
 # bare-caption diffusion arm next. Wait until reasoner_direct writes its JSON
 # (its 40 episodes are then safely recorded), stop that driver, and relaunch
 # with the corrected ARMS -- skipping reasoner_direct so it is not redone.
-cd "$(dirname "$0")/.." || exit 1
+cd "$(dirname "$0")/../.." || exit 1
 PY=${PY:-python}            # python of the latentpilot env (environment/latentpilot.yml)
 
 while ! ls results/runs/*_reasoner_direct.json >/dev/null 2>&1; do sleep 20; done

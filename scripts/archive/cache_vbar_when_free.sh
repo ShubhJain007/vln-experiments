@@ -8,7 +8,7 @@
 # fit would silently corrupt every target, so we wait instead.
 
 PY=${PY:-python}            # python of the latentpilot env (environment/latentpilot.yml)
-cd "$(dirname "$0")/.." || exit 1
+cd "$(dirname "$0")/../.." || exit 1
 export PYTHONPATH="" HF_HUB_OFFLINE=1
 
 echo "waiting for training to finish before caching v_bar ..."

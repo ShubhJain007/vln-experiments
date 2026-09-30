@@ -7,7 +7,7 @@
 # incrementally -- editing the file while it runs can make it execute garbage.
 
 PY_LP=${PY:-python}         # python of the latentpilot env (environment/latentpilot.yml)
-cd "$(dirname "$0")/.." || exit 1
+cd "$(dirname "$0")/../.." || exit 1
 export PYTHONPATH="" HF_HUB_OFFLINE=1
 
 CK=checkpoints/stage1_16scan/final

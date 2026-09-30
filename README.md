@@ -403,6 +403,7 @@ src/eval/        NE / SR / OS / SPL / nDTW; the Habitat worker runs in its own p
 src/train/       ① Stage 0 / 0′ / 1 / 2, ② pointing training (LoRA), Cosmos sequence packing
 src/nav/         ③④ Cosmos3-Edge navigator (reasoner + action pipeline), prompts with provenance, reasoner SFT data
 scripts/         download, collection, training, evaluation, sweeps, probes (each header says why the script exists)
+scripts/archive/ one-off orchestration scripts (queueing, hand-offs, catch-up evals), kept as provenance
 tools/           make_figures.py (docs/figures from logs), make_demo_media.py (demo videos from recordings)
 tests/           one test file per equation group (311 tests)
 results/         probe reports and closed-loop run summaries (JSON)
