@@ -69,15 +69,15 @@ frame, which reveals the action just taken; at test time it holds the model's ow
 (`scripts/test_slot_shortcut.py`), the learned model is **84.3 %** accurate with the true next frame in the slot and
 **30.8 %** with its own latent. A model with no slot scores 66.0 %. The identity control ignores the slot (61–63 % under
 every slot content). Training accuracy tells the same story: 78 % without the slot (Stage 0), 98 % with it. Loss-balance drift (`λ·L_pil / L_act` rises from 0.52 to
-5.5) contributes, but an adaptive λ that removed it did not recover navigation (OS 6.7 %). A short Stage 2 (scheduled
+5.5) contributes, but an adaptive λ that removed it did not recover navigation (OS 6.7 %). Stage 2 (scheduled
 sampling, 2,600 steps at 50 % / 75 % own latents) lifts navigation to OS 16.7 / 18.0 %, but the shortcut remains
-(33.6 / 33.9 % with its own latent). The paper's full data flywheel was not run.
+(33.6 / 33.9 % with its own latent); a 3× longer run (7,800 steps at 75 %) reaches 35.5 % and OS 19.3 %. The paper's full data flywheel was not run.
 
 ## Limitations
 
 - **Scale:** 2 B parameters and 6 buildings, against 7 B and full data in the paper. This is a finding at this scale,
   not a refutation of the paper.
-- **Missing stages:** Stage 2 was run only as a short fine-tune; the paper's data flywheel was not run.
+- **Missing stages:** Stage 2 was run only on expert data (up to 7,800 steps, at most 75 % own latents); the paper's data flywheel was not run.
 - **Stopping:** the model almost never stops on its own.
 - **Use restrictions:** research use in simulation only. It was trained on Matterport3D-derived data, which is limited
   to non-commercial academic use.

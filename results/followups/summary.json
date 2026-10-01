@@ -97,6 +97,15 @@
   "n": 150,
   "own_stops": 2
  },
+ "cl_stage2_p75_long": {
+  "SR": 0.1933,
+  "SPL": 0.1933,
+  "OS": 0.1933,
+  "nDTW": 0.2975,
+  "NE": 7.8572,
+  "n": 150,
+  "own_stops": 0
+ },
  "cl_valseen_thr0.10": {
   "SR": 0.4133,
   "SPL": 0.3945,
@@ -1311,6 +1320,181 @@
     "STOP": 110
    },
    "date": "2026-09-30 17:33"
+  },
+  "stage2_p75_long": {
+   "checkpoint": "checkpoints/stage2_p75_long/final",
+   "split": "val_unseen",
+   "episodes": 110,
+   "steps": 4306,
+   "scans": [
+    "2azQ1b91cZZ",
+    "8194nk5LbLH",
+    "EU6Fwq7SyZv",
+    "QUCTc6BB5sX",
+    "TbHJrupSAjP",
+    "X7HyMhZNoso",
+    "Z6MFQCViBuw",
+    "oLBMNvg9in8",
+    "pLe4wQe7qrG",
+    "x8F5xyUWy9e",
+    "zsNo4HB9uLZ"
+   ],
+   "per_scan": 10,
+   "seed": 0,
+   "vbar_cosine_check": 0.9999908804893494,
+   "conditions": {
+    "next_frame": {
+     "n": 4306,
+     "accuracy": 0.8416163492800743,
+     "recall_FWD": 0.8481107369996259,
+     "recall_LEFT": 0.9036281179138322,
+     "recall_RIGHT": 0.8517940717628705,
+     "recall_STOP": 0.12727272727272726,
+     "confusion": [
+      [
+       2267,
+       275,
+       127,
+       4
+      ],
+      [
+       70,
+       797,
+       12,
+       3
+      ],
+      [
+       69,
+       26,
+       546,
+       0
+      ],
+      [
+       88,
+       6,
+       2,
+       14
+      ]
+     ],
+     "episode_accuracy_mean": 0.8444906930892763,
+     "episode_accuracy_std": 0.10860018912346249
+    },
+    "own_z": {
+     "n": 4306,
+     "accuracy": 0.3546214584300975,
+     "recall_FWD": 0.27908716797605687,
+     "recall_LEFT": 0.5294784580498866,
+     "recall_RIGHT": 0.48985959438377535,
+     "recall_STOP": 0.0,
+     "confusion": [
+      [
+       746,
+       1052,
+       875,
+       0
+      ],
+      [
+       116,
+       467,
+       299,
+       0
+      ],
+      [
+       93,
+       234,
+       314,
+       0
+      ],
+      [
+       26,
+       40,
+       44,
+       0
+      ]
+     ],
+     "episode_accuracy_mean": 0.34836548070509354,
+     "episode_accuracy_std": 0.15819526872024456
+    },
+    "current_frame": {
+     "n": 4306,
+     "accuracy": 0.5587552252670692,
+     "recall_FWD": 0.7063224841002619,
+     "recall_LEFT": 0.3401360544217687,
+     "recall_RIGHT": 0.31825273010920435,
+     "recall_STOP": 0.12727272727272726,
+     "confusion": [
+      [
+       1888,
+       363,
+       254,
+       168
+      ],
+      [
+       360,
+       300,
+       185,
+       37
+      ],
+      [
+       242,
+       167,
+       204,
+       28
+      ],
+      [
+       88,
+       6,
+       2,
+       14
+      ]
+     ],
+     "episode_accuracy_mean": 0.5622556483819894,
+     "episode_accuracy_std": 0.16231705656047982
+    },
+    "other_next_frame": {
+     "n": 4306,
+     "accuracy": 0.2963307013469577,
+     "recall_FWD": 0.13019079685746351,
+     "recall_LEFT": 0.7108843537414966,
+     "recall_RIGHT": 0.46801872074882994,
+     "recall_STOP": 0.00909090909090909,
+     "confusion": [
+      [
+       348,
+       1603,
+       722,
+       0
+      ],
+      [
+       52,
+       627,
+       203,
+       0
+      ],
+      [
+       33,
+       308,
+       300,
+       0
+      ],
+      [
+       10,
+       63,
+       36,
+       1
+      ]
+     ],
+     "episode_accuracy_mean": 0.2941318327480103,
+     "episode_accuracy_std": 0.11437651073322215
+    }
+   },
+   "expert_action_counts": {
+    "FWD": 2673,
+    "LEFT": 882,
+    "RIGHT": 641,
+    "STOP": 110
+   },
+   "date": "2026-10-01 10:42"
   }
  }
 }

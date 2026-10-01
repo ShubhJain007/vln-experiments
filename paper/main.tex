@@ -50,8 +50,8 @@ Stage~1 of LatentPilot fails the method's own gate at this scale. The learned Pi
 $2.25\times$ better than an identity control, yet reaches the goal less often (oracle success 10.7\% vs.\ 17.3\%,
 $n{=}150$). A held-out test shows why: the same model is 84\% accurate with the true next frame in its Pilot slot (its
 training input) and 31\% with its own latent (its test-time input), below the 66\% of a model with no slot. Training
-teaches a shortcut through the privileged frame. A short Stage~2 (scheduled sampling) recovers some navigation but not
-the shortcut.
+teaches a shortcut through the privileged frame. Stage~2 (scheduled sampling) recovers some navigation but not
+the shortcut, even when run three times longer.
 
 Pointing reaches a success rate of \textbf{23.3\%} (own STOP within 3\,m; $n{=}150$; STOP threshold chosen on
 \texttt{val\_seen}), the best in the study, although it came within 3\,m in 36.7\% of episodes. The zero-shot diffusion
@@ -108,7 +108,7 @@ Our contributions are:
   \item A from-scratch reimplementation of LatentPilot, and a controlled test of its Stage~1 claim. With a learned
         future predictor versus an identity control and everything else fixed, it fails at 2B parameters and 1,665
         episodes. A held-out test that changes only the slot content measures a train-time shortcut through the
-        teacher-forced Pilot slot; a short Stage~2 does not remove it (\cref{sec:res-lp}).
+        teacher-forced Pilot slot; Stage~2, even three times longer, does not remove it (\cref{sec:res-lp}).
   \item A supervised-only pointing policy that reaches 23.3\% success with a threshold chosen off the test split, with ablations over data scale, history and
         layer fusion. A layer-wise probe shows that the STOP decision is decodable mid-network (AUC 0.72) but not at the
         output layer (0.44) (\cref{sec:res-pt}).
@@ -356,8 +356,8 @@ brings it to 0.42$\times$. For reference, persistence ($\vbar_t\!\to\!\vbar_{t+2
 and the constant mean scores 18.48.
 
 \paragraph{Training.}
-One offline round on expert demonstrations; the paper's data flywheel is not run, and Stage~2 only as a short
-follow-up (\cref{sec:res-lp}). 17,400 steps (2 epochs)
+One offline round on expert demonstrations; the paper's data flywheel is not run, and Stage~2 only as a
+follow-up fine-tune on expert data (\cref{sec:res-lp}). 17,400 steps (2 epochs)
 at batch 8 on the 6-scan corpus. Learning rate $10^{-4}$ with 100 warm-up steps and cosine
 decay to $5\times10^{-6}$.
 
@@ -434,10 +434,11 @@ split with extra training rounds (flywheel or RL) not used here.}
 \toprule
 Approach & Variant & $n$ & SR$\uparrow$ & end-SR$\uparrow$ & SPL$^*\uparrow$ & OS$\uparrow$ & nDTW$\uparrow$ & NE$\downarrow$ \\
 \midrule
-\multirow{4}{*}{(i) LatentPilot} & Stage 1, learned $G_\psi$ & 150 & n/m & n/m & \na & 10.7 & 0.277 & 8.50 \\
+\multirow{5}{*}{(i) LatentPilot} & Stage 1, learned $G_\psi$ & 150 & n/m & n/m & \na & 10.7 & 0.277 & 8.50 \\
  & identity $G_\psi$ (control) & 150 & n/m & n/m & \na & 17.3 & 0.268 & 8.17 \\
  & + Stage 2, 50\% own $z$ & 150 & n/m & n/m & \na & 16.7 & 0.312 & 7.98 \\
  & + Stage 2, 75\% own $z$ & 150 & n/m & n/m & \na & 18.0 & 0.315 & 7.99 \\
+ & + Stage 2, 75\%, 3$\times$ longer & 150 & n/m & n/m & \na & 19.3 & 0.298 & 7.86 \\
 \midrule
 \multirow{5}{*}{(ii) Pointing} & 16 scans, final layer & 150 & 12.7 & 13.3 & 13.0 & 14.0 & 0.350 & 7.34 \\
  & + history, 61 scans & 150 & 17.3 & 18.0 & 16.8 & 22.7 & 0.394 & 6.55 \\
@@ -555,6 +556,7 @@ Stage 1, learned $G_\psi$ & 84.3 & \textbf{30.8} & 45.1 & 27.8 & \na \\
 Stage 1, identity $G_\psi$ & 63.1 & 61.2 & 63.2 & 62.1 & \na \\
 Stage 2, 50\% own $z$ & 84.3 & 33.6 & 53.0 & 27.9 & \na \\
 Stage 2, 75\% own $z$ & 83.7 & 33.9 & 54.5 & 27.6 & \na \\
+Stage 2, 75\% own $z$, 3$\times$ longer & 84.2 & 35.5 & 55.9 & 29.6 & \na \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -573,8 +575,10 @@ Stage~2 scheduled sampling~\citep{bengio2015scheduled} replaces part of the slot
 latent. We fine-tune Stage~1 for 2,600 steps (0.1$\times$ learning rate, same 6 buildings), raising the replaced share
 to 50\% or 75\%; the project's rules require approval above 75\%. Closed-loop OS improves from 10.7\% to 16.7\% and
 18.0\%, the level of the identity control, but the shortcut stays: next-frame accuracy remains 84\% and own-latent
-accuracy only rises to 34\%. This short recipe is not enough. A longer schedule or the paper's data flywheel, which
-trains on the model's own trajectories over several rounds, remain untested at this scale.
+accuracy only rises to 34\%. A three times longer run (7,800 steps at 75\%) barely changes this: own-latent accuracy
+is 35.5\%, next-frame accuracy 84.2\%, and closed-loop OS 19.3\% (within noise of 18.0\% at $n{=}150$), with no
+STOP issued by the model. More scheduled sampling on expert trajectories does not remove the shortcut. The paper's data
+flywheel, which trains on the model's own trajectories over several rounds, remains untested at this scale.
 
 \begin{figure}[t]
 \centering
@@ -832,7 +836,7 @@ goal region).
 Evaluations are small ($n{=}40$--150) and unpaired across approaches, and they cover 6--8 of the 11 unseen buildings.
 The headline pointing threshold was chosen on \texttt{val\_seen}; other thresholds were tuned on the evaluation split.
 Every method was trained for one offline round only (no flywheel, RL or DAgger). Reasoner rows average three stochastic runs, which varied by up to 12 points. Several runs were stopped before finishing their schedules:
-the long pointing runs completed 1.1--1.2 of 1.5--3 planned epochs. Stage~2 was run only as a short fine-tune; a
+the long pointing runs completed 1.1--1.2 of 1.5--3 planned epochs. Stage~2 was run only on expert data (up to 7,800 steps, at most 75\% own latents); a
 16-scan Stage 1, the data flywheel, and most arms of a prompt/policy ablation for the Cosmos models were never run. Our backbone (2B) and
 data (6--61 buildings) differ from LatentPilot's (7B, full data), so our results describe this scale only.
 
@@ -843,7 +847,7 @@ data (6--61 buildings) differ from LatentPilot's (7B, full data), so our results
 On a single consumer GPU, with one offline training round and zero-shot evaluation, supervising \emph{where to go}
 with a pointing head and a geometric controller gave the best success rate (23.3\%). A fine-tuned video reasoner reached the goal region about as often but stopped
 there in 3.3\% of episodes. LatentPilot's Stage~1, because of a measured train-time shortcut through its Pilot slot that
-a short Stage~2 does not remove, and a zero-shot video diffusion policy did not produce competitive navigators at this scale. In every case the limiting factor was the decision to stop, together with the gap between
+Stage~2 does not remove, and a zero-shot video diffusion policy did not produce competitive navigators at this scale. In every case the limiting factor was the decision to stop, together with the gap between
 what an offline metric measures and what the closed loop requires.
 
 \paragraph{Reproducibility.}

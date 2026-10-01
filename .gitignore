@@ -21,3 +21,11 @@ _site/
 
 # unattended follow-up runner: per-item progress markers
 results/followups/state/
+
+# LaTeX build products / arXiv bundle (rebuilt with `make -C paper arxiv`)
+paper/*.aux
+paper/*.bbl
+paper/*.out
+paper/*.log
+paper/*.blg
+paper/arxiv.tar.gz

@@ -527,9 +527,10 @@ def fig_slot_shortcut():
              ("other_next_frame", "another episode's next frame", "#b9b7b1", 1.0)]
     models = [(k, lab) for k, lab in (("stage0prime_B", "Stage 0′\n(no L_pil)"), ("stage1_learned", "Stage 1\nlearned G_ψ"),
                                        ("stage1_identity", "Stage 1\nidentity G_ψ"),
-                                       ("stage2_p50", "Stage 2\n50 % own z"), ("stage2_p75", "Stage 2\n75 % own z"))
+                                       ("stage2_p50", "Stage 2\n50 % own z"), ("stage2_p75", "Stage 2\n75 % own z"),
+                                       ("stage2_p75_long", "Stage 2, 3× longer\n75 % own z"))
               if k in R]
-    fig, (a, b) = plt.subplots(1, 2, figsize=(13, 4.4), gridspec_kw={"width_ratios": [1.6, 1]})
+    fig, (a, b) = plt.subplots(1, 2, figsize=(14, 4.4), gridspec_kw={"width_ratios": [1.9, 1]})
     x = np.arange(len(models))
     w = 0.2
     for j, (c, lab, col, al) in enumerate(conds):

@@ -16,6 +16,7 @@ SR = own STOP within 3 m (standard); end-SR = ended within 3 m; OS = within 3 m 
 | cl_reasoner_strict_r3 | 40 | 5.0 | 17.5 | 32.5 | 12.4 | 7.75 |
 | cl_stage2_p50 | 150 | — | 16.7 | 16.7 | 16.7 | 7.98 |
 | cl_stage2_p75 | 150 | — | 18.0 | 18.0 | 18.0 | 7.99 |
+| cl_stage2_p75_long | 150 | — | 19.3 | 19.3 | 19.3 | 7.86 |
 | cl_valseen_thr0.10 | 150 | 39.3 | 41.3 | 50.0 | 39.5 | 5.80 |
 | cl_valseen_thr0.15 | 150 | 35.3 | 40.0 | 54.7 | 36.8 | 5.96 |
 | cl_valseen_thr0.20 | 150 | 31.3 | 38.0 | 56.0 | 34.0 | 6.13 |
@@ -37,5 +38,6 @@ SR = own STOP within 3 m (standard); end-SR = ended within 3 m; OS = within 3 m 
 | stage0 | — | — | — | — | 66.0 |
 | stage2_p50 | 84.3 | 33.6 | 53.0 | 27.9 | — |
 | stage2_p75 | 83.7 | 33.9 | 54.5 | 27.6 | — |
+| stage2_p75_long | 84.2 | 35.5 | 55.9 | 29.6 | — |
 
 \* SPL uses end-SR as its success criterion. Diagnostic runs (Stage 2, reasoner repeats) end on arrival, so only OS is meaningful for them.

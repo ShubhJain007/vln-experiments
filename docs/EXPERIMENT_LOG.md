@@ -856,6 +856,7 @@ strict unless marked diagnostic; SR = own STOP within 3 m, end-SR = ended within
 | E-51 | Pointing strict re-evaluation | n=150, stopping positions logged | SR 12.67 (16 scans, τ .05), 17.33 (history, τ .05), 22.67 (full3 40k, τ .10); end-SR/OS/SPL/NE identical to the original runs | `logs/followups/cl_pointing_*.log` |
 | E-52 | Threshold on val_seen | fusion 120k, 8 val_seen scans, 159 eps | SR 39.33 / 35.33 / 31.33 / 24.67 at τ .10/.15/.20/.30 → τ = 0.10 → val_unseen SR 23.33 (logs/eval120k_220002.log) | `logs/followups/cl_valseen_thr*.log` |
 | E-53 | Reasoner v3 step 1,500 | n=40, 3 strict + 2 extra diagnostic runs | strict SR 2.5 / 2.5 / 5.0, end-SR 17.5 / 20.0 / 17.5, OS 37.5 / 42.5 / 32.5; diagnostic OS 47.5 / 47.5 / 35.0 | `results/runs/v3_step1500_direct*.json`, `logs/followups/cl_reasoner_*.log` |
+| E-54 | Stage 2 long, p_final 0.75 | 7,800 steps (3× E-50) from Stage 1 learned, 6 scans (1,665 eps), lr ×0.1 | slot test next frame 84.16 / own z 35.46 / current 55.88 / other 29.63; closed-loop OS 19.33, nDTW 0.2975, NE 7.86, model_stop 0 (diagnostic, n=150; first eval attempt interrupted at 75/150 and rerun) | `logs/followups/stage2_p75_long.log`, `logs/followups/cl_stage2_p75_long.log` |
 
 Gap closed by these runs: the slot-shortcut test, Stage 2, val_seen threshold selection and the reasoner's strict
 evaluation, all listed in §8 above as missing.
