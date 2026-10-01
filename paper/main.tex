@@ -36,7 +36,7 @@
 
 \begin{abstract}
 This is an evaluation study; it proposes no new method. We take four recent ideas for turning a pretrained
-vision-language or video model into an instruction-following navigation policy for R2R-CE, build each one on a
+vision-language or video model into an instruction-following navigation policy for R2R-CE (Room-to-Room in Continuous Environments), build each one on a
 single 16\,GB GPU, and measure its \emph{raw} capability. Each trained model gets one round of offline imitation
 learning on expert demonstrations and is then evaluated zero-shot in unseen buildings. There is no data flywheel, no
 RL fine-tuning and no on-policy data. The four ideas are:
@@ -110,7 +110,7 @@ Our contributions are:
         episodes. A held-out test that changes only the slot content measures a train-time shortcut through the
         teacher-forced Pilot slot; Stage~2, even three times longer, does not remove it (\cref{sec:res-lp}).
   \item A supervised-only pointing policy that reaches 23.3\% success with a threshold chosen off the test split, with ablations over data scale, history and
-        layer fusion. A layer-wise probe shows that the STOP decision is decodable mid-network (AUC 0.72) but not at the
+        layer fusion. A layer-wise probe shows that the STOP decision is decodable mid-network (area under the ROC curve, AUC, 0.72) but not at the
         output layer (0.44) (\cref{sec:res-pt}).
   \item The first, to our knowledge, closed-loop evaluation of Cosmos3-Edge's action stream and reasoner as VLN policies,
         including a guidance analysis and the finding that offline next-action accuracy does not predict closed-loop
@@ -188,7 +188,8 @@ Our contributions are:
 {\small (d) Cosmos3-Edge reasoner as a direct policy}
 \end{minipage}
 \caption{The four architectures. All share the task interface: 448$\times$448 RGB, an English instruction, and the
-primitives FORWARD 0.25\,m, LEFT/RIGHT 15\textdegree\ and STOP, with at most 100 steps per episode.}
+primitives FORWARD 0.25\,m, LEFT/RIGHT 15\textdegree\ and STOP, with at most 100 steps per episode. LoRA: low-rank
+adaptation; mRoPE: multimodal rotary position embedding; CFG: classifier-free guidance; SFT: supervised fine-tuning.}
 \label{fig:arch}
 \end{figure}
 
@@ -201,8 +202,9 @@ R2R~\citep{anderson2018r2r} introduced instruction following on the Matterport3D
 data augmentation~\citep{fried2018speaker}, recurrent cross-modal state~\citep{hong2021vlnbert} and explicit
 history~\citep{chen2021hamt}. VLN-CE~\citep{krantz2020vlnce,vlnce2020code} moved the task into continuous Habitat
 environments~\citep{savva2019habitat,szot2021habitat2}. There, waypoint predictors~\citep{hong2022bridging} and
-topological planners~\citep{an2023etpnav} close part of the gap to the graph setting. We follow the standard metrics
-(NE, OS, SR, SPL~\citep{anderson2018evaluation} and nDTW~\citep{ilharco2019ndtw}).
+topological planners~\citep{an2023etpnav} close part of the gap to the graph setting. We follow the standard metrics:
+navigation error (NE), oracle success (OS), success rate (SR), success weighted by path length
+(SPL)~\citep{anderson2018evaluation} and normalised dynamic time warping (nDTW)~\citep{ilharco2019ndtw}.
 
 \paragraph{Navigation with large vision-language models.}
 Vision-language-action models transfer web-scale pretraining to control~\citep{brohan2023rt2,kim2024openvla}.
@@ -217,7 +219,7 @@ nvidia2025cosmosreason2}. LatentPilot uses LLaVA-Video~\citep{zhang2024llavavide
 Learning to predict the future in latent space is a long-standing route to better
 control~\citep{ha2018worldmodels,hafner2023dreamerv3}, and feature prediction is also an effective video
 pretext task~\citep{bardes2024vjepa}. Chain-of-Visual-Thought~\citep{covt} and LatentPilot~\citep{latentpilot} insert
-continuous visual tokens into a VLM's reasoning. LatentPilot trains them to anticipate future observations.
+continuous visual tokens into a vision-language model's (VLM's) reasoning. LatentPilot trains them to anticipate future observations.
 
 \paragraph{Pointing and spatial affordances.}
 Grounding-trained VLMs can output image coordinates~\citep{deitke2024molmo}, and pointing has been used as an action
@@ -229,7 +231,7 @@ online RL. We use the same supervision, but with a geometric controller and no R
 Cosmos~\citep{nvidia2025cosmoswfm} provides video world foundation models; Cosmos3-Edge~\citep{nvidia2026cosmos3edge}
 adds an action stream that denoises ego-motion or robot actions conditioned on video and text. Diffusion
 policies~\citep{chi2023diffusionpolicy} and flow matching~\citep{lipman2023flow} are standard for continuous control, and
-classifier-free guidance~\citep{ho2022cfg} controls how strongly the conditioning text steers sampling.
+classifier-free guidance (CFG)~\citep{ho2022cfg} controls how strongly the conditioning text steers sampling.
 
 \paragraph{Training dynamics.}
 Our LatentPilot failure concerns balancing an auxiliary loss against the task loss, the problem addressed by
@@ -280,8 +282,8 @@ therefore mildly optimistic. For the headline pointing result the STOP threshold
 
 \paragraph{Compute.}
 One NVIDIA RTX 4070 Ti SUPER (16\,GB). Rendering runs in a separate Habitat worker process~\citep{savva2019habitat}.
-Models use PyTorch~\citep{paszke2019pytorch}, Transformers~\citep{wolf2020transformers}, PEFT~\citep{mangrulkar2022peft}
-and Diffusers~\citep{vonplaten2022diffusers}. All fine-tuning uses LoRA~\citep{hu2021lora}, optimised with 8-bit AdamW~\citep{loshchilov2019adamw,
+Models use PyTorch~\citep{paszke2019pytorch}, Transformers~\citep{wolf2020transformers}, PEFT (parameter-efficient fine-tuning)~\citep{mangrulkar2022peft}
+and Diffusers~\citep{vonplaten2022diffusers}. All fine-tuning uses low-rank adaptation (LoRA)~\citep{hu2021lora}, optimised with 8-bit AdamW~\citep{loshchilov2019adamw,
 dettmers2022optim8bit} for the Cosmos-Reason2 models and standard AdamW for the reasoner.
 
 %=====================================================================================================================
@@ -310,7 +312,7 @@ Issue & Measured effect & Fix \\
 Qwen-VL drops multimodal RoPE~\citep{su2021roformer,wang2024qwen2vl} when called with \texttt{inputs\_embeds}
   & hidden-state relative $L_2$ 0.42--0.50; top-1 next token agrees on 2/5 prompts
   & rebuild 3-D position ids explicitly (checked bitwise) \\
-bf16 encoder output depends on batch size & 7\% relative $L_2$ for the same frame (fp32: $8\times10^{-6}$)
+bf16 (bfloat16) encoder output depends on batch size & 7\% relative $L_2$ for the same frame (fp32: $8\times10^{-6}$)
   & cache targets $\vbar$ in fp32 \\
 Paper's literal token layout (Eq.~5) & 21.2\% zero-shot instruction following (160 trials, chance 25\%)
   vs.\ 77.5\% for image-first with markers & image-first layout \\
@@ -405,7 +407,7 @@ of four commands. The prompt is given in \cref{app:prompt}. Each command is exec
 (0.5\,m, or 30\textdegree), after which the policy re-plans. STOP is executed after two consecutive stop commands. Zero-shot
 probes showed that the model narrated the scene as a bystander rather than acting as the agent (\cref{sec:res-rs}).
 We therefore prefix every prompt with an embodiment statement modelled on NVIDIA's driving prompt, and fine-tune with
-LoRA on expert decision points:
+LoRA on expert decision points (supervised fine-tuning, SFT):
 \begin{itemize}
   \item \textbf{SFT v1}: 43,036 samples, onset-balanced (forward 50\%, stop 25\%, turns 25\%), and a 16-frame
         context, which the processor reduces to about 1\,s.
@@ -605,7 +607,7 @@ navigator. This finding is specific to this setting and does not refute the 7B r
 \label{sec:res-pt}
 
 \paragraph{Data is the binding constraint.}
-This is a supervised-only test of the Robostral idea: no RL fine-tuning and a geometric controller. Trained
+This is a supervised-only test of the Robostral idea: no reinforcement-learning (RL) fine-tuning and a geometric controller. Trained
 identically for 20k steps, the 6-scan policy reached end-SR 4.0\% although its training loss was lower (0.076 vs.\
 0.396), while the 16-scan policy reached 13.3\% (\cref{tab:pt}). Moving to 61 scans with frame history raised end-SR to
 18.0\%, a longer schedule to 24.7\%, and layer fusion to 31.3\%. Re-evaluated with stopping positions logged, SR (own
@@ -835,7 +837,7 @@ goal region).
 
 Evaluations are small ($n{=}40$--150) and unpaired across approaches, and they cover 6--8 of the 11 unseen buildings.
 The headline pointing threshold was chosen on \texttt{val\_seen}; other thresholds were tuned on the evaluation split.
-Every method was trained for one offline round only (no flywheel, RL or DAgger). Reasoner rows average three stochastic runs, which varied by up to 12 points. Several runs were stopped before finishing their schedules:
+Every method was trained for one offline round only (no flywheel, RL or DAgger, i.e.\ dataset aggregation). Reasoner rows average three stochastic runs, which varied by up to 12 points. Several runs were stopped before finishing their schedules:
 the long pointing runs completed 1.1--1.2 of 1.5--3 planned epochs. Stage~2 was run only on expert data (up to 7,800 steps, at most 75\% own latents); a
 16-scan Stage 1, the data flywheel, and most arms of a prompt/policy ablation for the Cosmos models were never run. Our backbone (2B) and
 data (6--61 buildings) differ from LatentPilot's (7B, full data), so our results describe this scale only.

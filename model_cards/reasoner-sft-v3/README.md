@@ -16,6 +16,8 @@ tags:
 
 # Cosmos3-Edge reasoner, fine-tuned as a navigation policy (SFT v3)
 
+> **Abbreviations:** VLN = Vision-and-Language Navigation; R2R-CE = Room-to-Room in Continuous Environments; LoRA = Low-Rank Adaptation; SR = success rate (own STOP within 3 m); end-SR = ended within 3 m; OS = oracle success (ever within 3 m); SPL = Success weighted by Path Length; nDTW = normalised Dynamic Time Warping; NE = navigation error (final distance to goal); SFT = supervised fine-tuning; VLM = vision-language model.
+
 Approach ④ of *Evaluating Different Approaches to Vision-and-Language Navigation* ([report](https://github.com/ShubhJain007/evaluating-different-approaches-to-vln/blob/main/paper/main.pdf),
 [code](https://github.com/ShubhJain007/evaluating-different-approaches-to-vln)). The reasoning tower of
 [`nvidia/Cosmos3-Edge`](https://huggingface.co/nvidia/Cosmos3-Edge) is fine-tuned to answer "what should the robot do

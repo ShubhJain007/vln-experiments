@@ -10,7 +10,7 @@
 [![Cite](https://img.shields.io/badge/cite-CITATION.cff-555)](CITATION.cff)
 
 We took four recent ideas for turning a pretrained vision-language or video model into a robot that follows spoken
-route instructions (R2R-CE, Habitat). We built each one on a single 16 GB GPU and measured how well it navigates in
+route instructions (R2R-CE, *Room-to-Room in Continuous Environments*, in the Habitat simulator). We built each one on a single 16 GB GPU and measured how well it navigates in
 buildings it has never seen:
 
 | | Approach | Where the idea comes from | What we measure |
@@ -18,14 +18,15 @@ buildings it has never seen:
 | ① | **Latent reasoning** | LatentPilot ([arXiv:2603.29165](https://arxiv.org/abs/2603.29165)), reimplemented from scratch | Can the model "think" in latent tokens instead of words or extra frames? |
 | ② | **Pointing + controller** | Robostral Navigate by Mistral AI ([arXiv:2607.20785](https://arxiv.org/abs/2607.20785)) | Does pointing at the next waypoint in the image beat choosing an action? |
 | ③ | **Video diffusion action model** | NVIDIA Cosmos3-Edge action stream, used as is | Does a video world model's motion prior transfer to navigation? |
-| ④ | **Video reasoner as the policy** | NVIDIA Cosmos3-Edge reasoner, fine-tuned | Can a physical-reasoning VLM pick the next move from its own video? |
+| ④ | **Video reasoner as the policy** | NVIDIA Cosmos3-Edge reasoner, fine-tuned | Can a physical-reasoning vision-language model (VLM) pick the next move from its own video? |
 
 **What "raw capability" means here.** Every trained model gets exactly one round of offline imitation learning on
 expert demonstrations. It is then evaluated zero-shot in the 11 unseen `val_unseen` buildings, with no further
 adaptation. None of the methods' "extra rounds" were run:
 - LatentPilot's **data flywheel** (the model drives, an expert corrects, the model retrains) was not run.
-- Robostral's **online RL fine-tuning** was not run.
-- No DAgger or on-policy data collection was used.
+- Robostral's **online reinforcement-learning (RL) fine-tuning** was not run.
+- No DAgger (*Dataset Aggregation*: an expert relabels the states the model itself visits) or other on-policy data
+  collection was used.
 
 The numbers therefore show how far each idea gets on its own, at small scale. They do not show what each method
 reaches with its full recipe.
@@ -37,6 +38,41 @@ reaches with its full recipe.
 > **Status (Sept 2026): research code, finished and not maintained.** Results are on subsets of `val_unseen`
 > (n = 40–150), with thresholds tuned on that split. Read [Metrics](#results) and [Caveats](#caveats) before quoting a
 > number.
+
+<details>
+<summary><b>Abbreviations and terms</b> (click to expand)</summary>
+
+| Term | Full form / meaning |
+|---|---|
+| VLN | Vision-and-Language Navigation: following a spoken-style route instruction using only a camera |
+| R2R-CE | Room-to-Room in Continuous Environments, the benchmark used here (VLN-CE is its code release) |
+| Habitat | the 3-D simulator that renders the buildings |
+| MP3D | Matterport3D, the scanned buildings the benchmark uses |
+| `val_unseen` / `val_seen` | validation episodes in 11 buildings never seen in training / in training buildings |
+| VLM | vision-language model |
+| SFT | supervised fine-tuning: training on (input, correct answer) examples |
+| RL | reinforcement learning |
+| DAgger | Dataset Aggregation: an expert relabels states the model visits, and the model retrains |
+| LoRA | Low-Rank Adaptation: a small set of trainable weights added to a frozen model |
+| WFM | World Foundation Model (NVIDIA Cosmos) |
+| SigLIP | Sigmoid Loss for Language-Image Pre-training, a family of image encoders |
+| Qwen2-VL | Qwen2 Vision-Language, a VLM family |
+| Pilot Token, `G_ψ`, `L_pil` | LatentPilot's latent memory token, the module that predicts the future embedding, and its loss |
+| `L_act`, λ | the action loss, and the weight on `L_pil` relative to it |
+| SR | success rate: the agent's own STOP within 3 m of the goal (standard) |
+| end-SR | the episode ended within 3 m, by STOP or by running out of steps |
+| OS | oracle success: came within 3 m at any point |
+| SPL | Success weighted by Path Length |
+| nDTW | normalised Dynamic Time Warping: how closely the path follows the reference (0–1) |
+| NE | Navigation Error: final distance to the goal, in metres |
+| τ | STOP threshold: the STOP probability above which the agent stops |
+| AUC | area under the ROC (receiver operating characteristic) curve; 0.5 is chance |
+| n/m | not measured |
+| mRoPE | multimodal rotary position embedding |
+| bf16 | bfloat16, a 16-bit floating-point format |
+| GPU / VRAM | graphics processor / its memory |
+
+</details>
 
 ---
 
@@ -100,7 +136,7 @@ The step-10k policy is from an earlier run with the same configuration, whose ch
 #### What failed: the fully trained model
 
 **The symptom.** The final model wanders and almost never stops. It reached the goal region in 10.7 % of 150 unseen
-episodes; a control with the future-prediction part switched off (identity `G_ψ`) reached 17.3 %. In the 11 recorded
+episodes; a control with the future-prediction part switched off (identity `G_ψ`, where `G_ψ` is the module that predicts the future embedding) reached 17.3 %. In the 11 recorded
 scenes it reached 3 m of the goal in none, while the earlier step-10k checkpoint reached it in one.
 
 **The cause, measured: during training the Pilot slot leaks the answer.** LatentPilot trains with the slot filled by
@@ -141,7 +177,7 @@ when run 3× longer.** The fine-tune from the project's plan (2,600 steps, start
 of slot inputs with the model's own latents during training. In closed loop it lifts navigation from 10.7 % to
 **16.7 % and 18.0 %**, the level of the identity control. Offline, the model still scores 84 % with the true next frame
 and only 34 % with its own latent. Tripling the schedule (7,800 steps at 75 %) barely moves either number: own-latent
-accuracy 35.5 %, OS **19.3 %** (within noise of 18.0 % at n = 150), and the agent never issues STOP. More scheduled
+accuracy 35.5 %, OS (oracle success: came within 3 m of the goal at any point) **19.3 %** (within noise of 18.0 % at n = 150), and the agent never issues STOP. More scheduled
 sampling on expert trajectories does not close the gap; the paper's data flywheel, which trains on the model's own
 trajectories, was not run.
 
@@ -153,7 +189,7 @@ loss's weight (below). An adaptive λ removed the drift but did **not** recover 
 not the main problem.
 
 <img src="docs/figures/fig_loss_balance.png" width="720"><br>
-<sub><b>Figure 3. Stage 1 loss balance (λ = 0.1).</b> Left: the action loss and the future-prediction loss. Right: their weighted ratio λ·L_pil / L_act, which starts at about 0.5 and ends 5.5× larger, so the prediction term gradually dominates.</sub>
+<sub><b>Figure 3. Stage 1 loss balance (λ = 0.1).</b> Left: the action loss and the future-prediction loss. Right: their weighted ratio λ·L_pil / L_act (Pilot-Token prediction loss over action loss), which starts at about 0.5 and ends 5.5× larger, so the prediction term gradually dominates.</sub>
 
 **What this means for the method.** LatentPilot's appeal (one latent per step instead of history frames or text) rests
 on the model learning to *use its own* latent. Trained as specified in Stage 1, it instead learns to read the
@@ -187,7 +223,8 @@ reports 73.4 % success with supervised training alone and 77.4 % after RL. We te
 #### What failed, and why
 
 **First, an honest headline.** The STOP threshold is now chosen on `val_seen` (8 training buildings, new episodes),
-not on the test split. That picks τ = 0.10 and gives **SR 23.3 %** on `val_unseen`, within a point of the 22.7 % from
+not on the test split. That picks τ = 0.10 (τ is the STOP probability above which the agent stops) and gives **SR 23.3 %** (success rate:
+the agent's own STOP within 3 m of the goal) on `val_unseen`, within a point of the 22.7 % from
 test-set tuning (see the threshold figure under Results). The earlier runs were also re-evaluated with stopping
 positions logged: 12.7 % (16 scans), 17.3 % (+ history) and 22.7 % (longer schedule). Layer fusion matches the plain
 longer schedule rather than beating it.
@@ -205,7 +242,7 @@ There are three causes, in order of impact:
    missed and the agent never recovers.
 2. **STOP is weak.**
    - STOP is only 2.5 % of the training labels.
-   - The signal is readable in the middle of the network (layer 15, AUC 0.72) but not at the output layer (0.44).
+   - The signal is readable in the middle of the network (layer 15, AUC 0.72, where AUC is the area under the ROC curve and 0.5 is chance) but not at the output layer (0.44).
    - Only 49 % of its own stops land within 3 m.
    The second and third GIFs are the two sides of this: it passes the goal without stopping, or it stops at a
    look-alike spot.
@@ -250,7 +287,8 @@ which is why most episodes stop early.
 **Why try it.** A reasoning VLM trained on physical video might decide "what next?" better than an action classifier.
 It can also see how the view has changed over the last few seconds. Zero-shot it did not work: asked for the next
 action, it described the room as a bystander ("A person enters the room through the archway…"). We therefore
-fine-tuned it on expert decisions. There are two versions:
+fine-tuned it on expert decisions with **supervised fine-tuning (SFT)**: training on (video, instruction, correct
+next command) examples. There are two versions:
 
 | Version | Training data | Video it sees |
 |---|---|---|
@@ -307,6 +345,10 @@ academic use only.
 - **end-SR:** the episode *ended* within 3 m, by STOP or by running out of steps. Our "strict" runs originally reported
   this number as SR.
 - **OS:** the agent came within 3 m at any point (oracle success).
+
+The tables also report **SPL** (Success weighted by Path Length: success discounted by how much longer the path was
+than the shortest one), **nDTW** (normalised Dynamic Time Warping: how closely the path follows the reference path,
+0–1) and **NE** (Navigation Error: final distance to the goal, in metres).
 
 Most evaluations ended the episode as soon as the agent came within 3 m, so they measure only OS. SR can be recovered
 from the logs only where the stopping position was recorded.
@@ -365,8 +407,8 @@ Every evaluation is listed in [`docs/EXPERIMENT_LOG.md` §3](docs/EXPERIMENT_LOG
 6. **Data first.** Going from 6 to 16 buildings tripled the pointing policy's success. Fixing three silent label bugs
    raised label/expert agreement from 0.69 to 0.97.
 7. **Silent bugs rivalled any modelling change.** Examples:
-   - mRoPE dropped with `inputs_embeds`;
-   - bf16 targets that depend on batch size;
+   - mRoPE (multimodal rotary position embedding) dropped with `inputs_embeds`;
+   - bf16 (bfloat16, 16-bit floating point) targets that depend on batch size;
    - the paper's literal token layout (21 % vs 78 % instruction following);
    - a history stride trained wrong for 7 h;
    - a success metric that did not require STOP.
@@ -399,7 +441,7 @@ The full narrative, one section per experiment with why it was run, the setup, t
 ## Model zoo
 
 Every trained model reported in the paper has a model card in Hugging Face format ([`model_cards/`](model_cards/README.md)).
-Weights are not published yet (each is a 25–33 MB LoRA adapter).
+Weights are not published yet (each is a 25–33 MB LoRA, *Low-Rank Adaptation*, adapter).
 
 | Model | Approach | Base model | Result on R2R-CE `val_unseen` | Card |
 |---|---|---|---|---|
@@ -497,7 +539,7 @@ Suggested reading order: this README → [`paper/main.pdf`](paper/main.pdf) → 
 | What | Size | How to get it |
 |---|---|---|
 | Matterport3D scenes for Habitat | 32 GB for 17 scans (11 val_unseen + 6 train); more for all 72 | accept the [Matterport3D terms](http://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf), then set `MP3D_HABITAT_URL` to the link you are emailed and run `python scripts/download_mp3d.py` (resumable, verifies before extracting) |
-| R2R-CE episodes | small | VLN-CE release (`scripts/download_full.sh`) |
+| R2R-CE episodes | small | VLN-CE (Vision-and-Language Navigation in Continuous Environments) release (`scripts/download_full.sh`) |
 | Expert rollouts, rendered frames, resampled video | ~42 GB | regenerate with `scripts/collect_full.sh`, `scripts/render_resampled.py` |
 | Base models | — | Hugging Face `nvidia/Cosmos-Reason2-2B`, `nvidia/Cosmos3-Edge` |
 | Trained LoRA adapters | ~12.5 GB | not published; kept by the author |
@@ -530,7 +572,7 @@ Please also cite the work this builds on. The core references are below; all 53 
 | Scenes and simulator | Chang et al., *Matterport3D*, [arXiv:1709.06158](https://arxiv.org/abs/1709.06158); Savva et al., *Habitat*, [arXiv:1904.01201](https://arxiv.org/abs/1904.01201) |
 | Metrics | Anderson et al., *SPL*, [arXiv:1807.06757](https://arxiv.org/abs/1807.06757); Ilharco et al., *nDTW*, [arXiv:1907.05446](https://arxiv.org/abs/1907.05446) |
 | Backbones (①②) | NVIDIA, [Cosmos-Reason2-2B](https://huggingface.co/nvidia/Cosmos-Reason2-2B); Wang et al., *Qwen2-VL*, [arXiv:2409.12191](https://arxiv.org/abs/2409.12191); Tschannen et al., *SigLIP 2*, [arXiv:2502.14786](https://arxiv.org/abs/2502.14786) |
-| Models (③④) | NVIDIA, [Cosmos3-Edge](https://huggingface.co/nvidia/Cosmos3-Edge); NVIDIA, *Cosmos WFM*, [arXiv:2501.03575](https://arxiv.org/abs/2501.03575); NVIDIA, *Cosmos-Reason1*, [arXiv:2503.15558](https://arxiv.org/abs/2503.15558) |
+| Models (③④) | NVIDIA, [Cosmos3-Edge](https://huggingface.co/nvidia/Cosmos3-Edge); NVIDIA, *Cosmos WFM (World Foundation Model)*, [arXiv:2501.03575](https://arxiv.org/abs/2501.03575); NVIDIA, *Cosmos-Reason1*, [arXiv:2503.15558](https://arxiv.org/abs/2503.15558) |
 | Fine-tuning | Hu et al., *LoRA*, [arXiv:2106.09685](https://arxiv.org/abs/2106.09685) |
 
 ## Licences

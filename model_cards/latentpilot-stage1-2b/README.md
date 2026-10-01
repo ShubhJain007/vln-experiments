@@ -17,6 +17,8 @@ tags:
 
 # LatentPilot Stage 1 at 2 B (reimplementation): learned and identity-control checkpoints
 
+> **Abbreviations:** VLN = Vision-and-Language Navigation; R2R-CE = Room-to-Room in Continuous Environments; LoRA = Low-Rank Adaptation; SR = success rate (own STOP within 3 m); end-SR = ended within 3 m; OS = oracle success (ever within 3 m); SPL = Success weighted by Path Length; nDTW = normalised Dynamic Time Warping; NE = navigation error (final distance to goal); VLM = vision-language model; `G_ψ` = future-embedding predictor; `L_pil` = its loss.
+
 Approach ① of *Evaluating Different Approaches to Vision-and-Language Navigation* ([report](https://github.com/ShubhJain007/evaluating-different-approaches-to-vln/blob/main/paper/main.pdf),
 [code](https://github.com/ShubhJain007/evaluating-different-approaches-to-vln)). This is a from-scratch reimplementation of
 [LatentPilot](https://arxiv.org/abs/2603.29165) (Hao et al., 2026; the official code was not released) on a 2 B

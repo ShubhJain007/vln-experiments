@@ -19,6 +19,8 @@ metrics:
 
 # Pointing policy with layer fusion (Cosmos-Reason2-2B + LoRA): VLN on R2R-CE
 
+> **Abbreviations:** VLN = Vision-and-Language Navigation; R2R-CE = Room-to-Room in Continuous Environments; LoRA = Low-Rank Adaptation; SR = success rate (own STOP within 3 m); end-SR = ended within 3 m; OS = oracle success (ever within 3 m); SPL = Success weighted by Path Length; nDTW = normalised Dynamic Time Warping; NE = navigation error (final distance to goal); RL = reinforcement learning; τ = STOP threshold.
+
 The best policy in *Evaluating Different Approaches to Vision-and-Language Navigation* ([report](https://github.com/ShubhJain007/evaluating-different-approaches-to-vln/blob/main/paper/main.pdf),
 [code](https://github.com/ShubhJain007/evaluating-different-approaches-to-vln)): approach ②, with **success rate 23.3 %** (own STOP within 3 m; STOP threshold chosen on `val_seen`) on
 150 unseen R2R-CE episodes.

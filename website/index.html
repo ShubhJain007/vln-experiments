@@ -92,6 +92,7 @@ table.plain { min-width: 0; }
 table.plain th, table.plain td { text-align: center; white-space: normal; }
 table.plain td:first-child, table.plain th:first-child { text-align: left; }
 table.plain img { margin: 0 auto 4px; }
+table.gloss th, table.gloss td { text-align: left; }
 footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
 .themebtn { position: fixed; top: 12px; right: 12px; background: var(--chip); color: var(--ink); border: 1px solid var(--line);
   border-radius: 999px; padding: 6px 12px; font: 600 12px Inter, sans-serif; cursor: pointer; }
@@ -125,9 +126,9 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
 <section>
   <h2>What this is</h2>
   <p class="tldr">We took four recent ideas for turning a pretrained vision-language or video model into a robot that
-  follows spoken route instructions (R2R-CE, Habitat). We built each one on a single 16&nbsp;GB GPU and measured how
+  follows spoken route instructions (R2R-CE, <em>Room-to-Room in Continuous Environments</em>, in the Habitat simulator). We built each one on a single 16&nbsp;GB GPU and measured how
   well it navigates in buildings it has never seen. Every trained model gets <strong>one round of offline imitation
-  learning</strong> and is then evaluated <strong>zero-shot</strong>. There is no data flywheel, no RL fine-tuning and
+  learning</strong> and is then evaluated <strong>zero-shot</strong>. There is no data flywheel, no reinforcement-learning (RL) fine-tuning and
   no on-policy data, so the numbers show each idea's <em>raw</em> capability, not its full recipe.</p>
 
   <div class="grid4">
@@ -145,8 +146,35 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
       <p>The Cosmos3-Edge reasoner, fine-tuned to answer "what next?" from its own recent video.</p>
       <div class="res">SR 3.3 % <span class="note">(OS 37.5 %)</span></div></div>
   </div>
-  <p class="note">SR: stopped within 3&nbsp;m of the goal by its own decision. OS: came within 3&nbsp;m at some point.
+  <p class="note">SR (success rate): stopped within 3&nbsp;m of the goal by its own decision. OS (oracle success): came within 3&nbsp;m at some point.
   Across all four approaches, <strong>stopping, not reaching, is the bottleneck</strong>.</p>
+  <details class="card" style="margin-top:12px">
+    <summary><strong>Abbreviations and terms</strong></summary>
+    <div class="tablewrap"><table class="plain gloss">
+      <thead><tr><th>Term</th><th>Full form / meaning</th></tr></thead>
+      <tbody>
+      <tr><td>VLN</td><td>Vision-and-Language Navigation: following a route instruction using only a camera</td></tr>
+      <tr><td>R2R-CE</td><td>Room-to-Room in Continuous Environments, the benchmark used here</td></tr>
+      <tr><td>Habitat / MP3D</td><td>the 3-D simulator / Matterport3D, the scanned buildings it renders</td></tr>
+      <tr><td><code>val_unseen</code> / <code>val_seen</code></td><td>validation episodes in 11 buildings never seen in training / in training buildings</td></tr>
+      <tr><td>VLM</td><td>vision-language model</td></tr>
+      <tr><td>SFT</td><td>supervised fine-tuning: training on (input, correct answer) examples</td></tr>
+      <tr><td>RL</td><td>reinforcement learning</td></tr>
+      <tr><td>LoRA</td><td>Low-Rank Adaptation: a small set of trainable weights added to a frozen model</td></tr>
+      <tr><td>Pilot Token, G<sub>ψ</sub></td><td>LatentPilot's latent memory token, and the module that predicts the future embedding</td></tr>
+      <tr><td>SR</td><td>success rate: the agent's own STOP within 3&nbsp;m of the goal (standard)</td></tr>
+      <tr><td>end-SR</td><td>the episode ended within 3&nbsp;m, by STOP or by running out of steps</td></tr>
+      <tr><td>OS</td><td>oracle success: came within 3&nbsp;m at any point</td></tr>
+      <tr><td>SPL</td><td>Success weighted by Path Length</td></tr>
+      <tr><td>nDTW</td><td>normalised Dynamic Time Warping: how closely the path follows the reference (0–1)</td></tr>
+      <tr><td>NE</td><td>navigation error: final distance to the goal, in metres</td></tr>
+      <tr><td>τ</td><td>STOP threshold: the STOP probability above which the agent stops</td></tr>
+      <tr><td>AUC</td><td>area under the ROC (receiver operating characteristic) curve; 0.5 is chance</td></tr>
+      <tr><td>CFG</td><td>classifier-free guidance: how strongly the instruction steers a diffusion model</td></tr>
+      <tr><td>n/m</td><td>not measured</td></tr>
+      </tbody>
+    </table></div>
+  </details>
 </section>
 
 <section>
@@ -204,8 +232,8 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     <ol>
       <li><strong>Under-turning.</strong> When the expert turns, the model predicts FORWARD 39–43 % of the time. Its
       predicted bearing is 0.42× the true bearing: a regression head hedges toward "straight".</li>
-      <li><strong>Weak STOP.</strong> STOP is 2.5 % of labels, and the signal sits mid-network (layer 15 AUC 0.72,
-      output 0.44). Only 49 % of its stops land within 3&nbsp;m.</li>
+      <li><strong>Weak STOP.</strong> STOP is 2.5 % of labels, and the signal sits mid-network (probe AUC, the area under the ROC curve where 0.5 is chance:
+      0.72 at layer 15, 0.44 at the output). Only 49 % of its stops land within 3&nbsp;m.</li>
       <li><strong>No recovery.</strong> Imitation only sees expert states. Robostral's RL phase teaches recovery; it was
       not run.</li>
     </ol></div>
@@ -227,9 +255,9 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     become a single step. Two such chunks in a row end the episode, which happened in 75 % of episodes.</p></div>
 
   <h3>④ Cosmos3-Edge reasoner <span class="tag probe">decision probe</span></h3>
-  <p class="why"><strong>Why try it:</strong> a physical-reasoning VLM that sees how the view changed over the last few
+  <p class="why"><strong>Why try it:</strong> a physical-reasoning vision-language model (VLM) that sees how the view changed over the last few
   seconds might decide "what next?" better than a classifier. Zero-shot it answered as a bystander ("A person enters
-  the room…"), so it was fine-tuned on expert decisions.</p>
+  the room…"), so it was fine-tuned on expert decisions with supervised fine-tuning (SFT).</p>
   <p class="howto">Each clip shows <strong>one</strong> model. It plays exactly the video that model receives at one
   moment of an <strong>expert's</strong> walk, then shows what the expert did and that model's answer.
   <strong>SFT v1</strong>: turn- and stop-heavy data (25 % STOP labels), ~1&nbsp;s of video. <strong>SFT v3</strong>:
@@ -267,7 +295,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
       <tr><td>② Pointing</td><td>+ longer schedule</td><td>150</td><td>22.7</td><td>24.7</td><td>31.3</td><td>0.345</td><td>7.10</td></tr>
       <tr><td>② Pointing</td><td>+ layer fusion, τ tuned on test</td><td>150</td><td>22.7</td><td>31.3</td><td>42.7</td><td>0.323</td><td>7.22</td></tr>
       <tr class="best"><td>② Pointing</td><td>+ layer fusion, τ chosen on val_seen</td><td>150</td><td>23.3</td><td>28.7</td><td>36.7</td><td>0.363</td><td>7.03</td></tr>
-      <tr><td>③ Edge action</td><td>zero-shot, CFG 7.5</td><td>40</td><td class="nm">n/m</td><td class="nm">n/m</td><td>7.5</td><td>0.276</td><td>8.81</td></tr>
+      <tr><td>③ Edge action</td><td>zero-shot, guidance (CFG) 7.5</td><td>40</td><td class="nm">n/m</td><td class="nm">n/m</td><td>7.5</td><td>0.276</td><td>8.81</td></tr>
       <tr><td>④ Edge reasoner</td><td>SFT v1</td><td>40</td><td class="nm">n/m</td><td class="nm">n/m</td><td>17.5</td><td>0.365</td><td>7.41</td></tr>
       <tr><td>④ Edge reasoner</td><td>SFT v3, 1.5k, 3 diagnostic runs</td><td>40</td><td class="nm">n/m</td><td class="nm">n/m</td><td>43.3 ± 7.2</td><td>0.364</td><td>6.36</td></tr>
       <tr class="best"><td>④ Edge reasoner</td><td>SFT v3, 1.5k, 3 strict runs</td><td>40</td><td>3.3</td><td>18.3</td><td>37.5</td><td>0.175</td><td>7.31</td></tr>
@@ -276,8 +304,10 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     </tbody>
   </table>
   </div>
-  <p class="note">R2R-CE <code>val_unseen</code>. SR: the agent's own STOP within 3&nbsp;m (standard). end-SR: the episode
-  ended within 3&nbsp;m, including by running out of steps. OS: came within 3&nbsp;m. n/m: not measured, because the
+  <p class="note">R2R-CE <code>val_unseen</code>. SR (success rate): the agent's own STOP within 3&nbsp;m (standard). end-SR: the episode
+  ended within 3&nbsp;m, including by running out of steps. OS (oracle success): came within 3&nbsp;m. nDTW (normalised
+  Dynamic Time Warping): how closely the path follows the reference, 0–1. NE (navigation error): final distance to the
+  goal. CFG: classifier-free guidance strength. n/m: not measured, because the
   evaluation ended on arrival. The bold pointing row uses a STOP threshold chosen on <code>val_seen</code>; other
   pointing rows were tuned on this split. Reasoner rows average 3 runs (± = standard deviation).</p>
   <figure class="card"><img src="figures/fig_navigation.png" alt="All metrics for every policy" loading="lazy"></figure>

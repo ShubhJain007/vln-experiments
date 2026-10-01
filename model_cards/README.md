@@ -1,5 +1,7 @@
 # Model cards
 
+> **Abbreviations:** VLN = Vision-and-Language Navigation; R2R-CE = Room-to-Room in Continuous Environments; LoRA = Low-Rank Adaptation; SR = success rate (own STOP within 3 m); end-SR = ended within 3 m; OS = oracle success (ever within 3 m); SPL = Success weighted by Path Length; nDTW = normalised Dynamic Time Warping; NE = navigation error (final distance to goal); SFT = supervised fine-tuning.
+
 One card per trained model reported in the paper, written in Hugging Face model-card format, so each `README.md` can
 be uploaded as-is as a model repository.
 
