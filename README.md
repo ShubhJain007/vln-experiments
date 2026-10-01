@@ -122,7 +122,8 @@ runs:
 | Stage 2, 75 %, 3× longer (7,800 steps) | 84.2 % | 35.5 % | 55.9 % | 29.6 % |
 | *reference: Stage 0, no slot at all* | | | | *66.0 %* |
 
-<img src="docs/figures/fig_slot_shortcut.png" width="900">
+<img src="docs/figures/fig_slot_shortcut.png" width="900"><br>
+<sub><b>Figure 1. The Pilot-slot shortcut, measured.</b> (a) Held-out action accuracy of each checkpoint when only the content of the Pilot slot changes (4,306 unseen steps). Every model trained with the true next frame in the slot collapses when given its own latent, both Stage 2 runs included; the identity control does not care what the slot holds. (b) The learned Stage 1 model over training: own-latent accuracy collapses by step 4k and stays low while next-frame accuracy stays high.</sub>
 
 - **The same model drops from 84 % to 31 %** when its slot holds what it actually gets at test time. That is less
   than half the accuracy of a model with no slot at all (66 %), so the Pilot slot does not merely fail to help: it
@@ -144,13 +145,15 @@ accuracy 35.5 %, OS **19.3 %** (within noise of 18.0 % at n = 150), and the agen
 sampling on expert trajectories does not close the gap; the paper's data flywheel, which trains on the model's own
 trajectories, was not run.
 
-<img src="docs/figures/fig_lp_failure.png" width="860">
+<img src="docs/figures/fig_lp_failure.png" width="860"><br>
+<sub><b>Figure 2. The failure seen during training.</b> (a) Training accuracy jumps once the Pilot slot is fed the true next frame. (b) The learned Pilot Token predicts the future better than the identity control, yet (c) navigates worse in unseen buildings.</sub>
 
 **A contributing cause: the loss balance drifts.** With λ = 0.1 the future-prediction loss ends up with 5.5× the action
 loss's weight (below). An adaptive λ removed the drift but did **not** recover navigation (OS 6.7 %), so the drift is
 not the main problem.
 
-<img src="docs/figures/fig_loss_balance.png" width="720">
+<img src="docs/figures/fig_loss_balance.png" width="720"><br>
+<sub><b>Figure 3. Stage 1 loss balance (λ = 0.1).</b> Left: the action loss and the future-prediction loss. Right: their weighted ratio λ·L_pil / L_act, which starts at about 0.5 and ends 5.5× larger, so the prediction term gradually dominates.</sub>
 
 **What this means for the method.** LatentPilot's appeal (one latent per step instead of history frames or text) rests
 on the model learning to *use its own* latent. Trained as specified in Stage 1, it instead learns to read the
@@ -209,8 +212,11 @@ There are three causes, in order of impact:
 3. **It never learned to recover.** Supervised imitation only ever sees expert states. Robostral's RL phase exists to
    teach recovery from the model's own mistakes, and we did not run it.
 
-<img src="docs/figures/fig_pointing_failure.png" width="860">
-<img src="docs/figures/fig_bearing.png" width="420">
+<img src="docs/figures/fig_pointing_failure.png" width="860"><br>
+<sub><b>Figure 4. How pointing fails (layer fusion, step 120k, τ = 0.20, n = 150).</b> (a) How the episodes end: 22.7 % stop within 3 m, 8.7 % run out of steps within 3 m, 23.3 % stop more than 3 m away and 45.3 % run out of steps far from the goal. (b) Teacher-forced predictions grouped by the expert's action: 39–43 % of the expert's turns are predicted as FORWARD.</sub>
+
+<img src="docs/figures/fig_bearing.png" width="420"><br>
+<sub><b>Figure 5. Predicted turns are too shallow.</b> Predicted vs expert bearing on 3,000 teacher-forced steps (fusion, step 120k). The fitted slope is 0.42: the model turns less than half as sharply as the expert, so many turns fall under the 7.5° threshold and become FORWARD.</sub>
 
 ### ③ Cosmos3-Edge action model (video diffusion, zero-shot)
 
@@ -223,7 +229,8 @@ all.
 - **Right:** with full R2R instructions, how often its turn direction matches the expert. Blue bars use the right
   instruction; orange bars use another episode's instruction as a control.
 
-![edge guidance](docs/figures/fig_edge_guidance.png)
+<img src="docs/figures/fig_edge_guidance.png" width="760" alt="edge guidance"><br>
+<sub><b>Figure 6. Cosmos3-Edge action model, zero-shot.</b> Language changes the sampled motion only at high classifier-free guidance, and full instructions steer it weakly: the model recovers ego-motion from video but largely ignores what it is told.</sub>
 
 #### What failed, and why
 
@@ -277,11 +284,13 @@ memory beyond that, neither version can know this. Fine-tuning on expert frames 
 means it never practised recovering from its own errors. Its offline next-action accuracy (63–68 %) did not predict
 closed-loop success.
 
-<img src="docs/figures/fig_reasoner_failure.png" width="860">
+<img src="docs/figures/fig_reasoner_failure.png" width="860"><br>
+<sub><b>Figure 7. How the reasoner fails.</b> (a) How the 40 closed-loop episodes end (diagnostic evaluation). (b) STOP behaviour follows the share of STOP in the training labels: v1 (25 % STOP labels) ends 65 % of episodes with a STOP, mostly far from the goal; v3 (5 %) says STOP in 1 % of its commands and usually runs out of steps.</sub>
 
 Before fine-tuning, on still frames, the reasoner could sketch a plausible route:
 
-![reasoner zero-shot](docs/figures/fig_reasoner_zeroshot.png)
+<img src="docs/figures/fig_reasoner_zeroshot.png" width="760" alt="reasoner zero-shot"><br>
+<sub><b>Figure 8. Zero-shot reasoner on still frames.</b> Navigation waypoints the untuned model predicts on single frames (coordinates normalised to 0–1000). The routes look plausible on still images.</sub>
 
 All media is listed in [`media/README.md`](media/README.md). It is Matterport3D-derived and for non-commercial
 academic use only.
@@ -290,7 +299,8 @@ academic use only.
 
 ## Results
 
-![Navigation results](docs/figures/fig_navigation.png)
+<img src="docs/figures/fig_navigation.png" width="900" alt="Navigation results"><br>
+<sub><b>Figure 9. Closed-loop results on R2R-CE val_unseen.</b> Three bars per policy, loosest to strictest: OS (came within 3 m, light), end-SR (ended within 3 m, medium) and SR (stopped within 3 m by its own STOP, solid). n/m = not measured: those runs ended the episode on arrival. The reasoner bars average three strict runs; the paper's 7B row is for reference.</sub>
 
 **Three success metrics, from strictest to loosest:**
 - **SR:** the agent's own STOP was within 3 m of the goal. This is the standard R2R-CE definition.
@@ -329,7 +339,8 @@ from the logs only where the stopping position was recorded.
 
 Every evaluation is listed in [`docs/EXPERIMENT_LOG.md` §3](docs/EXPERIMENT_LOG.md#3-consolidated-navigation-evaluations-r2r-ce-val_unseen).
 
-<img src="docs/figures/fig_stop_threshold.png" width="820">
+<img src="docs/figures/fig_stop_threshold.png" width="820"><br>
+<sub><b>Figure 10. Choosing the STOP threshold (pointing, layer fusion).</b> Left: raising the threshold τ trades premature stops for overshoots. OS keeps rising, end-SR peaks at 0.20, and SR is flat up to 0.20, then falls. The headline τ = 0.10 was chosen on val_seen, not on the test split. Right: end-SR and SR over training at τ = 0.20 (stopping positions were not logged at 20k).</sub>
 
 ## Key findings
 
@@ -348,7 +359,9 @@ Every evaluation is listed in [`docs/EXPERIMENT_LOG.md` §3](docs/EXPERIMENT_LOG
    layer. A head reading layers 23/26/28 did not, however, raise SR: the fused model at 120k and the final-layer head at
    40k both reach 22.7 %.
 
-   <img src="docs/figures/fig_layer_probe.png" width="640">
+   <img src="docs/figures/fig_layer_probe.png" width="640"><br>
+   <sub><b>Figure 11. Where the STOP decision lives.</b> STOP linear-probe AUC per backbone layer (`pointing_full3`, before layer fusion; 1,000 held-out steps). It peaks at layer 15 (0.72) and is below chance at the final layer (0.44), the one the pointing head was reading.</sub>
+
 6. **Data first.** Going from 6 to 16 buildings tripled the pointing policy's success. Fixing three silent label bugs
    raised label/expert agreement from 0.69 to 0.97.
 7. **Silent bugs rivalled any modelling change.** Examples:
