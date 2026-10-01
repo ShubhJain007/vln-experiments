@@ -17,6 +17,7 @@ Figures
   fig_lp_failure.png     Why trained LatentPilot fails: training fit, future prediction and navigation, learned vs identity
   fig_pointing_failure.png  How pointing episodes end, and the teacher-forced action confusion
   fig_reasoner_failure.png  How reasoner episodes end, and STOP rate vs training-label mix
+  fig_slot_shortcut.png  Held-out action accuracy by Pilot-slot content (results/slot_shortcut*.json)
 """
 import json
 import pathlib
@@ -146,9 +147,9 @@ def fig_navigation(rows):
     handles += [Patch(color=INK2, alpha=a_, label=l) for a_, l in ((0.3, "OS: came within 3 m"),
                 (0.6, "end-SR: ended within 3 m"), (1.0, "SR: stopped within 3 m"))]
     a.legend(handles=handles, frameon=False, loc="upper left", fontsize=8, ncol=2)
-    a.text(len(rows) - 0.5, -21, "n/m = not measured (diagnostic evaluation)   n/r = not recoverable from logs",
-           ha="right", fontsize=7.5, color=INK2)
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.04, 1, 1))
+    fig.text(0.99, 0.01, "n/m = not measured (diagnostic evaluation)   n/r = not recoverable from logs",
+             ha="right", fontsize=7.5, color=INK2)
     fig.savefig(OUT / "fig_navigation.png", dpi=160)
 
 
@@ -185,8 +186,18 @@ def fig_stop_threshold():
     a.plot(t, [100 * r["OS"] for r in b], color=BLUE, marker="o", markersize=5)
     a.plot(t, [100 * r["SR"] for r in b], color=ORANGE, marker="o", markersize=5)
     a.plot(t, [100 * r["SR_std"] for r in b], color=AQUA, marker="o", markersize=5)
-    a.legend(["OS: came within 3 m", "end-SR: ended within 3 m", "SR: stopped within 3 m"], frameon=False,
-             fontsize=8, loc="lower left")
+    labels = ["OS: came within 3 m", "end-SR: ended within 3 m", "SR: stopped within 3 m"]
+    vs_p = ROOT / "results" / "followups" / "summary.json"
+    if vs_p.exists():   # SR on val_seen, used to CHOOSE the threshold without touching the test split
+        V = json.load(open(vs_p))
+        vs = sorted((float(k.split("thr")[1]), v["SR_stop"]) for k, v in V.items() if k.startswith("cl_valseen_thr"))
+        if vs:
+            a.plot([x for x, _ in vs], [100 * y for _, y in vs], color=AQUA, marker="o", markersize=4, linestyle="--")
+            labels.append("SR on val_seen (picks τ)")
+            best = max(vs, key=lambda xy: xy[1])[0]
+            a.axvline(best, color=INK2, linewidth=1, linestyle=":")
+            a.text(best + 0.004, 46, "τ chosen on val_seen", fontsize=8, color=INK2)
+    a.legend(labels, frameon=False, fontsize=8, loc="lower right")
     a.set_ylim(8, 48)
     a.set_xlabel("STOP probability threshold")
     a.set_ylabel("% of episodes (n = 150)")
@@ -502,6 +513,58 @@ def fig_qualitative():
     fig.savefig(OUT / "fig_qualitative.png", dpi=150, bbox_inches="tight")
 
 
+def fig_slot_shortcut():
+    """Offline test of the Pilot-slot shortcut (scripts/test_slot_shortcut.py): held-out action accuracy with the slot
+    filled with the true next frame (training condition) vs the model's own latent (test condition)."""
+    main_p = ROOT / "results" / "slot_shortcut.json"
+    over_p = ROOT / "results" / "slot_shortcut_over_training.json"
+    if not main_p.exists():
+        return
+    R = json.load(open(main_p))
+    conds = [("next_frame", "true next frame (training input)", BLUE, 1.0),
+             ("own_z", "its own latent z (test-time input)", ORANGE, 1.0),
+             ("current_frame", "current frame (no future info)", AQUA, 1.0),
+             ("other_next_frame", "another episode's next frame", "#b9b7b1", 1.0)]
+    models = [(k, lab) for k, lab in (("stage0prime_B", "Stage 0′\n(no L_pil)"), ("stage1_learned", "Stage 1\nlearned G_ψ"),
+                                       ("stage1_identity", "Stage 1\nidentity G_ψ"),
+                                       ("stage2_p50", "Stage 2\n50 % own z"), ("stage2_p75", "Stage 2\n75 % own z"))
+              if k in R]
+    fig, (a, b) = plt.subplots(1, 2, figsize=(13, 4.4), gridspec_kw={"width_ratios": [1.6, 1]})
+    x = np.arange(len(models))
+    w = 0.2
+    for j, (c, lab, col, al) in enumerate(conds):
+        v = [100 * R[m]["conditions"][c]["accuracy"] for m, _ in models]
+        a.bar(x + (j - 1.5) * w, v, w, color=col, alpha=al, edgecolor=SURFACE, linewidth=1.5, label=lab)
+        for i, y in enumerate(v):
+            a.text(x[i] + (j - 1.5) * w, y + 1, "%.0f" % y, ha="center", fontsize=7.5, color=INK)
+    if "stage0" in R:
+        s0 = 100 * R["stage0"]["conditions"]["no_slot"]["accuracy"]
+        a.axhline(s0, color=INK2, linestyle="--", linewidth=1, label="Stage 0, no slot (%.0f %%)" % s0)
+    counts = R[models[0][0]]["expert_action_counts"]
+    maj = 100 * max(counts.values()) / sum(counts.values())
+    a.axhline(maj, color=INK2, linestyle=":", linewidth=1, label="always FORWARD (%.0f %%)" % maj)
+    a.set_xticks(x, [lab for _, lab in models])
+    a.set_ylabel("held-out action accuracy (%)")
+    a.set_ylim(0, 112)
+    n = R[models[0][0]]["steps"]
+    a.set_title("(a) Same model, same steps, only the Pilot slot differs (%d steps)" % n)
+    a.legend(frameon=False, fontsize=7.5, loc="upper center", ncol=3)
+    if over_p.exists():
+        O = json.load(open(over_p))
+        ks = sorted(O, key=lambda k: int(k.rsplit("step", 1)[1]))
+        st = [int(k.rsplit("step", 1)[1]) / 1000 for k in ks]
+        for c, lab, col, _ in conds[:3]:
+            b.plot(st, [100 * O[k]["conditions"][c]["accuracy"] for k in ks], color=col, marker="o", markersize=4,
+                   label=lab.split(" (")[0])
+        b.set_xlabel("training step (thousands), Stage 1 learned G_ψ")
+        b.set_ylabel("held-out action accuracy (%)")
+        b.set_ylim(0, 100)
+        b.set_title("(b) Learned G_ψ: the gap opens by step 4k and stays")
+        b.legend(frameon=False, fontsize=8, loc="lower right")
+    fig.tight_layout()
+    fig.savefig(OUT / "fig_slot_shortcut.png", dpi=160)
+
+
 def main(nav_rows=None):
     OUT.mkdir(parents=True, exist_ok=True)
     fig_loss_balance()
@@ -516,6 +579,7 @@ def main(nav_rows=None):
     fig_lp_failure()
     fig_pointing_failure()
     fig_reasoner_failure()
+    fig_slot_shortcut()
     if nav_rows:
         fig_navigation(nav_rows["rows"])
     print("wrote", sorted(p.name for p in OUT.glob("*.png")))

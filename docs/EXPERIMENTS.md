@@ -140,12 +140,11 @@ nDTW 0.753, NE 2.87 m). The action prior is 62–64 % FORWARD.
 
   ![loss balance](figures/fig_loss_balance.png)
 
-- **The more plausible cause: a train-time shortcut** (analysed after the fact; [figure](figures/fig_lp_failure.png)).
-  The Pilot slot is teacher-forced during training with the *true* embedding of the next frame, which reveals the
-  action just taken. Training accuracy is 78 % without a slot (Stage 0), and 98 % with one (Stage 0′ and Stage 1). At
-  matched steps (7k–8k) the gap is still 78 % vs 92 %. At test time the slot holds the model's own prediction and the
-  shortcut is gone. The flywheel and Stage 2, which were not run, are the parts of the method meant to close exactly
-  this gap. The decisive check, a teacher-forced evaluation with the model's own `z_{t-1}` in the slot, was not run.
+- **The main cause: a train-time shortcut** (found after the fact, then measured in §7.1;
+  [figure](figures/fig_slot_shortcut.png)). The Pilot slot is teacher-forced during training with the *true* embedding
+  of the next frame, which reveals the action just taken. Training accuracy is 78 % without a slot (Stage 0) and 98 %
+  with one (Stage 0′ and Stage 1); at matched steps (7k–8k) it is 78 % vs 92 %. On held-out steps the trained model is
+  84 % accurate with the true next frame in the slot and 31 % with its own latent, which is what it gets at test time.
 
   ![LatentPilot failure](figures/fig_lp_failure.png)
 
@@ -362,7 +361,9 @@ corrected in the current README:
 | LatentPilot and reasoner tables labelled SR | All diagnostic: reported as OS |
 | Pointing results: step 10k 26.7 %, full3 15.0 % | The first is diagnostic OS (n = 60). The best result (fusion, n = 150) and the history run were missing. |
 | Pointing "strict SR 31.3 %" (second README) | The evaluation counted an episode as a success if it *ended* within 3 m, including at the step limit. With the standard definition (own STOP within 3 m) the best result is **SR 22.7 %**; 31.3 % is end-SR. SR is recoverable only for runs that logged stopping positions. |
-| LatentPilot failure "because the loss balance drifts" | Drift is real but secondary: removing it did not help. The more plausible cause is a train-time shortcut through the teacher-forced Pilot slot (§1.4). |
+| LatentPilot failure "because the loss balance drifts" | Drift is real but secondary: removing it did not help. The main cause is a train-time shortcut through the teacher-forced Pilot slot, measured in §7.1. |
+| Reasoner v3 "OS 47.5 %" as its result | That was one stochastic diagnostic run. Three runs give OS 43.3 ± 7.2 %; strict evaluation gives **SR 3.3 %** (§7.5). |
+| Pointing headline with a threshold tuned on the test split | Chosen on `val_seen` instead, SR is 23.3 % (§7.3). |
 | Reasoner uses "a 16-frame context" | Only SFT v1 did. v3 samples 8 frames at 1 fps from 120 source frames. |
 | "held-out `L_pil` 3.02 vs 6.80" | These are final *training* values. No held-out `L_pil` was computed. |
 | "never learned to stop (`model_stop` 0–4.7 % in every checkpoint)" | The adaptive-λ checkpoint stopped in 18 % of episodes, and Stage 0′ in 30–39 % |
@@ -373,9 +374,84 @@ and §2.6 above. The p-values quoted in two script headers (p = 0.333, p = 0.005
 
 ## 6. Planned but not run
 
-- Stage 2 (scheduled sampling), a 16-scan Stage 1, and a constant λ = 0.02 arm.
-- Choosing the STOP threshold on `val_seen`, whose data was collected for this purpose.
-- A strict evaluation of the reasoner, and repeated seeds or greedy decoding for it.
+- A 16-scan Stage 1, a constant λ = 0.02 arm, a longer Stage 2, and the paper's data flywheel.
+- Greedy decoding for the reasoner (it was evaluated with stochastic decoding, three runs per setting).
 - Most arms of the Cosmos prompt/policy ablation (`scripts/run_ablations.py`), which ran out of memory or were killed.
   Partial logs are in `results/salvaged/`.
 - Flow-matching post-training of the Edge action stream.
+
+---
+
+## 7. Follow-up experiments (2026-09-30)
+
+These answer the open questions above. The offline tests ran first; the closed-loop runs were then scheduled
+unattended by `scripts/run_pending_followups.sh`. Every number is collected in
+[`results/followups/summary.md`](../results/followups/summary.md).
+
+### 7.1 Is the Pilot slot a shortcut? (`scripts/test_slot_shortcut.py`)
+
+- **Question.** Does the trained LatentPilot read the action off the privileged next-frame embedding in its Pilot slot?
+- **Setup.** 110 held-out `val_unseen` expert episodes (10 per scan, 11 scans, 4,306 steps). Observations and
+  instruction are teacher-forced along the expert path. Each step is scored four times, changing only the slot:
+  - the true next frame (the training input);
+  - the model's own latent `z_{t-1}`, carried recurrently (the test-time input);
+  - the current frame (real, but carrying no future information);
+  - another episode's next frame (a real embedding that doesn't belong to this step).
+
+  The cached embeddings were re-checked against freshly encoded frames: cosine 1.0000 on 72 random frames.
+- **Result** (action accuracy):
+
+  | Model | true next frame | own latent | current frame | other episode | no slot |
+  |---|---|---|---|---|---|
+  | Stage 0′ B (no `L_pil`) | 82.0 | 56.6 | 44.5 | 27.8 | |
+  | Stage 1, learned `G_ψ` | 84.3 | 30.8 | 45.1 | 27.8 | |
+  | Stage 1, identity `G_ψ` | 63.1 | 61.2 | 63.2 | 62.1 | |
+  | Stage 0 (memoryless) | | | | | 66.0 |
+
+  Over training (Stage 1 learned, 5 episodes per scan), own-latent accuracy falls from 48 % at 2k steps to 32 % at 4k
+  and stays at 28–31 %. Next-frame accuracy stays at 78–87 %.
+- **Conclusion.** Confirmed. The model reads the slot (28 % with a wrong next frame), relies on the privileged frame
+  (84 %), and does worse than no memory at all with what it gets at test time (31 % vs 66 %). The shortcut comes from
+  the teacher-forced *input*: Stage 0′ already shows it. Learning `G_ψ` makes the test-time latent worse.
+
+### 7.2 Does Stage 2 (scheduled sampling) remove it? (`src/train/train_stage2.py`)
+
+- **Setup.** Fine-tune Stage 1 (learned) for 2,600 steps at 0.1× learning rate on the same 6 scans (1,665 episodes;
+  `--scans` added so it cannot silently use more). The share of slot inputs replaced by the model's own detached
+  latent ramps up to 50 % or 75 %. The project's ground rules (`Agents.md` §5.4) require approval above 75 %.
+- **Result.**
+
+  | | own-latent accuracy (held-out) | next-frame accuracy | closed-loop OS (n = 150) |
+  |---|---|---|---|
+  | Stage 1, learned | 30.8 | 84.3 | 10.7 |
+  | Stage 2, 50 % | 33.6 | 84.3 | 16.7 |
+  | Stage 2, 75 % | 33.9 | 83.7 | 18.0 |
+  | *identity control* | *61.2* | *63.1* | *17.3* |
+
+- **Conclusion.** Navigation improves to the identity control's level (+6–7 points), but the shortcut stays: the model
+  still prefers the true next frame and is barely better with its own latent. This short recipe does not fix the
+  problem. A longer schedule or the paper's full flywheel remain untested.
+
+### 7.3 The STOP threshold, chosen without the test split
+
+- **Setup.** Fusion step 120k on `val_seen`: the 8 training buildings with the most episodes per MB, 159 new episodes.
+  Strict, at τ = 0.10, 0.15, 0.20 and 0.30.
+- **Result.** `val_seen` SR is 39.3 / 35.3 / 31.3 / 24.7 %, so τ = 0.10 is chosen. On `val_unseen` that gives **SR
+  23.3 %** (end-SR 28.7 %, OS 36.7 %), against 22.7 % at the test-tuned 0.20.
+- **Conclusion.** The headline was not an artefact of tuning on the test split.
+
+### 7.4 Standard SR for the older pointing runs
+
+Strict re-evaluation with stopping positions logged (n = 150): 16 scans **12.7 %**, + history **17.3 %**, longer schedule
+(step 40k) **22.7 %**. end-SR, OS, SPL and NE reproduced the original runs exactly, since the simulator is
+deterministic. Layer fusion at 120k equals the 40k final-layer model in SR (22.7 %), so fusion did not raise success.
+
+### 7.5 The reasoner's real success rate
+
+- **Setup.** SFT v3 step 1,500, n = 40. Three strict runs, where the episode ends only at its own STOP or the step
+  limit, and two more diagnostic runs alongside the original one. Decoding is stochastic.
+- **Result.** Strict SR 2.5 / 2.5 / 5.0 % (mean **3.3 %**), end-SR 17.5–20.0 %, OS 32.5–42.5 %. Diagnostic OS 47.5 /
+  47.5 / 35.0 % (mean 43.3 ± 7.2).
+- **Conclusion.** The reasoner reaches the goal region about as often as the best pointing model but almost never
+  stops there. The single "47.5 %" overstated even its reaching ability.
+

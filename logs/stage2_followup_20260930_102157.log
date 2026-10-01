@@ -1,0 +1,157 @@
+######## Stage 2, p_final=0.5  Wed Sep 30 10:28:58 EDT 2026
+split=train  episodes=1665  steps=69606
+scans=6
+marginal-prior loss H(actions) = 0.9744  (uniform ln(4) = 1.3863)
+
+Stage 2 — scheduled sampling  (NOT IN PAPER, AGENTS.md Sec. 5)
+  init_from   : checkpoints/stage1_learned/final
+  steps       : 2610  (0.15 x Stage 1's 17400)
+  lr          : 1.00e-05  (0.1 x Stage 1's 1e-04)
+  p_selfpred  : 0.0 -> 0.5 over first 30% of the run
+  target      : v_bar_{t+2} ALWAYS (only the INPUT is mixed)
+
+  loaded Stage 1: 224 LoRA tensors, pilot mode=action_query
+step    25  L  0.2965  L_act 0.0028  L_pil    2.937  acc 1.000  STOP-rec 1.000(n=3)  p 0.02 (self 0.01)  |z|  14.87  1.93 it/s
+step    50  L  0.3635  L_act 0.0789  L_pil    2.846  acc 0.995  STOP-rec 1.000(n=4)  p 0.03 (self 0.02)  |z|  15.01  1.94 it/s
+step    75  L  0.3214  L_act 0.0326  L_pil    2.888  acc 0.980  STOP-rec 0.600(n=5)  p 0.05 (self 0.02)  |z|  14.98  1.97 it/s
+step   100  L  0.5380  L_act 0.1556  L_pil    3.824  acc 0.980  STOP-rec 1.000(n=2)  p 0.06 (self 0.05)  |z|  15.21  1.97 it/s
+step   125  L  0.4987  L_act 0.1628  L_pil    3.360  acc 0.980  STOP-rec 1.000(n=3)  p 0.08 (self 0.07)  |z|  15.14  1.95 it/s
+step   150  L  0.6077  L_act 0.1954  L_pil    4.123  acc 0.960  STOP-rec 0.833(n=6)  p 0.10 (self 0.10)  |z|  15.59  1.95 it/s
+step   175  L  0.4418  L_act 0.1163  L_pil    3.255  acc 0.980  STOP-rec 0.800(n=5)  p 0.11 (self 0.14)  |z|  14.59  1.94 it/s
+step   200  L  0.4689  L_act 0.1669  L_pil    3.020  acc 0.970  STOP-rec 0.500(n=2)  p 0.13 (self 0.12)  |z|  15.11  1.93 it/s
+step   225  L  0.3802  L_act 0.0321  L_pil    3.480  acc 0.990  STOP-rec 0.833(n=6)  p 0.14 (self 0.13)  |z|  15.32  1.92 it/s
+step   250  L  0.6568  L_act 0.3078  L_pil    3.490  acc 0.950  STOP-rec 1.000(n=3)  p 0.16 (self 0.20)  |z|  14.77  1.90 it/s
+step   275  L  0.5736  L_act 0.1930  L_pil    3.806  acc 0.965  STOP-rec 0.800(n=5)  p 0.17 (self 0.22)  |z|  15.08  1.89 it/s
+step   300  L  0.5808  L_act 0.2801  L_pil    3.008  acc 0.945  STOP-rec 0.875(n=8)  p 0.19 (self 0.17)  |z|  15.90  1.88 it/s
+step   325  L  0.9649  L_act 0.6395  L_pil    3.254  acc 0.915  STOP-rec 0.625(n=8)  p 0.21 (self 0.22)  |z|  14.92  1.87 it/s
+step   350  L  0.5195  L_act 0.2012  L_pil    3.183  acc 0.955  STOP-rec 1.000(n=4)  p 0.22 (self 0.20)  |z|  15.22  1.87 it/s
+step   375  L  0.6845  L_act 0.3089  L_pil    3.756  acc 0.940  STOP-rec 1.000(n=4)  p 0.24 (self 0.21)  |z|  15.42  1.87 it/s
+step   400  L  0.6491  L_act 0.3164  L_pil    3.328  acc 0.935  STOP-rec 0.571(n=7)  p 0.25 (self 0.27)  |z|  15.43  1.86 it/s
+step   425  L  0.6823  L_act 0.3008  L_pil    3.816  acc 0.935  STOP-rec 0.600(n=5)  p 0.27 (self 0.26)  |z|  15.11  1.86 it/s
+step   450  L  0.6702  L_act 0.3197  L_pil    3.505  acc 0.910  STOP-rec 0.000(n=2)  p 0.29 (self 0.26)  |z|  15.18  1.85 it/s
+step   475  L  0.7347  L_act 0.3477  L_pil    3.871  acc 0.935  STOP-rec 0.500(n=4)  p 0.30 (self 0.34)  |z|  15.44  1.85 it/s
+step   500  L  0.7522  L_act 0.4216  L_pil    3.305  acc 0.910  STOP-rec 0.000(n=4)  p 0.32 (self 0.30)  |z|  15.10  1.84 it/s
+step   525  L  0.7542  L_act 0.3877  L_pil    3.664  acc 0.895  STOP-rec 0.667(n=3)  p 0.33 (self 0.31)  |z|  14.71  1.83 it/s
+step   550  L  0.8342  L_act 0.4743  L_pil    3.599  acc 0.900  STOP-rec 0.000(n=4)  p 0.35 (self 0.37)  |z|  16.13  1.82 it/s
+step   575  L  0.7344  L_act 0.3980  L_pil    3.365  acc 0.905  STOP-rec 0.200(n=5)  p 0.37 (self 0.35)  |z|  14.32  1.82 it/s
+step   600  L  0.6858  L_act 0.3416  L_pil    3.442  acc 0.925  STOP-rec 0.750(n=4)  p 0.38 (self 0.38)  |z|  14.96  1.81 it/s
+step   625  L  0.7403  L_act 0.3881  L_pil    3.522  acc 0.895  STOP-rec 1.000(n=3)  p 0.40 (self 0.39)  |z|  14.65  1.80 it/s
+step   650  L  0.8031  L_act 0.4181  L_pil    3.850  acc 0.905  STOP-rec 0.000(n=1)  p 0.41 (self 0.40)  |z|  15.77  1.80 it/s
+step   675  L  0.7426  L_act 0.3541  L_pil    3.885  acc 0.890  STOP-rec 0.500(n=4)  p 0.43 (self 0.38)  |z|  15.60  1.79 it/s
+step   700  L  0.7088  L_act 0.3806  L_pil    3.281  acc 0.880  STOP-rec 0.500(n=10)  p 0.45 (self 0.45)  |z|  14.94  1.79 it/s
+step   725  L  0.8288  L_act 0.4599  L_pil    3.689  acc 0.880  STOP-rec 0.667(n=6)  p 0.46 (self 0.45)  |z|  15.21  1.79 it/s
+step   750  L  0.7188  L_act 0.3243  L_pil    3.946  acc 0.915  STOP-rec 0.400(n=5)  p 0.48 (self 0.49)  |z|  15.31  1.78 it/s
+step   775  L  0.7905  L_act 0.4217  L_pil    3.688  acc 0.880  STOP-rec 0.200(n=5)  p 0.49 (self 0.48)  |z|  15.46  1.78 it/s
+step   800  L  0.8451  L_act 0.4353  L_pil    4.098  acc 0.875  STOP-rec 0.200(n=5)  p 0.50 (self 0.55)  |z|  14.83  1.77 it/s
+step   825  L  0.8332  L_act 0.4445  L_pil    3.886  acc 0.870  STOP-rec 0.000(n=8)  p 0.50 (self 0.57)  |z|  15.37  1.77 it/s
+step   850  L  0.7709  L_act 0.3378  L_pil    4.331  acc 0.920  STOP-rec 0.000(n=2)  p 0.50 (self 0.47)  |z|  15.05  1.76 it/s
+step   875  L  0.7278  L_act 0.3987  L_pil    3.291  acc 0.880  STOP-rec 0.250(n=4)  p 0.50 (self 0.52)  |z|  15.19  1.76 it/s
+step   900  L  0.7611  L_act 0.4299  L_pil    3.312  acc 0.880  STOP-rec 0.500(n=4)  p 0.50 (self 0.42)  |z|  14.83  1.76 it/s
+step   925  L  0.8307  L_act 0.4498  L_pil    3.808  acc 0.885  STOP-rec 0.500(n=4)  p 0.50 (self 0.52)  |z|  15.23  1.75 it/s
+step   950  L  0.8110  L_act 0.4295  L_pil    3.816  acc 0.875  STOP-rec 0.400(n=5)  p 0.50 (self 0.50)  |z|  14.98  1.75 it/s
+step   975  L  0.7515  L_act 0.4281  L_pil    3.234  acc 0.860  STOP-rec 0.429(n=7)  p 0.50 (self 0.50)  |z|  15.77  1.75 it/s
+step  1000  L  0.6994  L_act 0.3878  L_pil    3.115  acc 0.875  STOP-rec 0.250(n=8)  p 0.50 (self 0.47)  |z|  14.69  1.75 it/s
+step  1025  L  0.7593  L_act 0.3970  L_pil    3.624  acc 0.875  STOP-rec 0.500(n=4)  p 0.50 (self 0.54)  |z|  15.37  1.74 it/s
+step  1050  L  0.7398  L_act 0.3725  L_pil    3.673  acc 0.890  STOP-rec 0.167(n=6)  p 0.50 (self 0.48)  |z|  14.98  1.74 it/s
+step  1075  L  0.7557  L_act 0.4324  L_pil    3.233  acc 0.875  STOP-rec 0.500(n=6)  p 0.50 (self 0.49)  |z|  15.46  1.74 it/s
+step  1100  L  0.7751  L_act 0.4250  L_pil    3.501  acc 0.865  STOP-rec 1.000(n=2)  p 0.50 (self 0.51)  |z|  14.54  1.73 it/s
+step  1125  L  0.8109  L_act 0.4713  L_pil    3.396  acc 0.885  STOP-rec 0.000(n=3)  p 0.50 (self 0.46)  |z|  15.46  1.73 it/s
+step  1150  L  0.6227  L_act 0.2659  L_pil    3.568  acc 0.930  STOP-rec 0.167(n=6)  p 0.50 (self 0.41)  |z|  15.82  1.73 it/s
+step  1175  L  0.7085  L_act 0.3732  L_pil    3.353  acc 0.880  STOP-rec 0.333(n=3)  p 0.50 (self 0.50)  |z|  15.07  1.73 it/s
+step  1200  L  0.6507  L_act 0.3392  L_pil    3.114  acc 0.895  STOP-rec 0.250(n=4)  p 0.50 (self 0.51)  |z|  14.30  1.73 it/s
+step  1225  L  0.8512  L_act 0.4639  L_pil    3.873  acc 0.875  STOP-rec 0.750(n=4)  p 0.50 (self 0.49)  |z|  14.99  1.73 it/s
+step  1250  L  0.7527  L_act 0.3892  L_pil    3.635  acc 0.865  STOP-rec 0.333(n=3)  p 0.50 (self 0.52)  |z|  15.21  1.73 it/s
+step  1275  L  0.6314  L_act 0.2695  L_pil    3.619  acc 0.925  STOP-rec 0.750(n=4)  p 0.50 (self 0.55)  |z|  14.81  1.72 it/s
+step  1300  L  0.7257  L_act 0.3295  L_pil    3.961  acc 0.910  STOP-rec 0.250(n=4)  p 0.50 (self 0.50)  |z|  15.70  1.72 it/s
+step  1325  L  0.6783  L_act 0.3241  L_pil    3.542  acc 0.890  STOP-rec 0.000(n=4)  p 0.50 (self 0.47)  |z|  15.42  1.72 it/s
+step  1350  L  0.8501  L_act 0.4609  L_pil    3.891  acc 0.855  STOP-rec 0.333(n=9)  p 0.50 (self 0.52)  |z|  15.51  1.72 it/s
+step  1375  L  0.7333  L_act 0.3756  L_pil    3.576  acc 0.905  STOP-rec 0.333(n=6)  p 0.50 (self 0.57)  |z|  15.38  1.72 it/s
+step  1400  L  0.6278  L_act 0.2821  L_pil    3.458  acc 0.910  STOP-rec 0.429(n=7)  p 0.50 (self 0.49)  |z|  15.10  1.72 it/s
+step  1425  L  0.8504  L_act 0.4682  L_pil    3.822  acc 0.845  STOP-rec 0.400(n=5)  p 0.50 (self 0.48)  |z|  15.08  1.72 it/s
+step  1450  L  0.5730  L_act 0.2494  L_pil    3.237  acc 0.895  STOP-rec 0.333(n=3)  p 0.50 (self 0.47)  |z|  15.42  1.71 it/s
+step  1475  L  0.6857  L_act 0.2968  L_pil    3.890  acc 0.895  STOP-rec 0.000(n=2)  p 0.50 (self 0.49)  |z|  14.93  1.71 it/s
+step  1500  L  0.8217  L_act 0.4530  L_pil    3.688  acc 0.865  STOP-rec 0.250(n=4)  p 0.50 (self 0.53)  |z|  15.63  1.71 it/s
+step  1525  L  0.7663  L_act 0.3929  L_pil    3.734  acc 0.895  STOP-rec 0.600(n=5)  p 0.50 (self 0.49)  |z|  15.38  1.71 it/s
+step  1550  L  0.7317  L_act 0.4006  L_pil    3.311  acc 0.905  STOP-rec 0.800(n=5)  p 0.50 (self 0.42)  |z|  15.92  1.71 it/s
+step  1575  L  0.6823  L_act 0.3436  L_pil    3.387  acc 0.900  STOP-rec 0.833(n=6)  p 0.50 (self 0.46)  |z|  14.84  1.71 it/s
+step  1600  L  0.6958  L_act 0.3502  L_pil    3.456  acc 0.895  STOP-rec 0.286(n=7)  p 0.50 (self 0.47)  |z|  15.19  1.71 it/s
+step  1625  L  0.7562  L_act 0.3426  L_pil    4.135  acc 0.885  STOP-rec 0.000(n=3)  p 0.50 (self 0.57)  |z|  15.11  1.71 it/s
+step  1650  L  0.5817  L_act 0.2543  L_pil    3.273  acc 0.925  STOP-rec 0.333(n=3)  p 0.50 (self 0.48)  |z|  15.42  1.71 it/s
+step  1675  L  0.7802  L_act 0.4212  L_pil    3.590  acc 0.875  STOP-rec 0.250(n=8)  p 0.50 (self 0.51)  |z|  15.52  1.71 it/s
+step  1700  L  0.6404  L_act 0.2987  L_pil    3.417  acc 0.915  STOP-rec 0.625(n=8)  p 0.50 (self 0.54)  |z|  15.02  1.71 it/s
+step  1725  L  0.8199  L_act 0.4665  L_pil    3.534  acc 0.865  STOP-rec 0.250(n=4)  p 0.50 (self 0.54)  |z|  15.27  1.70 it/s
+step  1750  L  0.5942  L_act 0.2314  L_pil    3.628  acc 0.930  STOP-rec 0.000(n=2)  p 0.50 (self 0.43)  |z|  15.33  1.70 it/s
+step  1775  L  0.6492  L_act 0.3151  L_pil    3.341  acc 0.890  STOP-rec 0.500(n=4)  p 0.50 (self 0.45)  |z|  14.77  1.70 it/s
+step  1800  L  0.7261  L_act 0.3478  L_pil    3.783  acc 0.900  STOP-rec 0.600(n=5)  p 0.50 (self 0.46)  |z|  14.89  1.70 it/s
+step  1825  L  0.8356  L_act 0.4485  L_pil    3.871  acc 0.850  STOP-rec 0.250(n=8)  p 0.50 (self 0.53)  |z|  15.85  1.70 it/s
+step  1850  L  0.6197  L_act 0.2867  L_pil    3.329  acc 0.905  STOP-rec 0.000(n=2)  p 0.50 (self 0.51)  |z|  15.09  1.70 it/s
+step  1875  L  0.7343  L_act 0.3730  L_pil    3.613  acc 0.875  STOP-rec 0.667(n=6)  p 0.50 (self 0.54)  |z|  15.25  1.70 it/s
+step  1900  L  0.6388  L_act 0.3284  L_pil    3.104  acc 0.895  STOP-rec 0.750(n=4)  p 0.50 (self 0.53)  |z|  15.43  1.70 it/s
+step  1925  L  0.7296  L_act 0.3348  L_pil    3.949  acc 0.895  STOP-rec 0.000(n=2)  p 0.50 (self 0.46)  |z|  15.21  1.70 it/s
+step  1950  L  0.7270  L_act 0.3810  L_pil    3.460  acc 0.870  STOP-rec 0.375(n=8)  p 0.50 (self 0.46)  |z|  15.75  1.70 it/s
+step  1975  L  0.6671  L_act 0.2879  L_pil    3.793  acc 0.900  STOP-rec 0.200(n=5)  p 0.50 (self 0.49)  |z|  15.43  1.70 it/s
+step  2000  L  0.5788  L_act 0.2346  L_pil    3.442  acc 0.935  STOP-rec 0.500(n=2)  p 0.50 (self 0.52)  |z|  15.49  1.70 it/s
+step  2025  L  0.7202  L_act 0.3744  L_pil    3.459  acc 0.885  STOP-rec 0.000(n=4)  p 0.50 (self 0.50)  |z|  14.94  1.70 it/s
+step  2050  L  0.7504  L_act 0.3671  L_pil    3.833  acc 0.880  STOP-rec 1.000(n=1)  p 0.50 (self 0.48)  |z|  14.94  1.70 it/s
+step  2075  L  0.6920  L_act 0.3341  L_pil    3.580  acc 0.900  STOP-rec 0.500(n=4)  p 0.50 (self 0.40)  |z|  15.08  1.70 it/s
+step  2100  L  0.7733  L_act 0.4136  L_pil    3.596  acc 0.875  STOP-rec 0.333(n=3)  p 0.50 (self 0.53)  |z|  14.91  1.70 it/s
+step  2125  L  0.7031  L_act 0.3391  L_pil    3.640  acc 0.900  STOP-rec 0.750(n=4)  p 0.50 (self 0.52)  |z|  14.66  1.70 it/s
+step  2150  L  0.7921  L_act 0.4338  L_pil    3.583  acc 0.855  STOP-rec 0.600(n=5)  p 0.50 (self 0.55)  |z|  14.78  1.69 it/s
+step  2175  L  0.7347  L_act 0.4105  L_pil    3.242  acc 0.865  STOP-rec 0.500(n=8)  p 0.50 (self 0.48)  |z|  14.92  1.69 it/s
+step  2200  L  0.5959  L_act 0.2568  L_pil    3.391  acc 0.920  STOP-rec 0.667(n=6)  p 0.50 (self 0.53)  |z|  14.41  1.69 it/s
+step  2225  L  0.8265  L_act 0.4345  L_pil    3.920  acc 0.880  STOP-rec 0.400(n=5)  p 0.50 (self 0.52)  |z|  15.01  1.69 it/s
+step  2250  L  0.6602  L_act 0.3273  L_pil    3.329  acc 0.900  STOP-rec 0.444(n=9)  p 0.50 (self 0.47)  |z|  15.16  1.69 it/s
+step  2275  L  0.5656  L_act 0.1796  L_pil    3.859  acc 0.935  STOP-rec 1.000(n=1)  p 0.50 (self 0.48)  |z|  15.35  1.69 it/s
+step  2300  L  0.7871  L_act 0.4559  L_pil    3.313  acc 0.855  STOP-rec 0.333(n=6)  p 0.50 (self 0.51)  |z|  14.66  1.69 it/s
+step  2325  L  0.6857  L_act 0.3164  L_pil    3.693  acc 0.905  STOP-rec 0.500(n=8)  p 0.50 (self 0.49)  |z|  15.14  1.69 it/s
+step  2350  L  0.5874  L_act 0.2728  L_pil    3.145  acc 0.905  STOP-rec 0.429(n=7)  p 0.50 (self 0.41)  |z|  15.21  1.69 it/s
+step  2375  L  0.7238  L_act 0.3890  L_pil    3.347  acc 0.870  STOP-rec 0.000(n=2)  p 0.50 (self 0.48)  |z|  14.93  1.69 it/s
+step  2400  L  0.7081  L_act 0.3689  L_pil    3.392  acc 0.880  STOP-rec 0.429(n=7)  p 0.50 (self 0.45)  |z|  15.49  1.69 it/s
+step  2425  L  0.9223  L_act 0.5501  L_pil    3.723  acc 0.860  STOP-rec 0.500(n=6)  p 0.50 (self 0.48)  |z|  15.54  1.69 it/s
+step  2450  L  0.9038  L_act 0.5058  L_pil    3.980  acc 0.870  STOP-rec 0.000(n=3)  p 0.50 (self 0.50)  |z|  15.45  1.69 it/s
+step  2475  L  0.5866  L_act 0.2581  L_pil    3.284  acc 0.915  STOP-rec 0.000(n=2)  p 0.50 (self 0.48)  |z|  15.39  1.69 it/s
+step  2500  L  0.7823  L_act 0.4501  L_pil    3.323  acc 0.870  STOP-rec 0.500(n=8)  p 0.50 (self 0.54)  |z|  15.43  1.69 it/s
+step  2525  L  0.7516  L_act 0.3743  L_pil    3.774  acc 0.915  STOP-rec 0.667(n=9)  p 0.50 (self 0.49)  |z|  15.39  1.69 it/s
+step  2550  L  0.6787  L_act 0.3381  L_pil    3.405  acc 0.875  STOP-rec 0.500(n=6)  p 0.50 (self 0.53)  |z|  14.81  1.69 it/s
+step  2575  L  0.6405  L_act 0.3162  L_pil    3.243  acc 0.895  STOP-rec 0.333(n=3)  p 0.50 (self 0.45)  |z|  15.88  1.69 it/s
+step  2600  L  0.7500  L_act 0.3785  L_pil    3.715  acc 0.900  STOP-rec 0.600(n=5)  p 0.50 (self 0.51)  |z|  15.49  1.69 it/s
+
+saved adapter (224 tensors) + pilot -> checkpoints/stage2_p50/final
+######## slot test, stage2_p50  Wed Sep 30 10:54:51 EDT 2026
+checkpoint checkpoints/stage2_p50/final  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+110 episodes, 4306 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/110] 10.2 steps/s  next_frame 0.894  own_z 0.354  current_frame 0.614  other_next_frame 0.233
+  [20/110] 10.3 steps/s  next_frame 0.831  own_z 0.351  current_frame 0.529  other_next_frame 0.266
+  [30/110] 10.3 steps/s  next_frame 0.779  own_z 0.317  current_frame 0.499  other_next_frame 0.251
+  [40/110] 10.2 steps/s  next_frame 0.813  own_z 0.336  current_frame 0.532  other_next_frame 0.263
+  [50/110] 10.2 steps/s  next_frame 0.819  own_z 0.349  current_frame 0.533  other_next_frame 0.281
+  [60/110] 10.2 steps/s  next_frame 0.832  own_z 0.362  current_frame 0.522  other_next_frame 0.297
+  [70/110] 10.2 steps/s  next_frame 0.845  own_z 0.362  current_frame 0.543  other_next_frame 0.287
+  [80/110] 10.2 steps/s  next_frame 0.837  own_z 0.350  current_frame 0.521  other_next_frame 0.287
+  [90/110] 10.2 steps/s  next_frame 0.833  own_z 0.339  current_frame 0.519  other_next_frame 0.283
+  [100/110] 10.2 steps/s  next_frame 0.837  own_z 0.338  current_frame 0.519  other_next_frame 0.284
+  [110/110] 10.2 steps/s  next_frame 0.843  own_z 0.336  current_frame 0.530  other_next_frame 0.279
+{"next_frame": 0.8435, "own_z": 0.3363, "current_frame": 0.5304, "other_next_frame": 0.2791}
+wrote <repo>/results/slot_shortcut.json [stage2_p50]
+######## Stage 2, p_final=1.0  Wed Sep 30 11:01:58 EDT 2026
+Traceback (most recent call last):
+  File "<repo>/src/train/train_stage2.py", line 479, in <module>
+    raise SystemExit(main())
+  File "<repo>/src/train/train_stage2.py", line 464, in main
+    raise ValueError(
+ValueError: p_final=1.0 > 0.75. Sec. 5.4: do not exceed 0.75 without asking the human -- above it the t+1 scaffold is gone and the task becomes unanchored two-step extrapolation.
+######## slot test, stage2_p100  Wed Sep 30 11:01:59 EDT 2026
+checkpoint checkpoints/stage2_p100/final  (memoryless, no slot)
+Traceback (most recent call last):
+  File "<repo>/scripts/test_slot_shortcut.py", line 182, in <module>
+    main()
+  File "<repo>/scripts/test_slot_shortcut.py", line 101, in main
+    enc, builder, backbone, head = _load_module("eval_stage0").load_policy(ckpt)
+  File "<repo>/scripts/eval_stage0.py", line 101, in load_policy
+    raise FileNotFoundError(
+FileNotFoundError: no adapter_model.safetensors under checkpoints/stage2_p100/final -- refusing to run, this would silently evaluate the untrained model
+######## done  Wed Sep 30 11:02:02 EDT 2026

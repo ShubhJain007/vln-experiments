@@ -103,18 +103,42 @@ The step-10k policy is from an earlier run with the same configuration, whose ch
 episodes; a control with the future-prediction part switched off (identity `G_ψ`) reached 17.3 %. In the 11 recorded
 scenes it reached 3 m of the goal in none, while the earlier step-10k checkpoint reached it in one.
 
-**Most plausible cause: during training the Pilot slot leaks the answer.** LatentPilot trains with the slot filled by
+**The cause, measured: during training the Pilot slot leaks the answer.** LatentPilot trains with the slot filled by
 the *true* embedding of the **next** frame, and at test time fills it with the model's own prediction. The next frame
-shows the result of the current action (whether the view rotated or moved forward), so during training the action
-can be read off the slot. The evidence is below:
-- **(a) Training accuracy jumps once the slot sees the next frame.** It rises from 78 % without a slot (Stage 0) to 98 %
-  with one (Stage 0′ and Stage 1). At matched training steps (7k–8k) the gap is still 78 % vs 92 %. The model is
-  learning a shortcut, not better navigation.
-- **(b), (c) Predicting the future better did not help.** The learned Pilot Token predicts the future 2.25× better than
-  the control, and navigates worse. At test time the shortcut is gone, and a policy that leaned on it cannot fall back
-  on anything.
-- **The earlier checkpoint was better.** Step 10k, with a weaker shortcut, beat the final model (OS 26.7 % vs 10.0 % at
-  n = 30).
+shows the result of the current action (whether the view rotated or moved forward), so during training the action can
+be read off the slot.
+
+We tested this directly ([`scripts/test_slot_shortcut.py`](scripts/test_slot_shortcut.py)). The trained models replay
+4,306 held-out expert steps in 11 unseen buildings four times, and only the content of the Pilot slot changes between
+runs:
+
+| Model | true next frame (training input) | its own latent (test-time input) | current frame | another episode's next frame |
+|---|---|---|---|---|
+| Stage 0′ (slot sees the next frame, no prediction loss) | 82.0 % | 56.6 % | 44.5 % | 27.8 % |
+| **Stage 1, learned `G_ψ`** | **84.3 %** | **30.8 %** | 45.1 % | 27.8 % |
+| Stage 1, identity `G_ψ` (control) | 63.1 % | 61.2 % | 63.2 % | 62.1 % |
+| Stage 2, 50 % own latents | 84.3 % | 33.6 % | 53.0 % | 27.9 % |
+| Stage 2, 75 % own latents | 83.7 % | 33.9 % | 54.5 % | 27.6 % |
+| *reference: Stage 0, no slot at all* | | | | *66.0 %* |
+
+<img src="docs/figures/fig_slot_shortcut.png" width="900">
+
+- **The same model drops from 84 % to 31 %** when its slot holds what it actually gets at test time. That is less
+  than half the accuracy of a model with no slot at all (66 %), so the Pilot slot does not merely fail to help: it
+  actively misleads the policy.
+- **It is reading the slot, not the image.** With another episode's next frame in the slot, accuracy falls to 28 %.
+- **The leak comes from the training input, not the prediction loss.** Stage 0′ never trained `G_ψ` and already
+  leans on the slot (82 % vs 57 %). Learning to predict the future makes the test-time input *worse* (57 % → 31 %).
+- **The identity control ignores the slot** (about 62 % whatever it holds), so it has nothing to lose at test time.
+  That is why it navigates better.
+- **The gap opens early** (panel b): own-latent accuracy falls from 48 % to 32 % between steps 2k and 4k, then stays
+  flat while training accuracy keeps rising.
+
+**Stage 2 (scheduled sampling), the paper's fix, helps navigation a little but does not remove the shortcut.** The
+short fine-tune from the project's plan (2,600 steps, starting from Stage 1) replaces 50 % or 75 % of slot inputs with
+the model's own latents during training. In closed loop it lifts navigation from 10.7 % to **16.7 % and 18.0 %**, the
+level of the identity control. Offline, the model still scores 84 % with the true next frame and only 34 % with its own
+latent. A longer schedule, or the paper's full data flywheel, may still close the gap; this short recipe does not.
 
 <img src="docs/figures/fig_lp_failure.png" width="860">
 
@@ -124,13 +148,11 @@ not the main problem.
 
 <img src="docs/figures/fig_loss_balance.png" width="720">
 
-**Why the full recipe might not fail this way.** These are the mechanisms LatentPilot adds after Stage 1, and we did
-not run them:
-- the data flywheel, which trains on the model's own trajectories;
-- Stage 2 scheduled sampling, which gradually replaces the true next frame with the model's prediction.
-
-Both expose the model to its own latents during training, which is exactly what removes the shortcut. Our result says
-Stage 1 alone does not transfer at 2 B parameters and 6 buildings. It does not say the full method fails.
+**What this means for the method.** LatentPilot's appeal (one latent per step instead of history frames or text) rests
+on the model learning to *use its own* latent. Trained as specified in Stage 1, it instead learns to read the
+privileged next frame, which it never sees at test time. Our results cover Stage 1 plus a short Stage 2 at 2 B
+parameters and 6 buildings. The paper's full flywheel, which trains on the model's own trajectories over several rounds,
+was not run.
 
 ### ② Pointing + controller (inspired by Robostral Navigate)
 
@@ -156,6 +178,12 @@ reports 73.4 % success with supervised training alone and 77.4 % after RL. We te
 (Recordings of the step-100k checkpoint: it succeeded in 6 of 22 recorded episodes; [all 16 failures](media/rollouts/step100k_failures/).)
 
 #### What failed, and why
+
+**First, an honest headline.** The STOP threshold is now chosen on `val_seen` (8 training buildings, new episodes),
+not on the test split. That picks τ = 0.10 and gives **SR 23.3 %** on `val_unseen`, within a point of the 22.7 % from
+test-set tuning (see the threshold figure under Results). The earlier runs were also re-evaluated with stopping
+positions logged: 12.7 % (16 scans), 17.3 % (+ history) and 22.7 % (longer schedule). Layer fusion matches the plain
+longer schedule rather than beating it.
 
 **How the best model's 150 episodes end** (panel a below):
 - **22.7 %** stop within 3 m of the goal (success);
@@ -231,9 +259,12 @@ and that model's answer.
 
 #### What failed, and why
 
-**The symptom.** In closed loop (n = 40), v3 reached the goal region most often of any approach (47.5 %), but it never
-stopped there: none of its own STOPs landed within 3 m. v1 ended 65 % of its episodes by saying STOP, always in the
-wrong place.
+**The symptom.** v3 reaches the goal region about as often as the best pointing model, but it almost never stops
+there.
+Measured over three strict runs (n = 40 each, the episode only ends at its own STOP or the step limit), its **success
+rate is 3.3 %** (2.5, 2.5 and 5.0 %), while it comes within 3 m in 37.5 % of episodes. Its reaching score also varies
+between runs: three diagnostic runs gave 47.5, 47.5 and 35.0 %, so ±15 points at n = 40 is real. v1 ended 65 % of its
+episodes by saying STOP, always in the wrong place.
 
 **Most plausible cause: each version reproduces its training label mix** (figure below). v1 trained on 25 % STOP
 labels and stops constantly. v3 trained on 5 % and almost never stops, so its episodes end by running out of steps
@@ -270,20 +301,26 @@ from the logs only where the stopping position was recorded.
 |---|---|---|---|---|---|---|---|---|
 | ① Latent reasoning | Stage 1, learned `G_ψ` (as specified) | 150 (8) | n/m | n/m | — | 10.7 | 0.277 | 8.50 |
 | ① Latent reasoning | identity `G_ψ` control | 150 (8) | n/m | n/m | — | 17.3 | 0.268 | 8.17 |
-| ② Pointing | 16 scans, final layer | 150 (8) | n/r | 13.3 | 13.0 | 14.0 | 0.350 | 7.34 |
-| ② Pointing | + history, 61 scans | 150 (8) | n/r | 18.0 | 16.8 | 22.7 | 0.394 | 6.55 |
-| ② Pointing | + longer schedule (step 40k) | 150 (8) | n/r | 24.7 | 22.3 | 31.3 | 0.345 | 7.10 |
-| ② Pointing | **+ layer fusion (step 120k)** | 150 (8) | **22.7** | **31.3** | 25.4 | 42.7 | 0.323 | 7.22 |
+| ① Latent reasoning | + Stage 2, 50 % own latents | 150 (8) | n/m | n/m | — | 16.7 | 0.312 | 7.98 |
+| ① Latent reasoning | + Stage 2, 75 % own latents | 150 (8) | n/m | n/m | — | 18.0 | 0.315 | 7.99 |
+| ② Pointing | 16 scans, final layer | 150 (8) | 12.7 | 13.3 | 13.0 | 14.0 | 0.350 | 7.34 |
+| ② Pointing | + history, 61 scans | 150 (8) | 17.3 | 18.0 | 16.8 | 22.7 | 0.394 | 6.55 |
+| ② Pointing | + longer schedule (step 40k) | 150 (8) | 22.7 | 24.7 | 22.3 | 31.3 | 0.345 | 7.10 |
+| ② Pointing | + layer fusion (step 120k), τ = 0.20 tuned on test | 150 (8) | 22.7 | 31.3 | 25.4 | 42.7 | 0.323 | 7.22 |
+| ② Pointing | **+ layer fusion, τ = 0.10 chosen on `val_seen`** | 150 (8) | **23.3** | 28.7 | 24.3 | 36.7 | 0.363 | 7.03 |
 | ③ Edge action model | zero-shot, guidance 7.5 | 40 (6) | n/m | n/m | — | 7.5 | 0.276 | 8.81 |
 | ④ Edge reasoner | SFT v1 | 40 (6) | n/m | n/m | — | 17.5 | 0.365 | 7.41 |
-| ④ Edge reasoner | **SFT v3, step 1,500** | 40 (6) | n/m¹ | n/m | — | **47.5** | 0.389 | 6.41 |
+| ④ Edge reasoner | SFT v3, step 1,500 (3 diagnostic runs) | 40 (6) | n/m | n/m | — | **43.3** ± 7.2 | 0.364 | 6.36 |
+| ④ Edge reasoner | **SFT v3, step 1,500 (3 strict runs)** | 40 (6) | **3.3** | 18.3 | 12.6 | 37.5 | 0.175 | 7.31 |
 | *LatentPilot paper* | *7 B, full split, with flywheel* | 1,839 (11) | *51.7–54.0* | — | *47.1–48.5* | *57.0* | — | *5.3* |
 | *Robostral Navigate* | *8 B, 2.4 M trajectories, SFT + RL* | 1,839 (11) | *77.4* | — | — | — | — | — |
 
-- n/m: not measured, because the evaluation ended on arrival. n/r: not recoverable from the logs.
+- n/m: not measured, because the evaluation ended on arrival.
 - \* SPL uses end-SR as its success criterion.
-- ¹ None of its 5 own STOPs were within 3 m, so its SR would be far below its 47.5 % OS.
-- Pointing rows use STOP thresholds between 0.05 and 0.20, chosen on this split.
+- Reasoner rows average three runs. Decoding is stochastic, and ± is the standard deviation across those runs.
+- The pointing row in bold uses a STOP threshold chosen on `val_seen` (8 training buildings, 159 new episodes), so
+  nothing about it was tuned on the test split. The other pointing rows use thresholds of 0.05–0.20 chosen on
+  `val_unseen`.
 
 Every evaluation is listed in [`docs/EXPERIMENT_LOG.md` §3](docs/EXPERIMENT_LOG.md#3-consolidated-navigation-evaluations-r2r-ce-val_unseen).
 
@@ -291,22 +328,31 @@ Every evaluation is listed in [`docs/EXPERIMENT_LOG.md` §3](docs/EXPERIMENT_LOG
 
 ## Key findings
 
-1. **Training on privileged future frames can teach a shortcut.** LatentPilot's Stage 1 fits its training data
-   (98 %) by reading the next frame out of the Pilot slot. The shortcut is gone at test time. The method's later stages
-   (flywheel, scheduled sampling) are what would close the gap.
-2. **Stopping, not reaching, is the bottleneck for every approach.** The best pointing model came within 3 m in 42.7 %
-   of episodes but stopped there in 22.7 %. The reasoner reached the goal region in 47.5 % and stopped there in none.
-3. **Offline probes picked the wrong model twice.** Once for the Pilot-slot design, once for the reasoner version.
+1. **Training on the privileged next frame teaches a shortcut, and we measured it.** On held-out steps, LatentPilot's
+   Stage 1 model is 84 % accurate when its Pilot slot holds the true next frame (its training input), and 31 % when it
+   holds its own latent (its test-time input). That is less than half the 66 % of a model with no slot at all. A short
+   Stage 2 (scheduled sampling) recovered some navigation (10.7 → 18.0 % OS) but not the shortcut (34 %).
+2. **Stopping, not reaching, is the bottleneck for every approach.** The best pointing model came within 3 m in 36.7 %
+   of episodes and stopped there in 23.3 %. The reasoner came within 3 m in 37.5 % and stopped there in 3.3 %.
+3. **Choosing the threshold properly barely moved the headline.** Picked on `val_seen` instead of the test split, the
+   pointing policy scores 23.3 % SR vs 22.7 % tuned on test, so the result was not an artefact of tuning.
+4. **Offline probes picked the wrong model twice.** Once for the Pilot-slot design, once for the reasoner version.
    Rank policies closed-loop.
-4. **The STOP decision lives mid-network.** A linear probe reads it at AUC 0.72 in layer 15, but 0.44 at the output
-   layer.
+5. **The STOP decision lives mid-network.** A linear probe reads it at AUC 0.72 in layer 15, but 0.44 at the output
+   layer. A head reading layers 23/26/28 did not, however, raise SR: the fused model at 120k and the final-layer head at
+   40k both reach 22.7 %.
 
    <img src="docs/figures/fig_layer_probe.png" width="640">
-5. **Data first.** Going from 6 to 16 buildings tripled the pointing policy's end-SR (4.0 → 13.3 %). Fixing three
-   silent label bugs raised label/expert agreement from 0.69 to 0.97.
-6. **Silent bugs rivalled any modelling change.** Examples: mRoPE dropped with `inputs_embeds`; bf16 targets that
-   depend on batch size; the paper's literal token layout (21 % vs 78 % instruction following); a history stride trained
-   wrong for 7 h; and a success metric that did not require STOP. See [`docs/GOTCHAS.md`](docs/GOTCHAS.md).
+6. **Data first.** Going from 6 to 16 buildings tripled the pointing policy's success. Fixing three silent label bugs
+   raised label/expert agreement from 0.69 to 0.97.
+7. **Silent bugs rivalled any modelling change.** Examples:
+   - mRoPE dropped with `inputs_embeds`;
+   - bf16 targets that depend on batch size;
+   - the paper's literal token layout (21 % vs 78 % instruction following);
+   - a history stride trained wrong for 7 h;
+   - a success metric that did not require STOP.
+
+   See [`docs/GOTCHAS.md`](docs/GOTCHAS.md).
 
 The full narrative, one section per experiment with why it was run, the setup, the result and the decision, is in
 **[`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md)**.
@@ -314,19 +360,19 @@ The full narrative, one section per experiment with why it was run, the setup, t
 ## Caveats
 
 - **SR definition.** Our "strict" runs counted an episode as successful if it *ended* within 3 m, including by running
-  out of steps. Standard SR also requires the agent's own STOP. Both are reported, and standard SR could be recovered
-  only for the later runs.
+  out of steps. Standard SR also requires the agent's own STOP. Both are reported. Every pointing row was re-evaluated
+  with stopping positions logged; only the 6-scan ablation was not.
 - **Raw capability only.** Each method got one offline round of imitation learning. There was no data flywheel
   (LatentPilot), no RL fine-tuning (Robostral) and no DAgger, so none of the numbers is the method's ceiling.
-- **Thresholds were tuned on the test split.** STOP and turn thresholds were chosen on `val_unseen`. A `val_seen` set
-  was collected for selection but never used, so the best pointing numbers are optimistic.
+- **Thresholds.** The headline pointing result uses a STOP threshold chosen on `val_seen`. The other pointing rows and
+  the turn threshold (7.5°) were chosen on `val_unseen`, so those are mildly optimistic.
 - **Small, unpaired evaluations.** Evaluations use n = 150 (8 scans) for ① and ②, and n = 40 (6 scans) for ③ and ④.
   Each takes the first n episodes of the split, so the episode sets differ. At n = 40, the 95 % interval is roughly
   ±15 points.
-- **The reasoner result is one stochastic run** (top-p 0.8, temperature 0.7). Its v1 → v3 change altered three things
-  at once.
-- **Unfinished runs.** The long pointing runs were stopped at 1.1–1.2 of their planned 1.5–3 epochs. LatentPilot
-  Stage 2, a 16-scan Stage 1 and most Cosmos ablation arms were never run
+- **The reasoner decodes stochastically** (top-p 0.8, temperature 0.7). Its rows average three runs each, and its
+  reaching score varied from 35 % to 47.5 % between runs. Its v1 → v3 change altered three things at once.
+- **Unfinished runs.** The long pointing runs were stopped at 1.1–1.2 of their planned 1.5–3 epochs. Stage 2 was run
+  only as a short fine-tune (2,600 steps). A 16-scan Stage 1 and most Cosmos ablation arms were never run
   ([list](docs/EXPERIMENTS.md#6-planned-but-not-run)).
 - **Different backbone and scale from the paper** (2 B vs 7 B parameters, 6–61 scans vs full data). These results
   describe this scale; they do not settle whether the paper is right.
@@ -338,9 +384,9 @@ Weights are not published yet (each is a 25–33 MB LoRA adapter).
 
 | Model | Approach | Base model | Result on R2R-CE `val_unseen` | Card |
 |---|---|---|---|---|
-| `pointing_fusion/step120000` | ② pointing + controller | Cosmos-Reason2-2B | **SR 22.7 %** (end-SR 31.3 %, OS 42.7 %; n = 150) | [card](model_cards/pointing-fusion-2b/README.md) |
-| `reasoner_sft_v3/step1500` | ④ Cosmos3-Edge reasoner | Cosmos3-Edge | OS 47.5 % (n = 40, diagnostic) | [card](model_cards/reasoner-sft-v3/README.md) |
-| `stage1_learned/final`, `stage1_identity/final` | ① LatentPilot | Cosmos-Reason2-2B | OS 10.7 % / 17.3 % (n = 150, diagnostic) | [card](model_cards/latentpilot-stage1-2b/README.md) |
+| `pointing_fusion/step120000` | ② pointing + controller | Cosmos-Reason2-2B | **SR 23.3 %** at τ chosen on `val_seen` (OS 36.7 %; n = 150) | [card](model_cards/pointing-fusion-2b/README.md) |
+| `reasoner_sft_v3/step1500` | ④ Cosmos3-Edge reasoner | Cosmos3-Edge | SR 3.3 %, OS 37.5 % (3 strict runs, n = 40) | [card](model_cards/reasoner-sft-v3/README.md) |
+| `stage1_learned/final`, `stage1_identity/final`, `stage2_p50/final`, `stage2_p75/final` | ① LatentPilot | Cosmos-Reason2-2B | OS 10.7 / 17.3 / 16.7 / 18.0 % (n = 150, diagnostic) | [card](model_cards/latentpilot-stage1-2b/README.md) |
 
 ## Reproduction
 
@@ -384,6 +430,11 @@ python scripts/eval_edge.py --limit 40             # guidance 7.5, chunk 24 (see
 # ④ Cosmos3-Edge reasoner
 python scripts/train_reasoner_sft.py ...           # see the script header for the v3 settings
 bash scripts/eval_v3.sh
+
+# follow-up experiments (slot-shortcut test, Stage 2, strict re-evaluations, val_seen threshold)
+python scripts/download_mp3d.py --accept-terms --scans <scans>   # only the buildings you need (~80 MB each)
+bash scripts/run_slot_shortcut.sh                                # held-out Pilot-slot test (~1 h)
+bash scripts/run_pending_followups.sh                            # everything else; safe to run from cron (see its header)
 
 # figures and demo media, from logs and recordings already on disk (no GPU)
 python tools/make_figures.py && python tools/make_demo_media.py

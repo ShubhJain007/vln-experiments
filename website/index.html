@@ -137,13 +137,13 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
       <div class="res">OS 10.7 % <span class="note">(control 17.3 %)</span></div></div>
     <div class="card approach"><div class="num">②</div><h4>Pointing + controller</h4>
       <p>Inspired by Mistral AI's Robostral Navigate: point at the next waypoint in the image. No RL.</p>
-      <div class="res">SR 22.7 % <span class="note">(OS 42.7 %)</span></div></div>
+      <div class="res">SR 23.3 % <span class="note">(OS 36.7 %)</span></div></div>
     <div class="card approach"><div class="num">③</div><h4>Video diffusion actions</h4>
       <p>NVIDIA Cosmos3-Edge's action stream, used zero-shot to sample ego-motion from video.</p>
       <div class="res">OS 7.5 %</div></div>
     <div class="card approach"><div class="num">④</div><h4>Video reasoner policy</h4>
       <p>The Cosmos3-Edge reasoner, fine-tuned to answer "what next?" from its own recent video.</p>
-      <div class="res">OS 47.5 % <span class="note">(no correct stops)</span></div></div>
+      <div class="res">SR 3.3 % <span class="note">(OS 37.5 %)</span></div></div>
   </div>
   <p class="note">SR: stopped within 3&nbsp;m of the goal by its own decision. OS: came within 3&nbsp;m at some point.
   Across all four approaches, <strong>stopping, not reaching, is the bottleneck</strong>.</p>
@@ -175,12 +175,14 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     <figcaption>Step 10k gets within 3.4&nbsp;m of the goal; the final model's closest point is 6.4&nbsp;m.
     <a href="https://github.com/ShubhJain007/vln-experiments/tree/main/media/comparisons">All 11 scenes</a>.</figcaption></figure>
   <div class="fail"><h4>What failed: the fully trained model wanders and almost never stops (OS 10.7 % vs 17.3 % for the control)</h4>
-    <p><strong>Most plausible cause: the training shortcut.</strong> During training the Pilot slot holds the
-    <em>true</em> embedding of the next frame, which reveals the action just taken. Training accuracy jumps from 78 %
-    without a slot to 98 % with one (92 % vs 78 % at matched steps), so the model learns to read the action off the
-    slot. At test time the slot holds its own prediction and the shortcut is gone. Predicting the future 2.25× better
-    did not help. Loss-balance drift contributes, but an adaptive λ that removed it did not recover navigation. The
-    flywheel and scheduled sampling, which were not run, are what would close this gap.</p></div>
+    <p><strong>The cause, measured: the Pilot slot leaks the answer during training.</strong> Training fills the slot with
+    the <em>true</em> embedding of the next frame, which reveals the action just taken; at test time it holds the model's
+    own latent. Replaying 4,306 held-out steps with only the slot changed, the same model is <strong>84 %</strong>
+    accurate with the true next frame and <strong>31 %</strong> with its own latent, less than half of a model with no
+    slot at all (66 %). The identity control ignores the slot (≈ 62 % either way), which is why it navigates better.</p>
+    <p><strong>The paper's fix, tried:</strong> a short Stage 2 (scheduled sampling) lifts navigation to 16.7–18.0 % OS,
+    but the shortcut stays (34 % with its own latent). Loss-balance drift contributes, but removing it did not help.</p></div>
+  <figure class="card"><img src="figures/fig_slot_shortcut.png" alt="Held-out accuracy by Pilot-slot content" loading="lazy"></figure>
   <figure class="card"><img src="figures/fig_lp_failure.png" alt="LatentPilot failure evidence" loading="lazy"></figure>
 
   <h3>② Pointing + controller <span class="tag roll">closed-loop rollout</span></h3>
@@ -196,7 +198,8 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     <figure><img src="media/previews/step100k_failures_ep16_pLe4wQe7qrG.gif" alt="Stops short" loading="lazy"><figcaption>Passes 1.5&nbsp;m away, then stops 5.4&nbsp;m short.</figcaption></figure>
   </div>
   <div class="fail"><h4>What failed: under-turning, weak STOP, no recovery</h4>
-    <p>Of 150 episodes, 22.7 % stop at the goal, 8.7 % run out of steps near it, 23.3 % stop in the wrong place, and
+    <p>With the STOP threshold chosen on <code>val_seen</code>, SR is <strong>23.3 %</strong>, within a point of
+    the test-tuned 22.7 %. At τ = 0.20, of 150 episodes 22.7 % stop at the goal, 8.7 % run out of steps near it, 23.3 % stop in the wrong place, and
     45.3 % run out of steps far away.</p>
     <ol>
       <li><strong>Under-turning.</strong> When the expert turns, the model predicts FORWARD 39–43 % of the time. Its
@@ -241,7 +244,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
         <td><img src="media/previews/reasoner_v1_8194nk5LbLH_t34.gif" alt="v1 case B" loading="lazy" style="width:260px">v1: turn left ✗</td>
         <td><img src="media/previews/reasoner_v3_8194nk5LbLH_t34.gif" alt="v3 case B" loading="lazy" style="width:260px">v3: move forward ✓</td></tr>
     </tbody></table></div>
-  <div class="fail"><h4>What failed: v3 reaches the goal region most often (47.5 %) but never stops there; v1 stops constantly</h4>
+  <div class="fail"><h4>What failed: v3 reaches the goal region (37.5 %) but stops there in only 3.3 % of episodes (3 strict runs); v1 stops constantly</h4>
     <p><strong>Most plausible cause: each version copies its training label mix.</strong> v1 trained on 25 % STOP and
     ends 65 % of episodes by stopping in the wrong place. v3 trained on 5 % STOP and rarely stops. Stopping also
     requires knowing how much of the instruction is done, which 8&nbsp;s of video cannot show. With no closed-loop
@@ -257,13 +260,16 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     <tbody>
       <tr><td>① Latent reasoning</td><td>Stage 1, learned G<sub>ψ</sub></td><td>150</td><td class="nm">n/m</td><td class="nm">n/m</td><td>10.7</td><td>0.277</td><td>8.50</td></tr>
       <tr><td>① Latent reasoning</td><td>identity G<sub>ψ</sub> (control)</td><td>150</td><td class="nm">n/m</td><td class="nm">n/m</td><td>17.3</td><td>0.268</td><td>8.17</td></tr>
-      <tr><td>② Pointing</td><td>16 scans, final layer</td><td>150</td><td class="nm">n/r</td><td>13.3</td><td>14.0</td><td>0.350</td><td>7.34</td></tr>
-      <tr><td>② Pointing</td><td>+ history, 61 scans</td><td>150</td><td class="nm">n/r</td><td>18.0</td><td>22.7</td><td>0.394</td><td>6.55</td></tr>
-      <tr><td>② Pointing</td><td>+ longer schedule</td><td>150</td><td class="nm">n/r</td><td>24.7</td><td>31.3</td><td>0.345</td><td>7.10</td></tr>
-      <tr class="best"><td>② Pointing</td><td>+ layer fusion</td><td>150</td><td>22.7</td><td>31.3</td><td>42.7</td><td>0.323</td><td>7.22</td></tr>
+      <tr><td>① Latent reasoning</td><td>+ Stage 2, 50 % / 75 % own z</td><td>150</td><td class="nm">n/m</td><td class="nm">n/m</td><td>16.7 / 18.0</td><td>0.312 / 0.315</td><td>7.98 / 7.99</td></tr>
+      <tr><td>② Pointing</td><td>16 scans, final layer</td><td>150</td><td>12.7</td><td>13.3</td><td>14.0</td><td>0.350</td><td>7.34</td></tr>
+      <tr><td>② Pointing</td><td>+ history, 61 scans</td><td>150</td><td>17.3</td><td>18.0</td><td>22.7</td><td>0.394</td><td>6.55</td></tr>
+      <tr><td>② Pointing</td><td>+ longer schedule</td><td>150</td><td>22.7</td><td>24.7</td><td>31.3</td><td>0.345</td><td>7.10</td></tr>
+      <tr><td>② Pointing</td><td>+ layer fusion, τ tuned on test</td><td>150</td><td>22.7</td><td>31.3</td><td>42.7</td><td>0.323</td><td>7.22</td></tr>
+      <tr class="best"><td>② Pointing</td><td>+ layer fusion, τ chosen on val_seen</td><td>150</td><td>23.3</td><td>28.7</td><td>36.7</td><td>0.363</td><td>7.03</td></tr>
       <tr><td>③ Edge action</td><td>zero-shot, CFG 7.5</td><td>40</td><td class="nm">n/m</td><td class="nm">n/m</td><td>7.5</td><td>0.276</td><td>8.81</td></tr>
       <tr><td>④ Edge reasoner</td><td>SFT v1</td><td>40</td><td class="nm">n/m</td><td class="nm">n/m</td><td>17.5</td><td>0.365</td><td>7.41</td></tr>
-      <tr class="best"><td>④ Edge reasoner</td><td>SFT v3, step 1,500</td><td>40</td><td class="nm">n/m</td><td class="nm">n/m</td><td>47.5</td><td>0.389</td><td>6.41</td></tr>
+      <tr><td>④ Edge reasoner</td><td>SFT v3, 1.5k, 3 diagnostic runs</td><td>40</td><td class="nm">n/m</td><td class="nm">n/m</td><td>43.3 ± 7.2</td><td>0.364</td><td>6.36</td></tr>
+      <tr class="best"><td>④ Edge reasoner</td><td>SFT v3, 1.5k, 3 strict runs</td><td>40</td><td>3.3</td><td>18.3</td><td>37.5</td><td>0.175</td><td>7.31</td></tr>
       <tr class="paper"><td>LatentPilot paper</td><td>7B, full split, flywheel</td><td>1,839</td><td>51.7–54.0</td><td>–</td><td>57.0</td><td>–</td><td>5.3</td></tr>
       <tr class="paper"><td>Robostral Navigate</td><td>8B, SFT + RL</td><td>1,839</td><td>77.4</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
     </tbody>
@@ -271,19 +277,22 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
   </div>
   <p class="note">R2R-CE <code>val_unseen</code>. SR: the agent's own STOP within 3&nbsp;m (standard). end-SR: the episode
   ended within 3&nbsp;m, including by running out of steps. OS: came within 3&nbsp;m. n/m: not measured, because the
-  evaluation ended on arrival. n/r: not recoverable from the logs. Thresholds were tuned on this split. n = 40 gives
-  roughly ±15 points.</p>
+  evaluation ended on arrival. The bold pointing row uses a STOP threshold chosen on <code>val_seen</code>; other
+  pointing rows were tuned on this split. Reasoner rows average 3 runs (± = standard deviation).</p>
   <figure class="card"><img src="figures/fig_navigation.png" alt="All metrics for every policy" loading="lazy"></figure>
 </section>
 
 <section>
   <h2>Key findings</h2>
   <ol class="findings">
-    <li><strong>Training on privileged future frames can teach a shortcut.</strong> LatentPilot's Stage 1 fits its
-    training data by reading the next frame from the Pilot slot, and the shortcut is gone at test time.</li>
+    <li><strong>Training on the privileged next frame teaches a shortcut, and we measured it:</strong> 84 % held-out
+    accuracy with the true next frame in the Pilot slot vs 31 % with the model's own latent. A short Stage 2 recovers
+    some navigation but not the shortcut.</li>
     <li><strong>Stopping, not reaching, is the bottleneck.</strong> The best pointing model came within 3&nbsp;m in
-    42.7 % of episodes but stopped there in 22.7 %. The reasoner reached the goal region in 47.5 % and stopped there
-    in none.</li>
+    36.7 % of episodes and stopped there in 23.3 %. The reasoner came within 3&nbsp;m in 37.5 % and stopped there in
+    3.3 %.</li>
+    <li><strong>Choosing the threshold properly barely moved the headline</strong> (23.3 % on a <code>val_seen</code>-chosen
+    threshold vs 22.7 % tuned on test).</li>
     <li><strong>Offline probes picked the wrong model twice.</strong> Rank policies closed-loop.</li>
     <li><strong>STOP lives mid-network</strong>: AUC 0.72 at layer 15, 0.44 at the output layer.</li>
     <li><strong>Data first.</strong> 6 → 16 buildings tripled the pointing policy's success, and fixing three label bugs

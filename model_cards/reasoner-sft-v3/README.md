@@ -51,17 +51,18 @@ version, used onset-balanced sampling, a ~1 s context and no projector LoRA. A v
 
 ## Evaluation
 
-| | step 1,500 | final |
-|---|---|---|
-| Closed-loop **oracle success** (n = 40, 6 buildings) | **47.5 %** | 32.5 % |
-| nDTW | 0.389 | 0.304 |
-| NE (m) | 6.41 | 7.62 |
-| Next-action probe accuracy (160 decision points; majority baseline 54.4 %) | – | 63.1 % |
+Step 1,500, n = 40 (6 buildings), three runs each (decoding is stochastic):
 
-**Important:** these closed-loop numbers come from a diagnostic evaluation that ends the episode when the agent first
-comes within 3 m. That measures *reaching* the goal, not *stopping* at it. The model's own STOP never fired within 3 m,
-so its strict success rate was not measured and would be far lower. They come from a single run with stochastic
-decoding, where ±15 points is roughly the 95 % interval at n = 40.
+| Evaluation | SR (own STOP ≤ 3 m) | end-SR (ended ≤ 3 m) | OS (ever ≤ 3 m) | NE (m) |
+|---|---|---|---|---|
+| **strict** (ends only at STOP or the step limit) | **2.5 / 2.5 / 5.0 %** (mean 3.3) | 17.5 / 20.0 / 17.5 % | 37.5 / 42.5 / 32.5 % | 7.31 |
+| diagnostic (ends on arrival; measures reaching only) | — | — | 47.5 / 47.5 / 35.0 % (mean 43.3) | 6.36 |
+
+The final checkpoint reached OS 32.5 % (one diagnostic run), and its next-action probe accuracy was 63.1 % (160
+decision points; majority baseline 54.4 %).
+
+**The model reaches the goal region but almost never stops there.** Its first public number, "47.5 %", was a single
+diagnostic run that measured reaching only.
 
 ## Limitations
 

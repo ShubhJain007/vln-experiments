@@ -29,6 +29,24 @@
    "sr": null
   },
   {
+   "label": "Stage 2, 50 % own z",
+   "group": "LatentPilot",
+   "n": 150,
+   "os": 16.67,
+   "sr_end": null,
+   "sr": null,
+   "source": "logs/followups/cl_stage2_p50.log"
+  },
+  {
+   "label": "Stage 2, 75 % own z",
+   "group": "LatentPilot",
+   "n": 150,
+   "os": 18.0,
+   "sr_end": null,
+   "sr": null,
+   "source": "logs/followups/cl_stage2_p75.log"
+  },
+  {
    "label": "Pointing 6 scans",
    "group": "Pointing",
    "n": 150,
@@ -42,36 +60,36 @@
    "group": "Pointing",
    "n": 150,
    "os": 14.0,
-   "source": "logs/evalfinal150_232320.log (thr 0.05)",
+   "source": "logs/evalfinal150_232320.log (thr 0.05); SR from logs/followups/cl_pointing_final.log",
    "sr_end": 13.33,
-   "sr": "n/r"
+   "sr": 12.67
   },
   {
    "label": "+ history (61 scans)",
    "group": "Pointing",
    "n": 150,
    "os": 22.67,
-   "source": "logs/evalsord_115012.log (pointing_hist, thr 0.05)",
+   "source": "logs/evalsord_115012.log (pointing_hist, thr 0.05); SR from logs/followups/cl_pointing_hist.log",
    "sr_end": 18.0,
-   "sr": "n/r"
+   "sr": 17.33
   },
   {
    "label": "full3 step 40k",
    "group": "Pointing",
    "n": 150,
    "os": 31.33,
-   "source": "logs/sweep40k_002048.log (thr 0.10)",
+   "source": "logs/sweep40k_002048.log (thr 0.10); SR from logs/followups/cl_pointing_full3_40k.log",
    "sr_end": 24.67,
-   "sr": "n/r"
+   "sr": 22.67
   },
   {
-   "label": "+ layer fusion 120k",
+   "label": "+ fusion (\u03c4 val_seen)",
    "group": "Pointing",
    "n": 150,
-   "os": 42.67,
-   "source": "logs/eval120k_220002.log (thr 0.20)",
-   "sr_end": 31.33,
-   "sr": 22.67
+   "os": 36.67,
+   "source": "logs/eval120k_220002.log at thr 0.10, the threshold chosen on val_seen (logs/followups/cl_valseen_thr*.log)",
+   "sr_end": 28.67,
+   "sr": 23.33
   },
   {
    "label": "Edge zero-shot",
@@ -101,13 +119,13 @@
    "sr": null
   },
   {
-   "label": "Reasoner v3 1.5k",
+   "label": "Reasoner v3 1.5k \u00d73",
    "group": "Cosmos",
    "n": 40,
-   "os": 47.5,
-   "source": "results/runs/v3_step1500_direct.json",
-   "sr_end": null,
-   "sr": null
+   "os": 37.5,
+   "source": "mean of results/runs/v3_step1500_direct_strict_r{1,2,3}.json",
+   "sr_end": 18.33,
+   "sr": 3.33
   },
   {
    "label": "Paper, 7B (Table 3)",

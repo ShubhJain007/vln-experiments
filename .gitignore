@@ -18,3 +18,6 @@ __pycache__/
 # published rollout videos (see media/README.md)
 !media/**/*.mp4
 _site/
+
+# unattended follow-up runner: per-item progress markers
+results/followups/state/

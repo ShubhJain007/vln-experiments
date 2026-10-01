@@ -48,13 +48,16 @@ embedding two steps ahead and is fed back as the only memory;
 
 Stage~1 of LatentPilot fails the method's own gate at this scale. The learned Pilot Token predicts future frames
 $2.25\times$ better than an identity control, yet reaches the goal less often (oracle success 10.7\% vs.\ 17.3\%,
-$n{=}150$). Training accuracy jumps from 78\% to 98\% once the Pilot slot is teacher-forced with the true next frame,
-which points to a train-time shortcut that the method's later stages (not run here) are designed to remove.
+$n{=}150$). A held-out test shows why: the same model is 84\% accurate with the true next frame in its Pilot slot (its
+training input) and 31\% with its own latent (its test-time input), below the 66\% of a model with no slot. Training
+teaches a shortcut through the privileged frame. A short Stage~2 (scheduled sampling) recovers some navigation but not
+the shortcut.
 
-Pointing reaches a success rate of \textbf{22.7\%} (own STOP within 3\,m; $n{=}150$). This is the best in the study,
-although it came within 3\,m in 42.7\% of episodes. The zero-shot diffusion policy recovers ego-motion from video but
-largely ignores the instruction (oracle success 7.5\%). The fine-tuned reasoner reaches the goal region most often
-(\textbf{47.5\%}, $n{=}40$) but never stops there.
+Pointing reaches a success rate of \textbf{23.3\%} (own STOP within 3\,m; $n{=}150$; STOP threshold chosen on
+\texttt{val\_seen}), the best in the study, although it came within 3\,m in 36.7\% of episodes. The zero-shot diffusion
+policy recovers ego-motion from video but largely ignores the instruction (oracle success 7.5\%). The fine-tuned
+reasoner reaches the goal region about as often (37.5\%) but stops there in only \textbf{3.3\%} of episodes (three
+strict runs, $n{=}40$).
 
 Across all four approaches, stopping rather than reaching is the bottleneck. Offline probes ranked candidate models
 incorrectly twice, and silent implementation errors changed results as much as any modelling choice. They include a
@@ -104,9 +107,9 @@ Our contributions are:
 \begin{itemize}
   \item A from-scratch reimplementation of LatentPilot, and a controlled test of its Stage~1 claim. With a learned
         future predictor versus an identity control and everything else fixed, it fails at 2B parameters and 1,665
-        episodes. The evidence points to a train-time shortcut through the teacher-forced Pilot slot, with loss-balance
-        drift as a secondary factor (\cref{sec:res-lp}).
-  \item A supervised-only pointing policy that reaches 22.7\% success, with ablations over data scale, history and
+        episodes. A held-out test that changes only the slot content measures a train-time shortcut through the
+        teacher-forced Pilot slot; a short Stage~2 does not remove it (\cref{sec:res-lp}).
+  \item A supervised-only pointing policy that reaches 23.3\% success with a threshold chosen off the test split, with ablations over data scale, history and
         layer fusion. A layer-wise probe shows that the STOP decision is decodable mid-network (AUC 0.72) but not at the
         output layer (0.44) (\cref{sec:res-pt}).
   \item The first, to our knowledge, closed-loop evaluation of Cosmos3-Edge's action stream and reasoner as VLN policies,
@@ -265,15 +268,15 @@ the episode also ends when the agent first comes within 3\,m. In this mode SR eq
 measures reaching rather than stopping. The \emph{strict} mode removes that early exit, so the episode ends only
 at STOP or at the step limit. From it we report both end-SR and, where recoverable, SR.
 
-\textbf{All LatentPilot, Cosmos3-Edge and reasoner evaluations in this report are diagnostic, and we report them as
-OS.} Only the pointing policy was evaluated in strict mode.
+\textbf{All LatentPilot and Cosmos3-Edge evaluations, and the original reasoner evaluations, are diagnostic, and we
+report them as OS.} The pointing policy and, in follow-up runs, the reasoner were also evaluated in strict mode.
 
 \paragraph{Evaluation subsets and caveats.}
 Each evaluation takes the first $n$ episodes of \texttt{val\_unseen}: $n{=}150$ covers 8 scans and $n{=}40$ covers 6.
 Results at different $n$ are therefore not paired. At $n{=}40$ a 95\% binomial interval is about $\pm$15 points, and at
-$n{=}150$ about $\pm$7.5. STOP and turn thresholds were selected on \texttt{val\_unseen} itself. A
-\texttt{val\_seen} set (778 episodes) was collected for this purpose but not used, so the tuned pointing numbers are
-optimistic.
+$n{=}150$ about $\pm$7.5. Most STOP thresholds and the turn threshold were selected on \texttt{val\_unseen} itself and are
+therefore mildly optimistic. For the headline pointing result the STOP threshold is instead chosen on
+\texttt{val\_seen} (8 training buildings, 159 new episodes; \cref{app:valseen}).
 
 \paragraph{Compute.}
 One NVIDIA RTX 4070 Ti SUPER (16\,GB). Rendering runs in a separate Habitat worker process~\citep{savva2019habitat}.
@@ -353,7 +356,8 @@ brings it to 0.42$\times$. For reference, persistence ($\vbar_t\!\to\!\vbar_{t+2
 and the constant mean scores 18.48.
 
 \paragraph{Training.}
-One offline round on expert demonstrations; the paper's data flywheel and Stage~2 are not run. 17,400 steps (2 epochs)
+One offline round on expert demonstrations; the paper's data flywheel is not run, and Stage~2 only as a short
+follow-up (\cref{sec:res-lp}). 17,400 steps (2 epochs)
 at batch 8 on the 6-scan corpus. Learning rate $10^{-4}$ with 100 warm-up steps and cosine
 decay to $5\times10^{-6}$.
 
@@ -421,8 +425,8 @@ wei2022cot}, with sampling at top-$p$ 0.8 and temperature 0.7.
 \centering\footnotesize
 \caption{Closed-loop results on R2R-CE \texttt{val\_unseen}. SR: own STOP within 3\,m (standard). end-SR: ended within
 3\,m, including at the step limit. OS: within 3\,m at any point. ``n/m'': not measured, because the evaluation ended on
-arrival (\cref{sec:protocol}). ``n/r'': not recoverable from the logs. $^*$SPL uses end-SR as its success criterion.
-Pointing rows use STOP thresholds between 0.05 and 0.20 chosen on this split. Reference rows use 7--8B models on the full
+arrival (\cref{sec:protocol}). $^*$SPL uses end-SR as its success criterion. The bold pointing row uses a STOP threshold chosen on
+\texttt{val\_seen}; the others use 0.05--0.20 chosen on this split. Reference rows use 7--8B models on the full
 split with extra training rounds (flywheel or RL) not used here.}
 \label{tab:main}
 \setlength{\tabcolsep}{3.6pt}
@@ -430,32 +434,35 @@ split with extra training rounds (flywheel or RL) not used here.}
 \toprule
 Approach & Variant & $n$ & SR$\uparrow$ & end-SR$\uparrow$ & SPL$^*\uparrow$ & OS$\uparrow$ & nDTW$\uparrow$ & NE$\downarrow$ \\
 \midrule
-\multirow{2}{*}{(i) LatentPilot} & Stage 1, learned $G_\psi$ & 150 & n/m & n/m & \na & 10.7 & 0.277 & 8.50 \\
+\multirow{4}{*}{(i) LatentPilot} & Stage 1, learned $G_\psi$ & 150 & n/m & n/m & \na & 10.7 & 0.277 & 8.50 \\
  & identity $G_\psi$ (control) & 150 & n/m & n/m & \na & 17.3 & 0.268 & 8.17 \\
+ & + Stage 2, 50\% own $z$ & 150 & n/m & n/m & \na & 16.7 & 0.312 & 7.98 \\
+ & + Stage 2, 75\% own $z$ & 150 & n/m & n/m & \na & 18.0 & 0.315 & 7.99 \\
 \midrule
-\multirow{4}{*}{(ii) Pointing} & 16 scans, final layer & 150 & n/r & 13.3 & 13.0 & 14.0 & 0.350 & 7.34 \\
- & + history, 61 scans & 150 & n/r & 18.0 & 16.8 & 22.7 & 0.394 & 6.55 \\
- & + longer schedule (step 40k) & 150 & n/r & 24.7 & 22.3 & 31.3 & 0.345 & 7.10 \\
- & \textbf{+ layer fusion (step 120k)} & 150 & \textbf{22.7} & \textbf{31.3} & 25.4 & 42.7 & 0.323 & 7.22 \\
+\multirow{5}{*}{(ii) Pointing} & 16 scans, final layer & 150 & 12.7 & 13.3 & 13.0 & 14.0 & 0.350 & 7.34 \\
+ & + history, 61 scans & 150 & 17.3 & 18.0 & 16.8 & 22.7 & 0.394 & 6.55 \\
+ & + longer schedule (40k) & 150 & 22.7 & 24.7 & 22.3 & 31.3 & 0.345 & 7.10 \\
+ & + fusion, $\tau$ tuned on test & 150 & 22.7 & 31.3 & 25.4 & 42.7 & 0.323 & 7.22 \\
+ & \textbf{+ fusion, $\tau$ from val.\ seen} & 150 & \textbf{23.3} & 28.7 & 24.3 & 36.7 & 0.363 & 7.03 \\
 \midrule
 (iii) Edge action & zero-shot, CFG 7.5 & 40 & n/m & n/m & \na & 7.5 & 0.276 & 8.81 \\
 \midrule
-\multirow{2}{*}{(iv) Edge reasoner} & SFT v1 & 40 & n/m & n/m & \na & 17.5 & 0.365 & 7.41 \\
- & \textbf{SFT v3, step 1{,}500} & 40 & n/m$^\dagger$ & n/m & \na & \textbf{47.5} & 0.389 & 6.41 \\
+\multirow{3}{*}{(iv) Edge reasoner} & SFT v1 & 40 & n/m & n/m & \na & 17.5 & 0.365 & 7.41 \\
+ & v3 1.5k, 3 diag.\ runs & 40 & n/m & n/m & \na & 43.3 & 0.364 & 6.36 \\
+ & \textbf{v3 1.5k, 3 strict runs} & 40 & \textbf{3.3} & 18.3 & 12.6 & 37.5 & 0.175 & 7.31 \\
 \midrule
 \citet{latentpilot} & 7B, flywheel & 1,839 & 51.7--54.0 & \na & 47.1--48.5 & 57.0 & \na & 5.3 \\
 \citet{robostral} & 8B, SFT + RL & 1,839 & 77.4 & \na & \na & \na & \na & \na \\
 \bottomrule
-\multicolumn{9}{l}{\footnotesize $^\dagger$ none of its 5 own STOP decisions fell within 3\,m of the goal, so its SR would be far
-below 47.5.}
+\multicolumn{9}{l}{\footnotesize Reasoner rows average three runs (stochastic decoding).}
 \end{tabular}
 \end{table}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{fig_navigation.png}
-\caption{Three bars per policy: OS (light), end-SR (medium) and SR (solid). Only the pointing policy was evaluated
-without the early exit, and SR is recoverable only for its final model.}
+\caption{Three bars per policy: OS (light), end-SR (medium) and SR (solid). Only the pointing policy and the reasoner
+were evaluated without the early exit; the reasoner bars average three strict runs.}
 \label{fig:nav}
 \end{figure}
 
@@ -517,26 +524,64 @@ Stage 1, adaptive $\lambda$ (step 10k) & 150 & \na & 6.7 & 0.275 & 8.36 & 18.0\%
 \end{tabular}
 \end{table}
 
-\paragraph{Most plausible cause: a train-time shortcut through the Pilot slot.}
+\paragraph{The cause, measured: a train-time shortcut through the Pilot slot.}
 Following the paper (\cref{eq:lp}), the Pilot slot is teacher-forced during training with the \emph{true} embedding of
 the next frame, $\vbar_{t+1}$. At test time it holds the model's own prediction $z_{t-1}$. The next frame is the
 consequence of the current action (the view has rotated, or moved forward), so during training the action can be read
-off the slot by inverse dynamics. Training accuracy shows exactly this (\cref{fig:lpfail}a). The memoryless Stage~0
-reaches 78\%; every model whose slot is fed $\vbar_{t+1}$ reaches 98\%, and at matched steps (7k--8k) the gap is 78\%
-vs.\ 92\%. The fully trained model relies on a signal that does not exist at test time. This also explains why the
-earlier step-10k checkpoint navigated better (OS 26.7\% vs.\ 10.0\%, $n{=}30$), and why better future prediction did not
-help (\cref{fig:lpfail}b,c). The paper's remaining stages exist to close this gap, and we did not run them: Stage~2
-scheduled sampling~\citep{bengio2015scheduled} gradually replaces $\vbar_{t+1}$ with the model's own prediction, and the
-data flywheel trains on the model's own trajectories. We therefore read our result as ``Stage~1 alone does not transfer
-at this scale'', not as a verdict on the full method. The evidence is correlational; the decisive test, teacher-forced
-evaluation with $z_{t-1}$ in the slot, remains to be run.
+off the slot by inverse dynamics. Training accuracy already hints at this (\cref{fig:lpfail}a): the memoryless Stage~0
+reaches 78\%, while every model whose slot is fed $\vbar_{t+1}$ reaches 98\% (78\% vs.\ 92\% at matched steps).
+
+To test it directly we replay 4,306 held-out \texttt{val\_unseen} expert steps (110 episodes, 11 buildings) through each
+checkpoint. Observations and instruction are teacher-forced, and only the content of the Pilot slot changes
+(\cref{tab:slot}, \cref{fig:slot}). The learned Stage~1 model is 84.3\% accurate with the true next frame and
+\textbf{30.8\%} with its own latent, less than half of the 66.0\% reached by a model with no slot at all. With another
+episode's next frame in the slot it falls to 27.8\%, so it is reading the slot. Stage~0$'$, which never trained
+$G_\psi$, already shows the dependence (82.0\% vs.\ 56.6\%), so the leak comes from the teacher-forced input. Learning to
+predict the future makes the test-time latent \emph{worse}. The identity control ignores its slot (61--63\% under
+every content), which explains why it navigates better. Across training checkpoints, the gap opens between 2k and 4k
+steps and then stays constant (\cref{fig:slot}b).
+
+\begin{table}[t]
+\centering\small
+\caption{Held-out action accuracy (\%) with only the Pilot slot changed; 4,306 \texttt{val\_unseen} steps.}
+\label{tab:slot}
+\begin{tabular}{lccccc}
+\toprule
+Model & true next frame & own latent & current frame & other episode & no slot \\
+\midrule
+Stage 0 (memoryless) & \na & \na & \na & \na & 66.0 \\
+Stage 0$'$ (slot, no $\mathcal{L}_{pil}$) & 82.0 & 56.6 & 44.5 & 27.8 & \na \\
+Stage 1, learned $G_\psi$ & 84.3 & \textbf{30.8} & 45.1 & 27.8 & \na \\
+Stage 1, identity $G_\psi$ & 63.1 & 61.2 & 63.2 & 62.1 & \na \\
+Stage 2, 50\% own $z$ & 84.3 & 33.6 & 53.0 & 27.9 & \na \\
+Stage 2, 75\% own $z$ & 83.7 & 33.9 & 54.5 & 27.6 & \na \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig_slot_shortcut.png}
+\caption{The Pilot-slot shortcut, measured. (a) Held-out action accuracy of each checkpoint with only the slot content
+changed. (b) The learned Stage~1 model over training: own-latent accuracy collapses by step 4k and stays low while
+next-frame accuracy stays high.}
+\label{fig:slot}
+\end{figure}
+
+\paragraph{Does Stage~2 remove it?}
+Stage~2 scheduled sampling~\citep{bengio2015scheduled} replaces part of the slot inputs with the model's own detached
+latent. We fine-tune Stage~1 for 2,600 steps (0.1$\times$ learning rate, same 6 buildings), raising the replaced share
+to 50\% or 75\%; the project's rules require approval above 75\%. Closed-loop OS improves from 10.7\% to 16.7\% and
+18.0\%, the level of the identity control, but the shortcut stays: next-frame accuracy remains 84\% and own-latent
+accuracy only rises to 34\%. This short recipe is not enough. A longer schedule or the paper's data flywheel, which
+trains on the model's own trajectories over several rounds, remain untested at this scale.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{fig_lp_failure.png}
-\caption{Why fully trained LatentPilot fails. (a) Training accuracy jumps once the Pilot slot is fed the true next
-frame (Stage 0$'$ and Stage 1), consistent with a shortcut. (b) The learned Pilot Token predicts the future better, yet
-(c) navigates worse in unseen buildings than the identity control.}
+\caption{Training-time view of the failure. (a) Training accuracy jumps once the Pilot slot is fed the true next frame.
+(b) The learned Pilot Token predicts the future better, yet (c) navigates worse in unseen buildings than the identity
+control.}
 \label{fig:lpfail}
 \end{figure}
 
@@ -559,7 +604,10 @@ navigator. This finding is specific to this setting and does not refute the 7B r
 This is a supervised-only test of the Robostral idea: no RL fine-tuning and a geometric controller. Trained
 identically for 20k steps, the 6-scan policy reached end-SR 4.0\% although its training loss was lower (0.076 vs.\
 0.396), while the 16-scan policy reached 13.3\% (\cref{tab:pt}). Moving to 61 scans with frame history raised end-SR to
-18.0\%, a longer schedule to 24.7\%, and layer fusion to 31.3\%. For the last, SR (own STOP within 3\,m) is 22.7\%.
+18.0\%, a longer schedule to 24.7\%, and layer fusion to 31.3\%. Re-evaluated with stopping positions logged, SR (own
+STOP within 3\,m) is 12.7\%, 17.3\%, 22.7\% and 22.7\% respectively. Choosing the STOP threshold on \texttt{val\_seen} (8
+training buildings, 159 new episodes; SR 39.3/35.3/31.3/24.7\% at $\tau{=}$0.10/0.15/0.20/0.30) selects $\tau{=}0.10$, which
+gives \textbf{SR 23.3\%} on \texttt{val\_unseen}, within a point of the test-tuned 22.7\%.
 
 \begin{table}[t]
 \centering\small
@@ -572,9 +620,9 @@ only where stopping positions were logged. The history run used stride 1 because
 Variant & scans & epochs & $\tau$ & SR & end-SR & SPL$^*$ & OS & NE \\
 \midrule
 final layer, no history & 6 & 2.30 & 0.05 & n/r & 4.0 & 3.7 & 6.7 & 8.37 \\
-final layer, no history & 16 & 0.93 & 0.05 & n/r & 13.3 & 13.0 & 14.0 & 7.34 \\
-+ history ($K{=}2$, stride 1) & 61 & 0.35 & 0.05 & n/r & 18.0 & 16.8 & 22.7 & 6.55 \\
-+ history ($K{=}2$, stride 8), step 40k & 61 & 0.37 & 0.10 & n/r & 24.7 & 22.3 & 31.3 & 7.10 \\
+final layer, no history & 16 & 0.93 & 0.05 & 12.7 & 13.3 & 13.0 & 14.0 & 7.34 \\
++ history ($K{=}2$, stride 1) & 61 & 0.35 & 0.05 & 17.3 & 18.0 & 16.8 & 22.7 & 6.55 \\
++ history ($K{=}2$, stride 8), step 40k & 61 & 0.37 & 0.10 & 22.7 & 24.7 & 22.3 & 31.3 & 7.10 \\
 + layer fusion 23/26/28, step 120k & 61 & 1.10 & 0.20 & \textbf{22.7} & \textbf{31.3} & 25.4 & 42.7 & 7.22 \\
 \midrule
 \multicolumn{9}{l}{\emph{matched comparison at $\tau{=}0.20$:}} \\
@@ -592,7 +640,7 @@ episode's, and 0.603 with none. The separation between STOP and non-STOP probabi
 \paragraph{STOP lives mid-network.}
 A linear probe on each of the 29 hidden states (2,000 training and 1,000 held-out frames) finds STOP at AUC 0.718 in
 layer 15. At the final layer, which the head was reading, the AUC is 0.441, below chance (\cref{fig:probe}, left). A
-head reading layers 23, 26 and 28 produced the best result, SR 22.7\% (end-SR 31.3\%).
+head reading layers 23, 26 and 28 reached SR 22.7\% (end-SR 31.3\%), the same SR as the final-layer head at 40k.
 
 A matched comparison at equal training shows no benefit, however (end-SR 22.7\% vs.\ 22.0\%, SR 12.7\% vs.\ 16.0\%;
 \cref{tab:pt}). Results over training are also non-monotonic (\cref{fig:thr}). The size of the fusion effect is
@@ -692,8 +740,9 @@ embodiment prompt, zero-shot next-action accuracy on 160 decision points is 32.5
 \Cref{tab:rs} compares probe accuracy with closed-loop success. SFT v1 has the best probe accuracy, 67.5\%, but in
 closed loop it over-turns and over-stops: STOP ends 65\% of episodes, and its step-1,250 checkpoint reaches OS 0\%.
 SFT v3 has lower probe accuracy (63.1\%, with STOP recall only 0.10) yet reaches OS 32.5\% at the final checkpoint and
-\textbf{47.5\%} at step 1,500, the highest oracle success in this study. None of its five self-stops occurred within
-3\,m of the goal, so its strict SR would be far lower. Because v3 changed three factors at once (sampling, context
+47.5\% at step 1,500 in its first diagnostic run. Two repeat runs gave 47.5\% and 35.0\% (mean 43.3\%; decoding is
+stochastic). Evaluated strictly in three runs, it reaches 3\,m in 37.5\% of episodes but stops there in only
+\textbf{2.5, 2.5 and 5.0\%} (mean 3.3\%). Because v3 changed three factors at once (sampling, context
 length, projector), we cannot attribute its gain to any one of them.
 
 \paragraph{What fails, and why.}
@@ -744,7 +793,8 @@ v3 (e). Videos are in the repository.}
 
 \paragraph{Stopping is the bottleneck.}
 Every approach reached the goal region more often than it stopped there. For the pointing policy the gap between OS
-and SR is 20 points at its chosen threshold, and the reasoner never stopped inside 3\,m. The two sides of that failure
+and SR is 13 points at the threshold chosen on \texttt{val\_seen}, and the reasoner stopped inside 3\,m in 3.3\% of
+episodes while reaching 3\,m in 37.5\%. The two sides of that failure
 point to different fixes. The STOP signal exists in the backbone (layer-15 AUC 0.72), and it depends strongly on the
 instruction. A dedicated STOP head is the one structural change that let a policy stop at all. We expect the next gains
 to come from supervising STOP on progress through the instruction rather than on proximity alone.
@@ -780,11 +830,10 @@ goal region).
 %=====================================================================================================================
 
 Evaluations are small ($n{=}40$--150) and unpaired across approaches, and they cover 6--8 of the 11 unseen buildings.
-STOP and turn thresholds were tuned on the evaluation split. Only the pointing policy was evaluated without the early exit, and SR was recoverable only for its later runs.
-Every method was trained for one offline round only (no flywheel, RL or DAgger). The
-reasoner result is a single run with stochastic decoding. Several runs were stopped before finishing their schedules:
-the long pointing runs completed 1.1--1.2 of 1.5--3 planned epochs. LatentPilot Stage 2 (scheduled sampling), a
-16-scan Stage 1, and most arms of a prompt/policy ablation for the Cosmos models were never run. Our backbone (2B) and
+The headline pointing threshold was chosen on \texttt{val\_seen}; other thresholds were tuned on the evaluation split.
+Every method was trained for one offline round only (no flywheel, RL or DAgger). Reasoner rows average three stochastic runs, which varied by up to 12 points. Several runs were stopped before finishing their schedules:
+the long pointing runs completed 1.1--1.2 of 1.5--3 planned epochs. Stage~2 was run only as a short fine-tune; a
+16-scan Stage 1, the data flywheel, and most arms of a prompt/policy ablation for the Cosmos models were never run. Our backbone (2B) and
 data (6--61 buildings) differ from LatentPilot's (7B, full data), so our results describe this scale only.
 
 %=====================================================================================================================
@@ -792,9 +841,9 @@ data (6--61 buildings) differ from LatentPilot's (7B, full data), so our results
 %=====================================================================================================================
 
 On a single consumer GPU, with one offline training round and zero-shot evaluation, supervising \emph{where to go}
-with a pointing head and a geometric controller gave the best success rate (22.7\%; 31.3\% ending within 3\,m). A fine-tuned video reasoner reached the goal region most often (47.5\%) but did not stop
-there. LatentPilot's Stage~1, likely because of a train-time shortcut its later stages are meant to remove, and a zero-shot
-video diffusion policy did not produce competitive navigators at this scale. In every case the limiting factor was the decision to stop, together with the gap between
+with a pointing head and a geometric controller gave the best success rate (23.3\%). A fine-tuned video reasoner reached the goal region about as often but stopped
+there in 3.3\% of episodes. LatentPilot's Stage~1, because of a measured train-time shortcut through its Pilot slot that
+a short Stage~2 does not remove, and a zero-shot video diffusion policy did not produce competitive navigators at this scale. In every case the limiting factor was the decision to stop, together with the gap between
 what an offline metric measures and what the closed loop requires.
 
 \paragraph{Reproducibility.}
@@ -874,6 +923,24 @@ Step & $\tau$ & SR & end-SR & SPL$^*$ & OS & nDTW & NE \\
 120k & 0.15 & 23.3 & 29.3 & 24.4 & 40.0 & 0.351 & 7.05 \\
 120k & 0.20 & \textbf{22.7} & \textbf{31.3} & 25.4 & 42.7 & 0.323 & 7.22 \\
 120k & 0.30 & 19.3 & 29.3 & 23.6 & 44.7 & 0.287 & 7.59 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{STOP threshold chosen on \texttt{val\_seen}}
+\label{app:valseen}
+\begin{table}[H]
+\centering\small
+\caption{Layer-fusion policy (step 120k) on \texttt{val\_seen}: 8 training buildings, 159 episodes not used in training
+(strict). The threshold with the best SR, $\tau{=}0.10$, is then applied to \texttt{val\_unseen} (\cref{tab:main}).}
+\begin{tabular}{lcccc}
+\toprule
+$\tau$ & SR & end-SR & OS & NE \\
+\midrule
+\textbf{0.10} & \textbf{39.3} & 41.3 & 50.0 & 5.80 \\
+0.15 & 35.3 & 40.0 & 54.7 & 5.96 \\
+0.20 & 31.3 & 38.0 & 56.0 & 6.13 \\
+0.30 & 24.7 & 33.3 & 59.3 & 6.49 \\
 \bottomrule
 \end{tabular}
 \end{table}
