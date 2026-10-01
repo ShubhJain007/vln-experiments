@@ -1,6 +1,6 @@
 # Technical report
 
-**Evaluating Four Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU**:
+**Evaluating Different Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU**:
 [`main.pdf`](main.pdf) (19 pages).
 
 | File | What it is |

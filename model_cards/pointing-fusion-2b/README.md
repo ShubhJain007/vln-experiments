@@ -19,8 +19,8 @@ metrics:
 
 # Pointing policy with layer fusion (Cosmos-Reason2-2B + LoRA): VLN on R2R-CE
 
-The best policy in *Evaluating Four Approaches to Vision-and-Language Navigation* ([report](https://github.com/ShubhJain007/vln-experiments/blob/main/paper/main.pdf),
-[code](https://github.com/ShubhJain007/vln-experiments)): approach ②, with **success rate 23.3 %** (own STOP within 3 m; STOP threshold chosen on `val_seen`) on
+The best policy in *Evaluating Different Approaches to Vision-and-Language Navigation* ([report](https://github.com/ShubhJain007/evaluating-different-approaches-to-vln/blob/main/paper/main.pdf),
+[code](https://github.com/ShubhJain007/evaluating-different-approaches-to-vln)): approach ②, with **success rate 23.3 %** (own STOP within 3 m; STOP threshold chosen on `val_seen`) on
 150 unseen R2R-CE episodes.
 
 The idea comes from [Robostral Navigate](https://arxiv.org/abs/2607.20785) by Mistral AI: point at the next waypoint in
@@ -107,12 +107,12 @@ python scripts/record_pointing.py --checkpoint checkpoints/pointing_fusion/step1
 ## Citation
 
 ```bibtex
-@techreport{jain2026vlnexperiments,
-  title       = {Evaluating Four Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU},
+@techreport{jain2026evaluatingvln,
+  title       = {Evaluating Different Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU},
   author      = {Jain, Shubh},
   year        = {2026},
   institution = {GitHub},
-  url         = {https://github.com/ShubhJain007/vln-experiments}
+  url         = {https://github.com/ShubhJain007/evaluating-different-approaches-to-vln}
 }
 ```
 

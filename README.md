@@ -1,8 +1,8 @@
-# Evaluating Four Approaches to Vision-and-Language Navigation
+# Evaluating Different Approaches to Vision-and-Language Navigation
 
 **An experimental study on a single GPU.** This repository evaluates existing ideas; it does not propose a new method.
 
-[![Project page](https://img.shields.io/badge/project-page-2a78d6)](https://shubhjain007.github.io/vln-experiments/)
+[![Project page](https://img.shields.io/badge/project-page-2a78d6)](https://shubhjain007.github.io/evaluating-different-approaches-to-vln/)
 [![Paper](https://img.shields.io/badge/report-PDF-b31b1b)](paper/main.pdf)
 [![Model cards](https://img.shields.io/badge/model-cards-ffcc4d)](model_cards/README.md)
 [![License: MIT](https://img.shields.io/badge/code-MIT-1baf7a)](LICENSE)
@@ -30,7 +30,7 @@ adaptation. None of the methods' "extra rounds" were run:
 The numbers therefore show how far each idea gets on its own, at small scale. They do not show what each method
 reaches with its full recipe.
 
-🌐 **Project page:** [shubhjain007.github.io/vln-experiments](https://shubhjain007.github.io/vln-experiments/)
+🌐 **Project page:** [shubhjain007.github.io/evaluating-different-approaches-to-vln](https://shubhjain007.github.io/evaluating-different-approaches-to-vln/)
 📄 **Technical report:** [`paper/main.pdf`](paper/main.pdf), with LaTeX source in [`paper/`](paper/)
 📚 **References:** [`docs/REFERENCES.md`](docs/REFERENCES.md) (53 works; BibTeX in [`paper/references.bib`](paper/references.bib))
 
@@ -508,13 +508,13 @@ If you use this code, results or media, please cite the report (GitHub's **"Cite
 [`CITATION.cff`](CITATION.cff)):
 
 ```bibtex
-@techreport{jain2026vlnexperiments,
-  title       = {Evaluating Four Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU},
+@techreport{jain2026evaluatingvln,
+  title       = {Evaluating Different Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU},
   author      = {Jain, Shubh},
   year        = {2026},
   month       = {9},
   institution = {GitHub},
-  url         = {https://github.com/ShubhJain007/vln-experiments}
+  url         = {https://github.com/ShubhJain007/evaluating-different-approaches-to-vln}
 }
 ```
 

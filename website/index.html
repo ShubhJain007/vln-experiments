@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VLN Experiments</title>
+<title>Evaluating VLN Approaches</title>
 <meta name="description" content="An evaluation study of four approaches to Vision-and-Language Navigation on one GPU: latent reasoning (LatentPilot), pointing (Robostral-style), Cosmos3-Edge action diffusion and a Cosmos3-Edge reasoner.">
-<meta property="og:title" content="Evaluating Four Approaches to Vision-and-Language Navigation">
+<meta property="og:title" content="Evaluating Different Approaches to Vision-and-Language Navigation">
 <meta property="og:description" content="Offline training, zero-shot evaluation in unseen buildings: what worked, what failed, and why.">
 <meta property="og:image" content="media/previews/compare_ep09_x8F5xyUWy9e.gif">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,14 +103,14 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
 <main>
 
 <header class="hero">
-  <h1>Evaluating Four Approaches to Vision-and-Language Navigation</h1>
+  <h1>Evaluating Different Approaches to Vision-and-Language Navigation</h1>
   <p class="sub">An experimental study on a single GPU: offline training, zero-shot evaluation in unseen buildings</p>
   <p class="author">Shubh Jain</p>
   <p class="affil">September 2026 · technical report · an evaluation study, not a new method</p>
   <div class="buttons">
     <a class="btn" href="paper.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Report (PDF)</a>
-    <a class="btn" href="https://github.com/ShubhJain007/vln-experiments"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.550-.29-5.24-1.28-5.24-5.690 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
-    <a class="btn secondary" href="https://github.com/ShubhJain007/vln-experiments/tree/main/model_cards">Model cards</a>
+    <a class="btn" href="https://github.com/ShubhJain007/evaluating-different-approaches-to-vln"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.550-.29-5.24-1.28-5.24-5.690 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+    <a class="btn secondary" href="https://github.com/ShubhJain007/evaluating-different-approaches-to-vln/tree/main/model_cards">Model cards</a>
     <a class="btn secondary" href="#demos">Demos</a>
     <a class="btn secondary" href="#bibtex">BibTeX</a>
   </div>
@@ -173,7 +173,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
   yellow line is the live distance to the goal.</p>
   <figure><img src="media/previews/compare_ep00_2azQ1b91cZZ.gif" alt="LatentPilot comparison" loading="lazy">
     <figcaption>Step 10k gets within 3.4&nbsp;m of the goal; the final model's closest point is 6.4&nbsp;m.
-    <a href="https://github.com/ShubhJain007/vln-experiments/tree/main/media/comparisons">All 11 scenes</a>.</figcaption></figure>
+    <a href="https://github.com/ShubhJain007/evaluating-different-approaches-to-vln/tree/main/media/comparisons">All 11 scenes</a>.</figcaption></figure>
   <div class="fail"><h4>What failed: the fully trained model wanders and almost never stops (OS 10.7 % vs 17.3 % for the control)</h4>
     <p><strong>The cause, measured: the Pilot slot leaks the answer during training.</strong> Training fills the slot with
     the <em>true</em> embedding of the next frame, which reveals the action just taken; at test time it holds the model's
@@ -303,18 +303,18 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
 
 <section id="bibtex">
   <h2>BibTeX</h2>
-<pre id="bib"><button class="copy" id="copybtn">Copy</button>@techreport{jain2026vlnexperiments,
-  title       = {Evaluating Four Approaches to Vision-and-Language Navigation:
+<pre id="bib"><button class="copy" id="copybtn">Copy</button>@techreport{jain2026evaluatingvln,
+  title       = {Evaluating Different Approaches to Vision-and-Language Navigation:
                  An Experimental Study on a Single GPU},
   author      = {Jain, Shubh},
   year        = {2026},
   institution = {GitHub},
-  url         = {https://github.com/ShubhJain007/vln-experiments}
+  url         = {https://github.com/ShubhJain007/evaluating-different-approaches-to-vln}
 }</pre>
   <p class="note">This study evaluates LatentPilot (<a href="https://arxiv.org/abs/2603.29165">arXiv:2603.29165</a>) and
   ideas from Robostral Navigate by Mistral AI (<a href="https://arxiv.org/abs/2607.20785">arXiv:2607.20785</a>) and
   NVIDIA Cosmos. All 53 references are in
-  <a href="https://github.com/ShubhJain007/vln-experiments/blob/main/docs/REFERENCES.md">REFERENCES.md</a>.</p>
+  <a href="https://github.com/ShubhJain007/evaluating-different-approaches-to-vln/blob/main/docs/REFERENCES.md">REFERENCES.md</a>.</p>
 </section>
 
 <footer>

@@ -16,8 +16,8 @@ tags:
 
 # Cosmos3-Edge reasoner, fine-tuned as a navigation policy (SFT v3)
 
-Approach ④ of *Evaluating Four Approaches to Vision-and-Language Navigation* ([report](https://github.com/ShubhJain007/vln-experiments/blob/main/paper/main.pdf),
-[code](https://github.com/ShubhJain007/vln-experiments)). The reasoning tower of
+Approach ④ of *Evaluating Different Approaches to Vision-and-Language Navigation* ([report](https://github.com/ShubhJain007/evaluating-different-approaches-to-vln/blob/main/paper/main.pdf),
+[code](https://github.com/ShubhJain007/evaluating-different-approaches-to-vln)). The reasoning tower of
 [`nvidia/Cosmos3-Edge`](https://huggingface.co/nvidia/Cosmos3-Edge) is fine-tuned to answer "what should the robot do
 next?" from its own recent video.
 
@@ -86,11 +86,11 @@ python scripts/probe_reasoner_nav.py --adapter checkpoints/reasoner_sft_v3/final
 ## Citation
 
 ```bibtex
-@techreport{jain2026vlnexperiments,
-  title       = {Evaluating Four Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU},
+@techreport{jain2026evaluatingvln,
+  title       = {Evaluating Different Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU},
   author      = {Jain, Shubh},
   year        = {2026},
   institution = {GitHub},
-  url         = {https://github.com/ShubhJain007/vln-experiments}
+  url         = {https://github.com/ShubhJain007/evaluating-different-approaches-to-vln}
 }
 ```

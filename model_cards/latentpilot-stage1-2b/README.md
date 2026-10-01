@@ -17,8 +17,8 @@ tags:
 
 # LatentPilot Stage 1 at 2 B (reimplementation): learned and identity-control checkpoints
 
-Approach ① of *Evaluating Four Approaches to Vision-and-Language Navigation* ([report](https://github.com/ShubhJain007/vln-experiments/blob/main/paper/main.pdf),
-[code](https://github.com/ShubhJain007/vln-experiments)). This is a from-scratch reimplementation of
+Approach ① of *Evaluating Different Approaches to Vision-and-Language Navigation* ([report](https://github.com/ShubhJain007/evaluating-different-approaches-to-vln/blob/main/paper/main.pdf),
+[code](https://github.com/ShubhJain007/evaluating-different-approaches-to-vln)). This is a from-scratch reimplementation of
 [LatentPilot](https://arxiv.org/abs/2603.29165) (Hao et al., 2026; the official code was not released) on a 2 B
 backbone. It is published as a **negative result**: at this scale the method's Stage 1 gate fails.
 
@@ -94,12 +94,12 @@ python scripts/record_episode.py --checkpoint checkpoints/stage1_learned/final -
 ## Citation
 
 ```bibtex
-@techreport{jain2026vlnexperiments,
-  title       = {Evaluating Four Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU},
+@techreport{jain2026evaluatingvln,
+  title       = {Evaluating Different Approaches to Vision-and-Language Navigation: An Experimental Study on a Single GPU},
   author      = {Jain, Shubh},
   year        = {2026},
   institution = {GitHub},
-  url         = {https://github.com/ShubhJain007/vln-experiments}
+  url         = {https://github.com/ShubhJain007/evaluating-different-approaches-to-vln}
 }
 ```
 
