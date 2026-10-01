@@ -1,0 +1,37 @@
+Loading pointing policy from checkpoints/pointing_full3/step40000 ...
+Loading weights:   0%|          | 0/626 [00:00<?, ?it/s]Loading weights:   4%|▍         | 28/626 [00:00<00:02, 274.93it/s]Loading weights:  22%|██▏       | 137/626 [00:00<00:00, 743.10it/s]Loading weights:  39%|███▉      | 245/626 [00:00<00:00, 895.42it/s]Loading weights:  82%|████████▏ | 511/626 [00:00<00:00, 1584.37it/s]Loading weights: 100%|██████████| 626/626 [00:00<00:00, 1390.55it/s]
+  history_frames = 2 (stride 8, spans 16 steps) [from checkpoint config]
+  head reads layers: final only
+  loaded 224 LoRA tensors (r=16) + pointing head
+stop_threshold=0.1  turn=7.5 deg
+  STRICT: success requires the model's OWN stop within 3 m
+
+split=val_unseen  episodes=150  scans=8
+
+
+====================================================================
+  POINTING EVAL — checkpoints/pointing_full3/step40000
+  split=val_unseen  n=150  stop_thr=0.1  STRICT (own STOP only)
+====================================================================
+    SR    = 0.2467
+    SPL   = 0.2229
+    OS    = 0.3133
+    nDTW  = 0.3454
+    NE    = 7.0973
+
+  TERMINATION:
+    model_stop        94  ( 62.7%)
+    within_radius      0  (  0.0%)
+    timeout           56  ( 37.3%)
+
+  DISTANCE TO GOAL (m):
+    closest approach : mean  5.28  median  4.95  p25  2.70  min  0.02
+    final position   : mean  7.10  median  6.55
+    ever within  3.0m :  31.3%
+    ever within  5.0m :  52.0%
+    ever within 10.0m :  91.3%
+    where it STOPPED : mean  5.75  median  4.54  within 3m 36.2%
+
+  p(stop) over 10,015 steps: mean 0.0125  p95 0.0577  max 0.1755
+    (threshold 0.1 would fire on 0.94% of steps)
+====================================================================

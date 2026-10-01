@@ -175,6 +175,8 @@ def main():
                    inference_steps=args.steps, stop_patience=args.stop_patience,
                    translation_scale=7.47,
                    SR=m.get("SR"), SPL=m.get("SPL"), OS=m.get("OS"), nDTW=m.get("nDTW"), NE=m.get("NE"),
+                   # standard SR: the agent's own STOP within 3 m (SR above counts any episode that ENDED within 3 m)
+                   SR_stop=float(sum(d <= 3.0 for d in stop_d) / n), strict=bool(args.strict),
                    term_model_stop=reasons.get("model_stop", 0), term_timeout=reasons.get("timeout", 0),
                    term_within_radius=reasons.get("within_radius", 0),
                    min_dist_mean=float(md.mean()), within_3m_pct=float((md <= 3).mean()*100),

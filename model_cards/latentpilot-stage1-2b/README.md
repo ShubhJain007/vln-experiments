@@ -27,8 +27,8 @@ fewer tokens per step, run faster, and reason visually in its native embedding s
 Pilot Token forward as the model's only memory, trained to predict the embedding of the frame two steps ahead.
 
 **What was and was not run.** Stages 0, 0′ and 1 with offline expert demonstrations, evaluated zero-shot in unseen
-buildings. The paper's **data flywheel** (the model drives, an expert corrects, the model retrains) and Stage 2
-(scheduled sampling) were **not** run, so this measures Stage 1's raw capability, not the full method.
+buildings. The paper's **data flywheel** (the model drives, an expert corrects, the model retrains) was **not** run, and Stage 2
+(scheduled sampling) only as a short follow-up fine-tune, so this measures Stage 1's raw capability, not the full method.
 
 > **Weights:** not published yet. `stage1_learned/final` and `stage1_identity/final` (LoRA adapter + Pilot module,
 > 33 MB each) are kept by the author.
@@ -64,18 +64,20 @@ within 3 m), so the success column is **oracle success**, not SR.
 
 The learned Pilot Token predicts future frames 2.25× better, but navigates worse.
 
-**Most plausible cause: a training shortcut.** During training the Pilot slot holds the *true* embedding of the next
-frame, which reveals the action just taken; at test time it holds the model's own prediction. Training accuracy jumps
-from 78 % without the slot (Stage 0) to 98 % with it, and 78 % vs 92 % at matched steps. The model learns to read the
-action off the slot, a shortcut that is gone at test time. Loss-balance drift (`λ·L_pil / L_act` rises from 0.52 to
-5.5) contributes, but an adaptive λ that removed it did not recover navigation (OS 6.7 %). The flywheel and scheduled
-sampling, which were not run, are the parts of the method designed to close this gap.
+**The cause, measured: a training shortcut.** During training the Pilot slot holds the *true* embedding of the next
+frame, which reveals the action just taken; at test time it holds the model's own prediction. On 4,306 held-out steps
+(`scripts/test_slot_shortcut.py`), the learned model is **84.3 %** accurate with the true next frame in the slot and
+**30.8 %** with its own latent. A model with no slot scores 66.0 %. The identity control ignores the slot (61–63 % under
+every slot content). Training accuracy tells the same story: 78 % without the slot (Stage 0), 98 % with it. Loss-balance drift (`λ·L_pil / L_act` rises from 0.52 to
+5.5) contributes, but an adaptive λ that removed it did not recover navigation (OS 6.7 %). A short Stage 2 (scheduled
+sampling, 2,600 steps at 50 % / 75 % own latents) lifts navigation to OS 16.7 / 18.0 %, but the shortcut remains
+(33.6 / 33.9 % with its own latent). The paper's full data flywheel was not run.
 
 ## Limitations
 
 - **Scale:** 2 B parameters and 6 buildings, against 7 B and full data in the paper. This is a finding at this scale,
   not a refutation of the paper.
-- **Missing stages:** Stage 2 (scheduled sampling) and the paper's data flywheel were not run.
+- **Missing stages:** Stage 2 was run only as a short fine-tune; the paper's data flywheel was not run.
 - **Stopping:** the model almost never stops on its own.
 - **Use restrictions:** research use in simulation only. It was trained on Matterport3D-derived data, which is limited
   to non-commercial academic use.

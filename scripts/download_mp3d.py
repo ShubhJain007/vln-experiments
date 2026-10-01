@@ -38,6 +38,9 @@ USAGE
     python scripts/download_mp3d.py
 
     # 3. if the download is interrupted, just run it again -- it resumes
+
+    # or fetch only some scans (their .glb + .navmesh, ~80 MB each) without the 15 GB archive
+    python scripts/download_mp3d.py --scans 2azQ1b91cZZ zsNo4HB9uLZ
 """
 
 # --- ROS guard: strip /opt/ros/* from sys.path before any other import. ------
@@ -46,6 +49,8 @@ sys.path[:] = [p for p in sys.path if "/opt/ros/" not in p]
 # ----------------------------------------------------------------------------
 
 import argparse
+import time
+import io
 import gzip
 import json
 import os
@@ -306,6 +311,80 @@ def verify(out_dir: pathlib.Path, scans):
 
 
 # ---------------------------------------------------------------------------
+class _HttpRange(io.RawIOBase):
+    """Seekable read-only view of a remote file over HTTP Range requests, so zipfile can read single members."""
+
+    def __init__(self, url):
+        self.url, self.pos = url, 0
+        with urllib.request.urlopen(urllib.request.Request(url, method="HEAD"), timeout=60) as r:
+            self.size = int(r.headers["Content-Length"])
+
+    def readable(self):
+        return True
+
+    def seekable(self):
+        return True
+
+    def tell(self):
+        return self.pos
+
+    def seek(self, off, whence=0):
+        self.pos = off if whence == 0 else (self.pos + off if whence == 1 else self.size + off)
+        return self.pos
+
+    def readinto(self, b):
+        n = min(len(b), self.size - self.pos)
+        if n <= 0:
+            return 0
+        for attempt in range(6):
+            try:
+                req = urllib.request.Request(self.url, headers={"Range": f"bytes={self.pos}-{self.pos + n - 1}"})
+                with urllib.request.urlopen(req, timeout=120) as r:
+                    data = r.read()
+                break
+            except OSError:
+                time.sleep(5 * (attempt + 1))
+        else:
+            raise IncompleteDownload(f"range read at byte {self.pos} failed 6 times")
+        b[:len(data)] = data
+        self.pos += len(data)
+        return len(data)
+
+
+def fetch_scans_remote(url, out_dir: pathlib.Path, scans, workers=4):
+    """Fetch only the .glb and .navmesh of `scans` from the remote archive, without downloading all 15 GB.
+
+    The archive is a plain zip, and the server honours Range requests (download_resumable relies on the same), so each
+    member can be read on its own. Habitat needs only the mesh and the navmesh; the semantic .ply and .house files are
+    skipped. Scans are fetched in parallel, and files already complete are skipped, so re-running resumes.
+    """
+    import concurrent.futures as cf
+
+    def one(scan):
+        zf = zipfile.ZipFile(io.BufferedReader(_HttpRange(url), buffer_size=16 << 20))
+        got = 0
+        for info in zf.infolist():
+            name = info.filename
+            if f"/{scan}/" not in name or not name.endswith((".glb", ".navmesh")):
+                continue
+            dest = out_dir / name[name.index("mp3d/"):] if "mp3d/" in name else out_dir / name
+            if dest.exists() and dest.stat().st_size == info.file_size:
+                continue
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            tmp = dest.with_suffix(dest.suffix + ".part")
+            with zf.open(info) as src, open(tmp, "wb") as dst:
+                shutil.copyfileobj(src, dst, 8 << 20)
+            tmp.replace(dest)
+            got += info.file_size
+        return scan, got
+
+    t0 = time.time()
+    with cf.ThreadPoolExecutor(workers) as ex:
+        for scan, got in ex.map(one, scans):
+            print(f"  {scan}: {_human(got)}  ({time.time() - t0:.0f}s)", flush=True)
+
+
+# ---------------------------------------------------------------------------
 def main():
     ap = argparse.ArgumentParser(description="Download habitat-ready MP3D scenes")
     ap.add_argument("--out", type=pathlib.Path, default=DEFAULT_OUT,
@@ -318,9 +397,16 @@ def main():
                     help="keep mp3d_habitat.zip after extracting (default: keep)")
     ap.add_argument("--episodes", type=int, default=1500,
                     help="train-episode budget used to pick train scans")
+    ap.add_argument("--scans", nargs="+", default=None,
+                    help="fetch ONLY these scans' .glb/.navmesh via HTTP Range requests (no 15 GB archive)")
+    ap.add_argument("--workers", type=int, default=4, help="parallel connections for --scans")
+    ap.add_argument("--accept-terms", action="store_true",
+                    help="confirm you have agreed to the Matterport3D terms of use (skips the ENTER prompt)")
     args = ap.parse_args()
 
     scans, detail = required_scans(train_episode_budget=args.episodes)
+    if args.scans:
+        scans = sorted(set(args.scans))
 
     print("=" * 78)
     print("  MP3D habitat-ready scene download")
@@ -330,7 +416,10 @@ def main():
     print(f"  TOTAL      : {len(scans)} scans (of 90 in the release)")
     print()
     print(f"  archive : {'MP3D_HABITAT_URL (set)' if HABITAT_ZIP_URL else 'MP3D_HABITAT_URL NOT SET'}")
-    print(f"  approx  : ~15 GB download (the full MP3D release is 1.3 TB)")
+    if args.scans:
+        print(f"  approx  : ~{80 * len(scans)} MB (.glb + .navmesh only, fetched from inside the archive)")
+    else:
+        print(f"  approx  : ~15 GB download (the full MP3D release is 1.3 TB)")
     print(f"  out dir : {args.out}")
     print()
     print("  Scans:")
@@ -352,11 +441,19 @@ def main():
     print("  terms of use:")
     print(f"    {TOS_URL}")
     print("*" * 78)
-    try:
-        input("  Press ENTER to continue, or CTRL-C to abort: ")
-    except (KeyboardInterrupt, EOFError):
-        print("\n  aborted.")
-        return 1
+    if args.accept_terms:
+        print("  --accept-terms given: you confirm you have agreed to these terms.")
+    else:
+        try:
+            input("  Press ENTER to continue, or CTRL-C to abort: ")
+        except (KeyboardInterrupt, EOFError):
+            print("\n  aborted (no terminal input; pass --accept-terms to confirm non-interactively).")
+            return 1
+
+    if args.scans:
+        print(f"\nFetching {len(scans)} scans (.glb + .navmesh only) with {args.workers} connections:")
+        fetch_scans_remote(HABITAT_ZIP_URL, args.out, scans, args.workers)
+        return 0 if verify(args.out, scans) else 1
 
     archive = args.out / "mp3d_habitat.zip"
     print(f"\nDownloading (resumable -- rerun this script if interrupted):")

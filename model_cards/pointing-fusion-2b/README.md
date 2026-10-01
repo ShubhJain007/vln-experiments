@@ -20,7 +20,7 @@ metrics:
 # Pointing policy with layer fusion (Cosmos-Reason2-2B + LoRA): VLN on R2R-CE
 
 The best policy in *Evaluating Four Approaches to Vision-and-Language Navigation* ([report](https://github.com/ShubhJain007/vln-experiments/blob/main/paper/main.pdf),
-[code](https://github.com/ShubhJain007/vln-experiments)): approach ②, with **success rate 22.7 %** (own STOP within 3 m) on
+[code](https://github.com/ShubhJain007/vln-experiments)): approach ②, with **success rate 23.3 %** (own STOP within 3 m; STOP threshold chosen on `val_seen`) on
 150 unseen R2R-CE episodes.
 
 The idea comes from [Robostral Navigate](https://arxiv.org/abs/2607.20785) by Mistral AI: point at the next waypoint in
@@ -78,7 +78,9 @@ within 3 m:
 SR is the standard R2R-CE success rate. end-SR also counts episodes that ran out of steps within 3 m; it is what the
 evaluation script originally reported as SR. \* SPL is computed with end-SR as the success criterion.
 
-The threshold was chosen on this same split, so these numbers are optimistic. For comparison, Robostral Navigate
+Choosing the threshold on `val_seen` instead (8 training buildings, 159 new episodes; SR there 39.3 / 35.3 / 31.3 /
+24.7 % at 0.10 / 0.15 / 0.20 / 0.30) picks **0.10**, so the untuned result is **SR 23.3 %**, within a point of the 22.7 %
+tuned on the test split. For comparison, Robostral Navigate
 (8 B, 2.4 M trajectories) reports 73.4 % with supervised training alone and 77.4 % after RL.
 
 ## Limitations

@@ -1,0 +1,68 @@
+==============================================================================
+  MP3D habitat-ready scene download
+==============================================================================
+  val_unseen : 11 scans, 1839 episodes
+  train      :  6 scans, 1665 episodes
+  TOTAL      : 19 scans (of 90 in the release)
+
+  archive : MP3D_HABITAT_URL (set)
+  approx  : ~1520 MB (.glb + .navmesh only, fetched from inside the archive)
+  out dir : <repo>/data/scene_datasets
+
+  Scans:
+    2azQ1b91cZZ 5LpN3gDmAk7 8194nk5LbLH EU6Fwq7SyZv JeFG25nYj2p Pm6F8kyY3z2
+    QUCTc6BB5sX TbHJrupSAjP ULsKaCPVFJR X7HyMhZNoso Z6MFQCViBuw i5noydFURQK
+    jh4fc5c5qoQ oLBMNvg9in8 pLe4wQe7qrG r47D5H71a5s sT4fr6TAbpF x8F5xyUWy9e
+    zsNo4HB9uLZ
+
+******************************************************************************
+  By continuing you confirm you have agreed to the Matterport3D
+  terms of use:
+    http://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf
+******************************************************************************
+  --accept-terms given: you confirm you have agreed to these terms.
+
+Fetching 19 scans (.glb + .navmesh only) with 4 connections:
+  2azQ1b91cZZ: 84.9MB  (33s)
+  5LpN3gDmAk7: 45.4MB  (33s)
+  8194nk5LbLH: 0.0B  (33s)
+  EU6Fwq7SyZv: 0.0B  (33s)
+  JeFG25nYj2p: 36.4MB  (33s)
+  Pm6F8kyY3z2: 26.1MB  (33s)
+  QUCTc6BB5sX: 87.2MB  (56s)
+  TbHJrupSAjP: 65.4MB  (91s)
+  ULsKaCPVFJR: 41.5MB  (91s)
+  X7HyMhZNoso: 40.1MB  (91s)
+  Z6MFQCViBuw: 116.2MB  (95s)
+  i5noydFURQK: 33.4MB  (95s)
+  jh4fc5c5qoQ: 27.4MB  (95s)
+  oLBMNvg9in8: 82.4MB  (101s)
+  pLe4wQe7qrG: 30.8MB  (101s)
+  r47D5H71a5s: 32.4MB  (101s)
+  sT4fr6TAbpF: 43.1MB  (117s)
+  x8F5xyUWy9e: 17.7MB  (117s)
+  zsNo4HB9uLZ: 32.6MB  (117s)
+
+scan               .glb  .navmesh  path
+------------------------------------------------------------------------------
+2azQ1b91cZZ         yes       yes  mp3d/2azQ1b91cZZ/2azQ1b91cZZ.glb
+5LpN3gDmAk7         yes       yes  mp3d/5LpN3gDmAk7/5LpN3gDmAk7.glb
+8194nk5LbLH         yes       yes  mp3d/8194nk5LbLH/8194nk5LbLH.glb
+EU6Fwq7SyZv         yes       yes  mp3d/EU6Fwq7SyZv/EU6Fwq7SyZv.glb
+JeFG25nYj2p         yes       yes  mp3d/JeFG25nYj2p/JeFG25nYj2p.glb
+Pm6F8kyY3z2         yes       yes  mp3d/Pm6F8kyY3z2/Pm6F8kyY3z2.glb
+QUCTc6BB5sX         yes       yes  mp3d/QUCTc6BB5sX/QUCTc6BB5sX.glb
+TbHJrupSAjP         yes       yes  mp3d/TbHJrupSAjP/TbHJrupSAjP.glb
+ULsKaCPVFJR         yes       yes  mp3d/ULsKaCPVFJR/ULsKaCPVFJR.glb
+X7HyMhZNoso         yes       yes  mp3d/X7HyMhZNoso/X7HyMhZNoso.glb
+Z6MFQCViBuw         yes       yes  mp3d/Z6MFQCViBuw/Z6MFQCViBuw.glb
+i5noydFURQK         yes       yes  mp3d/i5noydFURQK/i5noydFURQK.glb
+jh4fc5c5qoQ         yes       yes  mp3d/jh4fc5c5qoQ/jh4fc5c5qoQ.glb
+oLBMNvg9in8         yes       yes  mp3d/oLBMNvg9in8/oLBMNvg9in8.glb
+pLe4wQe7qrG         yes       yes  mp3d/pLe4wQe7qrG/pLe4wQe7qrG.glb
+r47D5H71a5s         yes       yes  mp3d/r47D5H71a5s/r47D5H71a5s.glb
+sT4fr6TAbpF         yes       yes  mp3d/sT4fr6TAbpF/sT4fr6TAbpF.glb
+x8F5xyUWy9e         yes       yes  mp3d/x8F5xyUWy9e/x8F5xyUWy9e.glb
+zsNo4HB9uLZ         yes       yes  mp3d/zsNo4HB9uLZ/zsNo4HB9uLZ.glb
+------------------------------------------------------------------------------
+19/19 scans complete

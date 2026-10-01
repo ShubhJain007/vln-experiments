@@ -840,3 +840,22 @@ The base Cosmos3-Edge weights sit outside `checkpoints/` subfolders (`checkpoint
 20. `train_stage2.py`'s docstring cites "STOP-recall ~0.5 at step10000 / 1.000 at final". The trainlog single-batch values are 0.615 and 0.923.
 21. The v3-vs-v1 SFT comparison is confounded: sampling (onset → uniform), context (16 → 120 frames) and trainable modules (+ projector) all changed at once.
 22. HANDOFF.md was last fully updated at Stage 0 / 0' (its own header says Session 3, 08-31, with a 09-01 addendum). It does not describe any later stage.
+
+---
+
+## 10. Follow-up experiments (2026-09-30)
+
+Narrative in [`EXPERIMENTS.md` §7](EXPERIMENTS.md#7-follow-up-experiments-2026-09-30). All closed-loop runs here are
+strict unless marked diagnostic; SR = own STOP within 3 m, end-SR = ended within 3 m.
+
+| id | What | Setup | Result | Source |
+|---|---|---|---|---|
+| E-49 | Pilot-slot shortcut test | 110 val_unseen expert episodes, 4,306 steps, teacher-forced; slot = next frame / own z / current frame / other episode | Stage 1 learned 84.35 / 30.82 / 45.15 / 27.75 %; identity 63.12 / 61.22 / 63.21 / 62.15; Stage 0′ B 82.00 / 56.64 / 44.50 / 27.78; Stage 0 no slot 66.05 | `results/slot_shortcut.json`, `logs/slotshortcut_20260930_092139.log` |
+| E-49b | Shortcut over training | Stage 1 learned, steps 2k–17.4k, 5 episodes/scan | own z 48.5 → 31.9 (4k) → 28–31; next frame 78–87 | `results/slot_shortcut_over_training.json` |
+| E-50 | Stage 2, p_final 0.5 / 0.75 | 2,600 steps from Stage 1 learned, 6 scans (1,665 eps), lr ×0.1 | slot test own z 33.63 / 33.88, next frame 84.35 / 83.67; closed-loop OS 16.67 / 18.00 (diagnostic, n=150) | `logs/stage2_followup_*.log`, `logs/followups/cl_stage2_p*.log` |
+| E-51 | Pointing strict re-evaluation | n=150, stopping positions logged | SR 12.67 (16 scans, τ .05), 17.33 (history, τ .05), 22.67 (full3 40k, τ .10); end-SR/OS/SPL/NE identical to the original runs | `logs/followups/cl_pointing_*.log` |
+| E-52 | Threshold on val_seen | fusion 120k, 8 val_seen scans, 159 eps | SR 39.33 / 35.33 / 31.33 / 24.67 at τ .10/.15/.20/.30 → τ = 0.10 → val_unseen SR 23.33 (logs/eval120k_220002.log) | `logs/followups/cl_valseen_thr*.log` |
+| E-53 | Reasoner v3 step 1,500 | n=40, 3 strict + 2 extra diagnostic runs | strict SR 2.5 / 2.5 / 5.0, end-SR 17.5 / 20.0 / 17.5, OS 37.5 / 42.5 / 32.5; diagnostic OS 47.5 / 47.5 / 35.0 | `results/runs/v3_step1500_direct*.json`, `logs/followups/cl_reasoner_*.log` |
+
+Gap closed by these runs: the slot-shortcut test, Stage 2, val_seen threshold selection and the reasoner's strict
+evaluation, all listed in §8 above as missing.

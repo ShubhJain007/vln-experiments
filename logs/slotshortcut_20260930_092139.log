@@ -1,0 +1,203 @@
+######## main comparison, 10 episodes per scan  Wed Sep 30 09:21:39 EDT 2026
+checkpoint checkpoints/stage1_learned/final  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+110 episodes, 4306 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/110] 10.2 steps/s  next_frame 0.879  own_z 0.316  current_frame 0.584  other_next_frame 0.233
+  [20/110] 10.1 steps/s  next_frame 0.843  own_z 0.312  current_frame 0.464  other_next_frame 0.270
+  [30/110] 9.9 steps/s  next_frame 0.788  own_z 0.290  current_frame 0.447  other_next_frame 0.252
+  [40/110] 9.9 steps/s  next_frame 0.825  own_z 0.303  current_frame 0.466  other_next_frame 0.259
+  [50/110] 10.0 steps/s  next_frame 0.827  own_z 0.321  current_frame 0.458  other_next_frame 0.279
+  [60/110] 9.9 steps/s  next_frame 0.839  own_z 0.339  current_frame 0.443  other_next_frame 0.297
+  [70/110] 9.9 steps/s  next_frame 0.850  own_z 0.324  current_frame 0.466  other_next_frame 0.287
+  [80/110] 10.0 steps/s  next_frame 0.842  own_z 0.318  current_frame 0.446  other_next_frame 0.288
+  [90/110] 10.0 steps/s  next_frame 0.837  own_z 0.309  current_frame 0.448  other_next_frame 0.283
+  [100/110] 10.0 steps/s  next_frame 0.835  own_z 0.310  current_frame 0.446  other_next_frame 0.284
+  [110/110] 9.9 steps/s  next_frame 0.843  own_z 0.308  current_frame 0.451  other_next_frame 0.278
+{"next_frame": 0.8435, "own_z": 0.3082, "current_frame": 0.4515, "other_next_frame": 0.2775}
+wrote <repo>/results/slot_shortcut.json [stage1_learned]
+checkpoint checkpoints/stage1_identity/final  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+110 episodes, 4306 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/110] 10.2 steps/s  next_frame 0.799  own_z 0.802  current_frame 0.794  other_next_frame 0.788
+  [20/110] 10.2 steps/s  next_frame 0.661  own_z 0.633  current_frame 0.659  other_next_frame 0.633
+  [30/110] 10.3 steps/s  next_frame 0.578  own_z 0.555  current_frame 0.578  other_next_frame 0.551
+  [40/110] 10.2 steps/s  next_frame 0.626  own_z 0.608  current_frame 0.624  other_next_frame 0.604
+  [50/110] 10.2 steps/s  next_frame 0.629  own_z 0.610  current_frame 0.629  other_next_frame 0.609
+  [60/110] 10.1 steps/s  next_frame 0.622  own_z 0.600  current_frame 0.621  other_next_frame 0.605
+  [70/110] 10.1 steps/s  next_frame 0.638  own_z 0.621  current_frame 0.637  other_next_frame 0.628
+  [80/110] 10.2 steps/s  next_frame 0.619  own_z 0.601  current_frame 0.619  other_next_frame 0.610
+  [90/110] 10.2 steps/s  next_frame 0.622  own_z 0.603  current_frame 0.622  other_next_frame 0.609
+  [100/110] 10.2 steps/s  next_frame 0.630  own_z 0.612  current_frame 0.631  other_next_frame 0.618
+  [110/110] 10.2 steps/s  next_frame 0.631  own_z 0.612  current_frame 0.632  other_next_frame 0.621
+{"next_frame": 0.6312, "own_z": 0.6122, "current_frame": 0.6321, "other_next_frame": 0.6215}
+wrote <repo>/results/slot_shortcut.json [stage1_identity]
+checkpoint checkpoints/stage0prime_B/final  (Pilot slot)
+  loaded full checkpoint (r=16, 112 adapted modules)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+110 episodes, 4306 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/110] 10.2 steps/s  next_frame 0.885  own_z 0.649  current_frame 0.617  other_next_frame 0.248
+  [20/110] 10.2 steps/s  next_frame 0.821  own_z 0.546  current_frame 0.541  other_next_frame 0.261
+  [30/110] 10.2 steps/s  next_frame 0.769  own_z 0.495  current_frame 0.473  other_next_frame 0.257
+  [40/110] 10.1 steps/s  next_frame 0.810  own_z 0.532  current_frame 0.492  other_next_frame 0.263
+  [50/110] 10.1 steps/s  next_frame 0.819  own_z 0.543  current_frame 0.493  other_next_frame 0.278
+  [60/110] 10.1 steps/s  next_frame 0.837  own_z 0.545  current_frame 0.462  other_next_frame 0.296
+  [70/110] 10.1 steps/s  next_frame 0.829  own_z 0.562  current_frame 0.459  other_next_frame 0.284
+  [80/110] 10.1 steps/s  next_frame 0.821  own_z 0.543  current_frame 0.441  other_next_frame 0.285
+  [90/110] 10.1 steps/s  next_frame 0.810  own_z 0.543  current_frame 0.431  other_next_frame 0.282
+  [100/110] 10.2 steps/s  next_frame 0.810  own_z 0.554  current_frame 0.429  other_next_frame 0.281
+  [110/110] 10.1 steps/s  next_frame 0.820  own_z 0.566  current_frame 0.445  other_next_frame 0.278
+{"next_frame": 0.82, "own_z": 0.5664, "current_frame": 0.445, "other_next_frame": 0.2778}
+wrote <repo>/results/slot_shortcut.json [stage0prime_B]
+checkpoint checkpoints/stage0/final  (memoryless, no slot)
+  adapter verified: 6,422,528 LoRA params active
+110 episodes, 4306 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/110] 26.2 steps/s  no_slot 0.720
+  [20/110] 26.2 steps/s  no_slot 0.609
+  [30/110] 26.3 steps/s  no_slot 0.590
+  [40/110] 26.0 steps/s  no_slot 0.651
+  [50/110] 26.0 steps/s  no_slot 0.652
+  [60/110] 26.0 steps/s  no_slot 0.647
+  [70/110] 26.0 steps/s  no_slot 0.669
+  [80/110] 26.1 steps/s  no_slot 0.643
+  [90/110] 26.1 steps/s  no_slot 0.640
+  [100/110] 26.1 steps/s  no_slot 0.654
+  [110/110] 26.1 steps/s  no_slot 0.660
+{"no_slot": 0.6605}
+wrote <repo>/results/slot_shortcut.json [stage0]
+######## learned G_psi over training, 5 episodes per scan  Wed Sep 30 09:46:08 EDT 2026
+checkpoint checkpoints/stage1_learned/step2000  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+55 episodes, 2126 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/55] 10.2 steps/s  next_frame 0.793  own_z 0.455  current_frame 0.650  other_next_frame 0.524
+  [20/55] 10.2 steps/s  next_frame 0.767  own_z 0.470  current_frame 0.601  other_next_frame 0.504
+  [30/55] 9.1 steps/s  next_frame 0.770  own_z 0.463  current_frame 0.603  other_next_frame 0.504
+  [40/55] 8.6 steps/s  next_frame 0.761  own_z 0.479  current_frame 0.610  other_next_frame 0.517
+  [50/55] 7.6 steps/s  next_frame 0.773  own_z 0.489  current_frame 0.628  other_next_frame 0.513
+  [55/55] 7.1 steps/s  next_frame 0.783  own_z 0.484  current_frame 0.641  other_next_frame 0.509
+{"next_frame": 0.7832, "own_z": 0.4845, "current_frame": 0.6406, "other_next_frame": 0.5089}
+wrote <repo>/results/slot_shortcut_over_training.json [stage1_learned_step2000]
+checkpoint checkpoints/stage1_learned/step4000  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+55 episodes, 2126 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/55] 5.1 steps/s  next_frame 0.760  own_z 0.344  current_frame 0.554  other_next_frame 0.407
+  [20/55] 4.7 steps/s  next_frame 0.786  own_z 0.322  current_frame 0.545  other_next_frame 0.381
+  [30/55] 5.2 steps/s  next_frame 0.780  own_z 0.326  current_frame 0.543  other_next_frame 0.399
+  [40/55] 5.6 steps/s  next_frame 0.785  own_z 0.328  current_frame 0.557  other_next_frame 0.403
+  [50/55] 5.8 steps/s  next_frame 0.796  own_z 0.316  current_frame 0.573  other_next_frame 0.399
+  [55/55] 6.0 steps/s  next_frame 0.799  own_z 0.319  current_frame 0.580  other_next_frame 0.394
+{"next_frame": 0.7992, "own_z": 0.3194, "current_frame": 0.5804, "other_next_frame": 0.3942}
+wrote <repo>/results/slot_shortcut_over_training.json [stage1_learned_step4000]
+checkpoint checkpoints/stage1_learned/step6000  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+55 episodes, 2126 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/55] 9.4 steps/s  next_frame 0.844  own_z 0.362  current_frame 0.608  other_next_frame 0.362
+  [20/55] 6.0 steps/s  next_frame 0.849  own_z 0.324  current_frame 0.577  other_next_frame 0.327
+  [30/55] 6.7 steps/s  next_frame 0.848  own_z 0.329  current_frame 0.571  other_next_frame 0.343
+  [40/55] 7.4 steps/s  next_frame 0.849  own_z 0.327  current_frame 0.579  other_next_frame 0.343
+  [50/55] 7.5 steps/s  next_frame 0.854  own_z 0.317  current_frame 0.593  other_next_frame 0.331
+  [55/55] 7.7 steps/s  next_frame 0.857  own_z 0.310  current_frame 0.605  other_next_frame 0.323
+{"next_frame": 0.8565, "own_z": 0.3104, "current_frame": 0.6049, "other_next_frame": 0.3231}
+wrote <repo>/results/slot_shortcut_over_training.json [stage1_learned_step6000]
+checkpoint checkpoints/stage1_learned/step8000  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+55 episodes, 2126 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/55] 9.4 steps/s  next_frame 0.838  own_z 0.371  current_frame 0.530  other_next_frame 0.332
+  [20/55] 9.8 steps/s  next_frame 0.844  own_z 0.350  current_frame 0.498  other_next_frame 0.291
+  [30/55] 9.8 steps/s  next_frame 0.838  own_z 0.345  current_frame 0.491  other_next_frame 0.310
+  [40/55] 9.9 steps/s  next_frame 0.841  own_z 0.319  current_frame 0.497  other_next_frame 0.299
+  [50/55] 10.0 steps/s  next_frame 0.843  own_z 0.309  current_frame 0.512  other_next_frame 0.287
+  [55/55] 9.9 steps/s  next_frame 0.845  own_z 0.302  current_frame 0.520  other_next_frame 0.280
+{"next_frame": 0.8452, "own_z": 0.3024, "current_frame": 0.5198, "other_next_frame": 0.2799}
+wrote <repo>/results/slot_shortcut_over_training.json [stage1_learned_step8000]
+checkpoint checkpoints/stage1_learned/step10000  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+55 episodes, 2126 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/55] 10.1 steps/s  next_frame 0.775  own_z 0.377  current_frame 0.518  other_next_frame 0.326
+  [20/55] 10.1 steps/s  next_frame 0.809  own_z 0.324  current_frame 0.470  other_next_frame 0.292
+  [30/55] 10.0 steps/s  next_frame 0.826  own_z 0.357  current_frame 0.448  other_next_frame 0.314
+  [40/55] 10.1 steps/s  next_frame 0.829  own_z 0.327  current_frame 0.460  other_next_frame 0.302
+  [50/55] 10.1 steps/s  next_frame 0.827  own_z 0.322  current_frame 0.470  other_next_frame 0.289
+  [55/55] 10.0 steps/s  next_frame 0.825  own_z 0.309  current_frame 0.477  other_next_frame 0.281
+{"next_frame": 0.8246, "own_z": 0.3086, "current_frame": 0.477, "other_next_frame": 0.2808}
+wrote <repo>/results/slot_shortcut_over_training.json [stage1_learned_step10000]
+checkpoint checkpoints/stage1_learned/step12000  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+55 episodes, 2126 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/55] 9.7 steps/s  next_frame 0.805  own_z 0.317  current_frame 0.464  other_next_frame 0.269
+  [20/55] 9.6 steps/s  next_frame 0.828  own_z 0.307  current_frame 0.465  other_next_frame 0.274
+  [30/55] 9.4 steps/s  next_frame 0.841  own_z 0.327  current_frame 0.442  other_next_frame 0.294
+  [40/55] 9.4 steps/s  next_frame 0.849  own_z 0.298  current_frame 0.455  other_next_frame 0.280
+  [50/55] 9.5 steps/s  next_frame 0.849  own_z 0.285  current_frame 0.466  other_next_frame 0.267
+  [55/55] 9.5 steps/s  next_frame 0.853  own_z 0.278  current_frame 0.477  other_next_frame 0.261
+{"next_frame": 0.8532, "own_z": 0.278, "current_frame": 0.477, "other_next_frame": 0.2611}
+wrote <repo>/results/slot_shortcut_over_training.json [stage1_learned_step12000]
+checkpoint checkpoints/stage1_learned/step14000  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+55 episodes, 2126 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/55] 9.9 steps/s  next_frame 0.850  own_z 0.323  current_frame 0.509  other_next_frame 0.293
+  [20/55] 9.7 steps/s  next_frame 0.863  own_z 0.306  current_frame 0.486  other_next_frame 0.276
+  [30/55] 9.3 steps/s  next_frame 0.869  own_z 0.339  current_frame 0.461  other_next_frame 0.313
+  [40/55] 8.2 steps/s  next_frame 0.871  own_z 0.327  current_frame 0.467  other_next_frame 0.299
+  [50/55] 8.0 steps/s  next_frame 0.871  own_z 0.319  current_frame 0.475  other_next_frame 0.286
+  [55/55] 7.7 steps/s  next_frame 0.874  own_z 0.308  current_frame 0.483  other_next_frame 0.279
+{"next_frame": 0.8739, "own_z": 0.3076, "current_frame": 0.4826, "other_next_frame": 0.2794}
+wrote <repo>/results/slot_shortcut_over_training.json [stage1_learned_step14000]
+checkpoint checkpoints/stage1_learned/step16000  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+55 episodes, 2126 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/55] 7.1 steps/s  next_frame 0.835  own_z 0.326  current_frame 0.494  other_next_frame 0.287
+  [20/55] 7.2 steps/s  next_frame 0.854  own_z 0.317  current_frame 0.484  other_next_frame 0.280
+  [30/55] 6.4 steps/s  next_frame 0.867  own_z 0.350  current_frame 0.472  other_next_frame 0.315
+  [40/55] 5.7 steps/s  next_frame 0.871  own_z 0.324  current_frame 0.473  other_next_frame 0.299
+  [50/55] 5.6 steps/s  next_frame 0.870  own_z 0.315  current_frame 0.479  other_next_frame 0.284
+  [55/55] 5.8 steps/s  next_frame 0.874  own_z 0.303  current_frame 0.484  other_next_frame 0.278
+{"next_frame": 0.8744, "own_z": 0.3034, "current_frame": 0.4845, "other_next_frame": 0.2775}
+wrote <repo>/results/slot_shortcut_over_training.json [stage1_learned_step16000]
+checkpoint checkpoints/stage1_learned/final  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+55 episodes, 2126 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/55] 9.2 steps/s  next_frame 0.808  own_z 0.314  current_frame 0.434  other_next_frame 0.275
+  [20/55] 9.2 steps/s  next_frame 0.830  own_z 0.307  current_frame 0.436  other_next_frame 0.275
+  [30/55] 9.3 steps/s  next_frame 0.843  own_z 0.341  current_frame 0.416  other_next_frame 0.311
+  [40/55] 9.2 steps/s  next_frame 0.850  own_z 0.320  current_frame 0.428  other_next_frame 0.296
+  [50/55] 8.9 steps/s  next_frame 0.848  own_z 0.314  current_frame 0.439  other_next_frame 0.282
+  [55/55] 8.9 steps/s  next_frame 0.853  own_z 0.303  current_frame 0.446  other_next_frame 0.276
+{"next_frame": 0.8532, "own_z": 0.3029, "current_frame": 0.4464, "other_next_frame": 0.2756}
+wrote <repo>/results/slot_shortcut_over_training.json [stage1_learned_step17400]
+######## done  Wed Sep 30 10:28:12 EDT 2026

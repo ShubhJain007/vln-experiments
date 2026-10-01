@@ -240,7 +240,7 @@ def train(args):
     out_dir = pathlib.Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    dataset = PilotRolloutDataset(args.split, max_episodes=args.max_episodes)
+    dataset = PilotRolloutDataset(args.split, scans=args.scans, max_episodes=args.max_episodes)
     prev_index = build_prev_index(dataset)
     mean_vbar = compute_mean_vbar(dataset)
     print(dataset.summary())
@@ -448,6 +448,8 @@ def main():
     ap.add_argument("--clip", type=float, default=1.0)
     ap.add_argument("--no-grad-checkpointing", action="store_true")
     ap.add_argument("--max-episodes", type=int, default=None)
+    ap.add_argument("--scans", nargs="+", default=None,
+                    help="restrict to these train scans (Stage 1 used 6: see scripts/run_followups.sh)")
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--log-every", type=int, default=25)
     ap.add_argument("--seed", type=int, default=0)
