@@ -47,6 +47,15 @@
    "source": "logs/followups/cl_stage2_p75.log"
   },
   {
+   "label": "Stage 2, 75 %, 3× longer",
+   "group": "LatentPilot",
+   "n": 150,
+   "os": 19.3,
+   "sr_end": null,
+   "sr": null,
+   "source": "logs/followups/cl_stage2_p75_long.log"
+  },
+  {
    "label": "Pointing 6 scans",
    "group": "Pointing",
    "n": 150,
@@ -83,7 +92,7 @@
    "sr": 22.67
   },
   {
-   "label": "+ fusion (\u03c4 val_seen)",
+   "label": "+ fusion (τ val_seen)",
    "group": "Pointing",
    "n": 150,
    "os": 36.67,
@@ -119,7 +128,7 @@
    "sr": null
   },
   {
-   "label": "Reasoner v3 1.5k \u00d73",
+   "label": "Reasoner v3 1.5k ×3",
    "group": "Cosmos",
    "n": 40,
    "os": 37.5,

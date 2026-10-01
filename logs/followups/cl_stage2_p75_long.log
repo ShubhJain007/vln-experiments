@@ -1,0 +1,37 @@
+v_bar reference: mean ||v_bar|| = 14.75
+Loading Stage 0' policy from checkpoints/stage2_p75_long/final ...
+Loading weights:   0%|          | 0/626 [00:00<?, ?it/s]Loading weights:   0%|          | 1/626 [00:00<04:28,  2.32it/s]Loading weights:   4%|▎         | 22/626 [00:00<00:11, 53.52it/s]Loading weights:   7%|▋         | 43/626 [00:00<00:06, 93.89it/s]Loading weights:  10%|█         | 65/626 [00:00<00:04, 126.59it/s]Loading weights:  14%|█▍        | 89/626 [00:00<00:03, 156.51it/s]Loading weights:  18%|█▊        | 111/626 [00:00<00:02, 173.91it/s]Loading weights:  22%|██▏       | 136/626 [00:01<00:02, 195.03it/s]Loading weights:  26%|██▌       | 160/626 [00:01<00:02, 206.83it/s]Loading weights:  31%|███       | 192/626 [00:01<00:01, 235.42it/s]Loading weights:  35%|███▌      | 221/626 [00:01<00:01, 250.30it/s]Loading weights:  40%|███▉      | 248/626 [00:01<00:01, 249.78it/s]Loading weights:  45%|████▍     | 280/626 [00:01<00:01, 264.38it/s]Loading weights:  50%|█████     | 315/626 [00:01<00:01, 287.89it/s]Loading weights:  68%|██████▊   | 425/626 [00:01<00:00, 523.31it/s]Loading weights:  87%|████████▋ | 543/626 [00:01<00:00, 714.25it/s]Loading weights:  98%|█████████▊| 616/626 [00:01<00:00, 709.22it/s]Loading weights: 100%|██████████| 626/626 [00:02<00:00, 312.79it/s]
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+slot_mode = z
+split=val_unseen  episodes=150  scans=8
+
+  25/150  (0.26 ep/s)
+  50/150  (0.26 ep/s)
+  75/150  (0.28 ep/s)
+  100/150  (0.27 ep/s)
+  125/150  (0.26 ep/s)
+  150/150  (0.27 ep/s)
+
+====================================================================
+  STAGE 0' EVAL — checkpoints/stage2_p75_long/final
+  slot_mode=z
+  split=val_unseen  n=150  diagnostic (3m early exit)
+====================================================================
+    SR    = 0.1933
+    SPL   = 0.1933
+    OS    = 0.1933
+    nDTW  = 0.2975
+    NE    = 7.8572
+
+  TERMINATION:
+    model_stop         0  (  0.0%)
+    within_radius     29  ( 19.3%)
+    timeout          121  ( 80.7%)
+
+  ||z_t|| over 13,297 steps: mean 15.04  min 13.10  max 16.96
+    (Stage 2 wants this DRIFT to shrink; record it as the Stage 0' reference)
+
+  Paper NaN row (Table 3): SR 51.7  SPL 47.1  NE 5.3  OS 57.0
+====================================================================

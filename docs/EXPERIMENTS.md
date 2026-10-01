@@ -374,7 +374,8 @@ and §2.6 above. The p-values quoted in two script headers (p = 0.333, p = 0.005
 
 ## 6. Planned but not run
 
-- A 16-scan Stage 1, a constant λ = 0.02 arm, a longer Stage 2, and the paper's data flywheel.
+- A 16-scan Stage 1, a constant λ = 0.02 arm, Stage 2 above 75 % own latents (needs approval under `Agents.md` §5.4),
+  and the paper's data flywheel. (A 3× longer Stage 2 at 75 % was run afterwards; see §7.2.)
 - Greedy decoding for the reasoner (it was evaluated with stochastic decoding, three runs per setting).
 - Most arms of the Cosmos prompt/policy ablation (`scripts/run_ablations.py`), which ran out of memory or were killed.
   Partial logs are in `results/salvaged/`.
@@ -426,11 +427,13 @@ unattended by `scripts/run_pending_followups.sh`. Every number is collected in
   | Stage 1, learned | 30.8 | 84.3 | 10.7 |
   | Stage 2, 50 % | 33.6 | 84.3 | 16.7 |
   | Stage 2, 75 % | 33.9 | 83.7 | 18.0 |
+  | Stage 2, 75 %, 7,800 steps (3×) | 35.5 | 84.2 | 19.3 |
   | *identity control* | *61.2* | *63.1* | *17.3* |
 
 - **Conclusion.** Navigation improves to the identity control's level (+6–7 points), but the shortcut stays: the model
   still prefers the true next frame and is barely better with its own latent. This short recipe does not fix the
-  problem. A longer schedule or the paper's full flywheel remain untested.
+  problem, and neither does a 3× longer one (`scripts/run_stage2_long.sh`): own-latent accuracy rises by 1.6 points,
+  OS by 1.3 (within noise at n = 150), and the model never issues STOP. The paper's full flywheel remains untested.
 
 ### 7.3 The STOP threshold, chosen without the test split
 

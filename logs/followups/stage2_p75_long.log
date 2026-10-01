@@ -1,0 +1,359 @@
+######## Stage 2 long: 7,800 steps, p_final=0.75  Thu Oct  1 09:13:25 EDT 2026
+split=train  episodes=1665  steps=69606
+scans=6
+marginal-prior loss H(actions) = 0.9744  (uniform ln(4) = 1.3863)
+
+Stage 2 — scheduled sampling  (NOT IN PAPER, AGENTS.md Sec. 5)
+  init_from   : checkpoints/stage1_learned/final
+  steps       : 7800  (0.15 x Stage 1's 17400)
+  lr          : 1.00e-05  (0.1 x Stage 1's 1e-04)
+  p_selfpred  : 0.0 -> 0.75 over first 30% of the run
+  target      : v_bar_{t+2} ALWAYS (only the INPUT is mixed)
+
+  loaded Stage 1: 224 LoRA tensors, pilot mode=action_query
+step    25  L  0.2967  L_act 0.0031  L_pil    2.936  acc 1.000  STOP-rec 1.000(n=3)  p 0.01 (self 0.01)  |z|  14.88  1.99 it/s
+step    50  L  0.2857  L_act 0.0022  L_pil    2.836  acc 1.000  STOP-rec 1.000(n=4)  p 0.02 (self 0.01)  |z|  15.01  2.01 it/s
+step    75  L  0.3172  L_act 0.0285  L_pil    2.888  acc 0.985  STOP-rec 0.800(n=5)  p 0.02 (self 0.02)  |z|  15.01  2.03 it/s
+step   100  L  0.4897  L_act 0.1080  L_pil    3.817  acc 0.985  STOP-rec 1.000(n=2)  p 0.03 (self 0.04)  |z|  15.19  2.03 it/s
+step   125  L  0.4418  L_act 0.1087  L_pil    3.331  acc 0.985  STOP-rec 1.000(n=3)  p 0.04 (self 0.05)  |z|  15.05  2.01 it/s
+step   150  L  0.4606  L_act 0.1509  L_pil    3.097  acc 0.975  STOP-rec 0.833(n=6)  p 0.05 (self 0.04)  |z|  15.57  2.01 it/s
+step   175  L  0.4362  L_act 0.1169  L_pil    3.193  acc 0.980  STOP-rec 0.800(n=5)  p 0.06 (self 0.09)  |z|  14.50  2.00 it/s
+step   200  L  0.4220  L_act 0.1222  L_pil    2.998  acc 0.980  STOP-rec 1.000(n=2)  p 0.06 (self 0.07)  |z|  15.12  2.00 it/s
+step   225  L  0.3795  L_act 0.0304  L_pil    3.491  acc 0.990  STOP-rec 0.833(n=6)  p 0.07 (self 0.06)  |z|  15.29  2.00 it/s
+step   250  L  0.5959  L_act 0.2466  L_pil    3.494  acc 0.965  STOP-rec 1.000(n=3)  p 0.08 (self 0.10)  |z|  14.85  1.99 it/s
+step   275  L  0.4421  L_act 0.1477  L_pil    2.944  acc 0.980  STOP-rec 0.800(n=5)  p 0.09 (self 0.11)  |z|  15.06  1.98 it/s
+step   300  L  0.4849  L_act 0.1924  L_pil    2.925  acc 0.980  STOP-rec 1.000(n=8)  p 0.10 (self 0.09)  |z|  15.88  1.98 it/s
+step   325  L  0.6246  L_act 0.3183  L_pil    3.062  acc 0.950  STOP-rec 0.750(n=8)  p 0.10 (self 0.14)  |z|  14.91  1.97 it/s
+step   350  L  0.4190  L_act 0.0914  L_pil    3.276  acc 0.970  STOP-rec 1.000(n=4)  p 0.11 (self 0.09)  |z|  15.18  1.97 it/s
+step   375  L  0.4809  L_act 0.1103  L_pil    3.706  acc 0.980  STOP-rec 1.000(n=4)  p 0.12 (self 0.08)  |z|  15.35  1.97 it/s
+step   400  L  0.4290  L_act 0.1106  L_pil    3.184  acc 0.980  STOP-rec 0.714(n=7)  p 0.13 (self 0.09)  |z|  15.39  1.97 it/s
+step   425  L  0.5876  L_act 0.2225  L_pil    3.651  acc 0.960  STOP-rec 0.800(n=5)  p 0.14 (self 0.16)  |z|  15.10  1.96 it/s
+step   450  L  0.5606  L_act 0.2279  L_pil    3.328  acc 0.945  STOP-rec 0.000(n=2)  p 0.14 (self 0.14)  |z|  15.19  1.96 it/s
+step   475  L  0.5828  L_act 0.2245  L_pil    3.582  acc 0.960  STOP-rec 0.500(n=4)  p 0.15 (self 0.15)  |z|  15.40  1.95 it/s
+step   500  L  0.7239  L_act 0.4068  L_pil    3.171  acc 0.920  STOP-rec 0.250(n=4)  p 0.16 (self 0.18)  |z|  15.16  1.95 it/s
+step   525  L  0.5727  L_act 0.2477  L_pil    3.250  acc 0.955  STOP-rec 1.000(n=3)  p 0.17 (self 0.15)  |z|  14.65  1.95 it/s
+step   550  L  0.7166  L_act 0.3569  L_pil    3.597  acc 0.940  STOP-rec 0.500(n=4)  p 0.18 (self 0.20)  |z|  16.16  1.94 it/s
+step   575  L  0.6126  L_act 0.3011  L_pil    3.115  acc 0.930  STOP-rec 0.400(n=5)  p 0.18 (self 0.18)  |z|  14.30  1.94 it/s
+step   600  L  0.5362  L_act 0.2123  L_pil    3.239  acc 0.955  STOP-rec 0.750(n=4)  p 0.19 (self 0.18)  |z|  15.01  1.93 it/s
+step   625  L  0.5841  L_act 0.2426  L_pil    3.415  acc 0.940  STOP-rec 1.000(n=3)  p 0.20 (self 0.24)  |z|  14.65  1.93 it/s
+step   650  L  0.5772  L_act 0.2059  L_pil    3.713  acc 0.955  STOP-rec 1.000(n=1)  p 0.21 (self 0.19)  |z|  15.79  1.93 it/s
+step   675  L  0.5634  L_act 0.2129  L_pil    3.505  acc 0.955  STOP-rec 0.500(n=4)  p 0.22 (self 0.18)  |z|  15.61  1.92 it/s
+step   700  L  0.5941  L_act 0.2783  L_pil    3.157  acc 0.935  STOP-rec 0.800(n=10)  p 0.22 (self 0.25)  |z|  14.94  1.92 it/s
+step   725  L  0.6218  L_act 0.2906  L_pil    3.313  acc 0.940  STOP-rec 0.833(n=6)  p 0.23 (self 0.20)  |z|  15.24  1.92 it/s
+step   750  L  0.4313  L_act 0.1090  L_pil    3.222  acc 0.960  STOP-rec 0.800(n=5)  p 0.24 (self 0.23)  |z|  15.30  1.91 it/s
+step   775  L  0.8155  L_act 0.4658  L_pil    3.497  acc 0.905  STOP-rec 0.200(n=5)  p 0.25 (self 0.28)  |z|  15.39  1.91 it/s
+step   800  L  0.7685  L_act 0.3930  L_pil    3.755  acc 0.920  STOP-rec 0.400(n=5)  p 0.26 (self 0.30)  |z|  14.85  1.91 it/s
+step   825  L  0.6147  L_act 0.2380  L_pil    3.767  acc 0.925  STOP-rec 0.500(n=8)  p 0.26 (self 0.29)  |z|  15.46  1.90 it/s
+step   850  L  0.5921  L_act 0.1799  L_pil    4.122  acc 0.960  STOP-rec 1.000(n=2)  p 0.27 (self 0.23)  |z|  15.01  1.90 it/s
+step   875  L  0.6453  L_act 0.3377  L_pil    3.075  acc 0.915  STOP-rec 0.500(n=4)  p 0.28 (self 0.29)  |z|  15.20  1.90 it/s
+step   900  L  0.6810  L_act 0.3698  L_pil    3.112  acc 0.920  STOP-rec 0.750(n=4)  p 0.29 (self 0.28)  |z|  14.88  1.90 it/s
+step   925  L  0.7527  L_act 0.3803  L_pil    3.724  acc 0.895  STOP-rec 0.500(n=4)  p 0.30 (self 0.34)  |z|  15.22  1.89 it/s
+step   950  L  0.6506  L_act 0.2997  L_pil    3.509  acc 0.920  STOP-rec 0.400(n=5)  p 0.30 (self 0.29)  |z|  14.98  1.89 it/s
+step   975  L  0.6837  L_act 0.3602  L_pil    3.235  acc 0.885  STOP-rec 0.571(n=7)  p 0.31 (self 0.34)  |z|  15.88  1.89 it/s
+step  1000  L  0.5874  L_act 0.2847  L_pil    3.027  acc 0.915  STOP-rec 0.250(n=8)  p 0.32 (self 0.29)  |z|  14.69  1.88 it/s
+step  1025  L  0.6654  L_act 0.3170  L_pil    3.484  acc 0.910  STOP-rec 0.500(n=4)  p 0.33 (self 0.35)  |z|  15.33  1.88 it/s
+step  1050  L  0.6908  L_act 0.3346  L_pil    3.563  acc 0.905  STOP-rec 0.167(n=6)  p 0.34 (self 0.32)  |z|  14.99  1.88 it/s
+step  1075  L  0.6259  L_act 0.3256  L_pil    3.002  acc 0.905  STOP-rec 0.833(n=6)  p 0.34 (self 0.34)  |z|  15.44  1.88 it/s
+step  1100  L  0.7593  L_act 0.4253  L_pil    3.340  acc 0.895  STOP-rec 1.000(n=2)  p 0.35 (self 0.35)  |z|  14.70  1.87 it/s
+step  1125  L  0.6945  L_act 0.3699  L_pil    3.246  acc 0.920  STOP-rec 0.667(n=3)  p 0.36 (self 0.33)  |z|  15.48  1.87 it/s
+step  1150  L  0.6069  L_act 0.2557  L_pil    3.512  acc 0.940  STOP-rec 0.333(n=6)  p 0.37 (self 0.30)  |z|  15.87  1.87 it/s
+step  1175  L  0.5747  L_act 0.2469  L_pil    3.278  acc 0.920  STOP-rec 0.667(n=3)  p 0.38 (self 0.38)  |z|  15.09  1.86 it/s
+step  1200  L  0.6544  L_act 0.3440  L_pil    3.103  acc 0.900  STOP-rec 0.250(n=4)  p 0.38 (self 0.38)  |z|  14.26  1.86 it/s
+step  1225  L  0.7945  L_act 0.4172  L_pil    3.772  acc 0.905  STOP-rec 0.500(n=4)  p 0.39 (self 0.38)  |z|  14.98  1.86 it/s
+step  1250  L  0.7115  L_act 0.3555  L_pil    3.560  acc 0.880  STOP-rec 0.333(n=3)  p 0.40 (self 0.40)  |z|  15.21  1.86 it/s
+step  1275  L  0.5690  L_act 0.2138  L_pil    3.552  acc 0.940  STOP-rec 0.750(n=4)  p 0.41 (self 0.41)  |z|  14.80  1.85 it/s
+step  1300  L  0.7416  L_act 0.3514  L_pil    3.902  acc 0.910  STOP-rec 0.500(n=4)  p 0.42 (self 0.39)  |z|  15.72  1.85 it/s
+step  1325  L  0.6824  L_act 0.3367  L_pil    3.457  acc 0.885  STOP-rec 0.000(n=4)  p 0.42 (self 0.36)  |z|  15.44  1.85 it/s
+step  1350  L  0.8179  L_act 0.4352  L_pil    3.827  acc 0.870  STOP-rec 0.333(n=9)  p 0.43 (self 0.42)  |z|  15.40  1.84 it/s
+step  1375  L  0.6639  L_act 0.3083  L_pil    3.556  acc 0.920  STOP-rec 0.500(n=6)  p 0.44 (self 0.47)  |z|  15.38  1.84 it/s
+step  1400  L  0.5770  L_act 0.2561  L_pil    3.208  acc 0.915  STOP-rec 0.571(n=7)  p 0.45 (self 0.45)  |z|  15.16  1.84 it/s
+step  1425  L  0.8180  L_act 0.4529  L_pil    3.651  acc 0.865  STOP-rec 0.600(n=5)  p 0.46 (self 0.43)  |z|  15.07  1.84 it/s
+step  1450  L  0.6065  L_act 0.2826  L_pil    3.238  acc 0.895  STOP-rec 0.333(n=3)  p 0.46 (self 0.44)  |z|  15.41  1.83 it/s
+step  1475  L  0.6657  L_act 0.2742  L_pil    3.915  acc 0.905  STOP-rec 0.000(n=2)  p 0.47 (self 0.47)  |z|  14.90  1.83 it/s
+step  1500  L  0.7960  L_act 0.4238  L_pil    3.722  acc 0.870  STOP-rec 0.250(n=4)  p 0.48 (self 0.48)  |z|  15.69  1.83 it/s
+step  1525  L  0.7870  L_act 0.4069  L_pil    3.800  acc 0.880  STOP-rec 0.600(n=5)  p 0.49 (self 0.48)  |z|  15.43  1.82 it/s
+step  1550  L  0.7466  L_act 0.4163  L_pil    3.303  acc 0.895  STOP-rec 0.800(n=5)  p 0.50 (self 0.41)  |z|  15.89  1.82 it/s
+step  1575  L  0.7018  L_act 0.3634  L_pil    3.384  acc 0.910  STOP-rec 0.833(n=6)  p 0.50 (self 0.46)  |z|  14.84  1.82 it/s
+step  1600  L  0.7436  L_act 0.3943  L_pil    3.493  acc 0.875  STOP-rec 0.286(n=7)  p 0.51 (self 0.47)  |z|  15.24  1.82 it/s
+step  1625  L  0.7678  L_act 0.3586  L_pil    4.092  acc 0.890  STOP-rec 0.333(n=3)  p 0.52 (self 0.58)  |z|  15.10  1.81 it/s
+step  1650  L  0.6203  L_act 0.2892  L_pil    3.311  acc 0.905  STOP-rec 0.333(n=3)  p 0.53 (self 0.49)  |z|  15.35  1.81 it/s
+step  1675  L  0.8069  L_act 0.4317  L_pil    3.752  acc 0.860  STOP-rec 0.250(n=8)  p 0.54 (self 0.56)  |z|  15.54  1.81 it/s
+step  1700  L  0.7283  L_act 0.3707  L_pil    3.576  acc 0.900  STOP-rec 0.625(n=8)  p 0.54 (self 0.58)  |z|  15.01  1.81 it/s
+step  1725  L  0.8985  L_act 0.5397  L_pil    3.589  acc 0.855  STOP-rec 0.250(n=4)  p 0.55 (self 0.56)  |z|  15.30  1.80 it/s
+step  1750  L  0.6350  L_act 0.2729  L_pil    3.620  acc 0.915  STOP-rec 0.500(n=2)  p 0.56 (self 0.49)  |z|  15.35  1.80 it/s
+step  1775  L  0.6936  L_act 0.3582  L_pil    3.354  acc 0.890  STOP-rec 0.500(n=4)  p 0.57 (self 0.51)  |z|  14.81  1.80 it/s
+step  1800  L  0.7832  L_act 0.3935  L_pil    3.897  acc 0.875  STOP-rec 0.600(n=5)  p 0.58 (self 0.55)  |z|  14.90  1.80 it/s
+step  1825  L  0.8530  L_act 0.4657  L_pil    3.873  acc 0.860  STOP-rec 0.250(n=8)  p 0.58 (self 0.60)  |z|  15.80  1.79 it/s
+step  1850  L  0.7053  L_act 0.3639  L_pil    3.414  acc 0.880  STOP-rec 0.000(n=2)  p 0.59 (self 0.57)  |z|  15.10  1.79 it/s
+step  1875  L  0.7726  L_act 0.4051  L_pil    3.676  acc 0.845  STOP-rec 0.500(n=6)  p 0.60 (self 0.62)  |z|  15.26  1.79 it/s
+step  1900  L  0.7091  L_act 0.3925  L_pil    3.166  acc 0.855  STOP-rec 0.750(n=4)  p 0.61 (self 0.62)  |z|  15.44  1.78 it/s
+step  1925  L  0.7932  L_act 0.3900  L_pil    4.031  acc 0.890  STOP-rec 0.000(n=2)  p 0.62 (self 0.60)  |z|  15.12  1.78 it/s
+step  1950  L  0.8695  L_act 0.4893  L_pil    3.802  acc 0.835  STOP-rec 0.250(n=8)  p 0.62 (self 0.59)  |z|  15.73  1.78 it/s
+step  1975  L  0.7467  L_act 0.3689  L_pil    3.778  acc 0.870  STOP-rec 0.200(n=5)  p 0.63 (self 0.62)  |z|  15.46  1.78 it/s
+step  2000  L  0.6655  L_act 0.3083  L_pil    3.572  acc 0.930  STOP-rec 0.500(n=2)  p 0.64 (self 0.62)  |z|  15.46  1.77 it/s
+step  2025  L  0.8344  L_act 0.4761  L_pil    3.583  acc 0.855  STOP-rec 0.000(n=4)  p 0.65 (self 0.69)  |z|  14.92  1.77 it/s
+step  2050  L  0.8213  L_act 0.4235  L_pil    3.979  acc 0.855  STOP-rec 1.000(n=1)  p 0.66 (self 0.64)  |z|  14.91  1.77 it/s
+step  2075  L  0.7941  L_act 0.4260  L_pil    3.681  acc 0.860  STOP-rec 0.500(n=4)  p 0.66 (self 0.55)  |z|  15.12  1.77 it/s
+step  2100  L  0.8437  L_act 0.4651  L_pil    3.786  acc 0.830  STOP-rec 0.333(n=3)  p 0.67 (self 0.69)  |z|  14.93  1.76 it/s
+step  2125  L  0.8739  L_act 0.4965  L_pil    3.774  acc 0.845  STOP-rec 0.000(n=4)  p 0.68 (self 0.74)  |z|  14.77  1.76 it/s
+step  2150  L  0.8905  L_act 0.5199  L_pil    3.706  acc 0.820  STOP-rec 0.600(n=5)  p 0.69 (self 0.70)  |z|  14.86  1.76 it/s
+step  2175  L  0.8206  L_act 0.4809  L_pil    3.398  acc 0.835  STOP-rec 0.250(n=8)  p 0.70 (self 0.70)  |z|  14.98  1.75 it/s
+step  2200  L  0.8260  L_act 0.4660  L_pil    3.601  acc 0.840  STOP-rec 0.333(n=6)  p 0.70 (self 0.71)  |z|  14.45  1.75 it/s
+step  2225  L  0.8893  L_act 0.4801  L_pil    4.092  acc 0.845  STOP-rec 0.400(n=5)  p 0.71 (self 0.70)  |z|  14.96  1.75 it/s
+step  2250  L  0.8486  L_act 0.4922  L_pil    3.563  acc 0.820  STOP-rec 0.222(n=9)  p 0.72 (self 0.70)  |z|  15.07  1.74 it/s
+step  2275  L  0.7076  L_act 0.3027  L_pil    4.049  acc 0.895  STOP-rec 1.000(n=1)  p 0.73 (self 0.72)  |z|  15.33  1.74 it/s
+step  2300  L  0.9346  L_act 0.5834  L_pil    3.513  acc 0.810  STOP-rec 0.167(n=6)  p 0.74 (self 0.73)  |z|  14.74  1.74 it/s
+step  2325  L  0.8568  L_act 0.4633  L_pil    3.935  acc 0.860  STOP-rec 0.375(n=8)  p 0.74 (self 0.75)  |z|  15.09  1.74 it/s
+step  2350  L  0.7962  L_act 0.4462  L_pil    3.500  acc 0.845  STOP-rec 0.143(n=7)  p 0.75 (self 0.74)  |z|  15.27  1.73 it/s
+step  2375  L  0.8587  L_act 0.4900  L_pil    3.687  acc 0.835  STOP-rec 0.000(n=2)  p 0.75 (self 0.72)  |z|  15.01  1.73 it/s
+step  2400  L  0.8347  L_act 0.4642  L_pil    3.706  acc 0.840  STOP-rec 0.143(n=7)  p 0.75 (self 0.73)  |z|  15.46  1.73 it/s
+step  2425  L  1.0599  L_act 0.6622  L_pil    3.977  acc 0.815  STOP-rec 0.500(n=6)  p 0.75 (self 0.72)  |z|  15.48  1.73 it/s
+step  2450  L  0.9524  L_act 0.5321  L_pil    4.203  acc 0.835  STOP-rec 0.000(n=3)  p 0.75 (self 0.74)  |z|  15.30  1.73 it/s
+step  2475  L  0.7368  L_act 0.3940  L_pil    3.427  acc 0.875  STOP-rec 0.000(n=2)  p 0.75 (self 0.71)  |z|  15.35  1.72 it/s
+step  2500  L  0.9738  L_act 0.6153  L_pil    3.585  acc 0.780  STOP-rec 0.125(n=8)  p 0.75 (self 0.79)  |z|  15.27  1.72 it/s
+step  2525  L  0.9272  L_act 0.5398  L_pil    3.874  acc 0.855  STOP-rec 0.222(n=9)  p 0.75 (self 0.77)  |z|  15.26  1.72 it/s
+step  2550  L  0.8259  L_act 0.4741  L_pil    3.518  acc 0.810  STOP-rec 0.333(n=6)  p 0.75 (self 0.78)  |z|  15.00  1.72 it/s
+step  2575  L  0.8014  L_act 0.4430  L_pil    3.584  acc 0.845  STOP-rec 0.333(n=3)  p 0.75 (self 0.77)  |z|  15.87  1.71 it/s
+step  2600  L  0.8906  L_act 0.4914  L_pil    3.992  acc 0.845  STOP-rec 0.600(n=5)  p 0.75 (self 0.70)  |z|  15.34  1.71 it/s
+step  2625  L  0.8369  L_act 0.4805  L_pil    3.563  acc 0.830  STOP-rec 0.000(n=5)  p 0.75 (self 0.70)  |z|  15.14  1.71 it/s
+step  2650  L  0.7964  L_act 0.4124  L_pil    3.841  acc 0.870  STOP-rec 0.000(n=3)  p 0.75 (self 0.78)  |z|  15.45  1.71 it/s
+step  2675  L  0.9404  L_act 0.5497  L_pil    3.907  acc 0.820  STOP-rec 0.286(n=7)  p 0.75 (self 0.74)  |z|  15.56  1.71 it/s
+step  2700  L  0.8852  L_act 0.5197  L_pil    3.655  acc 0.825  STOP-rec 0.500(n=8)  p 0.75 (self 0.75)  |z|  14.45  1.70 it/s
+step  2725  L  0.9077  L_act 0.5482  L_pil    3.594  acc 0.810  STOP-rec 0.143(n=7)  p 0.75 (self 0.73)  |z|  15.04  1.70 it/s
+step  2750  L  0.8919  L_act 0.5292  L_pil    3.627  acc 0.830  STOP-rec 0.143(n=7)  p 0.75 (self 0.80)  |z|  15.16  1.70 it/s
+step  2775  L  0.8766  L_act 0.4993  L_pil    3.773  acc 0.820  STOP-rec 0.333(n=3)  p 0.75 (self 0.80)  |z|  14.91  1.70 it/s
+step  2800  L  0.8849  L_act 0.4938  L_pil    3.912  acc 0.820  STOP-rec 0.000(n=4)  p 0.75 (self 0.76)  |z|  15.63  1.70 it/s
+step  2825  L  0.7953  L_act 0.4090  L_pil    3.863  acc 0.865  STOP-rec 0.500(n=6)  p 0.75 (self 0.76)  |z|  14.71  1.69 it/s
+step  2850  L  0.9099  L_act 0.5278  L_pil    3.821  acc 0.835  STOP-rec 0.000(n=5)  p 0.75 (self 0.78)  |z|  15.13  1.69 it/s
+step  2875  L  0.9939  L_act 0.5822  L_pil    4.116  acc 0.790  STOP-rec 0.125(n=8)  p 0.75 (self 0.77)  |z|  15.43  1.69 it/s
+step  2900  L  0.8178  L_act 0.4702  L_pil    3.476  acc 0.840  STOP-rec 0.000(n=5)  p 0.75 (self 0.77)  |z|  15.14  1.69 it/s
+step  2925  L  0.8959  L_act 0.4866  L_pil    4.093  acc 0.805  STOP-rec 0.167(n=6)  p 0.75 (self 0.79)  |z|  15.38  1.69 it/s
+step  2950  L  0.8223  L_act 0.4625  L_pil    3.598  acc 0.840  STOP-rec 0.500(n=4)  p 0.75 (self 0.72)  |z|  15.35  1.69 it/s
+step  2975  L  0.7747  L_act 0.3946  L_pil    3.802  acc 0.870  STOP-rec 0.500(n=4)  p 0.75 (self 0.80)  |z|  15.68  1.69 it/s
+step  3000  L  0.7301  L_act 0.4003  L_pil    3.298  acc 0.855  STOP-rec 0.667(n=3)  p 0.75 (self 0.71)  |z|  14.95  1.68 it/s
+step  3025  L  0.8624  L_act 0.5012  L_pil    3.612  acc 0.840  STOP-rec 0.200(n=5)  p 0.75 (self 0.80)  |z|  15.11  1.68 it/s
+step  3050  L  0.8152  L_act 0.4954  L_pil    3.198  acc 0.815  STOP-rec 0.182(n=11)  p 0.75 (self 0.70)  |z|  14.97  1.68 it/s
+step  3075  L  0.8515  L_act 0.4915  L_pil    3.600  acc 0.840  STOP-rec 0.500(n=4)  p 0.75 (self 0.73)  |z|  15.63  1.68 it/s
+step  3100  L  0.8253  L_act 0.4384  L_pil    3.869  acc 0.845  STOP-rec 0.333(n=3)  p 0.75 (self 0.74)  |z|  15.15  1.68 it/s
+step  3125  L  0.9459  L_act 0.5652  L_pil    3.807  acc 0.805  STOP-rec 0.000(n=4)  p 0.75 (self 0.81)  |z|  15.40  1.68 it/s
+step  3150  L  0.8399  L_act 0.4590  L_pil    3.808  acc 0.835  STOP-rec 0.200(n=5)  p 0.75 (self 0.73)  |z|  15.87  1.67 it/s
+step  3175  L  0.7978  L_act 0.4365  L_pil    3.614  acc 0.870  STOP-rec 0.200(n=5)  p 0.75 (self 0.72)  |z|  15.32  1.67 it/s
+step  3200  L  0.7877  L_act 0.4081  L_pil    3.797  acc 0.885  STOP-rec 0.200(n=5)  p 0.75 (self 0.72)  |z|  15.51  1.67 it/s
+step  3225  L  0.8046  L_act 0.4259  L_pil    3.788  acc 0.865  STOP-rec 0.250(n=4)  p 0.75 (self 0.80)  |z|  14.57  1.67 it/s
+step  3250  L  0.7545  L_act 0.4100  L_pil    3.445  acc 0.855  STOP-rec 0.400(n=5)  p 0.75 (self 0.78)  |z|  15.37  1.67 it/s
+step  3275  L  0.8249  L_act 0.4830  L_pil    3.418  acc 0.830  STOP-rec 0.000(n=5)  p 0.75 (self 0.73)  |z|  15.22  1.67 it/s
+step  3300  L  0.8666  L_act 0.5269  L_pil    3.397  acc 0.815  STOP-rec 0.000(n=3)  p 0.75 (self 0.72)  |z|  14.78  1.67 it/s
+step  3325  L  0.8770  L_act 0.4947  L_pil    3.823  acc 0.835  STOP-rec 0.000(n=5)  p 0.75 (self 0.79)  |z|  15.09  1.67 it/s
+step  3350  L  0.7994  L_act 0.4091  L_pil    3.903  acc 0.845  STOP-rec 0.333(n=3)  p 0.75 (self 0.75)  |z|  15.03  1.66 it/s
+step  3375  L  0.7608  L_act 0.3727  L_pil    3.881  acc 0.885  STOP-rec nan(n=0)  p 0.75 (self 0.70)  |z|  14.90  1.66 it/s
+step  3400  L  0.8105  L_act 0.4366  L_pil    3.739  acc 0.845  STOP-rec 0.000(n=3)  p 0.75 (self 0.82)  |z|  15.20  1.66 it/s
+step  3425  L  0.8519  L_act 0.4753  L_pil    3.766  acc 0.845  STOP-rec 0.000(n=4)  p 0.75 (self 0.74)  |z|  15.46  1.66 it/s
+step  3450  L  0.7636  L_act 0.4255  L_pil    3.381  acc 0.865  STOP-rec 0.000(n=3)  p 0.75 (self 0.78)  |z|  15.56  1.66 it/s
+step  3475  L  0.8869  L_act 0.5217  L_pil    3.652  acc 0.845  STOP-rec 0.143(n=7)  p 0.75 (self 0.71)  |z|  15.01  1.66 it/s
+step  3500  L  0.7421  L_act 0.3980  L_pil    3.441  acc 0.845  STOP-rec 0.333(n=3)  p 0.75 (self 0.74)  |z|  15.84  1.66 it/s
+step  3525  L  0.8522  L_act 0.4759  L_pil    3.763  acc 0.845  STOP-rec 0.500(n=6)  p 0.75 (self 0.76)  |z|  14.89  1.66 it/s
+step  3550  L  0.7522  L_act 0.4015  L_pil    3.507  acc 0.850  STOP-rec 0.000(n=3)  p 0.75 (self 0.74)  |z|  15.64  1.66 it/s
+step  3575  L  0.8018  L_act 0.4166  L_pil    3.852  acc 0.860  STOP-rec 0.200(n=5)  p 0.75 (self 0.77)  |z|  15.29  1.65 it/s
+step  3600  L  0.7652  L_act 0.4064  L_pil    3.588  acc 0.865  STOP-rec 0.000(n=3)  p 0.75 (self 0.72)  |z|  15.44  1.65 it/s
+step  3625  L  0.8107  L_act 0.4347  L_pil    3.760  acc 0.855  STOP-rec 0.000(n=2)  p 0.75 (self 0.72)  |z|  15.15  1.65 it/s
+step  3650  L  0.8723  L_act 0.4918  L_pil    3.805  acc 0.845  STOP-rec 0.500(n=6)  p 0.75 (self 0.74)  |z|  14.51  1.65 it/s
+step  3675  L  0.7549  L_act 0.3731  L_pil    3.818  acc 0.865  STOP-rec 1.000(n=2)  p 0.75 (self 0.76)  |z|  15.70  1.65 it/s
+step  3700  L  0.7591  L_act 0.3971  L_pil    3.620  acc 0.880  STOP-rec 0.250(n=4)  p 0.75 (self 0.76)  |z|  15.20  1.65 it/s
+step  3725  L  0.8411  L_act 0.4612  L_pil    3.799  acc 0.835  STOP-rec 0.000(n=6)  p 0.75 (self 0.73)  |z|  15.29  1.65 it/s
+step  3750  L  0.8377  L_act 0.4631  L_pil    3.746  acc 0.875  STOP-rec 0.167(n=6)  p 0.75 (self 0.75)  |z|  15.07  1.65 it/s
+step  3775  L  0.9056  L_act 0.4841  L_pil    4.215  acc 0.845  STOP-rec 0.000(n=6)  p 0.75 (self 0.79)  |z|  15.58  1.65 it/s
+step  3800  L  0.7621  L_act 0.4175  L_pil    3.446  acc 0.865  STOP-rec 0.500(n=6)  p 0.75 (self 0.76)  |z|  14.16  1.65 it/s
+step  3825  L  0.7820  L_act 0.4174  L_pil    3.646  acc 0.875  STOP-rec 0.400(n=5)  p 0.75 (self 0.74)  |z|  15.70  1.65 it/s
+step  3850  L  0.8493  L_act 0.4501  L_pil    3.992  acc 0.815  STOP-rec 0.250(n=4)  p 0.75 (self 0.75)  |z|  15.16  1.64 it/s
+step  3875  L  0.8123  L_act 0.4434  L_pil    3.689  acc 0.845  STOP-rec 0.333(n=6)  p 0.75 (self 0.79)  |z|  15.43  1.64 it/s
+step  3900  L  0.9050  L_act 0.5184  L_pil    3.866  acc 0.845  STOP-rec 0.250(n=4)  p 0.75 (self 0.77)  |z|  15.45  1.64 it/s
+step  3925  L  0.7002  L_act 0.3705  L_pil    3.298  acc 0.880  STOP-rec 0.667(n=6)  p 0.75 (self 0.73)  |z|  15.46  1.64 it/s
+step  3950  L  0.7474  L_act 0.3635  L_pil    3.839  acc 0.890  STOP-rec 0.600(n=5)  p 0.75 (self 0.71)  |z|  15.28  1.64 it/s
+step  3975  L  0.7818  L_act 0.4061  L_pil    3.757  acc 0.850  STOP-rec 0.333(n=3)  p 0.75 (self 0.78)  |z|  15.31  1.64 it/s
+step  4000  L  0.8447  L_act 0.4604  L_pil    3.843  acc 0.870  STOP-rec 0.200(n=5)  p 0.75 (self 0.78)  |z|  14.90  1.64 it/s
+step  4025  L  0.7384  L_act 0.3879  L_pil    3.505  acc 0.865  STOP-rec 0.333(n=3)  p 0.75 (self 0.76)  |z|  15.23  1.64 it/s
+step  4050  L  0.7301  L_act 0.3574  L_pil    3.727  acc 0.860  STOP-rec 0.333(n=6)  p 0.75 (self 0.73)  |z|  15.55  1.64 it/s
+step  4075  L  0.8873  L_act 0.5432  L_pil    3.440  acc 0.820  STOP-rec 0.000(n=6)  p 0.75 (self 0.78)  |z|  15.47  1.64 it/s
+step  4100  L  0.7380  L_act 0.3793  L_pil    3.587  acc 0.880  STOP-rec 0.333(n=3)  p 0.75 (self 0.70)  |z|  15.73  1.64 it/s
+step  4125  L  0.7964  L_act 0.4337  L_pil    3.627  acc 0.870  STOP-rec 0.250(n=8)  p 0.75 (self 0.78)  |z|  15.50  1.64 it/s
+step  4150  L  0.8111  L_act 0.4324  L_pil    3.787  acc 0.865  STOP-rec 0.333(n=3)  p 0.75 (self 0.74)  |z|  15.36  1.63 it/s
+step  4175  L  0.9258  L_act 0.5016  L_pil    4.242  acc 0.810  STOP-rec 0.000(n=5)  p 0.75 (self 0.79)  |z|  14.93  1.63 it/s
+step  4200  L  0.8211  L_act 0.4518  L_pil    3.693  acc 0.825  STOP-rec 0.400(n=5)  p 0.75 (self 0.73)  |z|  15.16  1.63 it/s
+step  4225  L  0.8654  L_act 0.4642  L_pil    4.013  acc 0.855  STOP-rec 0.000(n=5)  p 0.75 (self 0.74)  |z|  15.33  1.63 it/s
+step  4250  L  0.8576  L_act 0.5154  L_pil    3.422  acc 0.845  STOP-rec 0.500(n=4)  p 0.75 (self 0.83)  |z|  15.34  1.63 it/s
+step  4275  L  0.8258  L_act 0.4623  L_pil    3.635  acc 0.875  STOP-rec 0.000(n=5)  p 0.75 (self 0.72)  |z|  14.97  1.63 it/s
+step  4300  L  0.6930  L_act 0.3811  L_pil    3.119  acc 0.870  STOP-rec 0.000(n=7)  p 0.75 (self 0.74)  |z|  15.18  1.63 it/s
+step  4325  L  0.7443  L_act 0.3794  L_pil    3.648  acc 0.865  STOP-rec 0.600(n=5)  p 0.75 (self 0.72)  |z|  15.30  1.63 it/s
+step  4350  L  0.7133  L_act 0.3702  L_pil    3.431  acc 0.870  STOP-rec 0.286(n=7)  p 0.75 (self 0.72)  |z|  14.88  1.63 it/s
+step  4375  L  0.7492  L_act 0.3865  L_pil    3.628  acc 0.885  STOP-rec 0.400(n=5)  p 0.75 (self 0.73)  |z|  15.40  1.63 it/s
+step  4400  L  0.8117  L_act 0.4720  L_pil    3.397  acc 0.830  STOP-rec 0.500(n=6)  p 0.75 (self 0.76)  |z|  15.38  1.63 it/s
+step  4425  L  0.9161  L_act 0.5088  L_pil    4.073  acc 0.815  STOP-rec 0.400(n=5)  p 0.75 (self 0.71)  |z|  15.51  1.63 it/s
+step  4450  L  0.8181  L_act 0.4716  L_pil    3.465  acc 0.835  STOP-rec 0.000(n=5)  p 0.75 (self 0.71)  |z|  14.86  1.63 it/s
+step  4475  L  0.8344  L_act 0.4907  L_pil    3.437  acc 0.820  STOP-rec 0.167(n=6)  p 0.75 (self 0.77)  |z|  15.02  1.63 it/s
+step  4500  L  0.7367  L_act 0.3715  L_pil    3.652  acc 0.880  STOP-rec 0.500(n=6)  p 0.75 (self 0.78)  |z|  15.56  1.63 it/s
+step  4525  L  0.7378  L_act 0.3607  L_pil    3.771  acc 0.880  STOP-rec 0.000(n=4)  p 0.75 (self 0.73)  |z|  15.04  1.62 it/s
+step  4550  L  0.6562  L_act 0.3402  L_pil    3.159  acc 0.885  STOP-rec 0.000(n=6)  p 0.75 (self 0.77)  |z|  15.42  1.62 it/s
+step  4575  L  0.7025  L_act 0.3522  L_pil    3.503  acc 0.875  STOP-rec 1.000(n=1)  p 0.75 (self 0.77)  |z|  15.38  1.62 it/s
+step  4600  L  0.7647  L_act 0.4082  L_pil    3.566  acc 0.860  STOP-rec 1.000(n=3)  p 0.75 (self 0.72)  |z|  15.18  1.62 it/s
+step  4625  L  0.8061  L_act 0.4157  L_pil    3.904  acc 0.860  STOP-rec 0.500(n=2)  p 0.75 (self 0.77)  |z|  15.15  1.62 it/s
+step  4650  L  0.8632  L_act 0.4869  L_pil    3.763  acc 0.865  STOP-rec 0.500(n=4)  p 0.75 (self 0.77)  |z|  15.96  1.62 it/s
+step  4675  L  0.7133  L_act 0.3223  L_pil    3.910  acc 0.895  STOP-rec 0.250(n=4)  p 0.75 (self 0.76)  |z|  15.00  1.62 it/s
+step  4700  L  0.7442  L_act 0.3837  L_pil    3.605  acc 0.865  STOP-rec 0.333(n=6)  p 0.75 (self 0.76)  |z|  15.05  1.62 it/s
+step  4725  L  0.7966  L_act 0.4490  L_pil    3.475  acc 0.855  STOP-rec 0.000(n=3)  p 0.75 (self 0.76)  |z|  15.58  1.62 it/s
+step  4750  L  0.7444  L_act 0.3682  L_pil    3.763  acc 0.870  STOP-rec 0.000(n=3)  p 0.75 (self 0.76)  |z|  15.48  1.62 it/s
+step  4775  L  0.6111  L_act 0.2563  L_pil    3.548  acc 0.910  STOP-rec nan(n=0)  p 0.75 (self 0.70)  |z|  14.61  1.62 it/s
+step  4800  L  0.9176  L_act 0.5489  L_pil    3.687  acc 0.815  STOP-rec 0.286(n=7)  p 0.75 (self 0.76)  |z|  15.36  1.62 it/s
+step  4825  L  0.9050  L_act 0.5515  L_pil    3.535  acc 0.795  STOP-rec 0.333(n=6)  p 0.75 (self 0.76)  |z|  14.82  1.62 it/s
+step  4850  L  0.8159  L_act 0.4527  L_pil    3.632  acc 0.810  STOP-rec 0.000(n=3)  p 0.75 (self 0.72)  |z|  15.66  1.62 it/s
+step  4875  L  0.6912  L_act 0.3259  L_pil    3.653  acc 0.870  STOP-rec 0.333(n=3)  p 0.75 (self 0.76)  |z|  15.12  1.62 it/s
+step  4900  L  0.8235  L_act 0.4553  L_pil    3.681  acc 0.840  STOP-rec 0.000(n=3)  p 0.75 (self 0.72)  |z|  14.98  1.62 it/s
+step  4925  L  0.9338  L_act 0.5661  L_pil    3.677  acc 0.810  STOP-rec 0.000(n=6)  p 0.75 (self 0.77)  |z|  14.53  1.62 it/s
+step  4950  L  0.9014  L_act 0.5253  L_pil    3.761  acc 0.820  STOP-rec 0.000(n=6)  p 0.75 (self 0.77)  |z|  15.24  1.61 it/s
+step  4975  L  0.8545  L_act 0.4897  L_pil    3.647  acc 0.820  STOP-rec 0.333(n=15)  p 0.75 (self 0.75)  |z|  14.84  1.61 it/s
+step  5000  L  0.7909  L_act 0.4052  L_pil    3.857  acc 0.855  STOP-rec 0.500(n=2)  p 0.75 (self 0.76)  |z|  15.21  1.61 it/s
+step  5025  L  0.8019  L_act 0.4231  L_pil    3.788  acc 0.875  STOP-rec 0.500(n=2)  p 0.75 (self 0.79)  |z|  15.24  1.61 it/s
+step  5050  L  0.6966  L_act 0.3398  L_pil    3.568  acc 0.890  STOP-rec 0.750(n=8)  p 0.75 (self 0.70)  |z|  14.65  1.61 it/s
+step  5075  L  0.7173  L_act 0.3537  L_pil    3.636  acc 0.855  STOP-rec 0.500(n=4)  p 0.75 (self 0.73)  |z|  14.87  1.61 it/s
+step  5100  L  0.8581  L_act 0.4714  L_pil    3.867  acc 0.840  STOP-rec 0.000(n=2)  p 0.75 (self 0.77)  |z|  14.95  1.61 it/s
+step  5125  L  0.8140  L_act 0.4738  L_pil    3.402  acc 0.825  STOP-rec 0.125(n=8)  p 0.75 (self 0.77)  |z|  15.18  1.61 it/s
+step  5150  L  0.8307  L_act 0.4702  L_pil    3.605  acc 0.855  STOP-rec 0.333(n=9)  p 0.75 (self 0.71)  |z|  15.66  1.61 it/s
+step  5175  L  0.7520  L_act 0.4102  L_pil    3.419  acc 0.880  STOP-rec 0.167(n=6)  p 0.75 (self 0.69)  |z|  15.70  1.61 it/s
+step  5200  L  0.8897  L_act 0.5122  L_pil    3.776  acc 0.825  STOP-rec 0.286(n=7)  p 0.75 (self 0.76)  |z|  15.61  1.61 it/s
+step  5225  L  0.7315  L_act 0.4077  L_pil    3.238  acc 0.855  STOP-rec 0.429(n=7)  p 0.75 (self 0.79)  |z|  15.37  1.61 it/s
+step  5250  L  0.8698  L_act 0.4906  L_pil    3.793  acc 0.820  STOP-rec 0.125(n=8)  p 0.75 (self 0.78)  |z|  15.27  1.61 it/s
+step  5275  L  0.8318  L_act 0.4715  L_pil    3.603  acc 0.830  STOP-rec 0.000(n=4)  p 0.75 (self 0.76)  |z|  15.24  1.61 it/s
+step  5300  L  0.7509  L_act 0.4166  L_pil    3.344  acc 0.850  STOP-rec 0.000(n=2)  p 0.75 (self 0.71)  |z|  15.06  1.61 it/s
+step  5325  L  0.8059  L_act 0.4335  L_pil    3.723  acc 0.885  STOP-rec 0.000(n=4)  p 0.75 (self 0.70)  |z|  14.96  1.61 it/s
+step  5350  L  0.8721  L_act 0.4872  L_pil    3.849  acc 0.830  STOP-rec 0.333(n=3)  p 0.75 (self 0.76)  |z|  15.01  1.61 it/s
+step  5375  L  0.8803  L_act 0.5161  L_pil    3.642  acc 0.820  STOP-rec 0.333(n=3)  p 0.75 (self 0.75)  |z|  15.23  1.61 it/s
+step  5400  L  0.7852  L_act 0.4179  L_pil    3.673  acc 0.840  STOP-rec 0.500(n=4)  p 0.75 (self 0.76)  |z|  15.10  1.61 it/s
+step  5425  L  0.7512  L_act 0.3802  L_pil    3.711  acc 0.875  STOP-rec 0.333(n=3)  p 0.75 (self 0.76)  |z|  15.39  1.61 it/s
+step  5450  L  0.7869  L_act 0.4048  L_pil    3.820  acc 0.870  STOP-rec 0.250(n=4)  p 0.75 (self 0.76)  |z|  15.30  1.61 it/s
+step  5475  L  0.8003  L_act 0.4327  L_pil    3.676  acc 0.880  STOP-rec 0.200(n=5)  p 0.75 (self 0.76)  |z|  16.00  1.61 it/s
+step  5500  L  0.7000  L_act 0.3583  L_pil    3.417  acc 0.845  STOP-rec 0.000(n=6)  p 0.75 (self 0.82)  |z|  15.12  1.60 it/s
+step  5525  L  0.7686  L_act 0.3586  L_pil    4.099  acc 0.855  STOP-rec 1.000(n=1)  p 0.75 (self 0.74)  |z|  15.45  1.60 it/s
+step  5550  L  0.7255  L_act 0.3490  L_pil    3.765  acc 0.895  STOP-rec 0.500(n=6)  p 0.75 (self 0.79)  |z|  15.53  1.60 it/s
+step  5575  L  0.7294  L_act 0.3205  L_pil    4.089  acc 0.890  STOP-rec 0.400(n=5)  p 0.75 (self 0.76)  |z|  14.76  1.60 it/s
+step  5600  L  0.7747  L_act 0.4052  L_pil    3.696  acc 0.855  STOP-rec 0.500(n=4)  p 0.75 (self 0.83)  |z|  14.56  1.60 it/s
+step  5625  L  0.8002  L_act 0.4258  L_pil    3.744  acc 0.860  STOP-rec 0.400(n=5)  p 0.75 (self 0.77)  |z|  15.38  1.60 it/s
+step  5650  L  0.8422  L_act 0.4693  L_pil    3.728  acc 0.825  STOP-rec 0.250(n=4)  p 0.75 (self 0.75)  |z|  14.64  1.60 it/s
+step  5675  L  0.8362  L_act 0.4732  L_pil    3.630  acc 0.840  STOP-rec 0.250(n=4)  p 0.75 (self 0.78)  |z|  14.89  1.60 it/s
+step  5700  L  0.8002  L_act 0.4006  L_pil    3.997  acc 0.850  STOP-rec 0.000(n=4)  p 0.75 (self 0.73)  |z|  15.07  1.60 it/s
+step  5725  L  0.7121  L_act 0.3713  L_pil    3.408  acc 0.890  STOP-rec 0.600(n=5)  p 0.75 (self 0.76)  |z|  15.12  1.60 it/s
+step  5750  L  0.7340  L_act 0.3672  L_pil    3.668  acc 0.875  STOP-rec 0.000(n=4)  p 0.75 (self 0.73)  |z|  14.79  1.60 it/s
+step  5775  L  0.7711  L_act 0.4002  L_pil    3.709  acc 0.870  STOP-rec 0.000(n=3)  p 0.75 (self 0.76)  |z|  14.82  1.60 it/s
+step  5800  L  0.8495  L_act 0.4501  L_pil    3.994  acc 0.845  STOP-rec 0.200(n=5)  p 0.75 (self 0.79)  |z|  15.59  1.60 it/s
+step  5825  L  0.6432  L_act 0.2997  L_pil    3.435  acc 0.900  STOP-rec 0.000(n=2)  p 0.75 (self 0.75)  |z|  15.60  1.60 it/s
+step  5850  L  0.8323  L_act 0.4930  L_pil    3.394  acc 0.810  STOP-rec 0.400(n=5)  p 0.75 (self 0.70)  |z|  15.28  1.60 it/s
+step  5875  L  0.7320  L_act 0.3368  L_pil    3.952  acc 0.890  STOP-rec 1.000(n=1)  p 0.75 (self 0.72)  |z|  14.78  1.60 it/s
+step  5900  L  0.7538  L_act 0.3602  L_pil    3.936  acc 0.895  STOP-rec 0.333(n=6)  p 0.75 (self 0.78)  |z|  14.60  1.60 it/s
+step  5925  L  0.9092  L_act 0.4964  L_pil    4.128  acc 0.815  STOP-rec 0.000(n=7)  p 0.75 (self 0.75)  |z|  15.99  1.60 it/s
+step  5950  L  0.7957  L_act 0.4551  L_pil    3.406  acc 0.860  STOP-rec 0.000(n=5)  p 0.75 (self 0.68)  |z|  15.19  1.60 it/s
+step  5975  L  0.8052  L_act 0.4507  L_pil    3.545  acc 0.865  STOP-rec 0.300(n=10)  p 0.75 (self 0.73)  |z|  14.82  1.60 it/s
+step  6000  L  0.7623  L_act 0.3580  L_pil    4.044  acc 0.875  STOP-rec 0.400(n=5)  p 0.75 (self 0.80)  |z|  15.83  1.60 it/s
+step  6025  L  0.7149  L_act 0.3115  L_pil    4.034  acc 0.895  STOP-rec 0.333(n=3)  p 0.75 (self 0.74)  |z|  14.59  1.60 it/s
+step  6050  L  0.7293  L_act 0.4018  L_pil    3.274  acc 0.865  STOP-rec 0.286(n=7)  p 0.75 (self 0.72)  |z|  14.99  1.60 it/s
+step  6075  L  0.7903  L_act 0.4675  L_pil    3.228  acc 0.845  STOP-rec 0.250(n=4)  p 0.75 (self 0.73)  |z|  15.28  1.60 it/s
+step  6100  L  0.8971  L_act 0.5447  L_pil    3.524  acc 0.815  STOP-rec 0.375(n=8)  p 0.75 (self 0.79)  |z|  15.49  1.60 it/s
+step  6125  L  0.7594  L_act 0.3919  L_pil    3.675  acc 0.875  STOP-rec 0.400(n=5)  p 0.75 (self 0.71)  |z|  14.99  1.60 it/s
+step  6150  L  0.8285  L_act 0.4308  L_pil    3.977  acc 0.845  STOP-rec 0.250(n=4)  p 0.75 (self 0.73)  |z|  15.02  1.60 it/s
+step  6175  L  0.7985  L_act 0.4473  L_pil    3.512  acc 0.855  STOP-rec 0.167(n=6)  p 0.75 (self 0.74)  |z|  14.34  1.60 it/s
+step  6200  L  0.9717  L_act 0.6119  L_pil    3.598  acc 0.815  STOP-rec 0.429(n=7)  p 0.75 (self 0.75)  |z|  15.47  1.60 it/s
+step  6225  L  0.8023  L_act 0.4124  L_pil    3.899  acc 0.845  STOP-rec 0.200(n=5)  p 0.75 (self 0.73)  |z|  14.78  1.59 it/s
+step  6250  L  0.7798  L_act 0.4042  L_pil    3.756  acc 0.855  STOP-rec 0.500(n=4)  p 0.75 (self 0.72)  |z|  15.08  1.59 it/s
+step  6275  L  0.8317  L_act 0.4671  L_pil    3.647  acc 0.835  STOP-rec 0.167(n=6)  p 0.75 (self 0.77)  |z|  15.16  1.59 it/s
+step  6300  L  0.8146  L_act 0.4518  L_pil    3.628  acc 0.855  STOP-rec 0.500(n=4)  p 0.75 (self 0.77)  |z|  14.89  1.59 it/s
+step  6325  L  0.8277  L_act 0.4597  L_pil    3.680  acc 0.860  STOP-rec 0.429(n=7)  p 0.75 (self 0.68)  |z|  14.85  1.59 it/s
+step  6350  L  0.7485  L_act 0.4073  L_pil    3.412  acc 0.875  STOP-rec 0.500(n=6)  p 0.75 (self 0.77)  |z|  15.07  1.59 it/s
+step  6375  L  0.7332  L_act 0.3990  L_pil    3.342  acc 0.850  STOP-rec 0.400(n=5)  p 0.75 (self 0.80)  |z|  15.06  1.59 it/s
+step  6400  L  0.8789  L_act 0.4998  L_pil    3.791  acc 0.840  STOP-rec 0.333(n=3)  p 0.75 (self 0.76)  |z|  15.00  1.59 it/s
+step  6425  L  0.7096  L_act 0.3442  L_pil    3.654  acc 0.870  STOP-rec 0.333(n=3)  p 0.75 (self 0.75)  |z|  14.78  1.59 it/s
+step  6450  L  0.7326  L_act 0.3816  L_pil    3.510  acc 0.870  STOP-rec 0.333(n=3)  p 0.75 (self 0.77)  |z|  15.10  1.59 it/s
+step  6475  L  0.7914  L_act 0.4420  L_pil    3.494  acc 0.875  STOP-rec 0.250(n=4)  p 0.75 (self 0.75)  |z|  15.08  1.59 it/s
+step  6500  L  0.7710  L_act 0.4328  L_pil    3.382  acc 0.860  STOP-rec 0.667(n=3)  p 0.75 (self 0.69)  |z|  15.23  1.59 it/s
+step  6525  L  0.7365  L_act 0.3853  L_pil    3.513  acc 0.835  STOP-rec 0.000(n=3)  p 0.75 (self 0.76)  |z|  15.17  1.59 it/s
+step  6550  L  0.7311  L_act 0.3688  L_pil    3.623  acc 0.875  STOP-rec 0.571(n=7)  p 0.75 (self 0.74)  |z|  15.02  1.59 it/s
+step  6575  L  0.6631  L_act 0.3103  L_pil    3.528  acc 0.895  STOP-rec 0.667(n=6)  p 0.75 (self 0.72)  |z|  15.19  1.59 it/s
+step  6600  L  0.7466  L_act 0.3825  L_pil    3.641  acc 0.880  STOP-rec 0.429(n=7)  p 0.75 (self 0.70)  |z|  15.68  1.59 it/s
+step  6625  L  0.7139  L_act 0.3633  L_pil    3.507  acc 0.870  STOP-rec 0.000(n=4)  p 0.75 (self 0.69)  |z|  14.63  1.59 it/s
+step  6650  L  0.8227  L_act 0.4826  L_pil    3.400  acc 0.840  STOP-rec 0.200(n=5)  p 0.75 (self 0.77)  |z|  15.51  1.59 it/s
+step  6675  L  0.7400  L_act 0.3704  L_pil    3.696  acc 0.870  STOP-rec 0.200(n=5)  p 0.75 (self 0.69)  |z|  15.12  1.59 it/s
+step  6700  L  0.8044  L_act 0.4716  L_pil    3.327  acc 0.845  STOP-rec 0.375(n=8)  p 0.75 (self 0.78)  |z|  15.36  1.59 it/s
+step  6725  L  0.8863  L_act 0.5302  L_pil    3.561  acc 0.845  STOP-rec 0.250(n=8)  p 0.75 (self 0.81)  |z|  15.81  1.59 it/s
+step  6750  L  0.7454  L_act 0.3828  L_pil    3.626  acc 0.885  STOP-rec 0.667(n=3)  p 0.75 (self 0.76)  |z|  15.63  1.59 it/s
+step  6775  L  0.7883  L_act 0.3831  L_pil    4.053  acc 0.865  STOP-rec 0.500(n=4)  p 0.75 (self 0.78)  |z|  15.35  1.59 it/s
+step  6800  L  0.7774  L_act 0.4067  L_pil    3.707  acc 0.845  STOP-rec 0.000(n=3)  p 0.75 (self 0.82)  |z|  15.76  1.59 it/s
+step  6825  L  0.7331  L_act 0.3697  L_pil    3.635  acc 0.870  STOP-rec 0.333(n=6)  p 0.75 (self 0.72)  |z|  15.15  1.59 it/s
+step  6850  L  0.6920  L_act 0.3299  L_pil    3.621  acc 0.880  STOP-rec 0.500(n=4)  p 0.75 (self 0.71)  |z|  15.24  1.59 it/s
+step  6875  L  0.6878  L_act 0.3565  L_pil    3.312  acc 0.895  STOP-rec 0.250(n=4)  p 0.75 (self 0.73)  |z|  15.33  1.59 it/s
+step  6900  L  0.8118  L_act 0.4580  L_pil    3.539  acc 0.850  STOP-rec 0.000(n=5)  p 0.75 (self 0.74)  |z|  14.71  1.59 it/s
+step  6925  L  0.7914  L_act 0.4059  L_pil    3.855  acc 0.855  STOP-rec 0.333(n=6)  p 0.75 (self 0.76)  |z|  14.81  1.59 it/s
+step  6950  L  0.8418  L_act 0.4694  L_pil    3.724  acc 0.850  STOP-rec 0.200(n=10)  p 0.75 (self 0.74)  |z|  15.22  1.59 it/s
+step  6975  L  0.8380  L_act 0.4776  L_pil    3.604  acc 0.880  STOP-rec 0.250(n=4)  p 0.75 (self 0.74)  |z|  15.40  1.59 it/s
+step  7000  L  0.7540  L_act 0.3789  L_pil    3.751  acc 0.835  STOP-rec 0.400(n=10)  p 0.75 (self 0.78)  |z|  15.89  1.59 it/s
+step  7025  L  0.6912  L_act 0.3417  L_pil    3.496  acc 0.885  STOP-rec 0.167(n=6)  p 0.75 (self 0.74)  |z|  15.56  1.59 it/s
+step  7050  L  0.7084  L_act 0.3500  L_pil    3.584  acc 0.860  STOP-rec 0.333(n=6)  p 0.75 (self 0.72)  |z|  15.03  1.59 it/s
+step  7075  L  0.7691  L_act 0.4157  L_pil    3.534  acc 0.865  STOP-rec 0.222(n=9)  p 0.75 (self 0.73)  |z|  15.58  1.59 it/s
+step  7100  L  0.7162  L_act 0.3501  L_pil    3.661  acc 0.880  STOP-rec 0.400(n=5)  p 0.75 (self 0.76)  |z|  14.70  1.59 it/s
+step  7125  L  0.8956  L_act 0.5474  L_pil    3.482  acc 0.800  STOP-rec 0.167(n=6)  p 0.75 (self 0.76)  |z|  15.52  1.59 it/s
+step  7150  L  0.6637  L_act 0.3095  L_pil    3.541  acc 0.890  STOP-rec 0.800(n=5)  p 0.75 (self 0.77)  |z|  15.22  1.59 it/s
+step  7175  L  0.8814  L_act 0.4728  L_pil    4.086  acc 0.840  STOP-rec 0.500(n=2)  p 0.75 (self 0.82)  |z|  15.20  1.59 it/s
+step  7200  L  0.7031  L_act 0.3429  L_pil    3.602  acc 0.870  STOP-rec 1.000(n=3)  p 0.75 (self 0.78)  |z|  15.05  1.59 it/s
+step  7225  L  0.8632  L_act 0.5043  L_pil    3.589  acc 0.825  STOP-rec 0.000(n=3)  p 0.75 (self 0.74)  |z|  14.88  1.59 it/s
+step  7250  L  0.8401  L_act 0.4805  L_pil    3.596  acc 0.855  STOP-rec 0.000(n=2)  p 0.75 (self 0.75)  |z|  15.53  1.59 it/s
+step  7275  L  0.8353  L_act 0.4741  L_pil    3.612  acc 0.845  STOP-rec 0.500(n=6)  p 0.75 (self 0.79)  |z|  15.16  1.58 it/s
+step  7300  L  0.7391  L_act 0.3771  L_pil    3.621  acc 0.885  STOP-rec 0.000(n=4)  p 0.75 (self 0.71)  |z|  15.34  1.58 it/s
+step  7325  L  0.7353  L_act 0.3688  L_pil    3.665  acc 0.875  STOP-rec 0.500(n=2)  p 0.75 (self 0.76)  |z|  14.90  1.58 it/s
+step  7350  L  0.9080  L_act 0.5296  L_pil    3.783  acc 0.835  STOP-rec 0.200(n=5)  p 0.75 (self 0.78)  |z|  15.45  1.58 it/s
+step  7375  L  0.8524  L_act 0.4805  L_pil    3.719  acc 0.865  STOP-rec 0.400(n=5)  p 0.75 (self 0.78)  |z|  14.75  1.58 it/s
+step  7400  L  0.6491  L_act 0.2932  L_pil    3.559  acc 0.905  STOP-rec 0.333(n=3)  p 0.75 (self 0.73)  |z|  15.73  1.58 it/s
+step  7425  L  0.7888  L_act 0.4608  L_pil    3.281  acc 0.885  STOP-rec 0.286(n=7)  p 0.75 (self 0.68)  |z|  15.25  1.58 it/s
+step  7450  L  0.6669  L_act 0.3219  L_pil    3.450  acc 0.890  STOP-rec 0.167(n=6)  p 0.75 (self 0.76)  |z|  15.58  1.58 it/s
+step  7475  L  0.7377  L_act 0.3756  L_pil    3.622  acc 0.860  STOP-rec 0.167(n=6)  p 0.75 (self 0.74)  |z|  15.09  1.58 it/s
+step  7500  L  0.8269  L_act 0.4486  L_pil    3.783  acc 0.835  STOP-rec 0.333(n=6)  p 0.75 (self 0.74)  |z|  15.20  1.58 it/s
+step  7525  L  0.8078  L_act 0.4310  L_pil    3.768  acc 0.845  STOP-rec 0.000(n=3)  p 0.75 (self 0.75)  |z|  15.11  1.58 it/s
+step  7550  L  0.7037  L_act 0.3656  L_pil    3.381  acc 0.870  STOP-rec 0.429(n=7)  p 0.75 (self 0.79)  |z|  15.00  1.58 it/s
+step  7575  L  0.7339  L_act 0.3607  L_pil    3.732  acc 0.875  STOP-rec 0.222(n=9)  p 0.75 (self 0.77)  |z|  15.61  1.58 it/s
+step  7600  L  0.7105  L_act 0.3605  L_pil    3.500  acc 0.860  STOP-rec 0.000(n=2)  p 0.75 (self 0.77)  |z|  15.34  1.58 it/s
+step  7625  L  0.7085  L_act 0.3370  L_pil    3.715  acc 0.865  STOP-rec 0.667(n=3)  p 0.75 (self 0.75)  |z|  15.01  1.58 it/s
+step  7650  L  0.7600  L_act 0.3961  L_pil    3.639  acc 0.865  STOP-rec 0.200(n=5)  p 0.75 (self 0.79)  |z|  15.42  1.58 it/s
+step  7675  L  0.7318  L_act 0.4081  L_pil    3.237  acc 0.855  STOP-rec 0.250(n=4)  p 0.75 (self 0.78)  |z|  15.44  1.58 it/s
+step  7700  L  0.6830  L_act 0.3170  L_pil    3.661  acc 0.885  STOP-rec 0.667(n=3)  p 0.75 (self 0.78)  |z|  15.22  1.58 it/s
+step  7725  L  0.7862  L_act 0.4145  L_pil    3.717  acc 0.845  STOP-rec 0.333(n=6)  p 0.75 (self 0.72)  |z|  15.53  1.58 it/s
+step  7750  L  0.7795  L_act 0.4096  L_pil    3.699  acc 0.860  STOP-rec 0.400(n=5)  p 0.75 (self 0.73)  |z|  15.58  1.58 it/s
+step  7775  L  0.7280  L_act 0.3877  L_pil    3.403  acc 0.865  STOP-rec 0.000(n=6)  p 0.75 (self 0.70)  |z|  15.74  1.58 it/s
+step  7800  L  0.7301  L_act 0.3609  L_pil    3.691  acc 0.890  STOP-rec 0.500(n=2)  p 0.75 (self 0.78)  |z|  15.21  1.58 it/s
+
+saved adapter (224 tensors) + pilot -> checkpoints/stage2_p75_long/final
+######## slot test  Thu Oct  1 10:35:50 EDT 2026
+checkpoint checkpoints/stage2_p75_long/final  (Pilot slot)
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+110 episodes, 4306 steps, 11 scans
+cached v_bar vs fresh encoding, cosine = 1.0000
+  [10/110] 10.2 steps/s  next_frame 0.909  own_z 0.351  current_frame 0.667  other_next_frame 0.248
+  [20/110] 10.2 steps/s  next_frame 0.842  own_z 0.358  current_frame 0.555  other_next_frame 0.274
+  [30/110] 10.2 steps/s  next_frame 0.781  own_z 0.327  current_frame 0.522  other_next_frame 0.257
+  [40/110] 10.1 steps/s  next_frame 0.815  own_z 0.348  current_frame 0.555  other_next_frame 0.273
+  [50/110] 10.1 steps/s  next_frame 0.821  own_z 0.355  current_frame 0.553  other_next_frame 0.293
+  [60/110] 10.1 steps/s  next_frame 0.832  own_z 0.367  current_frame 0.545  other_next_frame 0.309
+  [70/110] 10.1 steps/s  next_frame 0.847  own_z 0.384  current_frame 0.567  other_next_frame 0.303
+  [80/110] 10.1 steps/s  next_frame 0.838  own_z 0.369  current_frame 0.544  other_next_frame 0.302
+  [90/110] 10.2 steps/s  next_frame 0.833  own_z 0.357  current_frame 0.542  other_next_frame 0.298
+  [100/110] 10.2 steps/s  next_frame 0.836  own_z 0.356  current_frame 0.545  other_next_frame 0.301
+  [110/110] 10.1 steps/s  next_frame 0.842  own_z 0.355  current_frame 0.559  other_next_frame 0.296
+{"next_frame": 0.8416, "own_z": 0.3546, "current_frame": 0.5588, "other_next_frame": 0.2963}
+wrote <repo>/results/slot_shortcut.json [stage2_p75_long]
+######## closed loop, n=150 (diagnostic, OS)  Thu Oct  1 10:42:59 EDT 2026
+v_bar reference: mean ||v_bar|| = 14.75
+Loading Stage 0' policy from checkpoints/stage2_p75_long/final ...
+  loaded adapter.pt (224 LoRA tensors, r=16)
+  adapter: 6,422,528 LoRA params
+  pilot  : mode=action_query (B -- distinct h_act/h_pil)
+slot_mode = z
+split=val_unseen  episodes=150  scans=8
+
+  25/150  (0.26 ep/s)
+  50/150  (0.26 ep/s)
+  75/150  (0.28 ep/s)

@@ -119,6 +119,7 @@ runs:
 | Stage 1, identity `G_ψ` (control) | 63.1 % | 61.2 % | 63.2 % | 62.1 % |
 | Stage 2, 50 % own latents | 84.3 % | 33.6 % | 53.0 % | 27.9 % |
 | Stage 2, 75 % own latents | 83.7 % | 33.9 % | 54.5 % | 27.6 % |
+| Stage 2, 75 %, 3× longer (7,800 steps) | 84.2 % | 35.5 % | 55.9 % | 29.6 % |
 | *reference: Stage 0, no slot at all* | | | | *66.0 %* |
 
 <img src="docs/figures/fig_slot_shortcut.png" width="900">
@@ -134,11 +135,14 @@ runs:
 - **The gap opens early** (panel b): own-latent accuracy falls from 48 % to 32 % between steps 2k and 4k, then stays
   flat while training accuracy keeps rising.
 
-**Stage 2 (scheduled sampling), the paper's fix, helps navigation a little but does not remove the shortcut.** The
-short fine-tune from the project's plan (2,600 steps, starting from Stage 1) replaces 50 % or 75 % of slot inputs with
-the model's own latents during training. In closed loop it lifts navigation from 10.7 % to **16.7 % and 18.0 %**, the
-level of the identity control. Offline, the model still scores 84 % with the true next frame and only 34 % with its own
-latent. A longer schedule, or the paper's full data flywheel, may still close the gap; this short recipe does not.
+**Stage 2 (scheduled sampling), the paper's fix, helps navigation a little but does not remove the shortcut, even
+when run 3× longer.** The fine-tune from the project's plan (2,600 steps, starting from Stage 1) replaces 50 % or 75 %
+of slot inputs with the model's own latents during training. In closed loop it lifts navigation from 10.7 % to
+**16.7 % and 18.0 %**, the level of the identity control. Offline, the model still scores 84 % with the true next frame
+and only 34 % with its own latent. Tripling the schedule (7,800 steps at 75 %) barely moves either number: own-latent
+accuracy 35.5 %, OS **19.3 %** (within noise of 18.0 % at n = 150), and the agent never issues STOP. More scheduled
+sampling on expert trajectories does not close the gap; the paper's data flywheel, which trains on the model's own
+trajectories, was not run.
 
 <img src="docs/figures/fig_lp_failure.png" width="860">
 
@@ -150,7 +154,7 @@ not the main problem.
 
 **What this means for the method.** LatentPilot's appeal (one latent per step instead of history frames or text) rests
 on the model learning to *use its own* latent. Trained as specified in Stage 1, it instead learns to read the
-privileged next frame, which it never sees at test time. Our results cover Stage 1 plus a short Stage 2 at 2 B
+privileged next frame, which it never sees at test time. Our results cover Stage 1 plus Stage 2 fine-tunes of up to 7,800 steps at 2 B
 parameters and 6 buildings. The paper's full flywheel, which trains on the model's own trajectories over several rounds,
 was not run.
 
@@ -303,6 +307,7 @@ from the logs only where the stopping position was recorded.
 | ① Latent reasoning | identity `G_ψ` control | 150 (8) | n/m | n/m | — | 17.3 | 0.268 | 8.17 |
 | ① Latent reasoning | + Stage 2, 50 % own latents | 150 (8) | n/m | n/m | — | 16.7 | 0.312 | 7.98 |
 | ① Latent reasoning | + Stage 2, 75 % own latents | 150 (8) | n/m | n/m | — | 18.0 | 0.315 | 7.99 |
+| ① Latent reasoning | + Stage 2, 75 %, 3× longer | 150 (8) | n/m | n/m | — | 19.3 | 0.298 | 7.86 |
 | ② Pointing | 16 scans, final layer | 150 (8) | 12.7 | 13.3 | 13.0 | 14.0 | 0.350 | 7.34 |
 | ② Pointing | + history, 61 scans | 150 (8) | 17.3 | 18.0 | 16.8 | 22.7 | 0.394 | 6.55 |
 | ② Pointing | + longer schedule (step 40k) | 150 (8) | 22.7 | 24.7 | 22.3 | 31.3 | 0.345 | 7.10 |
@@ -330,8 +335,9 @@ Every evaluation is listed in [`docs/EXPERIMENT_LOG.md` §3](docs/EXPERIMENT_LOG
 
 1. **Training on the privileged next frame teaches a shortcut, and we measured it.** On held-out steps, LatentPilot's
    Stage 1 model is 84 % accurate when its Pilot slot holds the true next frame (its training input), and 31 % when it
-   holds its own latent (its test-time input). That is less than half the 66 % of a model with no slot at all. A short
-   Stage 2 (scheduled sampling) recovered some navigation (10.7 → 18.0 % OS) but not the shortcut (34 %).
+   holds its own latent (its test-time input). That is less than half the 66 % of a model with no slot at all. Stage 2
+   (scheduled sampling) recovered some navigation (10.7 → 18.0 % OS) but not the shortcut (34 %), and a 3× longer
+   run left both almost unchanged (35.5 %, OS 19.3 %).
 2. **Stopping, not reaching, is the bottleneck for every approach.** The best pointing model came within 3 m in 36.7 %
    of episodes and stopped there in 23.3 %. The reasoner came within 3 m in 37.5 % and stopped there in 3.3 %.
 3. **Choosing the threshold properly barely moved the headline.** Picked on `val_seen` instead of the test split, the
@@ -372,7 +378,7 @@ The full narrative, one section per experiment with why it was run, the setup, t
 - **The reasoner decodes stochastically** (top-p 0.8, temperature 0.7). Its rows average three runs each, and its
   reaching score varied from 35 % to 47.5 % between runs. Its v1 → v3 change altered three things at once.
 - **Unfinished runs.** The long pointing runs were stopped at 1.1–1.2 of their planned 1.5–3 epochs. Stage 2 was run
-  only as a short fine-tune (2,600 steps). A 16-scan Stage 1 and most Cosmos ablation arms were never run
+  only as a fine-tune on expert data (2,600 and 7,800 steps, at most 75 % own latents). A 16-scan Stage 1 and most Cosmos ablation arms were never run
   ([list](docs/EXPERIMENTS.md#6-planned-but-not-run)).
 - **Different backbone and scale from the paper** (2 B vs 7 B parameters, 6–61 scans vs full data). These results
   describe this scale; they do not settle whether the paper is right.
@@ -386,7 +392,7 @@ Weights are not published yet (each is a 25–33 MB LoRA adapter).
 |---|---|---|---|---|
 | `pointing_fusion/step120000` | ② pointing + controller | Cosmos-Reason2-2B | **SR 23.3 %** at τ chosen on `val_seen` (OS 36.7 %; n = 150) | [card](model_cards/pointing-fusion-2b/README.md) |
 | `reasoner_sft_v3/step1500` | ④ Cosmos3-Edge reasoner | Cosmos3-Edge | SR 3.3 %, OS 37.5 % (3 strict runs, n = 40) | [card](model_cards/reasoner-sft-v3/README.md) |
-| `stage1_learned/final`, `stage1_identity/final`, `stage2_p50/final`, `stage2_p75/final` | ① LatentPilot | Cosmos-Reason2-2B | OS 10.7 / 17.3 / 16.7 / 18.0 % (n = 150, diagnostic) | [card](model_cards/latentpilot-stage1-2b/README.md) |
+| `stage1_learned/final`, `stage1_identity/final`, `stage2_p50/final`, `stage2_p75/final`, `stage2_p75_long/final` | ① LatentPilot | Cosmos-Reason2-2B | OS 10.7 / 17.3 / 16.7 / 18.0 / 19.3 % (n = 150, diagnostic) | [card](model_cards/latentpilot-stage1-2b/README.md) |
 
 ## Reproduction
 
